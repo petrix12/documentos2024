@@ -30,6 +30,26 @@ sidebar_position: 2
     + **src\pages**.
 8. Deploy en GitHub:
     + $ npm run build
+    + Crear en GitHub un respositorio para el proyecto.
+    + $ git init
+    + $ git add .
+    + $ git commit -m "first commit"
+    + $ git branch -M main
+    + $ git remote add origin https://github.com/petrix12/documentos2024.git
+    + $ git push -u origin main
+    + Configurar **docusaurus.config.js**:
+        ```js
+        // ...
+        baseUrl: '/documentos2024',
+        organizationName: 'soluciones++',
+        projectName: 'documentos2024',
+        deploymentBranch: 'gh-pages',
+        trailingSlash: false,
+        // ...
+        ```
+    + $ cmd /C 'set "GIT_USER=petrix12" && npm run deploy'
+
+
 
 
 ## Pruebas:
