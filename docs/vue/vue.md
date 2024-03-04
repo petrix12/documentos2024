@@ -328,6 +328,32 @@
         ? Where do you prefer placing config for Babel, ESLint, etc.? In dedicated config files  
         ? Save this as a preset for future projects? No    
         ```
++ Extructura común para consumo de una API para login
+    + End point: https://rutaservidor/auth/login
+    + Método: POST
+    + Respueste esperada en caso de exito:
+        ```json
+        {
+            "data": {
+                "access_token": "...",
+                "expires": 900000,
+                "refresh_token": "..."
+            }
+        }
+        ```
+    + Respueste esperada en caso de error:
+        ```json
+        {
+            "errors": [
+                {
+                    "message": "...",
+                    "extensions": {
+                        "code": "..."
+                    }
+                }
+            ]
+        }
+        ```
 + Crear vista AuthView en **...\src\views\AuthView.vue**:
     ```html
     ```

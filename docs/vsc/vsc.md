@@ -1,5 +1,10 @@
 # Visual Studio Code
 
+## Extensiones recomendadas:
+### Para peticiones HTTP
++ Thunder Client | thunderclient.com | Lightweight Rest API Client for VS Code | 
+    + **Nota**: Es como una versión de Postman para VSC.
+
 ## Construcción de un snippet
 1. Página para generar snippet: https://snippet-generator.app
 2. Estructura:
