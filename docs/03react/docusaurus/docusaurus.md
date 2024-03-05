@@ -48,6 +48,9 @@ sidebar_position: 2
         // ...
         ```
     + $ cmd /C 'set "GIT_USER=petrix12" && npm run deploy'
+9. Para actualizar y hacer nuevamente deploy:
+    + $ npm run build
+    + $ cmd /C 'set "GIT_USER=petrix12" && npm run deploy'
 
 
 
