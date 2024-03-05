@@ -354,6 +354,9 @@
             ]
         }
         ```
++ Crear servicio AuthService en **...\src\services\AuthService.ts**:
+    ```js
+    ```
 + Crear vista AuthView en **...\src\views\AuthView.vue**:
     ```html
     ```
