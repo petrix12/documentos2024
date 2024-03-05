@@ -1,3 +1,9 @@
+---
+title: Apuntes de Laravel 10
+sidebar_label: "Apuntes de Laravel 10"
+sidebar_position: 1
+---
+
 # LARAVEL 10
 
 ## Pre-requisitos obligatorios:
