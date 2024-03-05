@@ -40,10 +40,10 @@ sidebar_position: 2
     + Configurar **docusaurus.config.js**:
         ```js
         // ...
-        baseUrl: '/documentos2024',
-        organizationName: 'soluciones++',
-        projectName: 'documentos2024',
-        deploymentBranch: 'gh-pages',
+        baseUrl: '/documentos2024',     // Nombre del repositorio
+        organizationName: 'petrix12',   // Usuario GitHub
+        projectName: 'documentos2024',  // Nombre del repositorio
+        deploymentBranch: 'gh-pages',   // Rama de git pages
         trailingSlash: false,
         // ...
         ```

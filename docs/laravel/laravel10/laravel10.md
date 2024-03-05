@@ -557,16 +557,34 @@
         <html lang="es">
         <head>
             <!-- ... -->
+            <!-- NOTA: los stack a diferencia de los yield permiten apilar su contenido -->
+            @stack('meta')
+            <!-- ... -->
             <title>@yield('title')</title>
+            <!-- ... -->
+            @stack('css')
+            <!-- ... -->
         </head>
         <body>
+            <!-- ... -->
+            <!-- aquí puede ir un nav -->
+            <!-- ... -->
             @yield('content')
+            <!-- ... -->
+            <!-- aquí puede ir un footer -->
+            <!-- ... -->
+            @stack('js')
+            <!-- ... -->
         </body>
         </html>
         ```
     + Uso de la plantilla en una vista **resources\views\mi_vista.blade.php**:
         ```php
         @extends('layouts.mi_plantilla')
+
+        @push('meta')
+            <meta description="viewport" content="Descripción de mi vista">
+        @endpush
 
         @section('title', 'Mi título de página')
 
@@ -1787,7 +1805,56 @@
         }
         ```
     + Se invoca como el componente anónimo.
++ Crear un componente como plantilla:
+    + $ php artisan make:component AppLayout
+    + **Nota 1**: se crea los siguientes archivos:
+        + Lógica: **..\app\View\AppLayout.php**.
+        + Vista: **..\resource\views\components\app-layout.blade.php**.
+    + **Nota 2**: si se desea mover la vista (**..\resource\views\components\app-layout.blade.php**) del componente a una nueva carpeta dentro de **components** se deberá modificar la invocación de la misma en la parte lógica del componente (**..\app\View\AppLayout.php**)
+    + Diseñar vista del componente:
+        ```php
+        <!DOCTYPE html>
+        <html lang="es">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta http-equiv="X-UA-Compatible" content="ie=edge">
+            <!-- ... -->
+            @stack('meta')
+            <!-- ... -->
+            <title>{{ $title ?? 'Nombre por defecto' }}</title>
+            <!-- ... -->
+            {{-- incluir aquí todos los CDN necesarios --}}
+            <!-- ... -->
+            @stack('css')
+            <!-- ... -->
+        </head>
+        <body>
+            <nav>
+                {{-- diseño de un nav --}}
+            </nav>
 
+            {{ $slot }}
+
+            <footer>
+                {{-- diseño de un footer --}}
+            </footer>
+            <!-- ... -->
+            @stack('js')
+            <!-- ... -->
+        </body>
+        </html>        
+        ```
+    + Usar la plantilla en una vista blade cualquiera:
+        ```html
+        <x-app-layout>
+            <x-slot name="title">
+                Nombre de la vista
+            </x-slot>
+            <!-- vista -->
+        </x-app-layout>
+        ```
+    
 
 ## Middlewares:
 + Ejemplo de creación de un middleware:
