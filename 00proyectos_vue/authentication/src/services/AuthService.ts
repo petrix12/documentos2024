@@ -1,22 +1,22 @@
 import { Ref, ref } from 'vue'
 
 class AuthService {
-    private jwt: Ref<String>
-    private error: Ref<String>
+    private jwt: Ref<string>
+    private error: Ref<string>
     constructor() {
         this.jwt = ref('')
         this.error = ref('')
     }
 
-    getJwt(): Ref<String> {
+    getJwt(): Ref<string> {
         return this.jwt
     }
 
-    getError(): Ref<String> {
+    getError(): Ref<string> {
         return this.error
     }
 
-    async login(email: String, password: String): Promise<boolean> {
+    async login(email: string, password: string): Promise<boolean> {
         try {
             const res = await fetch('https://rutaservidor/auth/login', {
                 method: 'POST',

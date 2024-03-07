@@ -355,112 +355,158 @@
         }
         ```
 + Crear servicio AuthService en **...\src\services\AuthService.ts**:
-    + Con typescript:
-        ```ts
-        import { Ref, ref } from 'vue'
+    + **TRADICIONAL**:
+        + Con typescript:
+            ```ts
+            import { Ref, ref } from 'vue'
 
-        class AuthService {
-            private jwt: Ref<String>
-            private error: Ref<String>
-            constructor() {
-                this.jwt = ref('')
-                this.error = ref('')
-            }
+            class AuthService {
+                private jwt: Ref<string>
+                private error: Ref<string>
+                constructor() {
+                    this.jwt = ref('')
+                    this.error = ref('')
+                }
 
-            getJwt(): Ref<String> {
-                return this.jwt
-            }
+                getJwt(): Ref<string> {
+                    return this.jwt
+                }
 
-            getError(): Ref<String> {
-                return this.error
-            }
+                getError(): Ref<string> {
+                    return this.error
+                }
 
-            async login(email: String, password: String): Promise<boolean> {
-                try {
-                    const res = await fetch('https://rutaservidor/auth/login', {
-                        method: 'POST',
-                        headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            email,
-                            password
-                        })
-                    })            
-                    const response = await res.json()
-                    if('errors' in response) {
+                async login(email: string, password: string): Promise<boolean> {
+                    try {
+                        const res = await fetch('https://rutaservidor/auth/login', {
+                            method: 'POST',
+                            headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                email,
+                                password
+                            })
+                        })            
+                        const response = await res.json()
+                        if('errors' in response) {
+                            this.error.value = "Login failed"
+                            return false
+                        }
+                        this.jwt.value = response.data.access_token
+                        return true
+                    } catch(error) {
+                        console.log(error)
                         this.error.value = "Login failed"
                         return false
                     }
-                    this.jwt.value = response.data.access_token
-                    return true
-                } catch(error) {
-                    console.log(error)
-                    this.error.value = "Login failed"
-                    return false
                 }
             }
-        }
-        export default AuthService        
-        ```
-    + Con javascript:
-        ```js
-        import { ref } from 'vue'
+            export default AuthService        
+            ```
+        + Con javascript:
+            ```js
+            import { ref } from 'vue'
 
-        class AuthService {
-            constructor() {
-                this.jwt = ref('')
-                this.error = ref('')
-            }
+            class AuthService {
+                constructor() {
+                    this.jwt = ref('')
+                    this.error = ref('')
+                }
 
-            getJwt() {
-                return this.jwt
-            }
+                getJwt() {
+                    return this.jwt
+                }
 
-            getError() {
-                return this.error
-            }
+                getError() {
+                    return this.error
+                }
 
-            async login(email, password) {
-                try {
-                    const res = await fetch('https://rutaservidor/auth/login', {
-                        method: 'POST',
-                        headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            email,
-                            password
-                        })
-                    })            
-                    const response = await res.json()
-                    if('errors' in response) {
+                async login(email, password) {
+                    try {
+                        const res = await fetch('https://rutaservidor/auth/login', {
+                            method: 'POST',
+                            headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                email,
+                                password
+                            })
+                        })            
+                        const response = await res.json()
+                        if('errors' in response) {
+                            this.error.value = "Login failed"
+                            return false
+                        }
+                        this.jwt.value = response.data.access_token
+                        return true
+                    } catch(error) {
+                        console.log(error)
                         this.error.value = "Login failed"
                         return false
                     }
-                    this.jwt.value = response.data.access_token
-                    return true
-                } catch(error) {
-                    console.log(error)
-                    this.error.value = "Login failed"
-                    return false
                 }
             }
-        }
-        export default AuthService
-        ```
+            export default AuthService
+            ```
 + Crear vista AuthView en **...\src\views\AuthView.vue**:
     ```html
+    <template>
+        <h1>Auth View</h1>
+        <form action="">
+            <input v-model="email" type="text" placeholder="correo">
+            <input v-model="password" type="text" placeholder="password">
+            <button type="submit" @click.prevent="authUser">Iniciar Sesión</button>
+        </form>
+    </template>
+
+    <script lang="ts" setup>
+    import { ref } from 'vue'
+    import AuthService from '@/services/AuthService'
+
+    let email = ref("")
+    let password = ref("")
+
+    const authUser = async () => {
+        const auth = new AuthService()
+        const success = await auth.login(email.value, password.value)
+        if(success) {
+            console.log('login correcto')
+        } else {        
+            console.log('login incorrecto')
+        }
+    }
+    </script>    
     ```
 + Modificar el archivo de rutas **...\src\router\index.ts**:
-    ```html
+    ```ts
+    // ...
+    import AuthView from '../views/AuthView.vue'
+
+    const routes: Array<RouteRecordRaw> = [
+        // ...
+        {
+            path: '/auth',
+            name: 'auth',
+            component: AuthView
+        },
+    ]
+    // ...   
     ```
 + Modificar el componente principal **...\src\App.vue**:
     ```html
+    <template>
+        <nav>
+            <!-- ... -->
+            <router-link to="/auth">Iniciar Sesión</router-link>
+        </nav>
+        <!-- ... -->
+    </template>
     ```
-+ mmm
+
 
 
 ## Estructura recomendada de carpetas de un proyecto Vue:
