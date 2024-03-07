@@ -2803,3 +2803,23 @@ public function mi_metodo() {
         }
         // ...
         ``` 
+### Textarea con formato enriquecido:
++ **CKEditor**: https://ckeditor.com
+1. Incluir CDN del CKEditor en nuestra vista:
+    ```html
+    <!-- ... -->
+    <textarea name="texto" id="texto" cols="30" rows="10"></textarea>
+    <!-- ... -->
+    @section('js')
+        <!-- https://ckeditor.com/ckeditor-5/download -->
+        <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js"></script>
+        <!-- https://ckeditor.com/docs/ckeditor5/latest/installation/getting-started/quick-start.html -->
+        <script>
+            ClassicEditor
+                .create( document.querySelector( '#texto' ) )
+                .catch( error => {
+                    console.error( error );
+                } );
+        </script>        
+    @endsection
+    ```
