@@ -2535,30 +2535,271 @@ $minuscula = strtolower('pEdRo');    // regresa: pedro
 
 
 ## Tips generales:
-+ Crear un arreglo a partir de un campo de una colección:
-    ```php
-    $coleccion = Modelo::pluck('campo1');
+### Crear un arreglo a partir de un campo de una colección:
+```php
+$coleccion = Modelo::pluck('campo1');
+```
++ Esto regresa un objeto con una estructura similar a esta:
+    ```json
+    [
+        "valor 1",
+        "valor 2",
+        "valor 3",
+        // ...
+    ]
     ```
-    + Esto regresa un objeto con una estructura similar a esta:
-        ```json
-        [
-            "valor 1",
-            "valor 2",
-            "valor 3",
-            // ...
-        ]
+
+### Crear un objeto llave valor a partir de una colección:
+```php
+$coleccion = Modelo::pluck('valor', 'llave');   
+// Ejemplo: valor puede ser nombre y llave puede ser el id de la colección
+```
++ Esto regresa un objeto con una estructura similar a esta:
+    ```json
+    {
+        "1": "valor 1",
+        "2": "valor 2",
+        "3": "valor 3",
+        // ...
+    }
+    ```
+
+### Evitar que un código se ejecute desde consola:
+```php
+// ...
+public function mi_metodo() {
+    if(!app()->runningInConsole()) {
+        // ...
+    }
+}
+// ...
+```
+
+### Incorparar un select2 utilizando un plugin de jQuery:
++ Documentación: 
+    + https://select2.org
+    + https://releases.jquery.com
+1. Colocar los CDN de select2 en la vista a trabajar:
+    ```html
+    <!-- ... -->
+    @push('css')
+        <!-- tomado de select2 -->
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    @endpush
+    <!-- ... -->
+    @push('js')
+        <!-- tomado de jQuery -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <!-- tomado de select2 -->
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <!-- tomado de select2 -->
+        <script>
+            $(document).ready(function() {
+                $('.opcion-multiple').select2();
+            });                
+        </script>
+    @endpush
+    <!-- ... -->
+    <!-- Multi-select boxes (pillbox) -->
+    <div>
+        <select class="opcion-multiple" name="opciones[]" multiple="multiple">
+            @foreach($opciones as $opcion)
+                <option
+                    value="{{ $opcion->id }}"
+                    @selected(old('opciones', $condicion))
+                >
+                    {{ $opcion->name }}
+                </option>
+            @endforeach
+        </select>            
+    </div>
+    <!-- ... -->
+    ```
+    + **Nota**: en la plantilla de donde extiende esta vista debe tener una estructura similar a esta:
+        ```html
+        <!-- -->
+        <head>
+            <!-- -->
+            @stack('css')
+            <!-- -->    
+        </head>
+        <body>
+            <!-- -->
+            @stack('js')
+            <!-- -->    
+        </body>
+        <!-- -->
         ```
-+ Crear un objeto llave valor a partir de una colección:
+2. En el controlador que administra la vista anterior:
     ```php
-    $coleccion = Modelo::pluck('valor', 'llave');   
-    // Ejemplo: valor puede ser nombre y llave puede ser el id de la colección
+    // ...
+    public function metodo(Request $request, Opcion $opcion) {
+        // Recuperando los valores del select2
+        $opciones = $request->opciones;
+    }
+    // ...
     ```
-    + Esto regresa un objeto con una estructura similar a esta:
-        ```json
-        {
-            "1": "valor 1",
-            "2": "valor 2",
-            "3": "valor 3",
-            // ...
+
+### Incorparar un select2 pasando datos por ajax:
++ Documentación: 
+    + https://select2.org
+    + https://releases.jquery.com
+1. Colocar los CDN de select2 en la vista a trabajar:
+    ```html
+    <!-- ... -->
+    @push('css')
+        <!-- tomado de select2 -->
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    @endpush
+    <!-- ... -->
+    @push('js')
+        <!-- tomado de jQuery -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <!-- tomado de select2 -->
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <!-- tomado de select2 y adaptado al proyecto -->
+        <script>
+            $(document).ready(function() {
+                $('.opcion-multiple').select2({
+                    ajax: {
+                        url: "{{ route('api.opciones.index') }}",
+                        dataType: 'json',
+                        delay: 250,
+                        // Envía información a la api
+                        data: function(params) {
+                            return {
+                                search: params.search
+                            }
+                        },
+                        // Recibe información de la api
+                        processResults: function(data) {
+                            return {
+                                results: data
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
+    @endpush
+    <!-- ... -->
+    <!-- Multi-select boxes (pillbox) -->
+    <div>
+        <select class="opcion-multiple" name="opciones[]" multiple="multiple">
+            @foreach($opciones as $opcion)
+                <option value="{{ $opcion->id }}">{{ $opcion->name }}</option>
+            @endforeach
+        </select>            
+    </div>
+    <!-- ... -->
+    ```
+    + **Nota**: en la plantilla de donde extiende esta vista debe tener una estructura similar a esta:
+        ```html
+        <!-- -->
+        <head>
+            <!-- -->
+            @stack('css')
+            <!-- -->    
+        </head>
+        <body>
+            <!-- -->
+            @stack('js')
+            <!-- -->    
+        </body>
+        <!-- -->
+        ```
+2. Definir una ruta con respuesta json en  **...\routes\api.php**:
+    ```php
+    Route::get('/opciones', function(Request $request) {
+        $search = $request->search ?? '';
+        $opciones = Registros::select('id', 'name as text')
+            ->where('name', 'LIKE', "%$search%")
+            ->limit(10)
+            ->get();
+        return $opciones;
+    })->name('api.opciones.index');    
+    ```
+3. En el controlador que administra la vista anterior:
+    ```php
+    // ...
+    public function metodo(Request $request, Opcion $opcion) {
+        // Recuperando los valores del select2
+        $opciones = $request->opciones;
+    }
+    // ...
+    ```    
+4. Incorporar valores que no están presente en las opciones y que se registren en BD:
+    + Modificar el script del select2 en la vista a trabajar:
+        ```html
+        <!-- ... -->
+        @push('js')
+            <!-- ... -->
+            <!-- tomado de select2 y adaptado al proyecto -->
+            <script>
+                $(document).ready(function() {
+                    $('.opcion-multiple').select2({
+                        opciones: true,
+                        tokenSeparators: [',', ' '],
+                        ajax: {
+                            url: "{{ route('api.opciones.index') }}",
+                            dataType: 'json',
+                            delay: 250,
+                            // Envía información a la api
+                            data: function(params) {
+                                return {
+                                    search: params.search
+                                }
+                            },
+                            // Recibe información de la api
+                            processResults: function(data) {
+                                return {
+                                    results: data
+                                }
+                            }
+                        }
+                    });
+                });
+            </script>
+        @endpush
+        <!-- ... -->
+        <!-- Multi-select boxes (pillbox) -->
+        <div>
+            <select class="opcion-multiple" name="opciones[]" multiple="multiple">
+                @foreach($opciones as $opcion)
+                    <option value="{{ $opcion->name }}">{{ $opcion->name }}</option>
+                @endforeach
+            </select>            
+        </div>
+        <!-- ... -->
+        ```
+    + Modificar la ruta **api.opciones.index** en  **...\routes\api.php**:
+        ```php
+        Route::get('/opciones', function(Request $request) {
+            $search = $request->search ?? '';
+            $opciones = Registros::select('name')
+                ->where('name', 'LIKE', "%$search%")
+                ->limit(10)
+                ->get()->map(function($opcion) {
+                    return [
+                        'id' => $opcion->name,
+                        'text' => $opcion->name
+                    ];
+                });
+            return $opciones;
+        })->name('api.opciones.index');    
+        ```
+    + Modificar el controlador que administra la vista anterior:
+        ```php
+        // ...
+        public function metodo(Request $request, Opcion $opcion) {
+            // Recuperando los valores del select2
+            $opciones = [];
+            foreach($request->opciones ?? [] as $name) {
+                $opcion = Registros::firstOrCreate([
+                    'name' => $name
+                ]);
+                $opciones[] = $opcion->id;
+            }
         }
-        ```
+        // ...
+        ``` 

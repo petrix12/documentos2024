@@ -44,3 +44,12 @@ Route::get('/users3', function(Request $request) {
         $query->whereIn('id', $selected)->limit(10);
     })->get();
 })->name('api.users.index3');
+
+Route::get('/opciones', function(Request $request) {
+    $search = $request->search ?? '';
+    $opciones = Registros::select('id', 'name as text')
+        ->where('name', 'LIKE', "%$search%")
+        ->limit(10)
+        ->get();
+    return $opciones;
+})->name('api.opciones.index');
