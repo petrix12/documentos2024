@@ -841,6 +841,7 @@ sidebar_position: 1
                 $table->string('name', 150);
                 $table->string('email')->unique();
                 $table->text('descripcion');
+                $table->mediumText('descripcion_media_larga');
                 $table->longText('descripcion_muy_larga');
                 $table->timestamp('email_verified_at')->nullable();
                 $table->string('password');
@@ -848,6 +849,21 @@ sidebar_position: 1
                 $table->rememberToken();                                // Crea la columna remember_token
                 $table->foreignId('current_team_id')->nullable();
                 $table->string('profile_photo_path', 2048)->nullable();
+                $table->integer('campo_tipo_entero');
+                $table->bigInteger('campo_tipo_entero_largo');
+                $table->boolean('campo_booleano');
+                $table->timestaps('campo_fecha_corto_rango');  // Pocos años hacia atras y hacia adelante
+                $table->date('campo_fecha');
+                $table->time('campo_hora');
+                $table->dateTime('campo_fecha_hora');
+                $table->decimal('campo_decimal', 8, 2);     // 8: precisión, 2: cantidad de decimales
+                $table->float('campo_float', 8, 2);     // 8: precisión, 2: cantidad de decimales
+                $table->double('campo_double', 8, 2);     // 8: precisión, 2: cantidad de decimales
+                $table->foreignId('category_id');   // equivalente a. $table->bigInteger('category_id')->unsigned();
+                $table->json('array_de_elementos');
+                $table->morphs('datoable'); // Para relaciones polimorficas
+                // es equivalente a:    $table->bigInteger('datoable_id')->unsigned();
+                //                      $table->string('datoable_type');
 
                 // Restricciones de llave foranea con set null
                 $table->unsignedBigInteger('modelo_id')->nullable();
@@ -860,6 +876,8 @@ sidebar_position: 1
                 $table->foreign('otro_modelo_id')
                     ->rerferences('id')->on('otro_modelos')
                     ->onDelete('cascade');
+
+                
 
                 $table->timestamps();                                   // Crea las columnas created_at y updated_at
             });
@@ -919,6 +937,28 @@ sidebar_position: 1
                 $table->string('micolumna', 255)->nullable(false)->change();
             });
         }
+        ```
++ Migración que se encargue de eliminar una tabla:
+    + $ php artisan make:migration drop_tabla_table
+    + Lógica para la migración:
+        ```php
+        // ...
+        public function up(): void
+        {
+            //Schema::drop('tabla');
+            Schema::dropIfExists('tabla');
+        }
+        // ...
+        public function down(): void
+        {
+            // Aquí se deberá crear la tabla tabla
+            Schema::create('tabla', function (Blueprint $table) {
+                $table->id();
+                // ...
+                $table->timestamps();
+            });        
+        }
+        // ...
         ```
 
 ## Modelos:
@@ -2816,10 +2856,41 @@ public function mi_metodo() {
         <!-- https://ckeditor.com/docs/ckeditor5/latest/installation/getting-started/quick-start.html -->
         <script>
             ClassicEditor
-                .create( document.querySelector( '#texto' ) )
+                .create( document.querySelector('#texto'))
                 .catch( error => {
-                    console.error( error );
-                } );
+                    console.error(error);
+                });
         </script>        
     @endsection
+    ```
++ **Nota 1**: en caso de usar livewire:
+    ```html
+    <!-- ... -->
+    <textarea name="texto" id="texto" cols="30" rows="10"></textarea>
+    <!-- ... -->
+    @section('js')
+        <!-- https://ckeditor.com/ckeditor-5/download -->
+        <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js"></script>
+        <!-- https://ckeditor.com/docs/ckeditor5/latest/installation/getting-started/quick-start.html -->
+        <script>
+            ClassicEditor
+                .create( document.querySelector('#texto'))
+                .then(editor => {
+                    editor.model.document.on('change:data', () => {
+                        @this.set('texto', editor.getData());
+                    });
+                })
+                .catch( error => {
+                    console.error(error);
+                });
+        </script>        
+    @endsection
+    ```
++ **Nota 2**: para aumentar el alto:
+    ```html
+    <style>
+        .ck-editor__editable_inline {
+            min-height: 200px;
+        }
+    </style>  
     ```
