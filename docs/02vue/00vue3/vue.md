@@ -304,155 +304,156 @@
         ```
 
 ## Proyecto con autenticación:
-+ Estructuras de autenticación:
-    + Componentes necesarios:
-        + Login
-        + Registro
-        + Reset password
-        + Validación de email
-        + Doble Factor de auth (2FA)
-+ Crear proyecto con autenticación:
-    + $ vue create authentication
-    + Ejemplo de opciones seleccionadas para la creación de un proyecto:
-        ```
-        Vue CLI v5.0.8
-        ? Please pick a preset: Manually select features
-        ? Check the features needed for your project: Babel, TS, Router, CSS Pre-processors, Linter
-        ? Choose a version of Vue.js that you want to start the project with 3.x
-        ? Use class-style component syntax? No
-        ? Use Babel alongside TypeScript (required for modern mode, auto-detected polyfills, transpiling JSX)? Yes
-        ? Use history mode for router? (Requires proper server setup for index fallback in production) Yes
-        ? Pick a CSS pre-processor (PostCSS, Autoprefixer and CSS Modules are supported by default): Sass/SCSS (with dart-sass)
-        ? Pick a linter / formatter config: Basic
-        ? Pick additional lint features: Lint on save
-        ? Where do you prefer placing config for Babel, ESLint, etc.? In dedicated config files  
-        ? Save this as a preset for future projects? No    
-        ```
-+ Extructura común para consumo de una API para login
-    + End point: https://rutaservidor/auth/login
-    + Método: POST
-    + Respueste esperada en caso de exito:
-        ```json
-        {
-            "data": {
-                "access_token": "...",
-                "expires": 900000,
-                "refresh_token": "..."
-            }
+### Estructuras de autenticación:
++ Componentes necesarios:
+    + Login
+    + Registro
+    + Reset password
+    + Validación de email
+    + Doble Factor de auth (2FA)
+### Crear proyecto con autenticación:
++ $ vue create authentication
++ Ejemplo de opciones seleccionadas para la creación de un proyecto:
+    ```
+    Vue CLI v5.0.8
+    ? Please pick a preset: Manually select features
+    ? Check the features needed for your project: Babel, TS, Router, CSS Pre-processors, Linter
+    ? Choose a version of Vue.js that you want to start the project with 3.x
+    ? Use class-style component syntax? No
+    ? Use Babel alongside TypeScript (required for modern mode, auto-detected polyfills, transpiling JSX)? Yes
+    ? Use history mode for router? (Requires proper server setup for index fallback in production) Yes
+    ? Pick a CSS pre-processor (PostCSS, Autoprefixer and CSS Modules are supported by default): Sass/SCSS (with dart-sass)
+    ? Pick a linter / formatter config: Basic
+    ? Pick additional lint features: Lint on save
+    ? Where do you prefer placing config for Babel, ESLint, etc.? In dedicated config files  
+    ? Save this as a preset for future projects? No    
+    ```
+### Extructura común para consumo de una API para login
++ End point: https://rutaservidor/auth/login
++ Método: POST
++ Respueste esperada en caso de exito:
+    ```json
+    {
+        "data": {
+            "access_token": "...",
+            "expires": 900000,
+            "refresh_token": "..."
         }
-        ```
-    + Respueste esperada en caso de error:
-        ```json
-        {
-            "errors": [
-                {
-                    "message": "...",
-                    "extensions": {
-                        "code": "..."
-                    }
-                }
-            ]
-        }
-        ```
-+ Crear servicio AuthService en **...\src\services\AuthService.ts**:
-    + **TRADICIONAL**:
-        + Con typescript:
-            ```ts
-            import { Ref, ref } from 'vue'
-
-            class AuthService {
-                private jwt: Ref<string>
-                private error: Ref<string>
-                constructor() {
-                    this.jwt = ref('')
-                    this.error = ref('')
-                }
-
-                getJwt(): Ref<string> {
-                    return this.jwt
-                }
-
-                getError(): Ref<string> {
-                    return this.error
-                }
-
-                async login(email: string, password: string): Promise<boolean> {
-                    try {
-                        const res = await fetch('https://rutaservidor/auth/login', {
-                            method: 'POST',
-                            headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({
-                                email,
-                                password
-                            })
-                        })            
-                        const response = await res.json()
-                        if('errors' in response) {
-                            this.error.value = "Login failed"
-                            return false
-                        }
-                        this.jwt.value = response.data.access_token
-                        return true
-                    } catch(error) {
-                        console.log(error)
-                        this.error.value = "Login failed"
-                        return false
-                    }
+    }
+    ```
++ Respueste esperada en caso de error:
+    ```json
+    {
+        "errors": [
+            {
+                "message": "...",
+                "extensions": {
+                    "code": "..."
                 }
             }
-            export default AuthService        
-            ```
-        + Con javascript:
-            ```js
-            import { ref } from 'vue'
+        ]
+    }
+    ```
+### Servicio de autenticación:
+#### Tradicional:
+1. Crear servicio AuthService en **...\src\services\AuthService.ts**:
+      + Con typescript:
+          ```ts
+          import { Ref, ref } from 'vue'
 
-            class AuthService {
-                constructor() {
-                    this.jwt = ref('')
-                    this.error = ref('')
-                }
+          class AuthService {
+              private jwt: Ref<string>
+              private error: Ref<string>
+              constructor() {
+                  this.jwt = ref('')
+                  this.error = ref('')
+              }
 
-                getJwt() {
-                    return this.jwt
-                }
+              getJwt(): Ref<string> {
+                  return this.jwt
+              }
 
-                getError() {
-                    return this.error
-                }
+              getError(): Ref<string> {
+                  return this.error
+              }
 
-                async login(email, password) {
-                    try {
-                        const res = await fetch('https://rutaservidor/auth/login', {
-                            method: 'POST',
-                            headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({
-                                email,
-                                password
-                            })
-                        })            
-                        const response = await res.json()
-                        if('errors' in response) {
-                            this.error.value = "Login failed"
-                            return false
-                        }
-                        this.jwt.value = response.data.access_token
-                        return true
-                    } catch(error) {
-                        console.log(error)
-                        this.error.value = "Login failed"
-                        return false
-                    }
-                }
-            }
-            export default AuthService
-            ```
-+ Crear vista AuthView en **...\src\views\AuthView.vue**:
+              async login(email: string, password: string): Promise<boolean> {
+                  try {
+                      const res = await fetch('https://rutaservidor/auth/login', {
+                          method: 'POST',
+                          headers: {
+                              'Accept': 'application/json',
+                              'Content-Type': 'application/json'
+                          },
+                          body: JSON.stringify({
+                              email,
+                              password
+                          })
+                      })            
+                      const response = await res.json()
+                      if('errors' in response) {
+                          this.error.value = "Login failed"
+                          return false
+                      }
+                      this.jwt.value = response.data.access_token
+                      return true
+                  } catch(error) {
+                      console.log(error)
+                      this.error.value = "Login failed"
+                      return false
+                  }
+              }
+          }
+          export default AuthService        
+          ```
+      + Con javascript:
+          ```js
+          import { ref } from 'vue'
+
+          class AuthService {
+              constructor() {
+                  this.jwt = ref('')
+                  this.error = ref('')
+              }
+
+              getJwt() {
+                  return this.jwt
+              }
+
+              getError() {
+                  return this.error
+              }
+
+              async login(email, password) {
+                  try {
+                      const res = await fetch('https://rutaservidor/auth/login', {
+                          method: 'POST',
+                          headers: {
+                              'Accept': 'application/json',
+                              'Content-Type': 'application/json'
+                          },
+                          body: JSON.stringify({
+                              email,
+                              password
+                          })
+                      })            
+                      const response = await res.json()
+                      if('errors' in response) {
+                          this.error.value = "Login failed"
+                          return false
+                      }
+                      this.jwt.value = response.data.access_token
+                      return true
+                  } catch(error) {
+                      console.log(error)
+                      this.error.value = "Login failed"
+                      return false
+                  }
+              }
+          }
+          export default AuthService
+          ```
+2. Crear vista AuthView en **...\src\views\AuthView.vue**:
     ```html
     <template>
         <h1>Auth View</h1>
@@ -481,7 +482,78 @@
     }
     </script>    
     ```
-+ Modificar el archivo de rutas **...\src\router\index.ts**:
+#### Firebase:
+1. En consola de Firebase:
+    + Abrir cuenta **[Firebase](https://console.firebase.google.com)**.
+    + Crear proyecto de desarrollo web.
+    + No marcar firebase como hosting y registrar la aplicación.
+    + Usar npm y obtener la configuración de la cuenta:
+        ```js
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "firebase/app";
+        import { getAnalytics } from "firebase/analytics";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+        apiKey: "AIzaSyBkCucmFYNDgGYZLmOGlxSxXV310bCkY8E",
+        authDomain: "autenticacion-vue-655d6.firebaseapp.com",
+        projectId: "autenticacion-vue-655d6",
+        storageBucket: "autenticacion-vue-655d6.appspot.com",
+        messagingSenderId: "881503642689",
+        appId: "1:881503642689:web:01cf1fa1d8e00dce5b92c0",
+        measurementId: "G-NSDH0BQPNF"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);        
+        ```
+    + Ir a la consola.
+    + Ir a la sección de **Authentication**.
+    + Clic en **Comenzar**.
+    + Seleccionar como proveedor de acceso: **Proveedores nativos > Correo electrónico/contraseña**.
+    + Habilitar **Correo electrónico/contraseña** y **Guardar**.
+    + Ir a la pestaña **Usuarios** y agregar un usuario de prueba:
+        + Usuario: prueba@test.com
+        + Password: **********
+        + UID de usuario: ZbVrn0cIS2cXZjmNBk1NiMfj6Ex1
+2. En la consola local de nuestro proyecto:
+    + $ npm install firebase
+3. Incorporar Firebase a la aplicación en **00proyectos_vue\authentication\src\main.ts**:
+    ```ts
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "firebase/app"
+    import { getAnalytics } from "firebase/analytics"  // Opcional
+
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+        apiKey: "AIzaSyBkCucmFYNDgGYZLmOGlxSxXV310bCkY8E",
+        authDomain: "autenticacion-vue-655d6.firebaseapp.com",
+        projectId: "autenticacion-vue-655d6",
+        storageBucket: "autenticacion-vue-655d6.appspot.com",
+        messagingSenderId: "881503642689",
+        appId: "1:881503642689:web:01cf1fa1d8e00dce5b92c0",
+        measurementId: "G-NSDH0BQPNF"
+    }
+
+    // Initialize Firebase
+    initializeApp(firebaseConfig)
+    const analytics = getAnalytics(app) // Opcional    
+    ```
+4. Crear vista AuthView en **...\src\views\AuthView.vue**:
+    ```html
+    ```
+
+
+
+
+
+
+### Modificar el archivo de rutas **...\src\router\index.ts**:
     ```ts
     // ...
     import AuthView from '../views/AuthView.vue'
@@ -496,7 +568,7 @@
     ]
     // ...   
     ```
-+ Modificar el componente principal **...\src\App.vue**:
+### Modificar el componente principal **...\src\App.vue**:
     ```html
     <template>
         <nav>
