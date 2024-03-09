@@ -850,9 +850,11 @@ sidebar_position: 1
                 $table->foreignId('current_team_id')->nullable();
                 $table->string('profile_photo_path', 2048)->nullable();
                 $table->integer('campo_tipo_entero');
+                $table->integer('campo_tipo_entero_positivo')->unsigned();
                 $table->bigInteger('campo_tipo_entero_largo');
                 $table->boolean('campo_booleano');
                 $table->timestaps('campo_fecha_corto_rango');  // Pocos años hacia atras y hacia adelante
+                $table->timestaps('fecha_actual')->useCurrent();
                 $table->date('campo_fecha');
                 $table->time('campo_hora');
                 $table->dateTime('campo_fecha_hora');
@@ -875,9 +877,7 @@ sidebar_position: 1
                 $table->unsignedBigInteger('otro_modelo_id');
                 $table->foreign('otro_modelo_id')
                     ->rerferences('id')->on('otro_modelos')
-                    ->onDelete('cascade');
-
-                
+                    ->onDelete('cascade');                
 
                 $table->timestamps();                                   // Crea las columnas created_at y updated_at
             });
@@ -918,6 +918,9 @@ sidebar_position: 1
             });
         }
         ```
+        + **Nota**: a parte del método **after**, también existen:
+            + first: agrega la columna de primero.
+            + 
 + Modificar un campo de una migración:
     + Instalar dependencia:
         + $ composer require doctrine/dbal
@@ -928,13 +931,20 @@ sidebar_position: 1
         // ...
         public function up() {
             Schema::table('mitabla', function(Blueprint $table) {
+                // Modificar modificadores
                 $table->string('micolumna', 50)->nullable()->change();
+                // Modificar nombre
+                $table->renameColumn('columna2', 'columna3');
+                // Eliminar columna
+                $table->dropColumn('columna4');
             });
         }
         // ...
         public function down() {
             Schema::table('mitabla', function(Blueprint $table) {
                 $table->string('micolumna', 255)->nullable(false)->change();
+                $table->renameColumn('columna3', 'columna2');
+                $table->string('columna4')->after('columna1');
             });
         }
         ```
