@@ -838,6 +838,17 @@ sidebar_position: 1
         {
             Schema::create('users', function (Blueprint $table) {
                 $table->id();                                           // Crea la columna id
+                /*
+                    $table->id(); es equivalente a:
+                    $table->bigInteger()->autoIncrement()->unsigned();
+                    ó:
+                    $table->bigIncrment();
+                    El modificador autoIncrement agrega la siguiente instrucción:
+                    $table->primary('id');
+                    Para crear llaves primarias compuestas:
+                    $table->primary(['id', 'campo2']);
+
+                */
                 $table->string('name', 150);
                 $table->string('email')->unique();
                 $table->text('descripcion');
@@ -867,6 +878,14 @@ sidebar_position: 1
                 // es equivalente a:    $table->bigInteger('datoable_id')->unsigned();
                 //                      $table->string('datoable_type');
 
+                // Restricciones de llave foranea indicando indice y tabla
+                $table->foreignId('tabla_id')->constrained();
+                /* Equivalente a: 
+                    $table->foreign('tabla_id')
+                        ->rerferences('id')->on('tabla');
+                */
+            
+
                 // Restricciones de llave foranea con set null
                 $table->unsignedBigInteger('modelo_id')->nullable();
                 $table->foreign('modelo_id')
@@ -877,7 +896,13 @@ sidebar_position: 1
                 $table->unsignedBigInteger('otro_modelo_id');
                 $table->foreign('otro_modelo_id')
                     ->rerferences('id')->on('otro_modelos')
-                    ->onDelete('cascade');                
+                    ->onDelete('cascade');
+                    
+                $table->string('indice1');
+                $table->longText('indice2');
+                // Aplicando indices:
+                $table->index('indice1');
+                $table->fullText('indice2');
 
                 $table->timestamps();                                   // Crea las columnas created_at y updated_at
             });
@@ -937,6 +962,16 @@ sidebar_position: 1
                 $table->renameColumn('columna2', 'columna3');
                 // Eliminar columna
                 $table->dropColumn('columna4');
+                // Eliminar una llave única
+                $table->dropUnique('mitabla_columna5_unique');
+                // Eliminar un indice
+                $table->dropIndex('mitabla_columna6_index');
+                // Eliminar un indice full text
+                $table->dropFullText('mitabla_columna7_fulltext');
+                // Eliminar indice primario
+                $table->dropPrimary('PRIMARY');
+                // Eliminar restricciones de llave foranea
+                $table->dropForeign(['modelo_id']);
             });
         }
         // ...
@@ -945,6 +980,15 @@ sidebar_position: 1
                 $table->string('micolumna', 255)->nullable(false)->change();
                 $table->renameColumn('columna3', 'columna2');
                 $table->string('columna4')->after('columna1');
+                $table->unique('columna5');
+                $table->index('columna6');
+                $table->fullText('columna7');
+                $table->primary('id');
+                $table->foreign('modelo_id')
+                    ->references('id')
+                    ->on('modelos')
+                    ->onDelete('cascade')   // Suponiendo que el modificador que tenia antes de quitar la restricción de llave foranea
+                    ->onUpdate('cascade');   // Suponiendo que el modificador que tenia antes de quitar la restricción de llave foranea
             });
         }
         ```
