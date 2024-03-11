@@ -3013,3 +3013,48 @@ public function mi_metodo() {
         }
     </style>  
     ```
+
+### Instalar redis:
++ **Documentación**: https://laravel.com/docs/10.x/redis
++ $ php artisan sail:add
++ Seleccionar: [3] redis
++ Al ejecutar la instalación cambia la siguiente variable de entorno:
+    ```
+    REDIS_HOST=127.0.0.1
+    ```
+    por:
+    ```
+    REDIS_HOST=redis
+    ```
++ Para hacer que las sesiones las cargue en redis, cambiar la siguiente variable de entorno:
+    ```
+    SESSION_DRIVER=file
+    ```
+    por:
+    ```
+    SESSION_DRIVER=redis
+    ```
+    + Para administrar datos en sesión:
+        ```php
+        // ...
+        use Illuminate\Support\Facades\Session;
+        // ...
+        // guardar datos en sesión:
+        Session::put('clave1', 'valor1');
+        // leer datos en sesión:
+        $valor2 = Session::get('clave2');
+        // ...
+        ```
+    + Métodos de caché disponibles:
+        + put()
+        + get()
+        + many()
+        + putMany()
+        + increment()
+        + decrement()
+        + forever()
+        + forget()
+        + flush()
+        + remember()
+        + rememberForever()
+    + Página con ejemplos de uso: https://kinsta.com/es/blog/laravel-caching
