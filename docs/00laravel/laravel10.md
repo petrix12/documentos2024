@@ -407,7 +407,73 @@ sidebar_position: 1
     // $n: número de registros a recuperar
     $registros = Registro::latest('id')->take($n)->get();
     ```
-+ xxx
++ Trabajar con el generador de consultas de Eloquent:
+    ```php
+    // ...
+    use Illuminate\Support\Facades\DB;
+    // ...
+    public function metodo() {
+        // Obtener todos los registros de la tabla tabla
+        $registros = DB::table('tabla')->get();
+        // Obtener los registros cuyo campo1 sea igual a valor
+        $registros_filtro = DB::table('tabla')-where('campo1', 'valor')->get();
+        // Obtener el primer registro cuyo campo1 sea igual a valor
+        $registro_first = DB::table('tabla')-where('campo1', 'valor')->first();
+        // Obtener el primer registro cuyo campo2 sea mayor o igual que 2
+        $registro_first_mayor = DB::table('tabla')-where('campo1', '>=', 2)->first();
+        // Obtener el registro con id 3
+        $registro_id = DB::table('tabla')-find(3);
+        // Obtener todos los valores del campo2 en un array
+        $array_campo2 = DB::table('tabla')->pluck('campo2');        
+        // Obtener todos los valores del campo2 con llave id en un array tipo clave - valor
+        $array_clave_id_valor_campo2 = DB::table('tabla')->pluck('campo2', 'id');
+        // Obtener registros truncados
+        $cantidad_registros = 100;
+        DB::table('tabla')
+            ->orderBy('id')
+            ->chunk($cantidad_registros, function($registros) {
+                foreach($registros as $registro) {
+                    echo $registro->campo1 . '<br>';
+                }
+            });
+        // Obtener registros truncados para actualizar un valor
+        $cantidad_registros = 100;
+        DB::table('tabla')
+            ->orderBy('id')
+            ->chunkById($cantidad_registros, function($registros) {
+                foreach($registros as $registro) {
+                    // Actualizar campos de registros
+                }
+            });
+        // Obtener registros truncados con lazy
+        DB::table('tabla')
+            ->orderBy('id')
+            ->lazy()->each(function($registro) {
+                echo $registro->campo1 . '<br>';
+            });
+        // Obtener registros truncados con lazy para actualizar un valor
+        DB::table('tabla')
+            ->orderBy('id')
+            ->lazyById()->each(function($registro) {
+                // Actualizar campos de registros
+            });
+        // Obtener la cantidad de registros de la tabla tabla
+        $cantidad_registros = DB::table('tabla')->count();
+        // Obtener el mayor valor del campo campo3
+        $mayor_valor_campo3 = DB::table('tabla')->max('campo3');
+        // Obtener el menor valor del campo campo3
+        $menor_valor_campo3 = DB::table('tabla')->min('campo3');
+        // Obtener el promedio de los valores del campo campo3
+        $promedio_campo3 = DB::table('tabla')->avg('campo3');
+        // Verificar la existencia de un valor del campo3
+        $existe_3_en_campo3 = DB::table('tabla')->where('campo3', 3)->exists();
+        // Verificar la no existencia de un valor del campo3
+        $existe_3_en_campo3 = DB::table('tabla')->where('campo3', 3)->doesntExists();
+        // ...
+    }
+    // ...
+    ```
++ mmm
 
 ## Vistas
 + Ejemplos de vistas para un CRUD:
@@ -883,8 +949,7 @@ sidebar_position: 1
                 /* Equivalente a: 
                     $table->foreign('tabla_id')
                         ->rerferences('id')->on('tabla');
-                */
-            
+                */            
 
                 // Restricciones de llave foranea con set null
                 $table->unsignedBigInteger('modelo_id')->nullable();
