@@ -415,8 +415,18 @@ sidebar_position: 1
     public function metodo() {
         // Obtener todos los registros de la tabla tabla
         $registros = DB::table('tabla')->get();
-        // Obtener los registros cuyo campo1 sea igual a valor
+        // Obtener los registros cuyo campo1 sea igual a valor 
+        // Operadores del método where: >, >=, <, <=, =, <>, LIKE. Operadores especiales: % y ?
         $registros_filtro = DB::table('tabla')-where('campo1', 'valor')->get();
+        // Consulta con varias condicionales
+        $registros_filtro = DB::table('tabla')-where([
+            ['id', '>=', 5],
+            ['id', '<=', 10]
+        ])->get();
+        // Consultas con orWhere
+        $registros_filtro = DB::table('tabla')-where('campo1', 'LIKE', "%valor1%")->orWhere('campo1', 'LIKE', "%valor2%")->get();
+        // Consultas con whereNot
+        $registros_filtro = DB::table('tabla')-whereNot('campo1', 'LIKE', "%valor3%")->get();
         // Obtener el primer registro cuyo campo1 sea igual a valor
         $registro_first = DB::table('tabla')-where('campo1', 'valor')->first();
         // Obtener el primer registro cuyo campo2 sea mayor o igual que 2
@@ -469,6 +479,32 @@ sidebar_position: 1
         $existe_3_en_campo3 = DB::table('tabla')->where('campo3', 3)->exists();
         // Verificar la no existencia de un valor del campo3
         $existe_3_en_campo3 = DB::table('tabla')->where('campo3', 3)->doesntExists();
+        // Obtener los campos campo1 y campo2 de los registros de la tabla tabla
+        $registros_c1_c2 = DB::table('tabla')->select('campo1 as c1', 'campo2')->get();
+        // Obtener los campos campo2 y campo3 concatenados (Forma 1)
+        $registros_concat = DB::table('tabla')->select('campo1', DB::raw('CONCAT(campo2, " ", campo3) as campos2_3'), 'campo4')->get();
+        // Obtener los campos campo2 y campo3 concatenados (Forma 2)
+        $registros_concat = DB::table('tabla')->select('campo1', 'campo4')
+            selectRow('CONCAT(campo2, " ", campo3) as campos2_3')->get();
+        // Realizar un filtro más específico
+        $registros_where_raw = DB::table('tabla')->whereRaw('id >= 2 AND campo1 LIKE "123" OR campo2 = 0')->get();
+        $registros_or_where_raw = DB::table('tabla')->whereRaw('id >= 2 AND id <= 5')->orWhereRaw('campo3 = 0')->get();
+        // Otros métodos: havingRaw, orderByRaw, groupByRaw
+        // Consulta cruzada
+        $registros_cruzados = DB::table('tabla')
+            ->join('tabla2', 'tabla.modelo2_id' '=', 'tabla2.id')
+            ->get();
+        // Consulta cruzada indicando los campos a recuperar
+        $registros_cruzados = DB::table('tabla')
+            ->join('tabla2', 'tabla.modelo2_id' '=', 'tabla2.id')
+            ->select('tabla.*', 'tabla2.campo3 as c3')
+            ->get();
+        // Consulta cruzada con varias tablas
+        $registros_cruzados = DB::table('tabla')
+            ->join('tabla2', 'tabla.modelo2_id' '=', 'tabla2.id')
+            ->join('tabla3', 'tabla.modelo3_id' '=', 'tabla3.id')
+            ->select('tabla.*', 'tabla2.campo3 as c3', 'tabla3.*')
+            ->get();
         // ...
     }
     // ...
