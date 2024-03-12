@@ -1,5 +1,5 @@
 <template>
-    <h1>Auth View</h1>
+    <h1>Auth View con Firebase</h1>
     <form action="">
         <input v-model="email" type="text" placeholder="correo">
         <input v-model="password" type="text" placeholder="password">
@@ -9,18 +9,17 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import AuthService from '@/services/AuthService'
+import { getAuth, signInWithEmailAndPassword } from '/firebase/auth'
 
 let email = ref("")
 let password = ref("")
 
 const authUser = async () => {
-    const auth = new AuthService()
-    const success = await auth.login(email.value, password.value)
-    if(success) {
+    const auth = getAuth()
+    signInWithEmailAndPassword(auth, email.value, password.value).then(() => {
         console.log('login correcto')
-    } else {        
+    }).catch((error) => {
         console.log('login incorrecto')
-    }
+    })
 }
 </script>
