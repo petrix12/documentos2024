@@ -423,10 +423,36 @@ sidebar_position: 1
             ['id', '>=', 5],
             ['id', '<=', 10]
         ])->get();
+        // Consultar rangos
+        $registros_between = DB::table('tabla')-whereBetween('id', [5, 10])->get();
+        $registros_not_between = DB::table('tabla')-whereNotBetween('id', [5, 10])->get();
+        $registros_in = DB::table('tabla')-whereIn('id', [3, 7, 12])->get();
+        $registros_not_in = DB::table('tabla')-whereNotIn('id', [3, 7, 12])->get();
+        // Consultar null
+        $registros_null = DB::table('tabla')-whereNull('campo5')->get();
+        $registros_not_null = DB::table('tabla')-whereNotNull('campo5')->get();
         // Consultas con orWhere
         $registros_filtro = DB::table('tabla')-where('campo1', 'LIKE', "%valor1%")->orWhere('campo1', 'LIKE', "%valor2%")->get();
         // Consultas con whereNot
         $registros_filtro = DB::table('tabla')-whereNot('campo1', 'LIKE', "%valor3%")->get();
+        // Fechas
+        $registros_date = DB::table('tabla')-whereDate('campo5', '1972-01-12')->get();
+        $registros_date_mayor = DB::table('tabla')-whereDate('campo5', '>=', '1972-01-12')->get();
+        $registros_year = DB::table('tabla')-whereYear('campo5', '1972')->get();
+        $registros_month = DB::table('tabla')-whereMonth('campo5', '12')->get();
+        $registros_day = DB::table('tabla')-whereDay('campo5', '24')->get();
+        $registros_time = DB::table('tabla')-whereTime('campo5', '12:03:07')->get();
+        // Recuperar los registros en donde dos campos tengan el mismo valor
+        $registros_column = DB::table('tabla')-whereColumn('campo5', 'campo6')->get();
+        // Recuperar los registros en donde un campo sea mayor que otro
+        $registros_column_mayor = DB::table('tabla')-whereColumn('campo5', '>', 'campo6')->get();
+        // Agrupar filtros
+        $registro_agrupar = DB::table('tabla')-where('id', '>', 5)
+            ->where(function($query) {
+                $query->where('campo7', 'like', '%valor1')
+                    ->orWhere('campo7', 'like', '%valor2');
+            })
+            ->get();
         // Obtener el primer registro cuyo campo1 sea igual a valor
         $registro_first = DB::table('tabla')-where('campo1', 'valor')->first();
         // Obtener el primer registro cuyo campo2 sea mayor o igual que 2
@@ -505,6 +531,37 @@ sidebar_position: 1
             ->join('tabla3', 'tabla.modelo3_id' '=', 'tabla3.id')
             ->select('tabla.*', 'tabla2.campo3 as c3', 'tabla3.*')
             ->get();
+        // Ordenar registros
+        $registros_ordenados = DB::table('tabla')->orderBy('campo1', 'desc')->get();
+        // Recuperar registros ordenado de manera descendente
+        $registros_ordenados_latest = DB::table('tabla')->latest('campo1')->get();
+        // Recuperar registros ordenado de manera ascendente
+        $registros_ordenados_oldest = DB::table('tabla')->oldest('campo1')->get();
+        // Recuperar registros ordenado de manera aleatoria
+        $registros_ordenados_random = DB::table('tabla')->inRandomOrder('campo1')->get();
+        // Quitar orden
+        $registros_reorder = DB::table('tabla')->inRandomOrder('campo1');
+        $registros_reorder->reorder()->get();
+        // Agrupar
+        $registros_agrupados_total = DB::table('tabla')
+            ->select('campo1', DB::raw('count(*) as total'))
+            ->groupBy('campo1')
+            ->get();
+        $registros_agrupados_total_mayor = DB::table('tabla')
+            ->select('campo1', DB::raw('count(*) as total'))
+            ->groupBy('campo1')
+            ->having('total', '>', 2)   // having tiene una función similar a where
+            ->get();
+        $registros_agrupados_sumar = DB::table('tabla')
+            ->select('campo1', DB::raw('sum(*) as suma'))
+            ->groupBy('campo1')
+            ->get();
+        // Recuperar solo l2 registros
+        $registros_take = DB::table('tabla')->take(12)->get();
+        // Recuperar solo l2 registros a partir del cuarto (el método skip solo se puede usar si existe el método take o limit)
+        $registros_take_skip = DB::table('tabla')->skip(3)->take(12)->get();
+        $registros_limt_skip = DB::table('tabla')->skip(3)->limit(12)->get();   // Arroja el mismo resultado que la consulta anterior
+        $registros_limt_offset = DB::table('tabla')->offset(3)->limit(12)->get();   // Arroja el mismo resultado que la consulta anterior
         // ...
     }
     // ...
