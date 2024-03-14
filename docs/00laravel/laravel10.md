@@ -562,11 +562,111 @@ sidebar_position: 1
         $registros_take_skip = DB::table('tabla')->skip(3)->take(12)->get();
         $registros_limt_skip = DB::table('tabla')->skip(3)->limit(12)->get();   // Arroja el mismo resultado que la consulta anterior
         $registros_limt_offset = DB::table('tabla')->offset(3)->limit(12)->get();   // Arroja el mismo resultado que la consulta anterior
+        // Consultas condicionadas
+        $condicion = false;
+        $registros_condicionados = DB::table('tabla')
+            ->when($condicion, function($query) {
+                $query->where('campo1', 'valor1');
+            })->get();
+        $id = 15;
+        $registros_condicionados = DB::table('tabla')
+            ->when($condicion, function($query, $id) {
+                $query->where('id', >=, $id);
+            })->get();
         // ...
     }
     // ...
     ```
-+ mmm
++ Insertar registros con Eloquent:
+    ```php
+    // ...
+    use Illuminate\Support\Facades\DB;
+    // ...
+    public function metodo() {
+        // Insertar un registro
+        DB::table('tabla')->insert([
+            'campo1' => 'valor1',
+            'campo2' => 'valor2'
+        ]);
+        // Insertar un varios registros
+        DB::table('tabla')->insert([
+            [                
+                'campo1' => 'valor1_r1',
+                'campo2' => 'valor2_r1'
+            ],
+            [                
+                'campo1' => 'valor1_r2',
+                'campo2' => 'valor2_r2'
+            ]
+        ]);
+        // Insertar un varios registros e ignorar los registros que violan alguna restricción en bd
+        DB::table('tabla')->insertOrIgnore([
+            [                
+                'campo1' => 'valor1_r1',
+                'campo2' => 'valor2_r1'
+            ],
+            [                
+                'campo1' => 'valor1_r2',
+                'campo2' => 'valor2_r2'
+            ]
+        ]);
+        // Insertar nuevos registros, y si ya existen, entonces lo aptualiza
+        DB::table('tabla')->upsert([
+            // Datos a intentar registrar
+            [
+                'name' => 'Pedro',
+                'last_name' => 'Bazó',
+                'email' => 'bazo.pedro@gmail.com',
+                'password' => bcrypt('12345678')
+            ],
+            // Campo que indicará si el registro ya existe
+            [
+                'email'
+            ],
+            // En caso de que exista, indicar los campos a actualizar
+            [
+                'name' => 'Pedro',
+                'last_name' => 'Bazó'
+            ]
+        ]);
+    }
+    ```
++ Actualizar registros con Eloquent:
+    ```php
+    // ...
+    use Illuminate\Support\Facades\DB;
+    // ...
+    public function metodo() {
+        // Actualizar registros
+        DB::table('tabla')->where('id', 1508)
+            ->update([
+                'campo1' => 'valor1',
+                'campo2' => 'valor2'
+            ]);
+        // Actualizar registros o insertar
+        DB::table('tabla')
+            ->updateOrInsert(
+                [
+                    'email' => 'bazo.pedro@gmail.com',
+                ],
+                [
+                    'name' => 'Pedro',
+                    'last_name' => 'Bazó',
+                    'password' => bcrypt('12345678');
+                ]
+            );
+        // Incrementar un campo tipo integer
+        $cantidad_a_incrementar = 5;
+        DB::table('tabla')
+            ->where('id', 1207)
+            ->increment('campo_tipo_int', $cantidad_a_incrementar);
+        // Decrementar un campo tipo integer
+        $cantidad_a_decrementar = 7;
+        DB::table('tabla')
+            ->where('id', 1207)
+            ->increment('campo_tipo_int', $cantidad_a_decrementar);
+    }
+    ```
 
 ## Vistas
 + Ejemplos de vistas para un CRUD:
@@ -2800,6 +2900,11 @@ $coleccion = Modelo::pluck('campo1');
         // ...
     ]
     ```
+
+### Encriptar una contraseña:
+```php
+$password = bcrypt('12345678');
+```
 
 ### Crear un objeto llave valor a partir de una colección:
 ```php
