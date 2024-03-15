@@ -401,13 +401,8 @@ sidebar_position: 1
     + **Nota**: se recomienda nombrar las vista igual que el método.
 
 
-## Eloquent:
-+ Obtener los n últimos registros
-    ```php
-    // $n: número de registros a recuperar
-    $registros = Registro::latest('id')->take($n)->get();
-    ```
-+ Trabajar con el generador de consultas de Eloquent:
+## Query Builder:
++ Trabajar con el generador de consultas de Laravel (Query Builder):
     ```php
     // ...
     use Illuminate\Support\Facades\DB;
@@ -667,6 +662,103 @@ sidebar_position: 1
             ->increment('campo_tipo_int', $cantidad_a_decrementar);
     }
     ```
++ Eliminar registros con Eloquent:
+    ```php
+    // ...
+    use Illuminate\Support\Facades\DB;
+    // ...
+    public function metodo() {
+        // Eliminar registros
+        DB::table('tabla')->where('id', 1508)->delete();
+    }
+    ```
++ Paginación de registros con Eloquent:
+    ```php
+    // ...
+    use Illuminate\Support\Facades\DB;
+    // ...
+    public function metodo() {
+        // Registros paginados
+        $registros = DB::table('tabla')->paginate(15);
+        
+        // Registros paginados con más parametros
+        $registros = DB::table('tabla')->paginate(15, ['campo1', 'campo2'], 'nombre_parametro_page');
+
+        // Registros paginados simples (oculta los números de página en la vista)
+        $registros = DB::table('tabla')->simplePaginate(15);
+    }
+    ```
+    + Estructura de los registros paginados:
+    ```json
+    {
+        "current_page": 1,
+        "data": [
+            {
+                "id": 1,
+                "campo1": "Valor campo 1",
+                // ...
+            },
+            // ...
+        ],
+        "first_page_url": "url_de_mi_proyecto/vista?page=1",
+        "from": 1,
+        "last_page": 67,
+        "last_page_url": "url_de_mi_proyecto/vista?page=77",
+        "links": [
+            {
+                "url": null,
+                "label": "$laquo; Previous",
+                "active": false
+            },
+            {
+                "url": "url_de_mi_proyecto/vista?page=1",
+                "label": "1",
+                "active": true
+            },
+            {
+                "url": "url_de_mi_proyecto/vista?page=2",
+                "label": "2",
+                "active": false
+            },
+            // ...
+
+        ],
+        "next_page_url": "url_de_mi_proyecto/vista?page=2",
+        "per_page": 15,
+        "prev_page_url": null,
+        "to": 15,
+        "total": 999
+
+    }
+    ```
+    + Para paginar con Bootstrap:
+        :::tip Nota
+        Por defecto Laravel 10 usa tailwind como estilos de páginación
+        :::
+        + Agregar el CDN de bootstrap en el **head** de la vista de la aplicación.
+        + Modificar el provider **AppServiceProvider**:
+            ```php title="...\app\Providers\AppServiceProvider.php"
+            // ...
+            use Illuminate\Pagination\Paginator;
+            // ...
+            class AppServiceProvider extends ServiceProvider
+            {
+                // ...
+                public function boot(): void
+                {
+                    // ...
+                    Paginator::useBootstrapFive();
+                }
+            }            
+            ```
+
+
+## Eloquent:
++ Obtener los n últimos registros
+    ```php
+    // $n: número de registros a recuperar
+    $registros = Registro::latest('id')->take($n)->get();
+    ```
 
 ## Vistas
 + Ejemplos de vistas para un CRUD:
@@ -687,6 +779,32 @@ sidebar_position: 1
             {{ $modelos->link() }}
         @endsection
         ```
+        :::tip Nota
+        Si quiero personalizar los estilos de la paginación en el método link incorporar el nombre de la vista:
+        ```php
+        {{ $modelos->link('vista_paginacion_pesronalizada') }}        
+        ```
+        Si quiero establecer por defecto la vista de la paginación personalizada, modificar el provider **AppServiceProvider**:
+        ```php title="...\app\Providers\AppServiceProvider.php"
+        // ...
+        use Illuminate\Pagination\Paginator;
+        // ...
+        class AppServiceProvider extends ServiceProvider
+        {
+            // ...
+            public function boot(): void
+            {
+                // ...
+                Paginator::defaultView('vista_paginacion_pesronalizada');
+            }
+        }            
+        ```
+        Si quiero modificar los estilos de la paginación nativa de laravel:
+        ```bash
+        php artisan vendor:publish --tag=laravel-pagination
+        ```
+        Luego, establecer los estilos en **views/vendor/pagination/default.blade.php**.
+        :::
     + resources\views\crud\modelos\create.blade.php
         ```php
         @extends('layouts.mi_plantilla')
