@@ -1,10 +1,10 @@
 ---
-title: Página de prueba
-sidebar_label: "prueba"
+title: Proyecto Docusaurus
+sidebar_label: "Proyecto Docusaurus"
 sidebar_position: 2
 ---
 
-# Docusaurus
+# Proyecto Docusaurus
 + **Página oficial**: https://docusaurus.io
 + **Video tutorial**: https://www.youtube.com/watch?v=XPsEj5By5sk
 

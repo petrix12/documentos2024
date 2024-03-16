@@ -1,3 +1,9 @@
+---
+title: Apuntes de Vue 3
+sidebar_label: "Apuntes de Vue 3"
+sidebar_position: 1
+---
+
 # Vue.js
 
 ## Pre-requisitos obligatorios:

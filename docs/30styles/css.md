@@ -1,4 +1,10 @@
-# CSS
+---
+title: Apuntes de CSS3
+sidebar_label: "Apuntes de CSS3"
+sidebar_position: 1
+---
+
+# CSS3
 
 ## Rangos de ancho de pantalla 
 + Asociados con cada clase de tamaño en Bootstrap:
