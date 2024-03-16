@@ -1435,6 +1435,16 @@ sidebar_position: 1
         protected $guarded = [];
     }
     ```
++ Indicar que campos debe ocultar:
+    ```php
+    // ...
+    class Modelo extends Model {
+        // ...
+        protected $hidden = [
+            'campo1'
+        ];
+    }
+    ```
 + Establecer ralación 1:1 de **Modelo** a **OtroModelo**:
     ```php
     // ...
@@ -1718,6 +1728,35 @@ sidebar_position: 1
     + >>> $modelos = Modelo::where('propiedad3', 'LIKE', '%texto%')->get();
 
 ## Eloquent:
++ Crear registros:
+    ```php
+    // ...
+    class NombreController extends Controller
+    {
+        // ...
+        public function crear_forma1() {
+            $modelo = new Modelo();
+            $modelo->campo1 = 'valor 1';
+            $modelo->campo2 = 'valor 2';
+            $modelo->save();
+            // ...
+        }
+
+        public function crear_forma2() {
+            $modelo = Modelo::create([
+                'campo1' => 'valor 1',
+                'campo2' => 'valor 2',
+            ]);
+            // ...
+        }
+
+        public function crear_forma2_request(Request $request) {
+            $modelo = Modelo::create($request->all());
+            // ...
+        }
+        // ...
+    }
+    ```
 + Pasar todos los registros:
     ```php
     // ...
