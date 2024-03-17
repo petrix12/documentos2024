@@ -4,44 +4,131 @@ sidebar_position: 0
 
 # Apuntes Soluciones++
 
-Let's discover **Docusaurus in less than 5 minutes**.
+## Respositorios de GitHub en revisión
+- [ ] [jalvarez-commutatio/Publico](https://github.com/jalvarez-commutatio/Publico)
+- [ ] [francoMoyanoCommutatio/commutatio-light-2.0](https://github.com/francoMoyanoCommutatio/commutatio-light-2.0)
+- [ ] [jalvarez-commutatio/Administracion](https://github.com/jalvarez-commutatio/Administracion)
+- [x] [petrix12/documentos2024](https://github.com/petrix12/documentos2024)
+- [ ] [petrix12/wireui2024](https://github.com/petrix12/wireui2024)
+- [ ] [petrix12/cvpetrix2022](https://github.com/petrix12/cvpetrix2022)
+- [ ] [petrix12/doc_commutatio](https://github.com/petrix12/doc_commutatio)
+- [ ] [petrix12/datatable2023](https://github.com/petrix12/datatable2023)
+- [ ] [petrix12/livewire2023](https://github.com/petrix12/livewire2023)
+- [ ] [petrix12/wireui2023](https://github.com/petrix12/wireui2023)
+- [ ] [petrix12/superset](https://github.com/petrix12/superset)
+- [ ] [petrix12/repasosql](https://github.com/petrix12/repasosql)
+- [ ] [petrix12/alpine2023](https://github.com/petrix12/alpine2023)
+- [ ] [petrix12/vuexyfull2023](https://github.com/petrix12/vuexyfull2023)
+- [ ] [petrix12/AppSefarUniversal](https://github.com/petrix12/AppSefarUniversal)
+- [ ] [petrix12/vuexyfull](https://github.com/petrix12/vuexyfull)
+- [ ] [francoMoyanoCommutatio/commutatio-full-2.0](https://github.com/francoMoyanoCommutatio/commutatio-full-2.0)
+- [ ] [petrix12/vue-material-dashboard-laravel-bs4](https://github.com/petrix12/vue-material-dashboard-laravel-bs4)
+- [ ] [petrix12/documentacion](https://github.com/petrix12/documentacion)
+- [ ] [petrix12/cpp2023](https://github.com/petrix12/cpp2023)
+- [ ] [petrix12/imagenes2022](https://github.com/petrix12/imagenes2022)
+- [ ] [petrix12/aws2023](https://github.com/petrix12/aws2023)
+- [ ] [petrix12/calendario](https://github.com/petrix12/calendario)
+- [ ] [petrix12/autenticacion_laravel](https://github.com/petrix12/autenticacion_laravel)
+- [ ] [petrix12/crud_laravel](https://github.com/petrix12/crud_laravel)
+- [ ] [petrix12/zapier2022](https://github.com/petrix12/zapier2022)
+- [ ] [petrix12/programacion2023](https://github.com/petrix12/programacion2023)
+- [ ] [petrix12/numeros2022](https://github.com/petrix12/numeros2022)
+- [ ] [petrix12/docker2022](https://github.com/petrix12/docker2022)
+- [ ] [alejandrosfr1223/fid_2022](https://github.com/alejandrosfr1223/fid_2022)
+- [ ] [petrix12/pwa2022](https://github.com/petrix12/pwa2022)
+- [ ] [petrix12/twittor](https://github.com/petrix12/twittor)
+- [ ] [petrix12/sefar2022](https://github.com/petrix12/sefar2022)
+- [ ] [petrix12/auth2022](https://github.com/petrix12/auth2022)
+- [ ] [petrix12/reacjs2022](https://github.com/petrix12/reacjs2022)
+- [ ] [petrix12/vuepress2022](https://github.com/petrix12/vuepress2022)
+- [ ] [petrix12/nodejs2022](https://github.com/petrix12/nodejs2022)
+- [ ] [petrix12/react-laravel2022](https://github.com/petrix12/react-laravel2022)
+- [ ] [petrix12/instaclone2022](https://github.com/petrix12/instaclone2022)
+- [ ] [petrix12/voyager2022](https://github.com/petrix12/voyager2022)
+- [ ] [petrix12/obs-grabar-cursos-2021](https://github.com/petrix12/obs-grabar-cursos-2021)
+- [ ] [petrix12/openbootcamp2022](https://github.com/petrix12/openbootcamp2022)
+- [ ] [petrix12/laravel-excel-2022](https://github.com/petrix12/laravel-excel-2022)
+- [ ] [petrix12/nous2022](https://github.com/petrix12/nous2022)
+- [ ] [alejandrosfr1223/jdr_2022](https://github.com/alejandrosfr1223/jdr_2022)
+- [ ] [petrix12/react2022](https://github.com/petrix12/react2022)
+- [ ] [petrix12/instaclone-react-graphql_client](https://github.com/petrix12/instaclone-react-graphql_client)
+- [ ] [petrix12/fid_2022](https://github.com/petrix12/fid_2022)
+- [ ] [petrix12/Prep-Course](https://github.com/petrix12/Prep-Course)
+- [ ] [petrix12/tiempo2022](https://github.com/petrix12/tiempo2022)
+- [ ] [petrix12/tragedia99](https://github.com/petrix12/tragedia99)
+- [ ] [petrix12/vue2022](https://github.com/petrix12/vue2022)
+- [ ] [petrix12/api_rest_nodejs_2022](https://github.com/petrix12/api_rest_nodejs_2022)
+- [ ] [petrix12/apirest2022](https://github.com/petrix12/apirest2022)
+- [ ] [petrix12/nuxt2022](https://github.com/petrix12/nuxt2022)
+- [ ] [petrix12/mean2022](https://github.com/petrix12/mean2022)
+- [ ] [petrix12/instaclone-react-graphql_server](https://github.com/petrix12/instaclone-react-graphql_server)
+- [ ] [petrix12/api_restful_2021](https://github.com/petrix12/api_restful_2021)
+- [ ] [petrix12/inertia2022](https://github.com/petrix12/inertia2022)
+- [ ] [petrix12/inertia](https://github.com/petrix12/inertia)
+- [ ] [petrix12/oauth2022](https://github.com/petrix12/oauth2022)
+- [ ] [petrix12/prueba-laravel-monogo-2022](https://github.com/petrix12/prueba-laravel-monogo-2022)
+- [ ] [petrix12/pruebalaravel2022](https://github.com/petrix12/pruebalaravel2022)
+- [ ] [petrix12/deploy_2022](https://github.com/petrix12/deploy_2022)
+- [ ] [petrix12/excel2021](https://github.com/petrix12/excel2021)
+- [ ] [petrix12/graphql2022](https://github.com/petrix12/graphql2022)
+- [ ] [petrix12/laravel_mongodb_2021](https://github.com/petrix12/laravel_mongodb_2021)
+- [ ] [petrix12/docker_2021](https://github.com/petrix12/docker_2021)
+- [ ] [petrix12/mongo_db_2021](https://github.com/petrix12/mongo_db_2021)
+- [ ] [petrix12/web_mern_2021](https://github.com/petrix12/web_mern_2021)
+- [ ] [petrix12/mern_2021](https://github.com/petrix12/mern_2021)
+- [ ] [petrix12/2021app_arbolgen](https://github.com/petrix12/2021app_arbolgen)
+- [ ] [petrix12/2021_ecommerce](https://github.com/petrix12/2021_ecommerce)
+- [ ] [petrix12/cvpetrix](https://github.com/petrix12/cvpetrix)
+- [ ] [petrix12/arbol_excel2019](https://github.com/petrix12/arbol_excel2019)
+- [ ] [petrix12/vue2021](https://github.com/petrix12/vue2021)
+- [ ] [petrix12/desarrollo_web2021](https://github.com/petrix12/desarrollo_web2021)
+- [ ] [petrix12/laravel-permission2021](https://github.com/petrix12/laravel-permission2021)
+- [ ] [petrix12/laravel_vue_2021](https://github.com/petrix12/laravel_vue_2021)
+- [ ] [petrix12/convivencia2021](https://github.com/petrix12/convivencia2021)
+- [ ] [petrix12/vue3_net_core2021](https://github.com/petrix12/vue3_net_core2021)
+- [ ] [petrix12/vue3_rick_and_morty_api_2021](https://github.com/petrix12/vue3_rick_and_morty_api_2021)
+- [ ] [petrix12/cursos_sefar](https://github.com/petrix12/cursos_sefar)
+- [ ] [petrix12/automatizacion_vba_2017](https://github.com/petrix12/automatizacion_vba_2017)
+- [ ] [petrix12/pasarela_pago](https://github.com/petrix12/pasarela_pago)
+- [ ] [petrix12/api_laravel_passport](https://github.com/petrix12/api_laravel_passport)
+- [ ] [petrix12/apirestful_laravel8](https://github.com/petrix12/apirestful_laravel8)
+- [ ] [petrix12/file](https://github.com/petrix12/file)
+- [ ] [petrix12/hwasung](https://github.com/petrix12/hwasung)
+- [ ] [petrix12/thermo](https://github.com/petrix12/thermo)
+- [ ] [petrix12/borrar](https://github.com/petrix12/borrar)
+- [ ] [petrix12/awsejemplo](https://github.com/petrix12/awsejemplo)
+- [ ] [petrix12/Desarrollo-Web-Completo-con-HTML5-CSS3-JS-AJAX-PHP-y-MySQL](https://github.com/petrix12/Desarrollo-Web-Completo-con-HTML5-CSS3-JS-AJAX-PHP-y-MySQL)
+- [ ] [petrix12/API-RESTful-con-Laravel-Guia-Definitiva](https://github.com/petrix12/API-RESTful-con-Laravel-Guia-Definitiva)
+- [ ] [petrix12/PlataformaDeCursosLaravel](https://github.com/petrix12/PlataformaDeCursosLaravel)
+- [ ] [aprendible/desarrollo-de-una-api-con-laravel](https://github.com/aprendible/desarrollo-de-una-api-con-laravel)
+- [ ] [petrix12/AppFileLaravel](https://github.com/petrix12/AppFileLaravel)
+- [ ] [petrix12/Curso-Laravel-8-desde-cero---cursosdesarrolloweb.es](https://github.com/petrix12/Curso-Laravel-8-desde-cero---cursosdesarrolloweb.es)
+- [ ] [aprendible/aprende-laravel-intermedio](https://github.com/aprendible/aprende-laravel-intermedio)
+- [ ] [armandolazarte/aprende-laravel-intermedio](https://github.com/armandolazarte/aprende-laravel-intermedio)
+- [ ] [cvva/aprende-laravel-intermedio](https://github.com/cvva/aprende-laravel-intermedio)
+- [ ] [jmr85/aprende-laravel-intermedio](https://github.com/jmr85/aprende-laravel-intermedio)
+- [ ] [oliuz/aprende-laravel-intermedio](https://github.com/oliuz/aprende-laravel-intermedio)
+- [ ] [wilmertri/aprende-laravel-intermedio](https://github.com/wilmertri/aprende-laravel-intermedio)
+- [ ] [petrix12/Sistema-de-Historia-Cl-nica-en-Laravel](https://github.com/petrix12/Sistema-de-Historia-Cl-nica-en-Laravel)
+- [ ] [petrix12/ProyectoClientesSefar](https://github.com/petrix12/ProyectoClientesSefar)
+- [ ] [adrianmarrero14/sefaruniversal](https://github.com/adrianmarrero14/sefaruniversal)
+- [ ] [petrix12/octicons](https://github.com/petrix12/octicons)
+- [ ] [adrianmarrero14/biblioteca_laravel](https://github.com/adrianmarrero14/biblioteca_laravel)
+- [ ] [petrix12/canvas_html5](https://github.com/petrix12/canvas_html5)
+- [ ] [petrix12/ftm_sefar](https://github.com/petrix12/ftm_sefar)
+- [ ] [petrix12/laravel_datatables](https://github.com/petrix12/laravel_datatables)
+- [ ] [petrix12/arbol_sefar](https://github.com/petrix12/arbol_sefar)
+- [ ] [petrix12/autenticacion_firebase](https://github.com/petrix12/autenticacion_firebase)
+- [ ] [petrix12/arbol_genealogico](https://github.com/petrix12/arbol_genealogico)
+- [ ] [petrix12/prueba_repositorio](https://github.com/petrix12/prueba_repositorio)
+- [ ] [petrix12/cv](https://github.com/petrix12/cv)
+- [ ] [aprendible/curso-blog](https://github.com/aprendible/curso-blog)
+- [ ] [montand/curso-blog](https://github.com/montand/curso-blog)
+- [x] [jeespoping/curso-blog](https://github.com/jeespoping/curso-blog)
+- [x] [imer1319/curso-blog](https://github.com/imer1319/curso-blog)
+- [x] [aprendible/social-network](https://github.com/aprendible/social-network)
+- [x] [DavidRodarte/social-network](https://github.com/DavidRodarte/social-network)
+- [x] [aprendible/curso-dominando-laravel-53](https://github.com/aprendible/curso-dominando-laravel-53)
+- [x] [cvva/curso-dominando-laravel-53](https://github.com/cvva/curso-dominando-laravel-53)
 
-## Getting Started
 
-Get started by **creating a new site**.
-
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
-
-### What you'll need
-
-- [Node.js](https://nodejs.org/en/download/) version 18.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
-
-## Generate a new site
-
-Generate a new Docusaurus site using the **classic template**.
-
-The classic template will automatically be added to your project after you run the command:
-
-```bash
-npm init docusaurus@latest my-website classic
-```
-
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
-
-The command also installs all necessary dependencies you need to run Docusaurus.
-
-## Start your site
-
-Run the development server:
-
-```bash
-cd my-website
-npm run start
-```
-
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
-
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.

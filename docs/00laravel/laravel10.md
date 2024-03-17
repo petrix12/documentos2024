@@ -20,6 +20,7 @@ sidebar_position: 1
 + Laravel Blade Snippets (Winnie Lin).
 + Laravel goto view (codingyu).
 + Laravel Snippets (Winnie Lin).
++ Laravel Docs (Austen Cameron).
 + PHP Intelephense (Ben Mewburn).
 + Spanish Language Pack for Visual Studio Code (Microsoft).
 + Tailwind CSS IntelliSense (Tailwind Labs).
@@ -46,6 +47,10 @@ sidebar_position: 1
 
 ## Estructura de carpetas de un proyecto Laravel:
 + **app**: lógica principal de la aplicación (backend).
+    + **Http**:
+        + **Controllers**: controladores de la aplicación.
+    + **Models**: modelos de la aplicación.
+    + **Providers**: proveedores de servicios.
 + **bootstrap**: archivos que se usan para la carga del proyecto.
 + **config**: archivos de configuración del proyecto.
     + **config\app.php**: configuración de la aplicación.
@@ -68,7 +73,21 @@ sidebar_position: 1
 + **tests**: archivos de pruebas para la aplicación.
 + **vendor**: dependencias composer.
 
+:::tip Variables de entorno
++ **.env**: archivo de configuración de las variables de entorno.
+:::
+
+
 ## Rutas
++ Principales métodos estáticos de la clase **Route**:
+    ```php
+    Route::view('ruta', 'Vista a mostrar');                  // Para vistas estáticas
+    Route::get('ruta', 'Controlador que la gobierna');       // Crear ruta del tipo get
+    Route::post('ruta', 'Controlador que la gobierna');      // Crear ruta del tipo post
+    Route::put('ruta', 'Controlador que la gobierna');       // Crear ruta del tipo put
+    Route::delete('ruta', 'Controlador que la gobierna');    // Crear ruta del tipo delete
+    Route::patch('ruta', 'Controlador que la gobierna');     // Crear ruta del tipo patch
+    ```
 + Estructura de una ruta:
     + Las rutas se definenen en los archivos contenidos en la carpeta **routes**.
     + Ejemplo:
@@ -754,6 +773,112 @@ sidebar_position: 1
 
 
 ## Eloquent:
++ Crear registro:
+    ```php
+    // ...
+    class NombreController extends Controller
+    {
+        // ...
+        public function crear_forma1() {
+            $modelo = new Modelo();
+            $modelo->campo1 = 'valor 1';
+            $modelo->campo2 = 'valor 2';
+            $modelo->save();
+            // ...
+        }
+
+        public function crear_forma2() {
+            $modelo = Modelo::create([
+                'campo1' => 'valor 1',
+                'campo2' => 'valor 2',
+            ]);
+            // ...
+        }
+
+        public function crear_forma2_request(Request $request) {
+            $modelo = Modelo::create($request->all());
+            // ...
+        }
+        // ...
+    }
+    ```
++ Actualizar registro:
+    ```php
+    // ...
+    class NombreController extends Controller
+    {
+        // ...
+        public function actualizar_forma1(Request $request) {
+            $modelo = Modelo::find($request->modelo_id);
+            $modelo->campo1 = 'valor 1 actualizado';
+            $modelo->campo2 = 'valor 2 actualizado';
+            $modelo->save();
+            // ...
+        }
+
+        public function actualizar_forma2(Request $request) {
+            $modelo = Modelo::find($request->modelo_id)->update([
+                'campo1' => 'valor 1 actualizado',
+                'campo2' => 'valor 2 actualizado',
+            ]);
+            // ...
+        }
+
+        public function actualizar_forma2_request(Request $request) {
+            $modelo = Modelo::find($request->modelo_id)->update($request->all());
+            // ...
+        }
+        // ...
+    }
+    ```
++ Eliminar registro:
+    ```php
+    // ...
+    class NombreController extends Controller
+    {
+        // ...
+        public function eliminar(Request $request) {
+            $modelo = Modelo::find($request->modelo_id)->delete();
+            // ...
+        }
+
+        public function eliminar_varios(Request $request) {
+            $modelos = Modelo::whereIn('id', [$request->modelo_id1, $request->modelo_id2])->delete();
+            // ...
+        }
+        // ...
+    }
+    ```
++ Pasar todos los registros:
+    ```php
+    // ...
+    class NombreController extends Controller
+    {
+        // ...
+        public function mi_vista() {
+            $modelos = Modelo::all();
+            return view('mi_vista', compact('modelos'));
+        }
+        // ...
+    }
+    ```
++ Pasar registros paginados:
+    ```php
+    // ...
+    class NombreController extends Controller
+    {
+        // ...
+        public function mi_vista() {
+            $modelos = Modelo::paginate();  // Por defecto envía 15 registros
+            return view('mi_vista', compact('modelos'));
+        }
+        // ...
+    }
+    ```
+    :::tip Nota
+    Para navegar entre lotes de registros en la dirección del navegador podemos escribir algo así:
+    + http://miaplicacion.test/modelos?page=[numero]
+    :::
 + Obtener los n últimos registros
     ```php
     // $n: número de registros a recuperar
@@ -1673,7 +1798,6 @@ sidebar_position: 1
         }
     }
     ```
-+ 
 
 
 ## Tinker
@@ -1727,64 +1851,6 @@ sidebar_position: 1
 + Recuperar todos los registros que contenga el texto **texto** en cualquier parte del campo:
     + >>> $modelos = Modelo::where('propiedad3', 'LIKE', '%texto%')->get();
 
-## Eloquent:
-+ Crear registros:
-    ```php
-    // ...
-    class NombreController extends Controller
-    {
-        // ...
-        public function crear_forma1() {
-            $modelo = new Modelo();
-            $modelo->campo1 = 'valor 1';
-            $modelo->campo2 = 'valor 2';
-            $modelo->save();
-            // ...
-        }
-
-        public function crear_forma2() {
-            $modelo = Modelo::create([
-                'campo1' => 'valor 1',
-                'campo2' => 'valor 2',
-            ]);
-            // ...
-        }
-
-        public function crear_forma2_request(Request $request) {
-            $modelo = Modelo::create($request->all());
-            // ...
-        }
-        // ...
-    }
-    ```
-+ Pasar todos los registros:
-    ```php
-    // ...
-    class NombreController extends Controller
-    {
-        // ...
-        public function mi_vista() {
-            $modelos = Modelo::all();
-            return view('mi_vista', compact('modelos'));
-        }
-        // ...
-    }
-    ```
-+ Pasar registros paginados:
-    ```php
-    // ...
-    class NombreController extends Controller
-    {
-        // ...
-        public function mi_vista() {
-            $modelos = Modelo::paginate();  // Por defecto envía 15 registros
-            return view('mi_vista', compact('modelos'));
-        }
-        // ...
-    }
-    ```
-    + **Nota 1:** para navegar entre lotes de registros en la dirección del navegador podemos escribir algo así:
-        + http://miaplicacion.test/modelos?page=[numero]
 
 ## Seeder
 + Programar seeder en **database\seeders\DatabaseSeeder.php**:
@@ -1864,6 +1930,9 @@ sidebar_position: 1
     + $ php artisan migrate --seed
 
 ## Factory
+:::tip Docoumentacion
+Faker: https://fakerphp.github.io
+:::
 + Crear un factory:
     + $ php artisan make:factory ModeloFactory
     + **Nota**: cuando se crea de este modo, es necesario adaptar el código al modelo a emplear.
