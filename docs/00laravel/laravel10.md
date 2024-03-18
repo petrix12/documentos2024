@@ -68,6 +68,8 @@ sidebar_position: 1
     + **resources\css**: estilos.
     + **resources\js**: scripts.
     + **resources\views**: vistas y componentes.
+        + **resources\views\layouts**: plantillas blade.
+            + **resources\views\layouts\\_partials**: partes de plantillas blade.
 + **routes**: url's o rutas de la aplicación.
 + **storage**: almacenamiento.
 + **tests**: archivos de pruebas para la aplicación.
@@ -92,6 +94,8 @@ sidebar_position: 1
     + Las rutas se definenen en los archivos contenidos en la carpeta **routes**.
     + Ejemplo:
         ```php
+        // Ruta con vista de contenido estático
+        Route::view('ruta_estatica', 'vista_estatica');
         // Ruta con parámetros
         Route::get('ruta/{parametro_obligatorio}/{parametro_opcional?}', function($parametro_obligatorio, $parametro_opcional = null) {
             if($parametro_opcional) {
