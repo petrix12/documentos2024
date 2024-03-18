@@ -68,6 +68,7 @@ sidebar_position: 1
     + **resources\css**: estilos.
     + **resources\js**: scripts.
     + **resources\views**: vistas y componentes.
+        + **resources\views\_components**: componentes blade personalizados.
         + **resources\views\layouts**: plantillas blade.
             + **resources\views\layouts\\_partials**: partes de plantillas blade.
 + **routes**: url's o rutas de la aplicación.
@@ -1062,49 +1063,49 @@ sidebar_position: 1
         ```
 
 ## Blade
-+ Construcción de plantillas Blade
-    + Crear plantilla en **resources\views\layouts\mi_plantilla.blade.php**:
-        ```php
-        <!DOCTYPE html>
-        <html lang="es">
-        <head>
-            <!-- ... -->
-            <!-- NOTA: los stack a diferencia de los yield permiten apilar su contenido -->
-            @stack('meta')
-            <!-- ... -->
-            <title>@yield('title')</title>
-            <!-- ... -->
-            @stack('css')
-            <!-- ... -->
-        </head>
-        <body>
-            <!-- ... -->
-            <!-- aquí puede ir un nav -->
-            <!-- ... -->
-            @yield('content')
-            <!-- ... -->
-            <!-- aquí puede ir un footer -->
-            <!-- ... -->
-            @stack('js')
-            <!-- ... -->
-        </body>
-        </html>
-        ```
-    + Uso de la plantilla en una vista **resources\views\mi_vista.blade.php**:
-        ```php
-        @extends('layouts.mi_plantilla')
+### Construcción de plantillas Blade
++ Crear plantilla:
+    ```php title="resources\views\layouts\mi_plantilla.blade.php"
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <!-- ... -->
+        <!-- NOTA: los stack a diferencia de los yield permiten apilar su contenido -->
+        @stack('meta')
+        <!-- ... -->
+        <title>@yield('title')</title>
+        <!-- ... -->
+        @stack('css')
+        <!-- ... -->
+    </head>
+    <body>
+        <!-- ... -->
+        <!-- aquí puede ir un nav -->
+        <!-- ... -->
+        @yield('content')
+        <!-- ... -->
+        <!-- aquí puede ir un footer -->
+        <!-- ... -->
+        @stack('js')
+        <!-- ... -->
+    </body>
+    </html>
+    ```
+### Uso de la plantilla en una vista:
+    ```php title="resources\views\mi_vista.blade.php"
+    @extends('layouts.mi_plantilla')
 
-        @push('meta')
-            <meta description="viewport" content="Descripción de mi vista">
-        @endpush
+    @push('meta')
+        <meta description="viewport" content="Descripción de mi vista">
+    @endpush
 
-        @section('title', 'Mi título de página')
+    @section('title', 'Mi título de página')
 
-        @section('content')
-            {{-- Mi contenido HTML --}}
-        @endsection
-        ```
-+ Invocar vista desde un controllador:
+    @section('content')
+        {{-- Mi contenido HTML --}}
+    @endsection
+    ```
+### Invocar vista desde un controllador:
     ```php
     // ...
     class NombreController extends Controller
@@ -1117,7 +1118,26 @@ sidebar_position: 1
         // ...
     }
     ```
-+ Ejemplo de directiva **foreach**:
+### Invocación de un componente en una vista
+
+    ```php title="resources\views\mi_vista.blade.php"
+    <!-- ... -->
+    @component('_componentes.mi_componente')
+        @slot('title', 'Mi titulo')
+        @slot('content')
+            <!-- Código HTML -->
+        @endslot
+    @endcomponent
+    <!-- ... -->
+    ```
++ Compononente:
+    ```php title="resources\views\_components\mi_componente.blade.php"
+    <div>
+        <h3>{{ $title }}</h3>
+        {{ $content }}
+    </div>
+    ```
+### Ejemplo de directiva **foreach**:
     ```php
     <!-- ... -->
     <ul>

@@ -4,7 +4,7 @@ sidebar_label: "Apuntes de Vue 3"
 sidebar_position: 1
 ---
 
-# Vue.js
+# Apuntes Vue.js
 
 ## Pre-requisitos obligatorios:
 + [NodeJS](https://nodejs.org).
@@ -558,6 +558,104 @@ sidebar_position: 1
             <input v-model="email" type="text" placeholder="correo">
             <input v-model="password" type="text" placeholder="password">
             <button type="submit" @click.prevent="authUser">Iniciar Sesión</button>
+        </form>
+    </template>
+
+    <script lang="ts" setup>
+    import { ref } from 'vue'
+    import { getAuth, signInWithEmailAndPassword } from '/firebase/auth'
+
+    let email = ref("")
+    let password = ref("")
+
+    const authUser = async () => {
+        const auth = getAuth()
+        signInWithEmailAndPassword(auth, email.value, password.value).then(() => {
+            console.log('login correcto')
+        }).catch((error) => {
+            console.log('login incorrecto')
+        })
+    }
+    </script>    
+    ```
+
+#### Solial login con firebase (Google, Facebook, Twitter, Github):
+:::tip Documentación
++ [Documentación Firebase Google Auth](https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbnFjMFhRWUd0ckZFeUlxeXdXTGxOODhybml1UXxBQ3Jtc0tsbG9PNkpwWERHQVRSUldDX2tpeVB0YjVGQnFvRTBLSHY2eEd3UTBXSVE4QjVFaG4wUnN2VkZMT1I0ckJkZlhwUWx5dWx6ZUIzaVhvQXUxNlNNLVJidkN0Rm5pOHZkc2ZwaGlxLUhjamI4ZE1QcFk2cw&q=https%3A%2F%2Ffirebase.google.com%2Fdocs%2Fauth%2Fweb%2Fgoogle-signin%23web-version-9&v=R1_-x4WB3Iw)
++ [Documentación Firebase Facebook Auth](https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqa0lBLWJzYTZEbEp4b2V4Y3BCV1RGUDZMaFZXQXxBQ3Jtc0trZjFiaUctSVh4ZW9DdE83cGQxdm5QUTMxX3F0eWNfQlNMVko0ODQ1S29CbkZnNDBWUmNXbGhGMzdUTzMyTS1IWHNfR09SRE5QTlA3MjBjdzdqVjYwaURoSTdaeXl4cmg1UERxVzZnQzdwTXhtZlBsRQ&q=https%3A%2F%2Ffirebase.google.com%2Fdocs%2Fauth%2Fweb%2Ffacebook-login&v=R1_-x4WB3Iw)
++ [Documentación Firebase Twitter Auth](https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqa014clBWODVJU0hFYnJfM1JsVHU5d3B1cW50Z3xBQ3Jtc0tsZzFmeTEyRW9HTDZYYVQxRmtSQTNjWkh1bHhjU3hvcE1KWGJVSkYwNjBYSmc1eWFnN2pKd0lxOWgwMEIyakkybG5qVkhFNWMtVXpEQnRlT1FqcHJ2SS1teXdqQmNLX2lhc3JTRkZFMFh1YjJabDZqTQ&q=https%3A%2F%2Ffirebase.google.com%2Fdocs%2Fauth%2Fweb%2Ftwitter-login&v=R1_-x4WB3Iw)
++ [Documentación Firebase Github Auth](https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbVRYcnI5TEQxUGtORHZSLXdxSzE5LTFLdW95d3xBQ3Jtc0tsVEZvQTFENGpiYWl4WlZUUVE1aXpZV0NUTGVWSnR4WG1DMjVfTTdsdWdpOUlBMmlYdy1aTlFBcG43YjYxVnV4TmIyaTVzeDZocEE0SGx4bmswYVh6QndKcFZpRHl2eVYwcktha1REZXZUYjBiSkNwMA&q=https%3A%2F%2Ffirebase.google.com%2Fdocs%2Fauth%2Fweb%2Fgithub-auth&v=R1_-x4WB3Iw)
+:::
+1. En consola de Firebase:
+    + Abrir cuenta **[Firebase](https://console.firebase.google.com)**.
+    + Crear proyecto de desarrollo web.
+    + No marcar firebase como hosting y registrar la aplicación.
+    + Usar npm y obtener la configuración de la cuenta:
+        ```js
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "firebase/app";
+        import { getAnalytics } from "firebase/analytics";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+        apiKey: "AIzaSyBkCucmFYNDgGYZLmOGlxSxXV310bCkY8E",
+        authDomain: "autenticacion-vue-655d6.firebaseapp.com",
+        projectId: "autenticacion-vue-655d6",
+        storageBucket: "autenticacion-vue-655d6.appspot.com",
+        messagingSenderId: "881503642689",
+        appId: "1:881503642689:web:01cf1fa1d8e00dce5b92c0",
+        measurementId: "G-NSDH0BQPNF"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);        
+        ```
+    + Ir a la consola.
+    + Ir a la sección de **Authentication**.
+    + Clic en **Comenzar**.
+    + Seleccionar como proveedor de acceso: **Proveedores nativos > Correo electrónico/contraseña**.
+    + Habilitar **Correo electrónico/contraseña** y **Guardar**.
+    + Ir a la pestaña **Usuarios** y agregar un usuario de prueba:
+        + Usuario: prueba@test.com
+        + Password: **********
+        + UID de usuario: ZbVrn0cIS2cXZjmNBk1NiMfj6Ex1
+2. En la consola local de nuestro proyecto:
+    + $ npm install firebase
+3. Incorporar Firebase a la aplicación en **00proyectos_vue\authentication\src\main.ts**:
+    ```ts
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "firebase/app"
+    import { getAnalytics } from "firebase/analytics"  // Opcional
+
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+        apiKey: "AIzaSyBkCucmFYNDgGYZLmOGlxSxXV310bCkY8E",
+        authDomain: "autenticacion-vue-655d6.firebaseapp.com",
+        projectId: "autenticacion-vue-655d6",
+        storageBucket: "autenticacion-vue-655d6.appspot.com",
+        messagingSenderId: "881503642689",
+        appId: "1:881503642689:web:01cf1fa1d8e00dce5b92c0",
+        measurementId: "G-NSDH0BQPNF"
+    }
+
+    // Initialize Firebase
+    initializeApp(firebaseConfig)
+    const analytics = getAnalytics(app) // Opcional    
+    ```
+4. Crear vista AuthView en **...\src\views\AuthView.vue**:
+    ```html
+    <template>
+        <h1>Auth View con Social Login (Firebase)</h1>
+        <form action="">
+            <button>Iniciar Sesión con Google</button>
+            <button>Iniciar Sesión con Facebook</button>
+            <button>Iniciar Sesión con Twitter</button>
+            <button>Iniciar Sesión con Github</button>
         </form>
     </template>
 

@@ -2,8 +2,11 @@
 
 ## Extensiones recomendadas:
 ### Para peticiones HTTP
-+ Thunder Client | thunderclient.com | Lightweight Rest API Client for VS Code | 
++ Thunder Client | thunderclient.com | Lightweight Rest API Client for VS Code
     + **Nota**: Es como una versión de Postman para VSC.
+### IA
++ Codeium: AI Coding Autocomplete and Chat for Python, Javascript, Typescript, Java, Go, and more | Codeium | codeium.com
+    + **Nota**: Es como una versión de GitHub Copilot gratuita.
 
 ## Construcción de un snippet
 1. Página para generar snippet: https://snippet-generator.app
