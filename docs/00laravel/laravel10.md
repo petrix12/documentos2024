@@ -58,12 +58,15 @@ sidebar_position: 1
     + **config\mail.php**: configuración de emails.
 + **database**: administración de la base de datos.
     + **database\factories**: creación de datos de prueba.
-    + **database\migrations**: administración de tablas en base de datos.
+    + **database\migrations**: establecer estructura (crear, actualizar y eliminar) de base de datos.
     + **database\seeders**: poblar la base de datos con datos de prueba.
 + **lang**: administración de idiomas.
 + **node_modules**: dependencias npm.
 + **public**: archivos accesibles desde la web.
     + **public\index.php**: punto de entrada a la aplicación.
+    + **public\assets**: recursos públicos.
+        + **public\assets\img**: recursos públicos de imagenes.
+        + **public\assets\css**: recursos públicos de estilos.
 + **resources**: vista de la aplicación (frontend)
     + **resources\css**: estilos.
     + **resources\js**: scripts.
@@ -1119,7 +1122,6 @@ sidebar_position: 1
     }
     ```
 ### Invocación de un componente en una vista
-
     ```php title="resources\views\mi_vista.blade.php"
     <!-- ... -->
     @component('_componentes.mi_componente')
@@ -1137,6 +1139,22 @@ sidebar_position: 1
         {{ $content }}
     </div>
     ```
+### Cargar recursos públicos
+    ```php title="resources\views\mi_vista.blade.php"
+    <!-- ... -->
+    <head>
+        <!-- ... -->
+        <!-- Busca el recurso en public/assets/css/estilos.css -->
+        <link rel="stylesheet" href="{{ asset('assets/css/estilos.css') }}">
+        <!-- ... -->
+    </head>
+    <body>
+        <!-- ... -->
+        <!-- Busca el recurso en public/assets/img/imagen.jpg -->
+        <img src="{{ asset('assets/img/imagen.jpg') }}" alt="example">
+        <!-- ... -->
+    </body>
+    ```
 ### Ejemplo de directiva **foreach**:
     ```php
     <!-- ... -->
@@ -1149,212 +1167,221 @@ sidebar_position: 1
     {{ $modelos->link() }}
     <!-- ... -->
     ```
-+ Directivas:
-    + if:
-        ```php
-        @if($condicion)
-            <!-- Se muestra solo si $condicion = true -->
-        @else
-            <!-- Se muestra solo si $condicion = false -->
-        @endif
-        ```
-    + auth:
-        ```php
-        @auth
-            <!-- Se muestra solo si existe un usuario autenticado -->
-        @else
-            <!-- Se muestra solo si no existe un usuario autenticado -->
-        @endauth
-        ```
-    + foreach:
-        ```php
-        @foreach ($elementos as $elemento)
-            {{ $elemento }}
-        @endforeach
-        ```
-        + **Nota 1:** al usar un foreach se crean algunas variables de interes:
-            + $loop->first (Primero elemento)
-            + $loop->last (Último elemento)
-            + $loop->index (Elemento actual, el primero tendrá el valor de cero)
-            + $loop->iteration (Elemento actual, el primero tendrá el valor de uno)
-            + $loop->remaining (Iteraciones restantes)
-        + **Nota 2:** para acceder al loop del padre en caso de un bucle foreach anidado:
-            + $loop->parent->first (Primero elemento del bucle padre)
-    + class:
-        ```php
-        <style>
-            .mi-estilo1 {
-                color: blue;
-            }
-            .mi-estilo2 {
-                color: green;
-            }
-        </style>
-        @foreach ($elementos as $elemento)
-            <span @class([ 
-                'mi-estilo1' => $loop->first,
-                'mi-estilo2' => $loop->last,
-            ])>{{ $elemento }}</span>
-        @endforeach
-        ```
-    + forelse:
-        ```php
-        @forelse ($elementos as $elemento)
-            {{ $elemento }}
-        @empty
-            <p>No existen elementos a mostrar</p>
-        @endforelse
-        ```
-    + for:
-        ```php
-        @for ($i = 0; $i < $count; i++)
-            {{ $i }}
-        @endfor
-        ```
-    + continue:
-        ```php
-        <!-- Forma 1 -->
-        @for ($i = 0; $i < $count; i++)
-            @if($i == 3)
-                <p>Cuando $i sea igual a tres se saltará esta iteración a partir de aquí</p>
-                @continue
-            @endif
-            {{ $i }}
-        @endfor
-        <!-- Forma 2 -->
-        @for ($i = 0; $i < $count; i++)
+### Directivas:
++ if:
+    ```php
+    @if($condicion)
+        <!-- Se muestra solo si $condicion = true -->
+    @else
+        <!-- Se muestra solo si $condicion = false -->
+    @endif
+    ```
++ auth:
+    ```php
+    @auth
+        <!-- Se muestra solo si existe un usuario autenticado -->
+    @else
+        <!-- Se muestra solo si no existe un usuario autenticado -->
+    @endauth
+    ```
++ foreach:
+    ```php
+    @foreach ($elementos as $elemento)
+        {{ $elemento }}
+    @endforeach
+    ```
+    + **Nota 1:** al usar un foreach se crean algunas variables de interes:
+        + $loop->first (Primero elemento)
+        + $loop->last (Último elemento)
+        + $loop->index (Elemento actual, el primero tendrá el valor de cero)
+        + $loop->iteration (Elemento actual, el primero tendrá el valor de uno)
+        + $loop->remaining (Iteraciones restantes)
+    + **Nota 2:** para acceder al loop del padre en caso de un bucle foreach anidado:
+        + $loop->parent->first (Primero elemento del bucle padre)
++ class:
+    ```php
+    <style>
+        .mi-estilo1 {
+            color: blue;
+        }
+        .mi-estilo2 {
+            color: green;
+        }
+    </style>
+    @foreach ($elementos as $elemento)
+        <span @class([ 
+            'mi-estilo1' => $loop->first,
+            'mi-estilo2' => $loop->last,
+        ])>{{ $elemento }}</span>
+    @endforeach
+    ```
++ forelse:
+    ```php
+    @forelse ($elementos as $elemento)
+        {{ $elemento }}
+    @empty
+        <p>No existen elementos a mostrar</p>
+    @endforelse
+    ```
++ for:
+    ```php
+    @for ($i = 0; $i < $count; i++)
+        {{ $i }}
+    @endfor
+    ```
++ continue:
+    ```php
+    <!-- Forma 1 -->
+    @for ($i = 0; $i < $count; i++)
+        @if($i == 3)
             <p>Cuando $i sea igual a tres se saltará esta iteración a partir de aquí</p>
-            @continue($i == 3)
-            {{ $i }}
-        @endfor
-        ```
-    + break:
-        ```php
-        <!-- Forma 1 -->
-        @for ($i = 0; $i < $count; i++)
-            @if($i == 3)
-                <p>Cuando $i sea igual a tres se saldrá del bucle</p>
-                @break
-            @endif
-            {{ $i }}
-        @endfor
-        <!-- Forma 2 -->
-        @for ($i = 0; $i < $count; i++)
+            @continue
+        @endif
+        {{ $i }}
+    @endfor
+    <!-- Forma 2 -->
+    @for ($i = 0; $i < $count; i++)
+        <p>Cuando $i sea igual a tres se saltará esta iteración a partir de aquí</p>
+        @continue($i == 3)
+        {{ $i }}
+    @endfor
+    ```
++ break:
+    ```php
+    <!-- Forma 1 -->
+    @for ($i = 0; $i < $count; i++)
+        @if($i == 3)
             <p>Cuando $i sea igual a tres se saldrá del bucle</p>
-            @break($i == 3)
-            {{ $i }}
-        @endfor
-        ``
-    + while y php:
-        ```php
-        @php
-            $i = 1;
-        @endphp
+            @break
+        @endif
+        {{ $i }}
+    @endfor
+    <!-- Forma 2 -->
+    @for ($i = 0; $i < $count; i++)
+        <p>Cuando $i sea igual a tres se saldrá del bucle</p>
+        @break($i == 3)
+        {{ $i }}
+    @endfor
+    ``
++ while y php:
+    ```php
+    @php
+        $i = 1;
+    @endphp
 
-        @while ($i < $count)
-            {{ $i }}
-            @php
-                $i++;
-            @endphp
-        @endwhile
-        ```
-    + for:
-        ```php
-        @for ($i = 0;$i < $count; $i++)
-            {{ $i }}
-        @endfor
-        ```
-    + checked:
-        ```php
-        <input type="checkbox" @checked($condicion) name="mi_checked">
-        ```
-    + selected:
-        ```php
-        <option value="1" @selected($valor)>Opción ...</option>
-        ```
-    + disabled:
-        ```php
-        <button @disabled($condicion)>Botón</button>
-        ```
-    + readonly y required:
-        ```php
-        <input @readonly($condicion1) @required($condicion2) type="text" value="Readonly" />
-        ```
-    + include, includeIf, inlcudeWhen y includeFirst:
-        ```php
-        <!-- la vista partial.form debe existir -->
-        @include('partial.form')
-        <!-- pasar parámetros a la vista partial.form con la directiva include-->
-        @include('partial.form', ['parametro' => $valor])
-        <!-- si existe la vista partial.form se incluirá en esta vista -->
-        @includeIf('partial.form')
-        <!-- pasar parámetros a la vista partial.form con la directiva includeIf-->
-        @includeIf('partial.form', ['parametro' => $valor])
-        <!-- se trae una vista si se cumple una condición -->
-        @includeWhen($condicion, 'partial.form')
-        <!-- pasar parámetros a la vista partial.form con la directiva includeWhen -->
-        @includeWhen($condicion, 'partial.form', ['parametro' => $valor])
-        <!-- si existe varias vistas y que se traiga la primera -->
-        @includeFirst(['partial.form1', 'partial.form2'])
-        ```
-    + error:
-        ```php
-        @error('variable')
-            {{ $message }}
-        @enderror
-        ```
-    + isset (si la variable esta definida o no tiene un valor asignado):
-        ```php
-        @isset($variable)
-            <p>La variable esta definidad</p>
-        @else
-            <p>La variable no esta definidad</p>
-        @endisset
-        ```
-    + unless:
-        ```php
-        @unless($condicion)
-            <p>Este texto se mostrará si $condicion tiene el valor de false</p>
-        @endunless
-        ```
-    + empty:
-        ```php
-        @empty($variable)
-            <p>La variable $variable no existe o no tiene un valor asignado false</p>
-        @endempty
-        ```
-    + env:
-        ```php
-        @env('local')
-            <p>Me encuentro en un entorno local</p>
-        @endenv
-        
-        @env('production')
-            <p>Me encuentro en un entorno de producción</p>
-        @endenv
-        ```
-    + production:
-        ```php
-        @production
-            <p>Me encuentro en un entorno de producción</p>
-        @endproduction
-        ```
-    + switch:
-        ```php
-        @switch($caso)
-            @case(1)
-                <p>Caso 1</p>
-            @break
-            @case(2)
-                <p>Caso 2</p>
-            @break
-            @default
-                <p>Sin caso</p>
-        @endswitch
-        ```
+    @while ($i < $count)
+        {{ $i }}
+        @php
+            $i++;
+        @endphp
+    @endwhile
+    ```
++ for:
+    ```php
+    @for ($i = 0;$i < $count; $i++)
+        {{ $i }}
+    @endfor
+    ```
++ checked:
+    ```php
+    <input type="checkbox" @checked($condicion) name="mi_checked">
+    ```
++ selected:
+    ```php
+    <option value="1" @selected($valor)>Opción ...</option>
+    ```
++ disabled:
+    ```php
+    <button @disabled($condicion)>Botón</button>
+    ```
++ readonly y required:
+    ```php
+    <input @readonly($condicion1) @required($condicion2) type="text" value="Readonly" />
+    ```
++ include, includeIf, inlcudeWhen y includeFirst:
+    ```php
+    <!-- la vista partial.form debe existir -->
+    @include('partial.form')
+    <!-- pasar parámetros a la vista partial.form con la directiva include-->
+    @include('partial.form', ['parametro' => $valor])
+    <!-- si existe la vista partial.form se incluirá en esta vista -->
+    @includeIf('partial.form')
+    <!-- pasar parámetros a la vista partial.form con la directiva includeIf-->
+    @includeIf('partial.form', ['parametro' => $valor])
+    <!-- se trae una vista si se cumple una condición -->
+    @includeWhen($condicion, 'partial.form')
+    <!-- pasar parámetros a la vista partial.form con la directiva includeWhen -->
+    @includeWhen($condicion, 'partial.form', ['parametro' => $valor])
+    <!-- si existe varias vistas y que se traiga la primera -->
+    @includeFirst(['partial.form1', 'partial.form2'])
+    ```
++ error:
+    ```php
+    @error('variable')
+        {{ $message }}
+    @enderror
+    ```
++ isset (si la variable esta definida o no tiene un valor asignado):
+    ```php
+    @isset($variable)
+        <p>La variable esta definidad</p>
+    @else
+        <p>La variable no esta definidad</p>
+    @endisset
+    ```
++ unless:
+    ```php
+    @unless($condicion)
+        <p>Este texto se mostrará si $condicion tiene el valor de false</p>
+    @endunless
+    ```
++ empty:
+    ```php
+    @empty($variable)
+        <p>La variable $variable no existe o no tiene un valor asignado false</p>
+    @endempty
+    ```
++ env:
+    ```php
+    @env('local')
+        <p>Me encuentro en un entorno local</p>
+    @endenv
+    
+    @env('production')
+        <p>Me encuentro en un entorno de producción</p>
+    @endenv
+    ```
++ production:
+    ```php
+    @production
+        <p>Me encuentro en un entorno de producción</p>
+    @endproduction
+    ```
++ switch:
+    ```php
+    @switch($caso)
+        @case(1)
+            <p>Caso 1</p>
+        @break
+        @case(2)
+            <p>Caso 2</p>
+        @break
+        @default
+            <p>Sin caso</p>
+    @endswitch
+    ```
 
 ## Migraciones
 + Documentación: https://laravel.com/docs/10.x/migrations
++ Establecer conexión con la BD:
+    ```env titel=".env"
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=wireui2024
+    DB_USERNAME=root
+    DB_PASSWORD=    
+    ```
 + Nombre de ejemplo de un archivo de migración y los posibles tipos de campos a definir:
     + Nombre: database\migrations\2014_10_12_000000_create_users_table.php
     + Código:
@@ -1443,8 +1470,28 @@ sidebar_position: 1
     + **Nota:** al usar esta convención se crean las estructuras de los métodos **up** y **down** en el archivo de la migración.
 + Crear migración siguiendo las convenciones de Laravel para una tabla auxiliar:
     + $ php artisan make:migration create_nombretabla1_nombretabla2_table   (escribir en orden alfabético)
++ Migración para modificar la estructura de una tabla:
+    + $ php artisan make:migration update_nombretabla_table
+    + Ejemplo de modificación en el archivo de migración:
+        ```php
+        // ...
+        public function up() {
+            Schema::table('nombretabla', function(Blueprint $table) {
+                $table->string('new_column');
+                $table->dropColumn(['column1_a_eliminar', 'column2_a_eliminar']);
+            });
+        }
+        // ...
+        public function down() {
+            // Revirtir las acciones del método up
+            Schema::dropColumn('new_column');
+            // ...
+        }
+        ```
 + Revertir cambios de la última migración:
     + $ php artisan migrate:rollback
++ Revertir cambios de lote 3 en las migraciones:
+    + $ php artisan migrate:rollback --batch=3
 + Revertir todos los cambios y volver a ejecutar las migraciones (elimina la tabla sin ejecutar el método **down**):
     + $ php artisan migrate:fresh
 + Revertir todos los cambios y volver a ejecutar las migraciones (ejecuta el método **down**):
@@ -1470,7 +1517,6 @@ sidebar_position: 1
         ```
         + **Nota**: a parte del método **after**, también existen:
             + first: agrega la columna de primero.
-            + 
 + Modificar un campo de una migración:
     + Instalar dependencia:
         + $ composer require doctrine/dbal
@@ -1543,7 +1589,7 @@ sidebar_position: 1
 ## Modelos:
 + Crear un modelo:
     + $ php artisan make:model Modelo
-    + $ php artisan make:model Modelo -m        (con migración)
+    + $ php artisan make:model Modelo -m        (con migración, también se puede reemplazar -m por --migration)
     + $ php artisan make:model Modelo -mc       (con migración y controlador)
     + $ php artisan make:model Modelo -mcs      (con migración, controlador y seeder)
     + $ php artisan make:model Modelo -mcsf     (con migración, controlador, seeder y factory)
@@ -1591,6 +1637,16 @@ sidebar_position: 1
         // ...
         protected $hidden = [
             'campo1'
+        ];
+    }
+    ```
++ Realizar casting en las propiedades del modelo:
+    ```php
+    // ...
+    class Modelo extends Model {
+        // ...
+        protected $casts = [
+            'campo1' => 'string'
         ];
     }
     ```
