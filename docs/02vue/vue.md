@@ -615,14 +615,16 @@ sidebar_position: 1
         const analytics = getAnalytics(app);        
         ```
     + Ir a la consola.
-    + Ir a la sección de **Authentication**.
-    + Clic en **Comenzar**.
-    + Seleccionar como proveedor de acceso: **Proveedores nativos > Correo electrónico/contraseña**.
-    + Habilitar **Correo electrónico/contraseña** y **Guardar**.
-    + Ir a la pestaña **Usuarios** y agregar un usuario de prueba:
-        + Usuario: prueba@test.com
-        + Password: **********
-        + UID de usuario: ZbVrn0cIS2cXZjmNBk1NiMfj6Ex1
+    + **Autenticación con Google**:
+        + Ir a la sección de **Authentication**.
+        + Clic en **Comenzar**.
+        + Seleccionar como proveedor de acceso: **Proveedores adicionales > Google**.
+        + Habilitar **Google**.
+        + Establecer:
+            + Nombre público del proyecto
+            + Correo electrónico de asistencia del proyecto
+        + Clic en **Guardar**.
+    + **Autenticación con Facebook**:
 2. En la consola local de nuestro proyecto:
     + $ npm install firebase
 3. Incorporar Firebase a la aplicación en **00proyectos_vue\authentication\src\main.ts**:
@@ -652,7 +654,7 @@ sidebar_position: 1
     <template>
         <h1>Auth View con Social Login (Firebase)</h1>
         <form action="">
-            <button>Iniciar Sesión con Google</button>
+            <button @click="loginGoogle">Iniciar Sesión con Google</button>
             <button>Iniciar Sesión con Facebook</button>
             <button>Iniciar Sesión con Twitter</button>
             <button>Iniciar Sesión con Github</button>
@@ -660,17 +662,19 @@ sidebar_position: 1
     </template>
 
     <script lang="ts" setup>
-    import { ref } from 'vue'
-    import { getAuth, signInWithEmailAndPassword } from '/firebase/auth'
+    import { getAuth, GoogleAuthProvider, signInWithPopup } from '/firebase/auth'
 
-    let email = ref("")
-    let password = ref("")
+    const googlePrivider = GoogleAuthProvider()
+    const auth = getAuth()
 
-    const authUser = async () => {
-        const auth = getAuth()
-        signInWithEmailAndPassword(auth, email.value, password.value).then(() => {
+    const loginGoogle = () => {
+        signInWithPopup(auth, googlePrivider)
+        .then((result) => {
+            const credential = GoogleAuthProvider.credentialFromResult(result)
+            const token = credential?.accessToken
             console.log('login correcto')
-        }).catch((error) => {
+        })
+        .catch((error) => {
             console.log('login incorrecto')
         })
     }
