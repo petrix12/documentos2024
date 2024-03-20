@@ -1073,16 +1073,6 @@ sidebar_position: 0
         </script>
         <!-- ... -->
         ```
-+ Alugnos métodos de utilidad:
-    ```html
-    <!-- ... -->
-    @if($registros->isEmpty)
-        <!-- $registros esta vacia -->
-    @else
-        <!-- existe por lo menos un elemento en $registros -->
-    @endif
-    <!-- ... -->
-    ```
 
 ## Blade
 ### Construcción de plantillas Blade
@@ -3593,3 +3583,20 @@ public function mi_metodo() {
         + remember()
         + rememberForever()
     + Página con ejemplos de uso: https://kinsta.com/es/blog/laravel-caching
+
+### Alugnos métodos de utilidad:
+#### isEmpty e isNotEmpty
+    ```php title="isEmpty e isNotEmpty"
+    <!-- ... -->
+    @if($registros->isEmpty())
+        <!-- colección $registros vacia -->
+    @else
+        <!-- existe por lo menos un elemento en $registros -->
+    @endif
+    <!-- ... -->
+    @if($registros->isNotEmpty())
+        <!-- existe por lo menos un elemento en $registros -->
+    @else
+        <!-- colección $registros vacia -->
+    @endif
+    ```
