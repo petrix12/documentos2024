@@ -625,6 +625,22 @@ sidebar_position: 1
             + Correo electrónico de asistencia del proyecto
         + Clic en **Guardar**.
     + **Autenticación con Facebook**:
+        + Ir a la consola de desarrollo de facebook en https://developers.facebook.com y crear una aplicación.
+        + Ir a configuración de la aplicación y seleccionar información básica y obtener:
+            + Identificador de la aplicación
+            + Clave secreta de la aplicación
+        + Regresar a la consola de desarrollo de firebase.
+        + Ir a la sección de **Authentication**.
+        + Clic en **Comenzar**.
+        + Seleccionar como proveedor de acceso: **Proveedores adicionales > Facebook**.
+        + Habilitar **Facebook**.
+        + Completar los campos **ID de la app** y **Secreto de app** con los valores obtenidos en la consola de desarrollo de facebook.
+        + Obtener la **URI de redireccionamiento de OAuth**: https://crud-vue-e6e70.firebaseapp.com/__/auth/handler
+        + Clic en **Guardar**.
+        + Regresar al panel de facebook e ir a inicio de sesión con facebook e ir a configuración o guía de inicio rapido y seleccionar **web**.
+        + Indicar **URL del sitio web**. Si estas en desarrollo coloca: **localhost**.
+        + Luego siguiente, siguiente ... y finalizar.
+        + Ir a Inicio de sesión con facebook, seleccionar configurar y pegar la **URI de redireccionamiento de OAuth** obtenida en firebase en **URI de redireccionamiento de OAuth válidos**.
 2. En la consola local de nuestro proyecto:
     + $ npm install firebase
 3. Incorporar Firebase a la aplicación en **00proyectos_vue\authentication\src\main.ts**:
@@ -655,22 +671,35 @@ sidebar_position: 1
         <h1>Auth View con Social Login (Firebase)</h1>
         <form action="">
             <button @click="loginGoogle">Iniciar Sesión con Google</button>
-            <button>Iniciar Sesión con Facebook</button>
+            <button @click="loginFacebook">Iniciar Sesión con Facebook</button>
             <button>Iniciar Sesión con Twitter</button>
             <button>Iniciar Sesión con Github</button>
         </form>
     </template>
 
     <script lang="ts" setup>
-    import { getAuth, GoogleAuthProvider, signInWithPopup } from '/firebase/auth'
+    import { getAuth, GoogleAuthProvider, FacebookAuthProvider, signInWithPopup } from '/firebase/auth'
 
     const googlePrivider = GoogleAuthProvider()
+    const facebookPrivider = FacebookAuthProvider()
     const auth = getAuth()
 
     const loginGoogle = () => {
         signInWithPopup(auth, googlePrivider)
         .then((result) => {
             const credential = GoogleAuthProvider.credentialFromResult(result)
+            const token = credential?.accessToken
+            console.log('login correcto')
+        })
+        .catch((error) => {
+            console.log('login incorrecto')
+        })
+    }
+
+    const loginFacebook = () => {
+        signInWithPopup(auth, facebookPrivider)
+        .then((result) => {
+            const credential = FacebookAuthProvider.credentialFromResult(result)
             const token = credential?.accessToken
             console.log('login correcto')
         })
