@@ -10,6 +10,11 @@ sidebar_position: 0
 + [XAMPP](https://www.apachefriends.org/es/index.html) o [Laragon](https://laragon.org/index.html).
 + [Composer](https://getcomposer.org).
 + [NodeJS](https://nodejs.org).
++ Actualizar composer:
+    ```bash
+    composer self-update
+    composer global update
+    ```
 
 ## Pre-requisitos recomendados:
 + [GIT](https://git-scm.com).
@@ -382,6 +387,10 @@ sidebar_position: 0
             public function destroy(Modelo $modelo) {
                 $modelo->delete();
                 return redirect()->route('modelos.index');
+                /* 
+                    El método redirect también puede recibir la ruta en lugar de su nombre:
+                    return redirect('ruta_a_redirigir');
+                */
             }
         }        
         ```
@@ -1064,6 +1073,16 @@ sidebar_position: 0
         </script>
         <!-- ... -->
         ```
++ Alugnos métodos de utilidad:
+    ```html
+    <!-- ... -->
+    @if($registros->isEmpty)
+        <!-- $registros esta vacia -->
+    @else
+        <!-- existe por lo menos un elemento en $registros -->
+    @endif
+    <!-- ... -->
+    ```
 
 ## Blade
 ### Construcción de plantillas Blade
@@ -1176,6 +1195,16 @@ sidebar_position: 0
         <!-- Se muestra solo si $condicion = false -->
     @endif
     ```
++ elseif:
+    ```php
+    @if($condicion1)
+        <!-- Se muestra solo si $condicion1 = true -->
+    @elseif($condicion2)
+        <!-- Se muestra solo si $condicion2 = true -->
+    @else
+        <!-- Se muestra solo si $condicion1 = false y $condicion2 = false  -->
+    @endif
+    ```    
 + auth:
     ```php
     @auth
@@ -2028,6 +2057,8 @@ Faker: https://fakerphp.github.io
         class ModeloFactory extends Factory
         {
             // ...
+            use Illuminate\Support\Facades\Hash;
+            // ...
             public function definition(): array
             {
                 $propiedad4 = $this->faker->unique->word(20),   // Una palabra de máximo 20 caracteres que no se repite
@@ -2044,7 +2075,7 @@ Faker: https://fakerphp.github.io
                     // true: //public/storage/img/imagen.jpg
                     // false: /imagen.jpg
                     'propiedad8' => $this->faker->image('public/storage/img', 640, 480, null, true)
-
+                    'propiedad9' => Hash::make('12345678'); // Encripta el valor contenido en el método make
 
                 ];
             }
