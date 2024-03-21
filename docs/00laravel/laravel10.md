@@ -438,7 +438,21 @@ sidebar_position: 0
 
 
 ## Query Builder:
-+ Trabajar con el generador de consultas de Laravel (Query Builder):
+### Realizar consultas SQL directamente con DB:
+    ```php
+    // ...
+    use Illuminate\Support\Facades\DB;
+    // ...
+    public function metodo() {
+        // Realizar consultas
+        $age = 30;
+        $users_select = DB::select(DB::raw("SELECT * FROM users WHERE age > '$age"));
+        // Realizar inserción
+        $users_insert = DB::insert(DB::raw("INSERT INTO users VALUE ..."));
+
+    }
+    ```
+### Trabajar con el generador de consultas de Laravel (Query Builder):
     ```php
     // ...
     use Illuminate\Support\Facades\DB;
@@ -446,6 +460,8 @@ sidebar_position: 0
     public function metodo() {
         // Obtener todos los registros de la tabla tabla
         $registros = DB::table('tabla')->get();
+        // Obtener todos los registros de la tabla tabla e indicar las columnas
+        $registros = DB::table('tabla')->select('col1', 'col2')->get();
         // Obtener los registros cuyo campo1 sea igual a valor 
         // Operadores del método where: >, >=, <, <=, =, <>, LIKE. Operadores especiales: % y ?
         $registros_filtro = DB::table('tabla')-where('campo1', 'valor')->get();
@@ -592,6 +608,7 @@ sidebar_position: 0
         // Recuperar solo l2 registros a partir del cuarto (el método skip solo se puede usar si existe el método take o limit)
         $registros_take_skip = DB::table('tabla')->skip(3)->take(12)->get();
         $registros_limt_skip = DB::table('tabla')->skip(3)->limit(12)->get();   // Arroja el mismo resultado que la consulta anterior
+        $registros_limt_skip = DB::table('tabla')->limit(12, 3)->get();   // Arroja el mismo resultado que la consulta anterior
         $registros_limt_offset = DB::table('tabla')->offset(3)->limit(12)->get();   // Arroja el mismo resultado que la consulta anterior
         // Consultas condicionadas
         $condicion = false;
@@ -608,7 +625,7 @@ sidebar_position: 0
     }
     // ...
     ```
-+ Insertar registros con Eloquent:
+### Insertar registros con DB:
     ```php
     // ...
     use Illuminate\Support\Facades\DB;
@@ -662,7 +679,7 @@ sidebar_position: 0
         ]);
     }
     ```
-+ Actualizar registros con Eloquent:
+### Actualizar registros con DB:
     ```php
     // ...
     use Illuminate\Support\Facades\DB;
@@ -698,7 +715,7 @@ sidebar_position: 0
             ->increment('campo_tipo_int', $cantidad_a_decrementar);
     }
     ```
-+ Eliminar registros con Eloquent:
+### Eliminar registros con DB:
     ```php
     // ...
     use Illuminate\Support\Facades\DB;
@@ -708,7 +725,7 @@ sidebar_position: 0
         DB::table('tabla')->where('id', 1508)->delete();
     }
     ```
-+ Paginación de registros con Eloquent:
+### Paginación de registros con DB:
     ```php
     // ...
     use Illuminate\Support\Facades\DB;
