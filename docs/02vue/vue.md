@@ -641,6 +641,21 @@ sidebar_position: 1
         + Indicar **URL del sitio web**. Si estas en desarrollo coloca: **localhost**.
         + Luego siguiente, siguiente ... y finalizar.
         + Ir a Inicio de sesión con facebook, seleccionar configurar y pegar la **URI de redireccionamiento de OAuth** obtenida en firebase en **URI de redireccionamiento de OAuth válidos**.
+    + **Autenticación con Twitter**:
+        + Ir a la consola de desarrollo de twitter en https://developer.twitter.com y crear una aplicación.
+        + Ir a configuración de la aplicación y seleccionar información básica y obtener:
+            + API Key
+            + API Key Secret
+        + Regresar a la consola de desarrollo de firebase.
+        + Ir a la sección de **Authentication**.
+        + Clic en **Comenzar**.
+        + Seleccionar como proveedor de acceso: **Proveedores adicionales > Twitter**.
+        + Habilitar **Twitter**.
+        + Completar los campos **ID de la app** y **Secreto de app** con los valores obtenidos en la consola de desarrollo de twitter.
+        + Obtener la **URI de redireccionamiento de OAuth**: https://crud-vue-e6e70.firebaseapp.com/__/auth/handler
+        + Clic en **Guardar**.
+        + Regresar al panel de twitter y pegar la **URI de redireccionamiento de OAuth** obtenida en firebase en **App info > Callback URI / Redirect URL**.
+        + En **Website URL** indicar la url de producción, si estas en desarrollo colocar cualquier url.
 2. En la consola local de nuestro proyecto:
     + $ npm install firebase
 3. Incorporar Firebase a la aplicación en **00proyectos_vue\authentication\src\main.ts**:
@@ -672,20 +687,21 @@ sidebar_position: 1
         <form action="">
             <button @click="loginGoogle">Iniciar Sesión con Google</button>
             <button @click="loginFacebook">Iniciar Sesión con Facebook</button>
-            <button>Iniciar Sesión con Twitter</button>
+            <button @click="loginTwitter">Iniciar Sesión con Twitter</button>
             <button>Iniciar Sesión con Github</button>
         </form>
     </template>
 
     <script lang="ts" setup>
-    import { getAuth, GoogleAuthProvider, FacebookAuthProvider, signInWithPopup } from '/firebase/auth'
+    import { getAuth, GoogleAuthProvider, FacebookAuthProvider, TwitterAuthProvider, signInWithPopup } from '/firebase/auth'
 
-    const googlePrivider = GoogleAuthProvider()
-    const facebookPrivider = FacebookAuthProvider()
+    const googleProvider = GoogleAuthProvider()
+    const facebookProvider = FacebookAuthProvider()
+    const twitterProvider = TwitterAuthProvider()
     const auth = getAuth()
 
     const loginGoogle = () => {
-        signInWithPopup(auth, googlePrivider)
+        signInWithPopup(auth, googleProvider)
         .then((result) => {
             const credential = GoogleAuthProvider.credentialFromResult(result)
             const token = credential?.accessToken
@@ -697,9 +713,21 @@ sidebar_position: 1
     }
 
     const loginFacebook = () => {
-        signInWithPopup(auth, facebookPrivider)
+        signInWithPopup(auth, facebookProvider)
         .then((result) => {
             const credential = FacebookAuthProvider.credentialFromResult(result)
+            const token = credential?.accessToken
+            console.log('login correcto')
+        })
+        .catch((error) => {
+            console.log('login incorrecto')
+        })
+    }
+
+    const loginTwitter = () => {
+        signInWithPopup(auth, twitterProvider)
+        .then((result) => {
+            const credential = TwitterAuthProvider.credentialFromResult(result)
             const token = credential?.accessToken
             console.log('login correcto')
         })
