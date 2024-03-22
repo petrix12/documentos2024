@@ -579,7 +579,7 @@ sidebar_position: 1
     </script>    
     ```
 
-#### Solial login con firebase (Google, Facebook, Twitter, Github):
+#### Social login con firebase (Google, Facebook, Twitter, Github):
 :::tip Documentación
 + [Documentación Firebase Google Auth](https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbnFjMFhRWUd0ckZFeUlxeXdXTGxOODhybml1UXxBQ3Jtc0tsbG9PNkpwWERHQVRSUldDX2tpeVB0YjVGQnFvRTBLSHY2eEd3UTBXSVE4QjVFaG4wUnN2VkZMT1I0ckJkZlhwUWx5dWx6ZUIzaVhvQXUxNlNNLVJidkN0Rm5pOHZkc2ZwaGlxLUhjamI4ZE1QcFk2cw&q=https%3A%2F%2Ffirebase.google.com%2Fdocs%2Fauth%2Fweb%2Fgoogle-signin%23web-version-9&v=R1_-x4WB3Iw)
 + [Documentación Firebase Facebook Auth](https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqa0lBLWJzYTZEbEp4b2V4Y3BCV1RGUDZMaFZXQXxBQ3Jtc0trZjFiaUctSVh4ZW9DdE83cGQxdm5QUTMxX3F0eWNfQlNMVko0ODQ1S29CbkZnNDBWUmNXbGhGMzdUTzMyTS1IWHNfR09SRE5QTlA3MjBjdzdqVjYwaURoSTdaeXl4cmg1UERxVzZnQzdwTXhtZlBsRQ&q=https%3A%2F%2Ffirebase.google.com%2Fdocs%2Fauth%2Fweb%2Ffacebook-login&v=R1_-x4WB3Iw)
@@ -763,12 +763,6 @@ sidebar_position: 1
     }
     </script>    
     ```
-
-
-
-
-
-
 ### Modificar el archivo de rutas **...\src\router\index.ts**:
     ```ts
     // ...
