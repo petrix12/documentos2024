@@ -656,6 +656,19 @@ sidebar_position: 1
         + Clic en **Guardar**.
         + Regresar al panel de twitter y pegar la **URI de redireccionamiento de OAuth** obtenida en firebase en **App info > Callback URI / Redirect URL**.
         + En **Website URL** indicar la url de producción, si estas en desarrollo colocar cualquier url.
+    + **Autenticación con GitHub**:
+        + En firebase ir a la sección de **Authentication**.
+        + Clic en **Comenzar**.
+        + Seleccionar como proveedor de acceso: **Proveedores adicionales > GitHub**.
+        + Habilitar **GitHub** y obtener la **URI de redireccionamiento de OAuth**: https://crud-vue-e6e70.firebaseapp.com/__/auth/handler
+        + Ir a la consola de desarrollo de github en https://github.com/settings/developers, seleccionar **OAuth Apps** y registrar una nueva aplicación y completar el formulario solicitado.
+        + En el formulario de github pegar la **URI de redireccionamiento de OAuth** obtenida en firebase en **Authorize callback URL**.
+        + En **Homepage URL** indicar la url de producción, si estas en desarrollo colocar http://localhost.
+        + Luego de completar todos los datos dar clic en **Register application** y de la siguiente vista:
+            + ClientID
+            + Client secrets
+        + Regresar a la consola de firebase y completar los campos **ID de la app** y **Secreto de app** con los valores obtenidos en la consola de desarrollo de github.
+        + Clic en **Guardar**.
 2. En la consola local de nuestro proyecto:
     + $ npm install firebase
 3. Incorporar Firebase a la aplicación en **00proyectos_vue\authentication\src\main.ts**:
@@ -688,16 +701,17 @@ sidebar_position: 1
             <button @click="loginGoogle">Iniciar Sesión con Google</button>
             <button @click="loginFacebook">Iniciar Sesión con Facebook</button>
             <button @click="loginTwitter">Iniciar Sesión con Twitter</button>
-            <button>Iniciar Sesión con Github</button>
+            <button @click="loginGitHub">>Iniciar Sesión con Github</button>
         </form>
     </template>
 
     <script lang="ts" setup>
-    import { getAuth, GoogleAuthProvider, FacebookAuthProvider, TwitterAuthProvider, signInWithPopup } from '/firebase/auth'
+    import { getAuth, GoogleAuthProvider, FacebookAuthProvider, TwitterAuthProvider, GithubAuthProvider, signInWithPopup } from '/firebase/auth'
 
     const googleProvider = GoogleAuthProvider()
     const facebookProvider = FacebookAuthProvider()
     const twitterProvider = TwitterAuthProvider()
+    const gitHubProvider = GithubAuthProvider()
     const auth = getAuth()
 
     const loginGoogle = () => {
@@ -728,6 +742,18 @@ sidebar_position: 1
         signInWithPopup(auth, twitterProvider)
         .then((result) => {
             const credential = TwitterAuthProvider.credentialFromResult(result)
+            const token = credential?.accessToken
+            console.log('login correcto')
+        })
+        .catch((error) => {
+            console.log('login incorrecto')
+        })
+    }
+
+    const loginGitHub = () => {
+        signInWithPopup(auth, gitHubProvider)
+        .then((result) => {
+            const credential = GithubAuthProvider.credentialFromResult(result)
             const token = credential?.accessToken
             console.log('login correcto')
         })
