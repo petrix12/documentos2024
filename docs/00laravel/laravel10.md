@@ -155,7 +155,7 @@ sidebar_position: 0
         Route::resource('ruta', NombreController::class)->except(['show', 'destroy'])->names('rutas');
 
         // Ruta tipo resource para API (necesarias para hacer un CRUD, como es para API no se generan las rutas create y edit)
-        Route::apiResource('registros', RegistroController::class)->names('registross');
+        Route::apiResource('registros', RegistroController::class)->names('registros');
 
         // Para cambiar el nombre de los parámetros que se reciben en los métodos
         Route::apiResource('registros', RegistroController::class)->parameters(['registros' => 'rutas']);
@@ -3369,17 +3369,157 @@ https://spatie.be/index.php/docs/laravel-permission/v6/introduction
     ```
 9. Programar controlador:
     + Aplicación monolitica:
-        ```php title=""
+        ```php title="app\Http\Controllers\EntityController.php"
+        // ...        
+        use App\Http\Requests\EntityRequest;
+        use App\Models\Entity;
+        use Illuminate\Http\RedirectResponse;
+        use Illuminate\Support\Facades\Session;
+        use Illuminate\Support\Facades\Log;
+        use Illuminate\View\View;
+
+        class EntityController extends Controller
+        {
+            public function index(): View
+            {
+                $entities = Entity::all();
+                return view('crud.entities.index', 'entities');
+            }
+            
+            public function create(): View
+            {
+                $entity = new Entity();
+                return view('crud.entities.create', $entity);
+            }
+
+            public function store(EntityRequest $request): RedirectResponse
+            {
+                try {
+                    Entity::create($request->all());
+                    return redirect()->route('entities.index')->with('success', 'Registro creado con éxito');
+                } catch (\Throwable $th) {
+                    log::error('Error al intentar crear registro del modelo Entity');
+                    log::error($th);
+                    return redirect()->route('entities.index')->with('danger', 'No se pudo crear el registro');
+                }
+            }
+            
+            public function show(Entity $entity): View
+            {
+                return view('crud.entities.show', 'entity');
+            }
+            
+            public function edit(Entity $entity)
+            {
+                return view('crud.entities.edit', $entity);
+            }
+            
+            public function update(EntityRequest $request, Entity $entity): RedirectResponse
+            {
+                try {
+                    Entity::update($request->all());
+                    return redirect()->route('entities.index')->with('success', 'Registro actualizado con éxito');
+                } catch (\Throwable $th) {
+                    log::error('Error al intentar actualizar registro del modelo Entity');
+                    log::error($th);
+                    return redirect()->route('entities.index')->with('danger', 'No se pudo actualizar el registro');
+                }
+            }
+            
+            public function destroy(Entity $entity): RedirectResponse
+            {
+                try {
+                    $entity->delete();
+                    return redirect()->route('entities.index')->with('success', 'Registro eliminado con éxito');
+                } catch (\Throwable $th) {
+                    log::error('Error al intentar eliminar registro del modelo Entity');
+                    log::error($th);
+                    return redirect()->route('entities.index')->with('danger', 'No se pudo eliminar el registro');
+                }
+            }
+        }        
         ```
     + Aplicación API:
-        ```php title=""
+        ```php title="app\Http\Controllers\EntityController.php"
+        // ...        
+        use App\Http\Requests\EntityRequest;
+        use App\Models\Entity;
+        use Illuminate\Http\JsonResponse;
+
+        class EntityController extends Controller
+        {
+            public function index(): JsonResponse
+            {
+                $entities = Entity::all();
+                return response()->json($entities, 200);
+            }
+            
+            public function store(EntityRequest $request): JsonResponse
+            {
+                try {
+                    $entity = Entity::create($request->all());
+                    return response()->json([
+                        'status' => true,
+                        'entity' => $entity
+                    ], 201);
+                } catch (\Throwable $th) {
+                    log::error('Error al intentar crear registro del modelo Entity');
+                    log::error($th);
+                    return response()->json([
+                        'status' => false
+                    ], 500);
+                }
+            }
+            
+            public function show(Entity $entity): JsonResponse
+            {
+                return response()->json($entity, 200);
+            }
+            
+            public function update(EntityRequest $request, Entity $entity): JsonResponse
+            {
+                try {
+                    $entity->update($request->all());
+                    return response()->json([
+                        'status' => true,
+                        'entity' => $entity
+                    ], 200);
+                } catch (\Throwable $th) {
+                    log::error('Error al intentar crear registro del modelo Entity');
+                    log::error($th);
+                    return response()->json([
+                        'status' => false
+                    ], 500);
+                }
+            }
+
+            public function destroy(Entity $entity): JsonResponse
+            {
+                try {
+                    $entity->delete($request->all());
+                    return response()->json([
+                        'status' => true
+                    ], 200);
+                } catch (\Throwable $th) {
+                    log::error('Error al intentar eliminar registro del modelo Entity');
+                    log::error($th);
+                    return response()->json([
+                        'status' => false
+                    ], 500);
+                }
+            }
+        }
         ```
 10. Definir rutas tipo resource:
     + Aplicación monolitica:
-        ```php title=""
+        ```php title="routes\web.php"
+        // ...
+        Route::resource('entities', EntityController::class);
+        // ...
         ```
     + Aplicación API:
-        ```php title=""
+        ```php title="routes\api.php"
+        Route::apiResource('entities', EntityController::class);
         ```
 11. Diseñar vistas (**Solo en caso de aplicación monolítica**):
     + index:
@@ -3389,6 +3529,82 @@ https://spatie.be/index.php/docs/laravel-permission/v6/introduction
     + show:
     
 
+## API Resource
+1. Generar recurso:
+    ```bash
+    php artisan make:resource RecursoResource
+    ```
+    :::tip Nota
+    Esta acción crea un recurso en **app\Http\Resources\RecursoResource.php**.
+    :::
+2. Programar en nuevo recurso para modificar un request:
+    ```php title="app\Http\Resources\RecursoResource.php"
+    // ...
+    public function toArray(Request $request): array
+    {
+        //return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'title' => 'Title: ' . $this->title,
+            'campo_extra' => 'Campo añadido'
+        ];
+    }    
+    // ...
+    ```
+3. Modificar un request en un controlador:
+    ```php
+    // ...
+    use App\Http\Resources\RecursoResource;
+    use Illuminate\Http\Resources\Json\JsonResource;
+    // ...
+    class EntityController extends Controller {
+        public function index(): JsonResource
+        {
+            // return response()->json(Entity::all(), 200);
+            return RecursoResource::cellection(Entity::all());
+        }
+                  
+        public function store(EntityRequest $request): JsonResource
+        {
+            try {
+                $entity = Entity::create($request->all());
+                return response()->json([
+                    'status' => true,
+                    'entity' => new RecursoResource($entity)
+                ], 201);
+            } catch (\Throwable $th) {
+                // ...
+            }
+        }
+        
+        public function show(Entity $entity): JsonResource
+        {
+            return new RecursoResource($entity);
+        }
+            
+        public function update(EntityRequest $request, Entity $entity): JsonResource
+        {
+            try {
+                $entity->update($request->all());
+                return response()->json([
+                    'status' => true,
+                    'entity' => new RecursoResource($entity)
+                ], 200);
+            } catch (\Throwable $th) {
+                log::error('Error al intentar crear registro del modelo Entity');
+                log::error($th);
+                return response()->json([
+                    'status' => false
+                ], 500);
+            }
+        }
+
+        public function destroy(Entity $entity): JsonResource
+        {
+            // ...
+        }
+    }
+    ```
 
 
 ## Tips generales:
