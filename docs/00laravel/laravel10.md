@@ -311,19 +311,22 @@ sidebar_position: 0
         ```php
         // ...
         use App\Models\Modelo;
+        use Illuminate\Http\RedirectResponse;
+        use Illuminate\Http\Request;
+        use Illuminate\View\View;
         // ...
         class ModeloController extends Controller
         {
-            public function index() {
+            public function index(): View {
                 $modelos = Modelo::paginate();
                 return view('crud.modelos.index', compact('modelos'));
             }
 
-            public function create() {
+            public function create(): View {
                 return view('crud.modelos.create');
             }
 
-            public function store(Request $request) {
+            public function store(Request $request): RedirectResponse {
                 $request->validate([
                     'propiedad1' => 'required|min:12'
                     // Forma alternativa:
@@ -349,15 +352,15 @@ sidebar_position: 0
                 return redirect()->route('modelos.show', $modelo);
             }
 
-            public function show(Modelo $modelo) {
+            public function show(Modelo $modelo): View {
                 return view('crud.modelos.show', compact('modelo'));
             }
 
-            public function edit(Modelo $modelo) {
+            public function edit(Modelo $modelo): View {
                 return view('crud.modelos.edit', compact('modelo'));
             }
 
-            public function update(Request $request, Modelo $modelo) {
+            public function update(Request $request, Modelo $modelo): RedirectResponse {
                 $request->validate([
                     // Reglas de validación
                     'propiedad1' => 'required|min:12'
@@ -384,7 +387,7 @@ sidebar_position: 0
                 return redirect()->route('modelos.show', $modelo);
             }
 
-            public function destroy(Modelo $modelo) {
+            public function destroy(Modelo $modelo): RedirectResponse {
                 $modelo->delete();
                 return redirect()->route('modelos.index');
                 /* 
@@ -414,7 +417,7 @@ sidebar_position: 0
     // ...
     ```
 + Crear un controlador tipo resource:
-    + $ php artisan make:controller NameController -r
+    + $ php artisan make:controller NameController -r   // --resource
     + **Nota**: este comando genera un controlador con los métodos necesarios para un CRUD:
         + index, create, store, show, edit, update y destroy.
 + Llamar una vista:
@@ -920,7 +923,7 @@ sidebar_position: 0
     ```
 
 ## Vistas
-+ Ejemplos de vistas para un CRUD:
+### Ejemplos de vistas para un CRUD:
     + resources/views/crud/modelos/index.blade.php
         ```php
         @extends('layouts.mi_plantilla')
@@ -1021,7 +1024,7 @@ sidebar_position: 0
             </form>
         @endsection
         ```
-+ Resivir una variable de sesión:
+### Resivir una variable de sesión:
     + resources/views/crud/modelos/index.blade.php
         ```php
         @extends('layouts.mi_plantilla')
@@ -1044,7 +1047,7 @@ sidebar_position: 0
             {{ $modelos->link() }}
         @endsection
         ```
-+ Mostrar variables en vista:
+### Mostrar variables en vista:
     ```html
     <!-- ... -->
     <!-- Con bloqueo de texto enriquecido -->
@@ -1054,7 +1057,7 @@ sidebar_position: 0
     <!-- Si estamos trabajando con otro framework que utiliza la misma sintaxis -->
     @{{ $variable_de_vue }}
     ```
-+ Interactuar arreglos de php con javascript:
+### Interactuar arreglos de php con javascript:
     + Controlador:
         ```php
         // ...
@@ -1090,6 +1093,20 @@ sidebar_position: 0
         </script>
         <!-- ... -->
         ```
+### Capturar errores
+```html
+<!-- ... -->
+<!-- Todos los errores -->
+@if($errors->any())
+    <p>{{ $errors }}</p>
+@endif
+<!-- Un error en partícular -->
+@error('campo1')
+    <p>{{ $message }}</p>
+@enderror
+<!-- ... -->
+```
+
 
 ## Blade
 ### Construcción de plantillas Blade
@@ -2176,8 +2193,8 @@ Faker: https://fakerphp.github.io
         }
         ```
 
-## Form Request:
-+ Crear un Form Request:
+## Custom Request:
++ Crear un Custom Request:
     + $ php artisan make:request StoreModelo
     + **Nota:** se genera el archivo **app\Http\Requests\StoreModelo.php**.
     + Ejemplo de programación del Form Request **app\Http\Requests\StoreModelo.php**:
@@ -2597,88 +2614,105 @@ Faker: https://fakerphp.github.io
     ```
 
 ## Provider:
-+ Indicar vista con la que se iniciará la aplicación:
-    + Modificar el provider **app\Providers\RouteServiceProvider.php**:
-        ```php
+### Indicar vista con la que se iniciará la aplicación:
++ Modificar el provider **app\Providers\RouteServiceProvider.php**:
+    ```php
+    // ...
+    class RouteServiceProvider extends ServiceProvider
+    {
         // ...
-        class RouteServiceProvider extends ServiceProvider
-        {
-            // ...
-            public const HOME = '/mi_ruta';
-            // ...
-        }        
-        ```
-+ Crear un archivo de rutas:
-    + Crear archivo de rutas **routes\mis_rutas.php**:
-        ```php
-        <?php
+        public const HOME = '/mi_ruta';
+        // ...
+    }        
+    ```
+### Crear un archivo de rutas:
++ Crear archivo de rutas **routes\mis_rutas.php**:
+    ```php
+    <?php
 
-        use Illuminate\Support\Facades\Route;
-        // ...       
-        ```
-    + Modificar provider **app\Providers\RouteServiceProvider.php** para que **mis_rutas** se reconozca como archivo de rutas:
-        ```php
+    use Illuminate\Support\Facades\Route;
+    // ...       
+    ```
++ Modificar provider **app\Providers\RouteServiceProvider.php** para que **mis_rutas** se reconozca como archivo de rutas:
+    ```php
+    // ...
+    public function boot(): void
+    {
+        // ...
+        $this->routes(function () {
+            // ...
+            Route::middleware('web', 'otros_middleware')    // Por ejemplo: auth para usuarios autenticados
+                ->prefix('mi_prefijo_en_ruta')
+                ->group(base_path('routes/mi_ruta.php'));
+        });
+    }        
+    // ...       
+    ```
+### Indicar que una ruta recibirá un valor númerico:
++ Modificar el provider **app\Providers\RouteServiceProvider.php**:
+    ```php
+    // ...
+    class RouteServiceProvider extends ServiceProvider
+    {
         // ...
         public function boot(): void
         {
+            Route::pattern('id', '[0-9]+');
             // ...
-            $this->routes(function () {
-                // ...
-                Route::middleware('web', 'otros_middleware')    // Por ejemplo: auth para usuarios autenticados
-                    ->prefix('mi_prefijo_en_ruta')
-                    ->group(base_path('routes/mi_ruta.php'));
-            });
-        }        
-        // ...       
-        ```
-+ Indicar que una ruta recibirá un valor númerico:
-    + Modificar el provider **app\Providers\RouteServiceProvider.php**:
-        ```php
-        // ...
-        class RouteServiceProvider extends ServiceProvider
-        {
-            // ...
-            public function boot(): void
-            {
-                Route::pattern('id', '[0-9]+');
-                // ...
-            }
         }
-        ```
-+ Pasar parámetros a todas las vistas:
-    + Modificar el provider **app\Providers\AppServiceProvider.php**:
-        ```php
-        // ...
-        use Illuminate\Support\Facades\View;
+    }
+    ```
+### Pasar parámetros a todas las vistas:
++ Modificar el provider **app\Providers\AppServiceProvider.php**:
+    ```php
+    // ...
+    use Illuminate\Support\Facades\View;
 
-        class AppServiceProvider extends ServiceProvider
-        {
-            // ...
-            public function boot(): void
-            {
-                View::share('nombre_variable', 'valor de la variable nombre_variable');
-                /*
-                    Ahora, desde cualquier vista se podrá acceder a $nombre_variable
-                */
-            }
-        }        
-        ```
-        + **Nota**: es mejor práctica realizar esta acción en un provider especifico para esto, por ejemplo se podría crear un provider de nombre **ViewServiceProvider**.
-+ Crear un provider:
-    + $ php artisan make:provider PruebaServiceProvider
-    + **Nota*: el provider se creo en **app\Providers\PruebaServiceProvider.php**.
-    + Registrar provider en **config\app.php**:
-        ```php
+    class AppServiceProvider extends ServiceProvider
+    {
         // ...
-        return [
+        public function boot(): void
+        {
+            View::share('nombre_variable', 'valor de la variable nombre_variable');
+            /*
+                Ahora, desde cualquier vista se podrá acceder a $nombre_variable
+            */
+        }
+    }        
+    ```
+    :::tip Nota
+    Es mejor práctica realizar esta acción en un provider especifico para esto, por ejemplo se podría crear un provider de nombre **ViewServiceProvider**.
+    :::
+### Establecer el número máximo de solicitudes http:
++ Modificar el provider **RouteServiceProvider**:
+```php title="00proyectos_laravel\pruebas\app\Providers\RouteServiceProvider.php"
+// ...
+protected function configureRateLimiting() {
+    RateLimiter::for('api', function (Request $request) {
+        return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
+    });
+}
+// ...
+```
+### Crear un provider:
+```bash
+php artisan make:provider PruebaServiceProvider
+```
+:::tip Nota
+El provider se creo en **app\Providers\PruebaServiceProvider.php**.
+:::
++ Registrar provider en **config\app.php**:
+    ```php
+    // ...
+    return [
+        // ...
+        'providers' => ServiceProvider::defaultProviders()->merge([
             // ...
-            'providers' => ServiceProvider::defaultProviders()->merge([
-                // ...
-                App\Providers\PruebaServiceProvider::class,
-            ])->toArray(),
-            // ...
-        ];
-        ```
+            App\Providers\PruebaServiceProvider::class,
+        ])->toArray(),
+        // ...
+    ];
+    ```
 
 ## Observer:
 + Crear un observer:
@@ -3157,14 +3191,20 @@ $minuscula = strtolower('pEdRo');    // regresa: pedro
         ```
 
 ## Laravel-permission:
-+ Documentación: https://spatie.be/index.php/docs/laravel-permission/v6/introduction
++ :::tip Documentación
+https://spatie.be/index.php/docs/laravel-permission/v6/introduction
+:::
 + Instalación:
-    + $ composer require spatie/laravel-permission
+    ```bash
+    composer require spatie/laravel-permission
+    ```
 + Publicar las migraciones:
-    + $ php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+    ```bash
+    php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+    ```
 + Indicar los modelos que harán uso de Laravel permission:
-    + Ejemplo: modificar el modelo User **app\Models\User.php**:
-        ```php
+    + Ejemplo: modificar el modelo **User**:
+        ```php title="app\Models\User.php"
         // ...
         use Spatie\Permission\Traits\HasRoles;
         // ...
@@ -3225,9 +3265,130 @@ $minuscula = strtolower('pEdRo');    // regresa: pedro
             $this->middleware('can:permiso1')->only('metodo1', 'metodo2');
         }
         // ...
-    }
-    
+    }    
     ```
+
+
+## Cración de CRUD
+### Aplicación monolítica y API
+1. Generar la estructura completa de la entidad:
+    ```bash
+    php artisan make:model Entity -mcsf --resource
+    ```
+2. Generar el custom request para la entidad:
+    ```bash
+    php artisan make:request EntityRequest
+    ```
+3. Establecer los campos de la tabla de la entidad:
+    ```php title="database\migrations\2024_03_25_070533_create_entities_table.php"
+    // ...
+    public function up(): void
+    {
+        Schema::create('entities', function (Blueprint $table) {
+            $table->id();
+            // Definir campos
+            $table->timestamps();
+        });
+    }    
+    // ...
+    ```
+4. Programar los datos de prueba:
+    ```php title="database\factories\EntityFactory.php"
+    // ...
+    public function definition(): array
+    {
+        return [
+            // Programar los datos de prueba
+            $propiedad4 = $this->faker->unique->word(20),   // Una palabra de máximo 20 caracteres que no se repite
+            return [
+                'propiedad1' => $this->faker->sentence(),   // Oración
+                'propiedad2' => $this->faker->paragraph(),  // Párrafo                    
+                'propiedad3' => $this->faker->randomElement(['Valor 1', 'Valor 2', 'Valor 3']),   // Escoger entre varios elementos
+                'propiedad4' => $propiedad4,
+                'propiedad5' => Str::slug($propiedad4),
+                'propiedad6' => $this->faker->text(300),   // Texto de 300 caracteres
+                'propiedad7' => OtroModelo::all()->random()->id,   // Escoger al azar un id del modelo OtroModelo
+                // Parámetros: ruta, ancho, alto, catergoria (ya no funciona, ruta_completa)
+                // Si ruta_completa es:
+                // true: //public/storage/img/imagen.jpg
+                // false: /imagen.jpg
+                'propiedad8' => $this->faker->image('public/storage/img', 640, 480, null, true)
+                'propiedad9' => Hash::make('12345678'); // Encripta el valor contenido en el método make
+            ];            
+        ];
+    }    
+    // ...
+    ```
+    ```php title="database\seeders\EntitySeeder.php"
+    // ...
+    public function run(): void
+    {
+        Entity::factory(100)->create();
+    }
+    // ...
+    ```
+5. Ejecutar la migración:
+    ```bash
+    php artisan migrate --path=/database/migrations/2024_03_25_070533_create_entities_table.php
+    ```
+6. Ejecutar el seeder
+    ```bash
+    php artisan db:seed --class=EntitySeeder
+    ```
+7. Establecer asignación masiva, relaciones, borrado lógico y query scope en el modelo:
+    ```php title="app\Models\Entity.php"
+    // ...
+    class Entity extends Model
+    {
+        use HasFactory;
+
+        // Borrado lógico
+        // Asignación masiva
+        // Ralaciones
+        // Query scope
+    }    
+    // ...
+    ```
+8. Establecer reglas de autorización y validación para acceder a los datos de la entidad:
+    ```php title="app\Http\Requests\EntityRequest.php"
+    // ...
+    public function authorize(): bool
+    {
+        // Reglas de autorización
+        $authorized = ...
+        return $authorized;
+    }
+    // ...
+    public function rules(): array
+    {
+        return [
+            // Establecer reglas de validación
+        ];
+    }    
+    // ...
+    ```
+9. Programar controlador:
+    + Aplicación monolitica:
+        ```php title=""
+        ```
+    + Aplicación API:
+        ```php title=""
+        ```
+10. Definir rutas tipo resource:
+    + Aplicación monolitica:
+        ```php title=""
+        ```
+    + Aplicación API:
+        ```php title=""
+        ```
+11. Diseñar vistas (**Solo en caso de aplicación monolítica**):
+    + index:
+    + formulario:
+    + create:
+    + edit:
+    + show:
+    
+
 
 
 ## Tips generales:
