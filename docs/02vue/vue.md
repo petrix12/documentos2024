@@ -361,7 +361,7 @@ sidebar_position: 1
     }
     ```
 ### Servicio de autenticación:
-#### Tradicional:
+#### Tradicional
 1. Crear servicio AuthService en **...\src\services\AuthService.ts**:
       + Con typescript:
           ```ts
@@ -488,7 +488,7 @@ sidebar_position: 1
     }
     </script>    
     ```
-#### Firebase:
+#### Firebase
 1. En consola de Firebase:
     + Abrir cuenta **[Firebase](https://console.firebase.google.com)**.
     + Crear proyecto de desarrollo web.
@@ -575,6 +575,39 @@ sidebar_position: 1
         }).catch((error) => {
             console.log('login incorrecto')
         })
+    }
+    </script>    
+    ```
+#### AWS
+
+
+
+2. Crear vista AuthView en **...\src\views\AuthView.vue**:
+    ```html
+    <template>
+        <h1>Auth View - AWS</h1>
+        <form action="">
+            <input v-model="email" type="text" placeholder="correo">
+            <input v-model="password" type="text" placeholder="password">
+            <button type="submit" @click.prevent="authUser">Iniciar Sesión</button>
+        </form>
+    </template>
+
+    <script lang="ts" setup>
+    import { ref } from 'vue'
+    import AuthService from '@/services/AuthService'
+
+    let email = ref("")
+    let password = ref("")
+
+    const authUser = async () => {
+        const auth = new AuthService()
+        const success = await auth.login(email.value, password.value)
+        if(success) {
+            console.log('login correcto')
+        } else {        
+            console.log('login incorrecto')
+        }
     }
     </script>    
     ```
