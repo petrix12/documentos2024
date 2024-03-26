@@ -90,7 +90,7 @@ sidebar_position: 0
 
 
 ## Rutas
-+ Principales métodos estáticos de la clase **Route**:
+### Principales métodos estáticos de la clase **Route**:
     ```php
     Route::view('ruta', 'Vista a mostrar');                  // Para vistas estáticas
     Route::get('ruta', 'Controlador que la gobierna');       // Crear ruta del tipo get
@@ -99,8 +99,8 @@ sidebar_position: 0
     Route::delete('ruta', 'Controlador que la gobierna');    // Crear ruta del tipo delete
     Route::patch('ruta', 'Controlador que la gobierna');     // Crear ruta del tipo patch
     ```
-+ Estructura de una ruta:
-    + Las rutas se definenen en los archivos contenidos en la carpeta **routes**.
+### Estructura de una ruta:
++ Las rutas se definenen en los archivos contenidos en la carpeta **routes**.
     + Ejemplo:
         ```php
         // Ruta con vista de contenido estático
@@ -240,33 +240,39 @@ sidebar_position: 0
         }
         */
         ```
-+ Asignar nombre identificativo a una ruta:
+### Asignar nombre identificativo a una ruta:
+```php
+Route::get('ruta', [NombreController::class, 'nombre_metodo'])->name('mi_ruta.ruta');
+```
+:::tip Nota 1
+    Ejemplo para invocar ruta desde una vista:
     ```php
-    Route::get('ruta', [NombreController::class, 'nombre_metodo'])->name('mi_ruta.ruta');
+    <!-- ... -->
+    <a href="{{ route('mi_ruta.ruta') }}">Mi ruta</a>
+    <!-- ... -->
     ```
-    + **Nota 1:** ejemplo para invocar ruta desde una vista:
-        ```php
-        <!-- ... -->
-        <a href="{{ route('mi_ruta.ruta') }}">Mi ruta</a>
-        <!-- ... -->
-        ```
-    + **Nota 2:** ejemplo para invocar ruta con parámetro desde una vista:
-        ```php
-        <!-- ... -->
-        <a href="{{ route('mi_ruta.ruta', 'parametro') }}">Mi ruta</a>
-        <!-- ... -->
-        ```
-    + **Nota 3:** ejemplo para invocar ruta con varios parámetro desde una vista:
-        ```php
-        <!-- ... -->
-        <a href="{{ route('mi_ruta.ruta', [
-                'parametro1' => $valor1,
-                'parametro2' => $valor2
-            ]) }}"
-        >Mi ruta</a>
-        <!-- ... -->
-        ```
-+ Ejemplo de modelo de rutas para un CRUD:
+:::
+:::tip Nota 2
+Ejemplo para invocar ruta con parámetro desde una vista:
+    ```php
+    <!-- ... -->
+    <a href="{{ route('mi_ruta.ruta', 'parametro') }}">Mi ruta</a>
+    <!-- ... -->
+    ```
+:::
+:::tip Nota 3
+Ejemplo para invocar ruta con varios parámetro desde una vista:
+    ```php
+    <!-- ... -->
+    <a href="{{ route('mi_ruta.ruta', [
+            'parametro1' => $valor1,
+            'parametro2' => $valor2
+        ]) }}"
+    >Mi ruta</a>
+    <!-- ... -->
+    ```
+:::
+### Ejemplo de modelo de rutas para un CRUD:
     ```php
     Route::get('modelos', [ModeloController::class, 'index'])->name('modelos.index');
     Route::get('modelos/create', [ModeloController::class, 'create'])->name('modelos.create');
@@ -276,31 +282,64 @@ sidebar_position: 0
     Route::put('modelos/{modelo}', [ModeloController::class, 'update'])->name('modelos.update');
     Route::delete('modelos/{modelo}', [ModeloController::class, 'destroy'])->name('modelos.destroy');
     ```
-+ Ejemplo de modelo de rutas para un CRUD con resource:
+### Ejemplo de modelo de rutas para un CRUD con resource:
     ```php
     Route::resource('modelos', ModeloController::class);
     ```
-+ Ejemplo de ruta cuando queremos mostrar contenido estático:
+### Ejemplo de ruta cuando queremos mostrar contenido estático:
     ```php
     Route::view('mirutaestatica', 'vista');
     ```
+### Algunos comando artisan
 + Ver todas las rutas:
-    + $ php artisan r:l
-    + $ php artisan route:list
+    ```bash
+    php artisan r:l
+    php artisan route:list
+    ```
 + Ver todas las rutas con un nombre específico:
-    + $ php artisan r:l --name=rutas
-    + $ php artisan r:l --path=comienza_por
+    ```bash
+    php artisan r:l --name=rutas
+    php artisan r:l --path=comienza_por
+    ```
 + Ver todas las rutas definidas por el programador de la aplicación:
-    + $ php artisan r:l --except-vendor
+    ```bash
+    php artisan r:l --except-vendor
+    ```
 + Ver todas las rutas definidas por laravel o paquetes de terceros:
-    + $ php artisan r:l --only-vendor
+    ```bash
+    php artisan r:l --only-vendor
+    ```
 + Ver todas las rutas con junto con el middelware que la protege:
-    + $ php artisan r:l -v
+    ```bash
+    php artisan r:l -v
+    ```
 + Almacenar rutas en cache:
+    ```bash
     + $ php artisan route:cache
-    + **Nota**: este comando se recomienda usar en producción y no durante el desarrollo.
+    ```
+    :::tip Nota
+    Este comando se recomienda usar en producción y no durante el desarrollo.
+    :::
 + Limpiar rutas en cache:
-    + $ php artisan route:clear
+    ```bash
+    php artisan route:clear
+    ```
+### Ejecutar comandos cmd
+```php title="...\routes\web.php"
+// ...
+use Illuminate\Support\Facades\Process;
+// ...
+Route::get('directorio', function() {
+    $result = Process::run('ls ../');
+    if($result->successful()) {
+        return $result->output();
+    } else {
+        return $result->errorOutput();
+    }
+});
+// ...
+```
+
 
 
 ## Controladores
@@ -1486,6 +1525,7 @@ sidebar_position: 0
 
                 // Restricciones de llave foranea indicando indice y tabla
                 $table->foreignId('tabla_id')->constrained();
+                $table->foreignId('tabla_id')->constrained()->onDelete('cascade');
                 /* Equivalente a: 
                     $table->foreign('tabla_id')
                         ->rerferences('id')->on('tabla');
@@ -1743,6 +1783,11 @@ sidebar_position: 0
         // Forma simplificada, es funcionalmente igual a la anterior
         public function modelo2() {
             return $this->belongsTo('App\Models\Modelo');
+        }
+
+        // Forma simplificada, en caso de no seguir las convenciones
+        public function modelo2() {
+            return $this->belongsTo('App\Models\Modelo', 'modelo_id', 'id');
         }
     }
     ```
@@ -2077,6 +2122,7 @@ Faker: https://fakerphp.github.io
         use App\Models\Modelo;
         use App\Models\OtroModelo;
         use Illuminate\Support\Str;
+        use Illuminate\Database\Eloquent\Factories\Factory;
         // ...
         class ModeloFactory extends Factory
         {
@@ -2098,8 +2144,15 @@ Faker: https://fakerphp.github.io
                     // Si ruta_completa es:
                     // true: //public/storage/img/imagen.jpg
                     // false: /imagen.jpg
-                    'propiedad8' => $this->faker->image('public/storage/img', 640, 480, null, true)
-                    'propiedad9' => Hash::make('12345678'); // Encripta el valor contenido en el método make
+                    'propiedad8' => $this->faker->image('public/storage/img', 640, 480, null, true),
+                    'propiedad9' => Hash::make('12345678'), // Encripta el valor contenido en el método make
+
+                    'job' => fake()->jobTitle(),
+                    'phone' => fake()->phoneNumber(),
+                    'website' => fake()->domainName(),
+                    'address' => fake()->address(),
+                    'city' => fake()->city(),
+                    'country' => fake()->country()
 
                 ];
             }
