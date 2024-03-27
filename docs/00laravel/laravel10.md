@@ -1679,15 +1679,15 @@ Route::get('directorio', function() {
         // ...
         ```
 
-## Modelos:
-+ Crear un modelo:
-    + $ php artisan make:model Modelo
-    + $ php artisan make:model Modelo -m        (con migración, también se puede reemplazar -m por --migration)
-    + $ php artisan make:model Modelo -mc       (con migración y controlador)
-    + $ php artisan make:model Modelo -mcs      (con migración, controlador y seeder)
-    + $ php artisan make:model Modelo -mcsf     (con migración, controlador, seeder y factory)
-    + $ php artisan make:model Modelo -a        (con migración, controlador, seeder y factory)
-+ Indicar a un modelo la tabla a administrar:
+## Modelos
+### Crear un modelo
++ $ php artisan make:model Modelo
++ $ php artisan make:model Modelo -m        (con migración, también se puede reemplazar -m por --migration)
++ $ php artisan make:model Modelo -mc       (con migración y controlador)
++ $ php artisan make:model Modelo -mcs      (con migración, controlador y seeder)
++ $ php artisan make:model Modelo -mcsf     (con migración, controlador, seeder y factory)
++ $ php artisan make:model Modelo -a        (con migración, controlador, seeder y factory)
+### Indicar a un modelo la tabla a administrar
     ```php
     // ...
     class Modelo extends Model {
@@ -1695,7 +1695,7 @@ Route::get('directorio', function() {
         protected $table = "modelos";
     }
     ```
-+ Definir asignación masiva (indicando los campos a considerar):
+### Definir asignación masiva (indicando los campos a considerar)
     ```php
     // ...
     class Modelo extends Model {
@@ -1705,7 +1705,7 @@ Route::get('directorio', function() {
         ];
     }
     ```
-+ Definir asignación masiva (indicando los campos a no considerar):
+### Definir asignación masiva (indicando los campos a no considerar)
     ```php
     // ...
     class Modelo extends Model {
@@ -1715,7 +1715,7 @@ Route::get('directorio', function() {
         ];
     }
     ```
-+ Definir asignación masiva (indicando todos los campos):
+### Definir asignación masiva (indicando todos los campos)
     ```php
     // ...
     class Modelo extends Model {
@@ -1723,7 +1723,7 @@ Route::get('directorio', function() {
         protected $guarded = [];
     }
     ```
-+ Indicar que campos debe ocultar:
+### Indicar que campos debe ocultar
     ```php
     // ...
     class Modelo extends Model {
@@ -1733,7 +1733,7 @@ Route::get('directorio', function() {
         ];
     }
     ```
-+ Realizar casting en las propiedades del modelo:
+### Realizar casting en las propiedades del modelo
     ```php
     // ...
     class Modelo extends Model {
@@ -1743,7 +1743,7 @@ Route::get('directorio', function() {
         ];
     }
     ```
-+ Establecer ralación 1:1 de **Modelo** a **OtroModelo**:
+### Establecer ralación 1:1 de **Modelo** a **OtroModelo**
     ```php
     // ...
     class Modelo extends Model {
@@ -1769,7 +1769,7 @@ Route::get('directorio', function() {
         }
     }
     ```
-+ Establecer ralación 1:1 inversa de **OtroModelo** a **Modelo**:
+### Establecer ralación 1:1 inversa de **OtroModelo** a **Modelo**
     ```php
     // ...
     class OtroModelo extends Model {
@@ -1791,7 +1791,7 @@ Route::get('directorio', function() {
         }
     }
     ```
-+ Establecer ralación 1:n de **OtroModelo** a **Modelo**:
+### Establecer ralación 1:n de **OtroModelo** a **Modelo**
     ```php
     // ...
     class Modelo extends Model {
@@ -1802,7 +1802,7 @@ Route::get('directorio', function() {
         }
     }
     ```
-+ Establecer ralación 1:n inversa de **OtroModelo** a **Modelo**:
+### Establecer ralación 1:n inversa de **OtroModelo** a **Modelo**
     ```php
     // ...
     class OtroModelo extends Model {
@@ -1813,7 +1813,7 @@ Route::get('directorio', function() {
         }
     }
     ```
-+ Establecer ralación n:n de **OtroModelo** a **Modelo**:
+### Establecer ralación n:n de **OtroModelo** a **Modelo**
     ```php
     // ...
     class Modelo extends Model {
@@ -1844,129 +1844,159 @@ Route::get('directorio', function() {
         // $modelo->otro_modelos()->sync([$otro_modelo1_id, $otro_modelo2_id]);
     }
     ```
-+ Relaciones polimórficas:
-    + Cuando establezca las relaciones polimórficas del medelo **Tabla** tener en cuenta:
-      + En el modelo **Tabla**:
-          ```php
-          public function tablanable() {
-              return $this->morphTo();
-          }
-          ```
-    + En el modelo **Modelo**:
-        ```php
-        // Relación uno a uno polimórfica
-        public function tabla() {
-            return $this->morphOne('App\Models\Tabla', 'tablaable');
+### Relaciones polimórficas
++ Cuando establezca las relaciones polimórficas del medelo **Tabla** tener en cuenta:
+  + En el modelo **Tabla**:
+      ```php
+      public function tablanable() {
+          return $this->morphTo();
+      }
+      ```
++ En el modelo **Modelo**:
+    ```php
+    // Relación uno a uno polimórfica
+    public function tabla() {
+        return $this->morphOne('App\Models\Tabla', 'tablaable');
+    }
+
+    // Relación uno a muchos polimórfica
+    // El 2do parámetro es el nombre del método definido en el modelo Tabla
+    public function tablas() {
+        return $this->morphMany('App\Models\Tabla', 'tablaable');   
+    }
+
+    // Relación muchos a muchos polimórfica
+    // El 2do parámetro es el nombre de la tabla intermedia en singular
+    public function tablas2() {
+        return $this->morphToMany('App\Models\Tabla', 'tablaable');
+    }
+
+    // Relación muchos a muchos inversa polimórficas
+    // El 2do parámetro es el nombre de la tabla intermedia en singular
+    public function tablas3() {
+        return $this->morphedByMany('App\Models\Tabla', 'tablaable');
+    }
+    ```
++ La tabla **tablas** deberá tener campos similares a:
+    + campo1
+    + campo2
+    + tablaable_id
+    + tablaable_type
+    + **Nota 1:** La clave primaria será una clave compuesta por los campos **tablaable_id** y **tablaable_type**.
+    + **Nota 2:** 
+        + Ejemplo del archivo de migración para relaciones polimórficas uno a uno:
+            ```php
+            // ...
+            public function up(): void
+            {
+                Schema::create('tablas', function (Blueprint $table) {
+                    $table->string('campo1');
+                    $table->string('campo2');
+                    $table->unsignedBigInteger('tablaable_id');
+                    $table->string('tablaable_type');
+                    // Definición de la llave primaria compuesta
+                    $table->primary(['tablaable_id', 'tablaable_type']);
+                    $table->timestamps();
+                });
+            }
+            // ...
+            ```
+        + Ejemplo del archivo de migración para relaciones polimórficas uno a muchos:
+            ```php
+            // ...
+            public function up(): void
+            {
+                Schema::create('tablas', function (Blueprint $table) {
+                    $table->id();
+                    $table->string('campo1');
+                    $table->string('campo2');
+                    $table->unsignedBigInteger('tablaable_id');
+                    $table->string('tablaable_type');
+                    $table->timestamps();
+                });
+            }
+            // ...
+            ```
+        + Ejemplo del archivo de migración para relaciones polimórficas uno a muchos:
+            ```php
+            // ...
+            public function up(): void
+            {
+                Schema::create('tablas', function (Blueprint $table) {
+                    $table->id();
+                    $table->string('campo1');
+                    $table->string('campo2');
+                    $table->timestamps();
+                });
+            }
+            // ...
+            ```
+            + En este caso hay que generar una tabla intermedia:
+                + $ php artisan make:migration create_tablaables_table
+                + Ejemplo de construcción de la migración:
+                    ```php
+                    // ...
+                    public function up(): void
+                    {
+                        Schema::create('tablaables', function (Blueprint $table) {
+                            $table->id();
+                            $table->unsignedBigInteger('tablaable_id');
+                            $table->string('tablaable_type');
+                            $table->unsignedBigInteger('tabla_id');
+                            $table->foreign('tabla_id')->references('id')->on('tablas')->onDelete('cascade');
+                            $table->timestamps();
+                        });
+                    }
+                    // ...
+                    ```
+    + **Nota 3:** Creación de registros:
+        + Desde el modelo **Tabla**:
+            ```php
+            Tabla::create([
+                'campo1' => 'Valor campo 1',
+                'campo2' => 'Valor campo 2',
+                'tablaable_id' => $modelo_id,
+                'tablaable_type' => 'App\Models\Modelo'
+            ]);
+            ```
+        + Desde el modelo **Modelo**:
+            ```php
+            $modelo->tabla()->create([
+                'campo1' => 'Valor campo 1',
+                'campo2' => 'Valor campo 2'
+            ]);
+            ```
+### Relación 1:1 a traves de
+    ```php
+    // ...
+    class Modelo extends Model {
+        // ...
+        public function profile() {
+            return $this->hasOne(Profile::class);
         }
 
-        // Relación uno a muchos polimórfica
-        // El 2do parámetro es el nombre del método definido en el modelo Tabla
-        public function tablas() {
-            return $this->morphMany('App\Models\Tabla', 'tablaable');   
+        public function address() {
+            return $this->hasOneThrough(Address::class, Profile::class);
+        }
+    }
+    ```
+### Relación 1:n a traves de
+    ```php
+    // ...
+    class Modelo extends Model {
+        // ...
+        // Relación uno a muchos
+        public function section() {
+            return $this->hasMany(Section::class);
         }
 
-        // Relación muchos a muchos polimórfica
-        // El 2do parámetro es el nombre de la tabla intermedia en singular
-        public function tablas2() {
-            return $this->morphToMany('App\Models\Tabla', 'tablaable');
+        // Relación uno a mucho a traves de
+        public function lessons() {
+            return $this->hasManyhrough(Lesson::class, Section::class);
         }
-
-        // Relación muchos a muchos inversa polimórficas
-        // El 2do parámetro es el nombre de la tabla intermedia en singular
-        public function tablas3() {
-            return $this->morphedByMany('App\Models\Tabla', 'tablaable');
-        }
-        ```
-    + La tabla **tablas** deberá tener campos similares a:
-        + campo1
-        + campo2
-        + tablaable_id
-        + tablaable_type
-        + **Nota 1:** La clave primaria será una clave compuesta por los campos **tablaable_id** y **tablaable_type**.
-        + **Nota 2:** 
-            + Ejemplo del archivo de migración para relaciones polimórficas uno a uno:
-                ```php
-                // ...
-                public function up(): void
-                {
-                    Schema::create('tablas', function (Blueprint $table) {
-                        $table->string('campo1');
-                        $table->string('campo2');
-                        $table->unsignedBigInteger('tablaable_id');
-                        $table->string('tablaable_type');
-                        // Definición de la llave primaria compuesta
-                        $table->primary(['tablaable_id', 'tablaable_type']);
-                        $table->timestamps();
-                    });
-                }
-                // ...
-                ```
-            + Ejemplo del archivo de migración para relaciones polimórficas uno a muchos:
-                ```php
-                // ...
-                public function up(): void
-                {
-                    Schema::create('tablas', function (Blueprint $table) {
-                        $table->id();
-                        $table->string('campo1');
-                        $table->string('campo2');
-                        $table->unsignedBigInteger('tablaable_id');
-                        $table->string('tablaable_type');
-                        $table->timestamps();
-                    });
-                }
-                // ...
-                ```
-            + Ejemplo del archivo de migración para relaciones polimórficas uno a muchos:
-                ```php
-                // ...
-                public function up(): void
-                {
-                    Schema::create('tablas', function (Blueprint $table) {
-                        $table->id();
-                        $table->string('campo1');
-                        $table->string('campo2');
-                        $table->timestamps();
-                    });
-                }
-                // ...
-                ```
-                + En este caso hay que generar una tabla intermedia:
-                    + $ php artisan make:migration create_tablaables_table
-                    + Ejemplo de construcción de la migración:
-                        ```php
-                        // ...
-                        public function up(): void
-                        {
-                            Schema::create('tablaables', function (Blueprint $table) {
-                                $table->id();
-                                $table->unsignedBigInteger('tablaable_id');
-                                $table->string('tablaable_type');
-                                $table->unsignedBigInteger('tabla_id');
-                                $table->foreign('tabla_id')->references('id')->on('tablas')->onDelete('cascade');
-                                $table->timestamps();
-                            });
-                        }
-                        // ...
-                        ```
-        + **Nota 3:** Creación de registros:
-            + Desde el modelo **Tabla**:
-                ```php
-                Tabla::create([
-                    'campo1' => 'Valor campo 1',
-                    'campo2' => 'Valor campo 2',
-                    'tablaable_id' => $modelo_id,
-                    'tablaable_type' => 'App\Models\Modelo'
-                ]);
-                ```
-            + Desde el modelo **Modelo**:
-                ```php
-                $modelo->tabla()->create([
-                    'campo1' => 'Valor campo 1',
-                    'campo2' => 'Valor campo 2'
-                ]);
-                ```
-+ Para crear url amigables:
+    }
+    ```
+### Para crear url amigables
     ```php
     // ...
     class Modelo extends Model {
@@ -2152,7 +2182,10 @@ Faker: https://fakerphp.github.io
                     'website' => fake()->domainName(),
                     'address' => fake()->address(),
                     'city' => fake()->city(),
-                    'country' => fake()->country()
+                    'country' => fake()->country(),
+                    'sentence' => fake()->sentence(),
+                    'text' => fake()->text(),
+                    'number_rnd' => fake()->numberBetween(1, 10)
 
                 ];
             }
