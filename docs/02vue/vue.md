@@ -579,6 +579,25 @@ sidebar_position: 1
     </script>    
     ```
 #### AWS
+1. Crear cuenta en [AWS](https://commutatio.signin.aws.amazon.com/console).
+2. En la consola local, ejecutar como administrador:
+    ```bash
+    npm install -g @aws-amplify/cli
+    amplify configure
+    ```
+    + Seguir el enlace para hacer login en la consola de AWS.
+    + Nuevamente en la terminal local indicar:
+        + Región (Ejm.: eu-west-1).
+        + Usuario IAM. (Como ya hicimos login, detectará un usuario, si no existe, entonces ir a la consola de AWS y crearlo).
+    + Seguir el link hacia la consola de AWS
+        + Confirmar las credenciales del usuario.
+        + Establecer el permiso de **AdministratorAccess-Amplify**.
+        + Crear el usuario y recuperar: **ID de clave de acceso** y **Clave de acceso secreta**.
+    + Nuevamente en la terminal local indicar:
+        + accessKyId (introducir **ID de clave de acceso**).
+        + secretAccessKey (introducir el **Clave de acceso secreta**).
+        + Profile Name (ENTER).
+
 
 
 
