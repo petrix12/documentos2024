@@ -1820,7 +1820,11 @@ Route::get('directorio', function() {
         // ...
         // Forma simplificada
         public function otro_modelos() {
-            return $this->belongsToMany('App\Models\OtroModelo');
+            return $this->belongsToMany('App\Models\OtroModelo')
+                ->withPivot('campo_adicional')
+                ->withTimestamps();
+            // El método withPivot sirve para recuperar un campo adicional establecido en la tabla pivote
+            // El método withTimesstamps sirve para asignarle valores de creación y actualización a los campos created_at y updated_at
         }
 
         // Ejemplo de código para asignar un valor
