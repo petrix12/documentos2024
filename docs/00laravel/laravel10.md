@@ -2065,8 +2065,35 @@ Route::get('directorio', function() {
 
 
 ## Seeder
-+ Programar seeder en **database\seeders\DatabaseSeeder.php**:
-    ```php
+### Programar seeder
+```php title="database\seeders\DatabaseSeeder.php"
+// ...
+use App\Models\Modelo;
+use Illuminate\Database\Seeder;
+
+class DatabaseSeeder extends Seeder
+{
+    // ...
+    public function run(): void
+    {
+        // ...
+        $modelo = new Modelo();
+        $modelo->propiedad = "Valor de mi propiedad";
+        $modelo->save();
+    }
+}    
+```
+### Ejecutar seeders
+```bash
+php artisan db:seed
+```
+### Crear, programar y cargar un seeder:
++ Crear:
+    ```bash
+    php artisan make:seeder ModeloSeeder
+    ```
++ Programar:
+    ```php title="database\seeders\ModeloSeeder.php"
     // ...
     use App\Models\Modelo;
     use Illuminate\Database\Seeder;
@@ -2076,36 +2103,14 @@ Route::get('directorio', function() {
         // ...
         public function run(): void
         {
-            // ...
             $modelo = new Modelo();
             $modelo->propiedad = "Valor de mi propiedad";
             $modelo->save();
         }
     }    
     ```
-+ Ejecutar seeder:
-    + $ php artisan db:seed
-+ Crear, programar y cargar un seeder:
-    + $ php artisan make:seeder ModeloSeeder
-    + Programar seeder en **database\seeders\ModeloSeeder.php**:
-        ```php
-        // ...
-        use App\Models\Modelo;
-        use Illuminate\Database\Seeder;
-
-        class DatabaseSeeder extends Seeder
-        {
-            // ...
-            public function run(): void
-            {
-                $modelo = new Modelo();
-                $modelo->propiedad = "Valor de mi propiedad";
-                $modelo->save();
-            }
-        }    
-        ```
-    + Cargar el en **database\seeders\DatabaseSeeder.php**:
-    ```php
++ Cargar:
+    ```php title="database\seeders\DatabaseSeeder.php"
     // ...
     use Illuminate\Database\Seeder;
     use Illuminate\Support\Facades\Storage;
@@ -2136,10 +2141,37 @@ Route::get('directorio', function() {
         }
     }    
     ```
-+ Reestablecer tablas de la base de datos y ejecutar los seeders:
-    + $ php artisan migrate:fresh --seed
-+ Migrar y ejecutar los seeders:
-    + $ php artisan migrate --seed
++ Cargar varios seeders:
+    ```php title="database\seeders\DatabaseSeeder.php"
+    // ...
+    use Illuminate\Database\Seeder;
+    use Illuminate\Support\Facades\Storage;
+    use App\Models\Modelo;
+    use App\Models\Post;
+
+    class DatabaseSeeder extends Seeder
+    {
+        // ...
+        public function run(): void
+        {
+            // ...
+            $this->call([
+                Modelo1Seeder::class,
+                Modelo2Seeder::class,
+                Modelo3Seeder::class
+            ]);
+            // ...
+        }
+    }    
+    ```    
+### Reestablecer tablas de la base de datos y ejecutar los seeders
+```bash
+php artisan migrate:fresh --seed
+```
+### Migrar y ejecutar los seeders
+```bash
+php artisan migrate --seed
+```
 
 ## Factory
 :::tip Docoumentacion
