@@ -2014,43 +2014,80 @@ Route::get('directorio', function() {
 
 ## Tinker
 + Ejecutar Tinker:
-    + $ php artisan tinker
+    ```bash
+    php artisan tinker
+    ```
 + Salir de Tinker:
-    + >>> exit
+    ```bash
+    >>> exit
+    ```
 + Usar un modelo:
-    + >>> use App\Models\Modelo
+    ```bash
+    >>> use App\Models\Modelo
+    ```
 + Crear una instancia de un modelo:
-    + >>> $modelo = new Modelo;
+    ```bash
+    >>> $modelo = new Modelo;
+    ```
 + Asignar un valor a una propiedad de un modelo:
-    + >>> $modelo->propiedad = 'Valor';
+    ```bash
+    >>> $modelo->propiedad = 'Valor';
+    ```
 + Ver el contendido de un modelo:
-    + >>> $modelo;
+    ```bash
+    >>> $modelo;
+    ```
 + Agregar instancia del modelo como un registro en tabla:
-    + >>> $modelo->save();
+    ```bash
+    >>> $modelo->save();
+    ```
 + Modificar un registro
-    + >>> $modelo->propiedad = 'otro valor';
-    + >>> $modelo->save();
+    ```bash
+    >>> $modelo->propiedad = 'otro valor';
+    >>> $modelo->save();
+    ```
 + Recuperar todos los registros de una tabla:
-    + >>> $modelos = Modelo::all();
+    ```bash
+    >>> $modelos = Modelo::all();
+    ```
 + Recuperar todos los registros de una tabla aplicando un filtro:
-    + >>> $modelos = Modelo::where('propiedad1', 'valor1')->get();
+    ```bash
+    >>> $modelos = Modelo::where('propiedad1', 'valor1')->get();
+    ```
 + Recuperar todos los registros de una tabla aplicando un filtro y un orden:
-    + >>> $modelos = Modelo::where('propiedad1', 'valor1')->orderBy('propiedad2', 'desc')->get();
-    + **Nota:** por defecto **orderBy** ordena de manera ascendente: **asc**.
+    ```bash
+    >>> $modelos = Modelo::where('propiedad1', 'valor1')->orderBy('propiedad2', 'desc')->get();
+    ```
+    :::tip Nota
+    Por defecto **orderBy** ordena de manera ascendente: **asc**.
+    :::
 + Recuperar el primer registro:
-    + >>> $modelos = Modelo::where('propiedad1', 'valor1')->orderBy('propiedad2', 'desc')->first();
+    ```bash
+    >>> $modelos = Modelo::where('propiedad1', 'valor1')->orderBy('propiedad2', 'desc')->first();
+    ```
 + Recuperar solo los campos **propiedad1** y **propiedad2**:
-    + >>> $modelos = Modelo::select('propiedad1', 'propiedad2')->get();
-    + >>> $modelos = Modelo::select('propiedad1', 'propiedad2')->orderBy('propiedad2')->where('propiedad1', 'valor1')->get();
+    ```bash
+    >>> $modelos = Modelo::select('propiedad1', 'propiedad2')->get();
+    >>> $modelos = Modelo::select('propiedad1', 'propiedad2')->orderBy('propiedad2')->where('propiedad1', 'valor1')->get();
+    ```
 + Recuperar solo los campos **propiedad1** y **propiedad2** usando alias:
-    + >>> $modelos = Modelo::select('propiedad1 as p1', 'propiedad2 as p2')->get();
+    ```bash
+    >>> $modelos = Modelo::select('propiedad1 as p1', 'propiedad2 as p2')->get();
+    ```
 + Recuperar solo 5 registros:
-    + >>> $modelos = Modelo::select('propiedad1 as p1', 'propiedad2 as p2')->take(5)->get();
+    ```bash
+    >>> $modelos = Modelo::select('propiedad1 as p1', 'propiedad2 as p2')->take(5)->get();
+    ```
 + Recuperar un registro con **id** = 3:
-    + >>> $modelos = Modelo::find(3);
+    ```bash
+    >>> $modelos = Modelo::find(3);
+    ```
 + Recuperar todos los registros con **id** > 3:
-    + >>> $modelos = Modelo::where('id', '>', 3)->get();
-    + **Nota:** operadores de comparación que se pueden usar:
+    ```bash
+    >>> $modelos = Modelo::where('id', '>', 3)->get();
+    ```
+    :::tip Nota
+    Operadores de comparación que se pueden usar:
         ```
         + Igual: =
         + Mayor: >
@@ -2060,8 +2097,11 @@ Route::get('directorio', function() {
         + Diferente: <>
         + Que contenga: LIKE
         ```
+    :::
 + Recuperar todos los registros que contenga el texto **texto** en cualquier parte del campo:
-    + >>> $modelos = Modelo::where('propiedad3', 'LIKE', '%texto%')->get();
+    ```bash
+    >>> $modelos = Modelo::where('propiedad3', 'LIKE', '%texto%')->get();
+    ```
 
 
 ## Seeder
