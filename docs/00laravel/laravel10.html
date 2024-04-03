@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.1.1">
 <title data-rh="true">Apuntes de Laravel 10 | Documentación S++</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://petrix12.github.io/documentos2024/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://petrix12.github.io/documentos2024/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://petrix12.github.io/documentos2024/docs/00laravel/laravel10"><meta data-rh="true" property="og:locale" content="es"><meta data-rh="true" name="docusaurus_locale" content="es"><meta data-rh="true" name="docsearch:language" content="es"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Apuntes de Laravel 10 | Documentación S++"><meta data-rh="true" name="description" content="Pre-requisitos obligatorios:"><meta data-rh="true" property="og:description" content="Pre-requisitos obligatorios:"><link data-rh="true" rel="icon" href="/documentos2024/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://petrix12.github.io/documentos2024/docs/00laravel/laravel10"><link data-rh="true" rel="alternate" href="https://petrix12.github.io/documentos2024/docs/00laravel/laravel10" hreflang="es"><link data-rh="true" rel="alternate" href="https://petrix12.github.io/documentos2024/docs/00laravel/laravel10" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/documentos2024/blog/rss.xml" title="Documentación S++ RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/documentos2024/blog/atom.xml" title="Documentación S++ Atom Feed"><link rel="stylesheet" href="/documentos2024/assets/css/styles.222c2b53.css">
-<script src="/documentos2024/assets/js/runtime~main.1057109e.js" defer="defer"></script>
+<script src="/documentos2024/assets/js/runtime~main.7fc2e694.js" defer="defer"></script>
 <script src="/documentos2024/assets/js/main.c982767f.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -632,252 +632,60 @@
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="tinker">Tinker<a href="#tinker" class="hash-link" aria-label="Enlace directo al Tinker" title="Enlace directo al Tinker">​</a></h2>
 <ul>
 <li>Ejecutar Tinker:<!-- -->
-<ul>
-<li>$ php artisan tinker</li>
-</ul>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">php artisan tinker</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copiar código al portapapeles" title="Copiar" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 </li>
 <li>Salir de Tinker:<!-- -->
-<ul>
-<li>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>exit</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</li>
-</ul>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">&gt;&gt;&gt; exit</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copiar código al portapapeles" title="Copiar" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 </li>
 <li>Usar un modelo:<!-- -->
-<ul>
-<li>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>use App\Models\Modelo</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</li>
-</ul>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">&gt;&gt;&gt; use App\Models\Modelo</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copiar código al portapapeles" title="Copiar" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 </li>
 <li>Crear una instancia de un modelo:<!-- -->
-<ul>
-<li>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>$modelo = new Modelo;</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</li>
-</ul>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">&gt;&gt;&gt; $modelo = new Modelo;</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copiar código al portapapeles" title="Copiar" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 </li>
 <li>Asignar un valor a una propiedad de un modelo:<!-- -->
-<ul>
-<li>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>$modelo-&gt;propiedad = &#x27;Valor&#x27;;</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</li>
-</ul>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">&gt;&gt;&gt; $modelo-&gt;propiedad = &#x27;Valor&#x27;;</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copiar código al portapapeles" title="Copiar" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 </li>
 <li>Ver el contendido de un modelo:<!-- -->
-<ul>
-<li>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>$modelo;</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</li>
-</ul>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">&gt;&gt;&gt; $modelo;</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copiar código al portapapeles" title="Copiar" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 </li>
 <li>Agregar instancia del modelo como un registro en tabla:<!-- -->
-<ul>
-<li>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>$modelo-&gt;save();</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</li>
-</ul>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">&gt;&gt;&gt; $modelo-&gt;save();</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copiar código al portapapeles" title="Copiar" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 </li>
 <li>Modificar un registro<!-- -->
-<ul>
-<li>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>$modelo-&gt;propiedad = &#x27;otro valor&#x27;;</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</li>
-<li>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>$modelo-&gt;save();</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</li>
-</ul>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">&gt;&gt;&gt; $modelo-&gt;propiedad = &#x27;otro valor&#x27;;</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">&gt;&gt;&gt; $modelo-&gt;save();</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copiar código al portapapeles" title="Copiar" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 </li>
 <li>Recuperar todos los registros de una tabla:<!-- -->
-<ul>
-<li>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>$modelos = Modelo::all();</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</li>
-</ul>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">&gt;&gt;&gt; $modelos = Modelo::all();</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copiar código al portapapeles" title="Copiar" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 </li>
 <li>Recuperar todos los registros de una tabla aplicando un filtro:<!-- -->
-<ul>
-<li>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>$modelos = Modelo::where(&#x27;propiedad1&#x27;, &#x27;valor1&#x27;)-&gt;get();</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</li>
-</ul>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">&gt;&gt;&gt; $modelos = Modelo::where(&#x27;propiedad1&#x27;, &#x27;valor1&#x27;)-&gt;get();</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copiar código al portapapeles" title="Copiar" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 </li>
 <li>Recuperar todos los registros de una tabla aplicando un filtro y un orden:<!-- -->
-<ul>
-<li>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>$modelos = Modelo::where(&#x27;propiedad1&#x27;, &#x27;valor1&#x27;)-&gt;orderBy(&#x27;propiedad2&#x27;, &#x27;desc&#x27;)-&gt;get();</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</li>
-<li><strong>Nota:</strong> por defecto <strong>orderBy</strong> ordena de manera ascendente: <strong>asc</strong>.</li>
-</ul>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">&gt;&gt;&gt; $modelos = Modelo::where(&#x27;propiedad1&#x27;, &#x27;valor1&#x27;)-&gt;orderBy(&#x27;propiedad2&#x27;, &#x27;desc&#x27;)-&gt;get();</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copiar código al portapapeles" title="Copiar" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Nota</div><div class="admonitionContent_BuS1"><p>Por defecto <strong>orderBy</strong> ordena de manera ascendente: <strong>asc</strong>.</p></div></div>
 </li>
 <li>Recuperar el primer registro:<!-- -->
-<ul>
-<li>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>$modelos = Modelo::where(&#x27;propiedad1&#x27;, &#x27;valor1&#x27;)-&gt;orderBy(&#x27;propiedad2&#x27;, &#x27;desc&#x27;)-&gt;first();</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</li>
-</ul>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">&gt;&gt;&gt; $modelos = Modelo::where(&#x27;propiedad1&#x27;, &#x27;valor1&#x27;)-&gt;orderBy(&#x27;propiedad2&#x27;, &#x27;desc&#x27;)-&gt;first();</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copiar código al portapapeles" title="Copiar" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 </li>
 <li>Recuperar solo los campos <strong>propiedad1</strong> y <strong>propiedad2</strong>:<!-- -->
-<ul>
-<li>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>$modelos = Modelo::select(&#x27;propiedad1&#x27;, &#x27;propiedad2&#x27;)-&gt;get();</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</li>
-<li>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>$modelos = Modelo::select(&#x27;propiedad1&#x27;, &#x27;propiedad2&#x27;)-&gt;orderBy(&#x27;propiedad2&#x27;)-&gt;where(&#x27;propiedad1&#x27;, &#x27;valor1&#x27;)-&gt;get();</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</li>
-</ul>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">&gt;&gt;&gt; $modelos = Modelo::select(&#x27;propiedad1&#x27;, &#x27;propiedad2&#x27;)-&gt;get();</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">&gt;&gt;&gt; $modelos = Modelo::select(&#x27;propiedad1&#x27;, &#x27;propiedad2&#x27;)-&gt;orderBy(&#x27;propiedad2&#x27;)-&gt;where(&#x27;propiedad1&#x27;, &#x27;valor1&#x27;)-&gt;get();</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copiar código al portapapeles" title="Copiar" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 </li>
 <li>Recuperar solo los campos <strong>propiedad1</strong> y <strong>propiedad2</strong> usando alias:<!-- -->
-<ul>
-<li>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>$modelos = Modelo::select(&#x27;propiedad1 as p1&#x27;, &#x27;propiedad2 as p2&#x27;)-&gt;get();</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</li>
-</ul>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">&gt;&gt;&gt; $modelos = Modelo::select(&#x27;propiedad1 as p1&#x27;, &#x27;propiedad2 as p2&#x27;)-&gt;get();</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copiar código al portapapeles" title="Copiar" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 </li>
 <li>Recuperar solo 5 registros:<!-- -->
-<ul>
-<li>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>$modelos = Modelo::select(&#x27;propiedad1 as p1&#x27;, &#x27;propiedad2 as p2&#x27;)-&gt;take(5)-&gt;get();</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</li>
-</ul>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">&gt;&gt;&gt; $modelos = Modelo::select(&#x27;propiedad1 as p1&#x27;, &#x27;propiedad2 as p2&#x27;)-&gt;take(5)-&gt;get();</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copiar código al portapapeles" title="Copiar" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 </li>
 <li>Recuperar un registro con <strong>id</strong> = 3:<!-- -->
-<ul>
-<li>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>$modelos = Modelo::find(3);</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</li>
-</ul>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">&gt;&gt;&gt; $modelos = Modelo::find(3);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copiar código al portapapeles" title="Copiar" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 </li>
 <li>Recuperar todos los registros con <strong>id</strong> &gt; 3:<!-- -->
-<ul>
-<li>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>$modelos = Modelo::where(&#x27;id&#x27;, &#x27;&gt;&#x27;, 3)-&gt;get();</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</li>
-<li><strong>Nota:</strong> operadores de comparación que se pueden usar:<!-- -->
-<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">+ Igual: =</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">+ Mayor: &gt;</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">+ Mayor o igual: &gt;=</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">+ Menor: &#x27;&lt;&#x27;</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">+ Menor o igual: &lt;=</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">+ Diferente: &lt;&gt;</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">+ Que contenga: LIKE</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copiar código al portapapeles" title="Copiar" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
-</li>
-</ul>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">&gt;&gt;&gt; $modelos = Modelo::where(&#x27;id&#x27;, &#x27;&gt;&#x27;, 3)-&gt;get();</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copiar código al portapapeles" title="Copiar" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Nota</div><div class="admonitionContent_BuS1"><p>Operadores de comparación que se pueden usar:</p><div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">+ Igual: =</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">+ Mayor: &gt;</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">+ Mayor o igual: &gt;=</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">+ Menor: &#x27;&lt;&#x27;</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">+ Menor o igual: &lt;=</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">+ Diferente: &lt;&gt;</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">+ Que contenga: LIKE</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copiar código al portapapeles" title="Copiar" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div></div></div>
 </li>
 <li>Recuperar todos los registros que contenga el texto <strong>texto</strong> en cualquier parte del campo:<!-- -->
-<ul>
-<li>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>$modelos = Modelo::where(&#x27;propiedad3&#x27;, &#x27;LIKE&#x27;, &#x27;%texto%&#x27;)-&gt;get();</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</li>
-</ul>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">&gt;&gt;&gt; $modelos = Modelo::where(&#x27;propiedad3&#x27;, &#x27;LIKE&#x27;, &#x27;%texto%&#x27;)-&gt;get();</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copiar código al portapapeles" title="Copiar" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 </li>
 </ul>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="seeder">Seeder<a href="#seeder" class="hash-link" aria-label="Enlace directo al Seeder" title="Enlace directo al Seeder">​</a></h2>
@@ -1180,7 +988,7 @@
 </li>
 <li>Crear una vista markdown <strong>public\markdown.md</strong>.</li>
 <li>Ejemplo del llamado de un archivo markdown en <strong>routes\web.php</strong>:<!-- -->
-<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">// ...</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">use GrahamCampbell\Markdown\Facades\Markdown;</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">use Illuminate\Support\Facades\File;</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">// ...</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">Route::get(&#x27;markdown&#x27;, function () {</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    // Ruta al archivo Markdown</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    $filePath = public_path(&#x27;markdown.md&#x27;);</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    // Leer el contenido del archivo</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    $markdownContent = File::get($filePath);    </span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    // Convertir Markdown a HTML usando la fachada Markdown</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    $htmlContent = Markdown::convertToHtml($markdownContent);</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    // Pasar el contenido HTML a la vista</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    return view(&#x27;markdown&#x27;)-&gt;with(&#x27;htmlContent&#x27;, $htmlContent);</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">});    </span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copiar c ódigo al portapapeles" title="Copiar" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<div class="language-php codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-php codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">// ...</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">use GrahamCampbell\Markdown\Facades\Markdown;</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">use Illuminate\Support\Facades\File;</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">// ...</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">Route::get(&#x27;markdown&#x27;, function () {</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    // Ruta al archivo Markdown</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    $filePath = public_path(&#x27;markdown.md&#x27;);</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    // Leer el contenido del archivo</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    $markdownContent = File::get($filePath);    </span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    // Convertir Markdown a HTML usando la fachada Markdown</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    $htmlContent = Markdown::convertToHtml($markdownContent);</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    // Pasar el contenido HTML a la vista</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    return view(&#x27;markdown&#x27;)-&gt;with(&#x27;htmlContent&#x27;, $htmlContent);</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">});    </span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copiar código al portapapeles" title="Copiar" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 </li>
 </ol>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="livewire">Livewire:<a href="#livewire" class="hash-link" aria-label="Enlace directo al Livewire:" title="Enlace directo al Livewire:">​</a></h2>
