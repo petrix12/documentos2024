@@ -1007,7 +1007,7 @@ Route::get('directorio', function() {
         Luego, establecer los estilos en **views/vendor/pagination/default.blade.php**.
         :::
     + resources\views\crud\modelos\create.blade.php
-        ```php
+        ```html
         @extends('layouts.mi_plantilla')
 
         @section('title', 'Crear modelo')
@@ -1017,10 +1017,25 @@ Route::get('directorio', function() {
             <form action="{{ route('modelos.store') }}" method="POST">
                 @csrf
                 <label>Propiedad 1</label>
+                <!-- Uso del método old en un input -->
                 <input type="text" name="propiedad1" value="{{ old('propiedad1') }}" />
                 @error('propiedad1')
                     {{ $message }}
                 @enderror
+
+                <!-- Uso del método old en un select -->
+                <select name="category_id">
+                    @foreach($categories as $category)
+                        <option @selected(old('category_id') == $category->id) value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+
+                <!-- Uso del método old en un chackbox -->
+                <label>
+                    <input type="checkbox" name="active" value="1" @checked(old('active') == 1) />
+                    Activo
+                </label>
+
                 <button type="submit">Crear</button>
             </form>
         @endsection
@@ -1054,11 +1069,27 @@ Route::get('directorio', function() {
             <form action="{{ route('modelos.update', $modelo) }}" method="POST">
                 @csrf
                 @method('put')
+
+                <!-- Uso del método old en un input -->
                 <label>Propiedad 1</label>
                 <input type="text" name="propiedad1" value="{{ old('propiedad1', $modelo->propiedad1) }}" />
                 @error('propiedad1')
                     {{ $message }}
                 @enderror
+
+                <!-- Uso del método old en un select -->
+                <select name="category_id">
+                    @foreach($categories as $category)
+                        <option @selected(old('category_id', $modelo->category_id) == $category->id) value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+
+                <!-- Uso del método old en un chackbox -->
+                <label>
+                    <input type="checkbox" name="active" value="1" @checked(old('active', $modelo->active) == 1) />
+                    Activo
+                </label>
+
                 <button type="submit">Actualizar</button>
             </form>
         @endsection
@@ -1138,7 +1169,12 @@ Route::get('directorio', function() {
 <!-- Todos los errores -->
 @if($errors->any())
     <p>{{ $errors }}</p>
+    <!-- Recorrer todos los errores -->
+    @foreach($errors->all() as $error)
+        <p>{{ $error }}</p>
+    @endforeach
 @endif
+
 <!-- Un error en partícular -->
 @error('campo1')
     <p>{{ $message }}</p>
