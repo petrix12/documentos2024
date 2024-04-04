@@ -578,59 +578,6 @@ sidebar_position: 1
     }
     </script>    
     ```
-#### AWS
-1. Crear cuenta en [AWS](https://commutatio.signin.aws.amazon.com/console).
-2. En la consola local, ejecutar como administrador:
-    ```bash
-    npm install -g @aws-amplify/cli
-    amplify configure
-    ```
-    + Seguir el enlace para hacer login en la consola de AWS.
-    + Nuevamente en la terminal local indicar:
-        + Región (Ejm.: eu-west-1).
-        + Usuario IAM. (Como ya hicimos login, detectará un usuario, si no existe, entonces ir a la consola de AWS y crearlo).
-    + Seguir el link hacia la consola de AWS
-        + Confirmar las credenciales del usuario.
-        + Establecer el permiso de **AdministratorAccess-Amplify**.
-        + Crear el usuario y recuperar: **ID de clave de acceso** y **Clave de acceso secreta**.
-    + Nuevamente en la terminal local indicar:
-        + accessKyId (introducir **ID de clave de acceso**).
-        + secretAccessKey (introducir el **Clave de acceso secreta**).
-        + Profile Name (ENTER).
-
-
-
-
-2. Crear vista AuthView en **...\src\views\AuthView.vue**:
-    ```html
-    <template>
-        <h1>Auth View - AWS</h1>
-        <form action="">
-            <input v-model="email" type="text" placeholder="correo">
-            <input v-model="password" type="text" placeholder="password">
-            <button type="submit" @click.prevent="authUser">Iniciar Sesión</button>
-        </form>
-    </template>
-
-    <script lang="ts" setup>
-    import { ref } from 'vue'
-    import AuthService from '@/services/AuthService'
-
-    let email = ref("")
-    let password = ref("")
-
-    const authUser = async () => {
-        const auth = new AuthService()
-        const success = await auth.login(email.value, password.value)
-        if(success) {
-            console.log('login correcto')
-        } else {        
-            console.log('login incorrecto')
-        }
-    }
-    </script>    
-    ```
-
 #### Social login con firebase (Google, Facebook, Twitter, Github):
 :::tip Documentación
 + [Documentación Firebase Google Auth](https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbnFjMFhRWUd0ckZFeUlxeXdXTGxOODhybml1UXxBQ3Jtc0tsbG9PNkpwWERHQVRSUldDX2tpeVB0YjVGQnFvRTBLSHY2eEd3UTBXSVE4QjVFaG4wUnN2VkZMT1I0ckJkZlhwUWx5dWx6ZUIzaVhvQXUxNlNNLVJidkN0Rm5pOHZkc2ZwaGlxLUhjamI4ZE1QcFk2cw&q=https%3A%2F%2Ffirebase.google.com%2Fdocs%2Fauth%2Fweb%2Fgoogle-signin%23web-version-9&v=R1_-x4WB3Iw)
@@ -812,6 +759,91 @@ sidebar_position: 1
         .catch((error) => {
             console.log('login incorrecto')
         })
+    }
+    </script>    
+    ```
+#### AWS
+1. Crear cuenta en [AWS](https://commutatio.signin.aws.amazon.com/console).
+2. En la consola local, ejecutar como administrador:
+    ```bash
+    npm install -g @aws-amplify/cli
+    amplify configure
+    ```
+    + Seguir el enlace para hacer login en la consola de AWS.
+    + Nuevamente en la terminal local indicar:
+        + Región (Ejm.: eu-west-1).
+        + Usuario IAM. (Como ya hicimos login, detectará un usuario, si no existe, entonces ir a la consola de AWS y crearlo).
+    + Seguir el link hacia la consola de AWS
+        + Confirmar las credenciales del usuario.
+        + Establecer el permiso de **AdministratorAccess-Amplify**.
+        + Crear el usuario y recuperar: **ID de clave de acceso** y **Clave de acceso secreta**.
+    + Nuevamente en la terminal local indicar:
+        + accessKyId (introducir **ID de clave de acceso**).
+        + secretAccessKey (introducir el **Clave de acceso secreta**).
+        + Profile Name (ENTER).
+3. Instalación de amplify:
+    + Ejecutar:
+        ```bash
+        amplify init
+        ```    
+    + Introducir nombre del proyecto.
+    + Aceptar o modificar la configuración propuesta.
+    + Seleccionar la forma de autenticación: AWS Profile.
+    + Escoger el perfil a usar: default.
+    + Indicar si se desea compartir con Amazon los posibles problemas en desarrollo.
+    :::tip Nota
+    Esta instalación genera:
+        + Una carpeta **amplify** con toda la configuración requerida.
+        + Un archivo **src/aws-exports.js**.
+    :::
+4. Añadir módulo de autorizaciones de amplify:
+    + Ejecutar:
+        ```bash
+        amplify add auth
+        ```
+    + Indicar la configuración: Default configuration
+    + Indicar el campo para login de usuario: Email
+    + Indicar que no se requiere ninguna configuración adicional.
+5. Públicar el servicio de backend:
+    + Ejecutar:
+        ```bash
+        amplify push
+        ```
+    + Indicar que si estamos seguros de continuar.
+6. Instalar librerias de AWS requeridas:
+    + Ejecutar:
+        ```bash
+        npm install aws-amplify @aws-amplify/ui-vue
+        ```
+
+
+
+7. Crear vista AuthView en **...\src\views\AuthView.vue**:
+    ```html
+    <template>
+        <h1>Auth View - AWS</h1>
+        <form action="">
+            <input v-model="email" type="text" placeholder="correo">
+            <input v-model="password" type="text" placeholder="password">
+            <button type="submit" @click.prevent="authUser">Iniciar Sesión</button>
+        </form>
+    </template>
+
+    <script lang="ts" setup>
+    import { ref } from 'vue'
+    import AuthService from '@/services/AuthService'
+
+    let email = ref("")
+    let password = ref("")
+
+    const authUser = async () => {
+        const auth = new AuthService()
+        const success = await auth.login(email.value, password.value)
+        if(success) {
+            console.log('login correcto')
+        } else {        
+            console.log('login incorrecto')
+        }
     }
     </script>    
     ```
