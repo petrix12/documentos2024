@@ -4079,8 +4079,11 @@ public function mi_metodo() {
         }
         // ...
         ``` 
+
 ### Textarea con formato enriquecido:
-+ **CKEditor**: https://ckeditor.com
+:::tip Documentación
+**CKEditor**: https://ckeditor.com
+:::
 1. Incluir CDN del CKEditor en nuestra vista:
     ```html
     <!-- ... -->
@@ -4099,7 +4102,8 @@ public function mi_metodo() {
         </script>        
     @endsection
     ```
-+ **Nota 1**: en caso de usar livewire:
+:::tip Nota 1
+En caso de usar livewire:
     ```html
     <!-- ... -->
     <textarea name="texto" id="texto" cols="30" rows="10"></textarea>
@@ -4122,14 +4126,25 @@ public function mi_metodo() {
         </script>        
     @endsection
     ```
-+ **Nota 2**: para aumentar el alto:
+:::
+:::tip Nota 2
+Para establecer el alto mínimo y máximo y añadir un scroll bar:
     ```html
     <style>
+        .ck-editor__editable {            
+            max-height: 400px; /* Ajusta según necesites */
+        }                    
         .ck-editor__editable_inline {
             min-height: 200px;
         }
+        .ck-content {
+            /* Esto asegura que el contenido tenga un scroll si excede el alto del contenedor */
+            overflow-y: auto; /* Muestra un scroll vertical si es necesario */
+            max-height: 350px; /* Ajusta este valor según lo necesites */
+        }        
     </style>  
     ```
+:::
 
 ### Instalar redis:
 + **Documentación**: https://laravel.com/docs/10.x/redis
