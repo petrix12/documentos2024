@@ -318,7 +318,10 @@ sidebar_position: 1
     + Validación de email
     + Doble Factor de auth (2FA)
 ### Crear proyecto con autenticación:
-+ $ vue create authentication
++ Ejecutar:
+```bash
+vue create authentication
+```
 + Ejemplo de opciones seleccionadas para la creación de un proyecto:
     ```
     Vue CLI v5.0.8
@@ -362,105 +365,105 @@ sidebar_position: 1
     ```
 ### Servicio de autenticación:
 #### Tradicional
-1. Crear servicio AuthService en **...\src\services\AuthService.ts**:
-      + Con typescript:
-          ```ts
-          import { Ref, ref } from 'vue'
+1. Crear servicio **AuthService**:
+    + Con typescript:
+        ```ts title="...\src\services\AuthService.ts"
+        import { Ref, ref } from 'vue'
 
-          class AuthService {
-              private jwt: Ref<string>
-              private error: Ref<string>
-              constructor() {
-                  this.jwt = ref('')
-                  this.error = ref('')
-              }
+        class AuthService {
+            private jwt: Ref<string>
+            private error: Ref<string>
+            constructor() {
+                this.jwt = ref('')
+                this.error = ref('')
+            }
 
-              getJwt(): Ref<string> {
-                  return this.jwt
-              }
+            getJwt(): Ref<string> {
+                return this.jwt
+            }
 
-              getError(): Ref<string> {
-                  return this.error
-              }
+            getError(): Ref<string> {
+                return this.error
+            }
 
-              async login(email: string, password: string): Promise<boolean> {
-                  try {
-                      const res = await fetch('https://rutaservidor/auth/login', {
-                          method: 'POST',
-                          headers: {
-                              'Accept': 'application/json',
-                              'Content-Type': 'application/json'
-                          },
-                          body: JSON.stringify({
-                              email,
-                              password
-                          })
-                      })            
-                      const response = await res.json()
-                      if('errors' in response) {
-                          this.error.value = "Login failed"
-                          return false
-                      }
-                      this.jwt.value = response.data.access_token
-                      return true
-                  } catch(error) {
-                      console.log(error)
-                      this.error.value = "Login failed"
-                      return false
-                  }
-              }
-          }
-          export default AuthService        
-          ```
-      + Con javascript:
-          ```js
-          import { ref } from 'vue'
+            async login(email: string, password: string): Promise<boolean> {
+                try {
+                    const res = await fetch('https://rutaservidor/auth/login', {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            email,
+                            password
+                        })
+                    })            
+                    const response = await res.json()
+                    if('errors' in response) {
+                        this.error.value = "Login failed"
+                        return false
+                    }
+                    this.jwt.value = response.data.access_token
+                    return true
+                } catch(error) {
+                    console.log(error)
+                    this.error.value = "Login failed"
+                    return false
+                }
+            }
+        }
+        export default AuthService        
+        ```
+    + Con javascript:
+        ```js
+        import { ref } from 'vue'
 
-          class AuthService {
-              constructor() {
-                  this.jwt = ref('')
-                  this.error = ref('')
-              }
+        class AuthService {
+            constructor() {
+                this.jwt = ref('')
+                this.error = ref('')
+            }
 
-              getJwt() {
-                  return this.jwt
-              }
+            getJwt() {
+                return this.jwt
+            }
 
-              getError() {
-                  return this.error
-              }
+            getError() {
+                return this.error
+            }
 
-              async login(email, password) {
-                  try {
-                      const res = await fetch('https://rutaservidor/auth/login', {
-                          method: 'POST',
-                          headers: {
-                              'Accept': 'application/json',
-                              'Content-Type': 'application/json'
-                          },
-                          body: JSON.stringify({
-                              email,
-                              password
-                          })
-                      })            
-                      const response = await res.json()
-                      if('errors' in response) {
-                          this.error.value = "Login failed"
-                          return false
-                      }
-                      this.jwt.value = response.data.access_token
-                      return true
-                  } catch(error) {
-                      console.log(error)
-                      this.error.value = "Login failed"
-                      return false
-                  }
-              }
-          }
-          export default AuthService
-          ```
-2. Crear vista AuthView en **...\src\views\AuthView.vue**:
-    ```html
+            async login(email, password) {
+                try {
+                    const res = await fetch('https://rutaservidor/auth/login', {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            email,
+                            password
+                        })
+                    })            
+                    const response = await res.json()
+                    if('errors' in response) {
+                        this.error.value = "Login failed"
+                        return false
+                    }
+                    this.jwt.value = response.data.access_token
+                    return true
+                } catch(error) {
+                    console.log(error)
+                    this.error.value = "Login failed"
+                    return false
+                }
+            }
+        }
+        export default AuthService
+        ```
+2. Crear vista **AuthView**:
+    ```html title="...\src\views\AuthView.vue"
     <template>
         <h1>Auth View - Backend Tradicional</h1>
         <form action="">
@@ -528,8 +531,8 @@ sidebar_position: 1
         + UID de usuario: ZbVrn0cIS2cXZjmNBk1NiMfj6Ex1
 2. En la consola local de nuestro proyecto:
     + $ npm install firebase
-3. Incorporar Firebase a la aplicación en **00proyectos_vue\authentication\src\main.ts**:
-    ```ts
+3. Incorporar Firebase a la aplicación:
+    ```ts title="...\authentication\src\main.ts"
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "firebase/app"
     import { getAnalytics } from "firebase/analytics"  // Opcional
@@ -550,8 +553,8 @@ sidebar_position: 1
     initializeApp(firebaseConfig)
     const analytics = getAnalytics(app) // Opcional    
     ```
-4. Crear vista AuthView en **...\src\views\AuthView.vue**:
-    ```html
+4. Crear vista **AuthView**:
+    ```html title="...\src\views\AuthView.vue"
     <template>
         <h1>Auth View con Firebase</h1>
         <form action="">
@@ -670,8 +673,8 @@ sidebar_position: 1
         + Clic en **Guardar**.
 2. En la consola local de nuestro proyecto:
     + $ npm install firebase
-3. Incorporar Firebase a la aplicación en **00proyectos_vue\authentication\src\main.ts**:
-    ```ts
+3. Incorporar Firebase a la aplicación:
+    ```ts title="...\authentication\src\main.ts"
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "firebase/app"
     import { getAnalytics } from "firebase/analytics"  // Opcional
@@ -692,8 +695,8 @@ sidebar_position: 1
     initializeApp(firebaseConfig)
     const analytics = getAnalytics(app) // Opcional    
     ```
-4. Crear vista AuthView en **...\src\views\AuthView.vue**:
-    ```html
+4. Crear vista **AuthView**:
+    ```html title="...\src\views\AuthView.vue"
     <template>
         <h1>Auth View con Social Login (Firebase)</h1>
         <form action="">
@@ -815,40 +818,45 @@ sidebar_position: 1
         ```bash
         npm install aws-amplify @aws-amplify/ui-vue
         ```
-
-
-
-7. Crear vista AuthView en **...\src\views\AuthView.vue**:
+3. Incorporar AWS a la aplicación:
+    ```ts  title="...\authentication\src\main.ts"
+    //...
+    import { Amplify }  from 'aws-amplify'
+    import awsExports from './aws-exports'
+    // ...
+    Amplify.configure(awsExports)
+    // ...
+    ```
+4. En caso de estar trabajando con Typescript crear:
+    ```ts title=".../src/aws-exports.d.ts"
+    declare const awsmobile: Record<string, any>
+    export default awsmobile
+    ```
+5. Crear vista AuthView en **...\src\views\AuthView.vue**:
     ```html
     <template>
-        <h1>Auth View - AWS</h1>
-        <form action="">
-            <input v-model="email" type="text" placeholder="correo">
-            <input v-model="password" type="text" placeholder="password">
-            <button type="submit" @click.prevent="authUser">Iniciar Sesión</button>
-        </form>
+        <authenticator>
+            <!-- EL CÓDIGO QUE ESCRIBAMOS AQUÍ SOLO SE PODRÁ VER SI SE HACE LOGIN -->
+            <template v-slot="{user, signOut}">
+                <h1>Hola {{ user.username }}</h1>
+                <button @click="signOut">Cerrar sesión</button>
+            </template>
+        </authenticator>
     </template>
 
     <script lang="ts" setup>
-    import { ref } from 'vue'
-    import AuthService from '@/services/AuthService'
-
-    let email = ref("")
-    let password = ref("")
-
-    const authUser = async () => {
-        const auth = new AuthService()
-        const success = await auth.login(email.value, password.value)
-        if(success) {
-            console.log('login correcto')
-        } else {        
-            console.log('login incorrecto')
-        }
-    }
+    import { Authenticator } from '@aws-amplify/ui-vue'
+    import '@aws-amplify/ui-vue/styles.css'
     </script>    
     ```
-### Modificar el archivo de rutas **...\src\router\index.ts**:
-    ```ts
+:::tip Nota
+Para abrir la consola de Amplify:
+```bash
+amplify console
+```
+:::
+### Modificar el archivo de rutas:
+    ```ts title="...\src\router\index.ts"
     // ...
     import AuthView from '../views/AuthView.vue'
 
@@ -862,8 +870,8 @@ sidebar_position: 1
     ]
     // ...   
     ```
-### Modificar el componente principal **...\src\App.vue**:
-    ```html
+### Modificar el componente principal:
+    ```html title="...\src\App.vue"
     <template>
         <nav>
             <!-- ... -->
@@ -872,7 +880,6 @@ sidebar_position: 1
         <!-- ... -->
     </template>
     ```
-
 
 
 ## Estructura recomendada de carpetas de un proyecto Vue:
