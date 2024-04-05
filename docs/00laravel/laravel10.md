@@ -2337,7 +2337,7 @@ Faker: https://fakerphp.github.io
             }    
             ```
 
-## Mutadores y accesores:
+## Mutadores y accesores
 1. Agregar un mutador y un accesor a el modelo **Modelo**:
     + Modificar el modelo **app\Models\Modelo.php**:
         ```php
@@ -2391,100 +2391,113 @@ Faker: https://fakerphp.github.io
         }
         ```
 
-## Custom Request:
-+ Crear un Custom Request:
-    + $ php artisan make:request StoreModelo
-    + **Nota:** se genera el archivo **app\Http\Requests\StoreModelo.php**.
-    + Ejemplo de programación del Form Request **app\Http\Requests\StoreModelo.php**:
-        ```php
-        // ...
-        class StoreModelo extends FormRequest
+## Custom Request (Form Request)
+### Crear un Custom Request:
+```bash
+php artisan make:request StoreModelo
+```
+:::tip Nota
+Se genera el archivo **app\Http\Requests\StoreModelo.php**.
+:::
++ Ejemplo de programación del Form Request **app\Http\Requests\StoreModelo.php**:
+    ```php
+    // ...
+    class StoreModelo extends FormRequest
+    {
+        // Reglas de autorización (normalmente se deja así)
+        public function authorize(): bool
         {
-            // Reglas de autorización (normalmente se deja así)
-            public function authorize(): bool
-            {
-                return true;
-            } else {
-                return false;
-            }
-
-            // Reglas de autorización (verificando usuario autenticado)
-            public function authorize(): bool
-            {
-                if($this->usuer_id == auth()->user()->id){
-                    return true;
-                }
-            }
-
-            // Reglas de validación
-            public function rules(): array
-            {
-                return [
-                    'propiedad1' => 'required|min:12',
-                    'propiedad2' => 'required|unique:nombre_tabla',
-                    'propiedad3' => "required|unique:nombre_tabla,propiedad3,$modelo->id",
-                    'propiedad4' => 'in:1,2',
-                    'propiedad5_file' => 'image'
-                ];
-            }
-
-            // Reglas de validación condicionales
-            public function rules(): array
-            {
-                // Capturar parámetro de la ruta
-                $parametro = $this->route()->parameter('paremetro');
-                
-                $rules = [
-                    'propiedad1' => 'required|min:12',
-                    'propiedad2' => 'required|unique:nombre_tabla',
-                    'propiedad3' => "required|unique:nombre_tabla,propiedad3,$modelo->id",
-                    'propiedad4' => 'in:1,2'
-                ];
-
-                if($parametro) {
-                    $rules['propiedad2'] = "required|unique:nombre_tabla,propiedad3,$parametro"
-                }
-
-                if($this->propiedad4 == 2) {
-                    $rules = array_merge($rules, [
-                        'propiedad5' = 'required'
-                    ]);
-                }
-
-                return $rules;
-            }
-
-            // Método para personalizar los mensaje de error
-            public function messages(): array
-            {
-                return [
-                    'propiedad1.required' => 'La propiedad 1 es obligatoria'
-                ];
-            }
-
-            // Método para personalizar los atributos
-            public function attributes(): array
-            {
-                return [
-                    'propiedad1' => 'Cambio de nombre'
-                ];
-            }
-        }        
-        ```
-    + Ejemplo de uso en el controlador que lo invoca **app\Http\Controllers\ModeloController.php**:
-        ```php
-        // ...
-        use App\Http\Requests\StoreModelo;
-        // ...
-        public function store(StoreModelo $request) {
-
-            $modelo = new Modelo();
-            $modelo->propiedad1 = $request->propiedad1;
-            $modelo->save();
-            return redirect()->route('modelos.show', $modelo);
+            return true;
+        } else {
+            return false;
         }
-        // ...   
-        ```
+
+        // Reglas de autorización (verificando usuario autenticado)
+        public function authorize(): bool
+        {
+            if($this->usuer_id == auth()->user()->id){
+                return true;
+            }
+        }
+
+        // Reglas de validación
+        public function rules(): array
+        {
+            if($this->modelo) {
+                $modelo_id = ',' . $this->modelo->id;
+            } else {
+                $modelo_id = '';
+            }
+            return [
+                'propiedad1' => 'required|min:12',
+                // Otra forma de crea reglas de validación
+                'propiedad1_1' => ['required', 'min:12'],
+                'propiedad2' => 'required|unique:nombre_tabla',
+                'propiedad2_1' => 'required|unique:nombre_tabla,campo_tabla',   // En caso de que el nombre del request no coincida con el campo de la tabla
+                'propiedad3' => "required|unique:nombre_tabla,propiedad3,$modelo_id",
+                'propiedad4' => 'in:1,2',
+                'propiedad5_file' => 'image',
+                'option_id' => 'required|exists:tabla_options,id'
+            ];
+        }
+
+        // Reglas de validación condicionales
+        public function rules(): array
+        {
+            // Capturar parámetro de la ruta
+            $parametro = $this->route()->parameter('paremetro');
+            
+            $rules = [
+                'propiedad1' => 'required|min:12',
+                'propiedad2' => 'required|unique:nombre_tabla',
+                'propiedad3' => "required|unique:nombre_tabla,propiedad3,$modelo->id",
+                'propiedad4' => 'in:1,2'
+            ];
+
+            if($parametro) {
+                $rules['propiedad2'] = "required|unique:nombre_tabla,propiedad3,$parametro"
+            }
+
+            if($this->propiedad4 == 2) {
+                $rules = array_merge($rules, [
+                    'propiedad5' = 'required'
+                ]);
+            }
+
+            return $rules;
+        }
+
+        // Método para personalizar los mensaje de error
+        public function messages(): array
+        {
+            return [
+                'propiedad1.required' => 'La propiedad 1 es obligatoria'
+            ];
+        }
+
+        // Método para personalizar los atributos
+        public function attributes(): array
+        {
+            return [
+                'propiedad1' => 'Cambio de nombre'
+            ];
+        }
+    }        
+    ```
++ Ejemplo de uso en el controlador que lo invoca **app\Http\Controllers\ModeloController.php**:
+    ```php
+    // ...
+    use App\Http\Requests\StoreModelo;
+    // ...
+    public function store(StoreModelo $request) {
+
+        $modelo = new Modelo();
+        $modelo->propiedad1 = $request->propiedad1;
+        $modelo->save();
+        return redirect()->route('modelos.show', $modelo);
+    }
+    // ...   
+    ```
 
 ## Policy:
 + Crear una policy:
