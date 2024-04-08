@@ -2276,7 +2276,8 @@ Faker: https://fakerphp.github.io
                 $propiedad4 = $this->faker->unique->word(20),   // Una palabra de máximo 20 caracteres que no se repite
                 return [
                     'propiedad1' => $this->faker->sentence(),   // Oración
-                    'propiedad2' => $this->faker->paragraph(),  // Párrafo                    
+                    'propiedad2' => $this->faker->paragraph(),  // Párrafo
+                    'propiedad2_1' => $this->faker->paragraph(3),  // Párrafo con tres oraciones
                     'propiedad3' => $this->faker->randomElement(['Valor 1', 'Valor 2', 'Valor 3']),   // Escoger entre varios elementos
                     'propiedad4' => $propiedad4,
                     'propiedad5' => Str::slug($propiedad4),
@@ -2298,7 +2299,6 @@ Faker: https://fakerphp.github.io
                     'sentence' => fake()->sentence(),
                     'text' => fake()->text(),
                     'number_rnd' => fake()->numberBetween(1, 10)
-
                 ];
             }
         }        
