@@ -48,7 +48,7 @@ php artisan serve
     php artisan make:controller HolaController
     ```
     :::tip NOTA
-    Antes comentar **Route::get('/hola2/{name}', HolaController::class);** en **routes\web.php**.
+    Antes comentar **Route::get('/hola2/\{name}', HolaController::class);** en **routes\web.php**.
     :::
 5. Crear: **resources\views\saludo.blade.php**.
 6. Modificar: **.env**
