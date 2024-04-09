@@ -1,7 +1,7 @@
 ---
 title: Apuntes de Laravel 10
 sidebar_label: "Apuntes de Laravel 10"
-sidebar_position: 0
+sidebar_position: 1
 ---
 
 # APUNTES LARAVEL 10
@@ -1559,7 +1559,7 @@ Route::get('directorio', function() {
                 // es equivalente a:    $table->bigInteger('datoable_id')->unsigned();
                 //                      $table->string('datoable_type');
 
-                // Restricciones de llave foranea indicando indice y tabla
+                // Restricciones de llave foránea indicando indice y tabla
                 $table->foreignId('tabla_id')->constrained();
                 $table->foreignId('tabla_id')->constrained()->onDelete('cascade');
                 /* Equivalente a: 
@@ -1567,13 +1567,13 @@ Route::get('directorio', function() {
                         ->rerferences('id')->on('tabla');
                 */            
 
-                // Restricciones de llave foranea con set null
+                // Restricciones de llave foránea con set null
                 $table->unsignedBigInteger('modelo_id')->nullable();
                 $table->foreign('modelo_id')
                     ->rerferences('id')->on('modelos')
                     ->onDelete('set null');
 
-                // Restricciones de llave foranea con cascade
+                // Restricciones de llave foránea con cascade
                 $table->unsignedBigInteger('otro_modelo_id');
                 $table->foreign('otro_modelo_id')
                     ->rerferences('id')->on('otro_modelos')
@@ -1670,7 +1670,7 @@ Route::get('directorio', function() {
                 $table->dropFullText('mitabla_columna7_fulltext');
                 // Eliminar indice primario
                 $table->dropPrimary('PRIMARY');
-                // Eliminar restricciones de llave foranea
+                // Eliminar restricciones de llave foránea
                 $table->dropForeign(['modelo_id']);
             });
         }
@@ -1687,8 +1687,8 @@ Route::get('directorio', function() {
                 $table->foreign('modelo_id')
                     ->references('id')
                     ->on('modelos')
-                    ->onDelete('cascade')   // Suponiendo que el modificador que tenia antes de quitar la restricción de llave foranea
-                    ->onUpdate('cascade');   // Suponiendo que el modificador que tenia antes de quitar la restricción de llave foranea
+                    ->onDelete('cascade')   // Suponiendo que el modificador que tenia antes de quitar la restricción de llave foránea
+                    ->onUpdate('cascade');   // Suponiendo que el modificador que tenia antes de quitar la restricción de llave foránea
             });
         }
         ```
@@ -1779,7 +1779,14 @@ Route::get('directorio', function() {
         ];
     }
     ```
-### Establecer ralación 1:1 de **Modelo** a **OtroModelo**
+### Relaciones
+:::tip Tips
++ Relación 1:1 (El modelo tiene la clave primaria):
+    + Método: **hasOne** (Modelo a relacionar, clave foránea, clave primaria) -> Tiene un ...
++ Relación 1:1 inverso (El modelo tiene la clave foránea):
+    + Método: **belonsTo** (Modelo a relacionar, clave foránea, clave primaria) -> Pertenece a ...
+:::
+#### Establecer ralación 1:1 de **Modelo** a **OtroModelo** (hasOne -> Tiene)
     ```php
     // ...
     class Modelo extends Model {
@@ -1793,19 +1800,20 @@ Route::get('directorio', function() {
         // Forma simplificada, es funcionalmente igual a la anterior
         // Este método considera que la llave primaria del Modelo modelo es 'id', 
         // y la llave foránea de OtroModelo es modelo_id
-        public function otro_modelo_forma2() {
+        public function otro_modelo_forma2(): HasOne {
             return $this->hasOne('App\Models\OtroModelo');
+            // también sirve: $this->hasOne(OtroModelo::class);
         }
 
         // Forma simplificada, sin seguir las convenciones de laravel
         // Este método considera que la llave primaria del Modelo modelo no sigue las convenciones
         // y la llave foránea de OtroModelo tampoco sigue las convenciones
-        public function otro_modelo_forma3() {
+        public function otro_modelo_forma3(): HasOne {
             return $this->hasOne('App\Models\OtroModelo', 'modelo_id', 'id');
         }
     }
     ```
-### Establecer ralación 1:1 inversa de **OtroModelo** a **Modelo**
+#### Establecer ralación 1:1 inversa de **OtroModelo** a **Modelo** (belongsTo -> Pertenece)
     ```php
     // ...
     class OtroModelo extends Model {
@@ -1817,17 +1825,17 @@ Route::get('directorio', function() {
         }
 
         // Forma simplificada, es funcionalmente igual a la anterior
-        public function modelo2() {
+        public function modelo2(): BelongsTo {
             return $this->belongsTo('App\Models\Modelo');
         }
 
         // Forma simplificada, en caso de no seguir las convenciones
-        public function modelo2() {
+        public function modelo2(): BelongsTo {
             return $this->belongsTo('App\Models\Modelo', 'modelo_id', 'id');
         }
     }
     ```
-### Establecer ralación 1:n de **OtroModelo** a **Modelo**
+#### Establecer ralación 1:n de **OtroModelo** a **Modelo**
     ```php
     // ...
     class Modelo extends Model {
@@ -1838,18 +1846,18 @@ Route::get('directorio', function() {
         }
     }
     ```
-### Establecer ralación 1:n inversa de **OtroModelo** a **Modelo**
+#### Establecer ralación 1:n inversa de **OtroModelo** a **Modelo**
     ```php
     // ...
     class OtroModelo extends Model {
         // ...
         // Forma simplificada
-        public function modelo() {
+        public function modelo(): BelongsTo {
             return $this->belongsTo('App\Models\Modelo');
         }
     }
     ```
-### Establecer ralación n:n de **OtroModelo** a **Modelo**
+#### Establecer ralación n:n de **OtroModelo** a **Modelo**
     ```php
     // ...
     class Modelo extends Model {
@@ -1884,7 +1892,7 @@ Route::get('directorio', function() {
         // $modelo->otro_modelos()->sync([$otro_modelo1_id, $otro_modelo2_id]);
     }
     ```
-### Relaciones polimórficas
+#### Relaciones polimórficas
 + Cuando establezca las relaciones polimórficas del medelo **Tabla** tener en cuenta:
   + En el modelo **Tabla**:
       ```php
@@ -2006,12 +2014,12 @@ Route::get('directorio', function() {
                 'campo2' => 'Valor campo 2'
             ]);
             ```
-### Relación 1:1 a traves de
+#### Relación 1:1 a traves de
     ```php
     // ...
     class Modelo extends Model {
         // ...
-        public function profile() {
+        public function profile(): HasOne {
             return $this->hasOne(Profile::class);
         }
 
@@ -2020,7 +2028,7 @@ Route::get('directorio', function() {
         }
     }
     ```
-### Relación 1:n a traves de
+#### Relación 1:n a traves de
     ```php
     // ...
     class Modelo extends Model {

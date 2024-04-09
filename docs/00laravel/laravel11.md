@@ -1,7 +1,7 @@
 ---
 title: Apuntes de Laravel 11
 sidebar_label: "Apuntes de Laravel 11"
-sidebar_position: 1
+sidebar_position: 0
 ---
 
 # APUNTES LARAVEL 11
