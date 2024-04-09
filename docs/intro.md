@@ -52,6 +52,7 @@ sidebar_position: 0
 - [ ] [petrix12/instaclone2022](https://github.com/petrix12/instaclone2022)
 - [ ] [petrix12/voyager2022](https://github.com/petrix12/voyager2022)
 - [ ] [petrix12/laravel-excel-2022](https://github.com/petrix12/laravel-excel-2022)
+- [ ] [petrix12/AppFileLaravel](https://github.com/petrix12/AppFileLaravel)
 ### Portafolios
 - [ ] [petrix12/cvpetrix2022](https://github.com/petrix12/cvpetrix2022)
 ### Plantillas
@@ -110,7 +111,6 @@ sidebar_position: 0
 - [ ] [petrix12/API-RESTful-con-Laravel-Guia-Definitiva](https://github.com/petrix12/API-RESTful-con-Laravel-Guia-Definitiva)
 - [ ] [petrix12/PlataformaDeCursosLaravel](https://github.com/petrix12/PlataformaDeCursosLaravel)
 - [ ] [aprendible/desarrollo-de-una-api-con-laravel](https://github.com/aprendible/desarrollo-de-una-api-con-laravel)
-- [ ] [petrix12/AppFileLaravel](https://github.com/petrix12/AppFileLaravel)
 - [X] [petrix12/Curso-Laravel-8-desde-cero---cursosdesarrolloweb.es](https://github.com/petrix12/Curso-Laravel-8-desde-cero---cursosdesarrolloweb.es)
 - [X] [aprendible/aprende-laravel-intermedio](https://github.com/aprendible/aprende-laravel-intermedio)
 - [X] [armandolazarte/aprende-laravel-intermedio](https://github.com/armandolazarte/aprende-laravel-intermedio)
