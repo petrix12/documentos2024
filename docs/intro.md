@@ -19,6 +19,12 @@ sidebar_position: 0
 - [ ] [petrix12/nous2022](https://github.com/petrix12/nous2022)
 - [ ] [alejandrosfr1223/jdr_2022](https://github.com/alejandrosfr1223/jdr_2022)
 - [ ] [petrix12/fid_2022](https://github.com/petrix12/fid_2022)
+- [X] [petrix12/ProyectoClientesSefar](https://github.com/petrix12/ProyectoClientesSefar)
+- [X] [adrianmarrero14/sefaruniversal](https://github.com/adrianmarrero14/sefaruniversal)
+- [X] [adrianmarrero14/biblioteca_laravel](https://github.com/adrianmarrero14/biblioteca_laravel)
+- [X] [petrix12/ftm_sefar](https://github.com/petrix12/ftm_sefar)
+- [X] [petrix12/arbol_sefar](https://github.com/petrix12/arbol_sefar)
+- [X] [petrix12/arbol_genealogico](https://github.com/petrix12/arbol_genealogico)
 ### Documentación
 - [x] [petrix12/documentos2024](https://github.com/petrix12/documentos2024)
 - [ ] [petrix12/repasosql](https://github.com/petrix12/repasosql)
@@ -48,13 +54,17 @@ sidebar_position: 0
 - [ ] [petrix12/react-laravel2022](https://github.com/petrix12/react-laravel2022)
 - [ ] [petrix12/react2022](https://github.com/petrix12/react2022)
 - [ ] [petrix12/instaclone-react-graphql_client](https://github.com/petrix12/instaclone-react-graphql_client)
+- [X] [petrix12/Curso-Laravel-8-desde-cero---cursosdesarrolloweb.es](https://github.com/petrix12/Curso-Laravel-8-desde-cero---cursosdesarrolloweb.es)
+- [X] [petrix12/laravel_datatables](https://github.com/petrix12/laravel_datatables)
 ### Proyectos
 - [ ] [petrix12/instaclone2022](https://github.com/petrix12/instaclone2022)
 - [ ] [petrix12/voyager2022](https://github.com/petrix12/voyager2022)
 - [ ] [petrix12/laravel-excel-2022](https://github.com/petrix12/laravel-excel-2022)
-- [ ] [petrix12/AppFileLaravel](https://github.com/petrix12/AppFileLaravel)
+- [X] [petrix12/AppFileLaravel](https://github.com/petrix12/AppFileLaravel)
+- [X] [petrix12/Sistema-de-Historia-Cl-nica-en-Laravel](https://github.com/petrix12/Sistema-de-Historia-Cl-nica-en-Laravel)
 ### Portafolios
 - [ ] [petrix12/cvpetrix2022](https://github.com/petrix12/cvpetrix2022)
+- [X] [petrix12/cv](https://github.com/petrix12/cv)
 ### Plantillas
 - [ ] [petrix12/vuexyfull2023](https://github.com/petrix12/vuexyfull2023)
 - [ ] [petrix12/vuexyfull](https://github.com/petrix12/vuexyfull)
@@ -111,28 +121,20 @@ sidebar_position: 0
 - [ ] [petrix12/API-RESTful-con-Laravel-Guia-Definitiva](https://github.com/petrix12/API-RESTful-con-Laravel-Guia-Definitiva)
 - [ ] [petrix12/PlataformaDeCursosLaravel](https://github.com/petrix12/PlataformaDeCursosLaravel)
 - [ ] [aprendible/desarrollo-de-una-api-con-laravel](https://github.com/aprendible/desarrollo-de-una-api-con-laravel)
-- [X] [petrix12/Curso-Laravel-8-desde-cero---cursosdesarrolloweb.es](https://github.com/petrix12/Curso-Laravel-8-desde-cero---cursosdesarrolloweb.es)
+
+### Pruebas
+- [X] [petrix12/octicons](https://github.com/petrix12/octicons)
+- [X] [petrix12/canvas_html5](https://github.com/petrix12/canvas_html5)
+- [X] [petrix12/autenticacion_firebase](https://github.com/petrix12/autenticacion_firebase)
+- [X] [petrix12/prueba_repositorio](https://github.com/petrix12/prueba_repositorio)
+
+### Compartidos
 - [X] [aprendible/aprende-laravel-intermedio](https://github.com/aprendible/aprende-laravel-intermedio)
 - [X] [armandolazarte/aprende-laravel-intermedio](https://github.com/armandolazarte/aprende-laravel-intermedio)
 - [X] [cvva/aprende-laravel-intermedio](https://github.com/cvva/aprende-laravel-intermedio)
 - [X] [jmr85/aprende-laravel-intermedio](https://github.com/jmr85/aprende-laravel-intermedio)
 - [X] [oliuz/aprende-laravel-intermedio](https://github.com/oliuz/aprende-laravel-intermedio)
 - [X] [wilmertri/aprende-laravel-intermedio](https://github.com/wilmertri/aprende-laravel-intermedio)
-- [X] [petrix12/Sistema-de-Historia-Cl-nica-en-Laravel](https://github.com/petrix12/Sistema-de-Historia-Cl-nica-en-Laravel)
-- [X] [petrix12/ProyectoClientesSefar](https://github.com/petrix12/ProyectoClientesSefar)
-- [X] [adrianmarrero14/sefaruniversal](https://github.com/adrianmarrero14/sefaruniversal)
-- [X] [petrix12/octicons](https://github.com/petrix12/octicons)
-- [X] [adrianmarrero14/biblioteca_laravel](https://github.com/adrianmarrero14/biblioteca_laravel)
-- [X] [petrix12/canvas_html5](https://github.com/petrix12/canvas_html5)
-- [X] [petrix12/ftm_sefar](https://github.com/petrix12/ftm_sefar)
-- [X] [petrix12/laravel_datatables](https://github.com/petrix12/laravel_datatables)
-- [X] [petrix12/arbol_sefar](https://github.com/petrix12/arbol_sefar)
-- [X] [petrix12/autenticacion_firebase](https://github.com/petrix12/autenticacion_firebase)
-- [X] [petrix12/arbol_genealogico](https://github.com/petrix12/arbol_genealogico)
-- [X] [petrix12/prueba_repositorio](https://github.com/petrix12/prueba_repositorio)
-- [X] [petrix12/cv](https://github.com/petrix12/cv)
-
-### Compartidos
 - [X] [aprendible/curso-blog](https://github.com/aprendible/curso-blog)
 - [X] [montand/curso-blog](https://github.com/montand/curso-blog)
 - [x] [jeespoping/curso-blog](https://github.com/jeespoping/curso-blog)
