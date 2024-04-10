@@ -896,7 +896,7 @@ amplify console
 
 
 
-## Estructura de un compoenten Vue:
+## Estructura de un compoenten Vue
 + Estructura general Option API:
     ```html
     <template>
@@ -1084,7 +1084,7 @@ amplify console
     </style>
     ```
 
-## Ciclo de vida:
+## Ciclo de vida
 + Etapas:
     + beforeCreate
     + created
@@ -1122,7 +1122,7 @@ amplify console
     </script>
     ```
 
-## Directivas:
+## Directivas
 + Selectivo **v-if**:
     ```html
     <!-- ... -->
@@ -1209,142 +1209,207 @@ amplify console
     <!-- ... -->
     ```
 
-## Comunicación entre componentes:
-+ Comunicación vertical descendente (**props**):
-    + Componente padre con Composition API:
-        ```html
-        <template>
-            <h2>Componente padre</h2>
-            <ComponenteHijo 
-                informacion="Información a pasar al componente hijo"
-            />
-        </template>
+## Comunicación entre componentes
+### Comunicación vertical descendente (**props**)
++ Componente padre con Composition API:
+    ```html
+    <template>
+        <h2>Componente padre</h2>
+        <ComponenteHijo 
+            informacion="Información a pasar al componente hijo"
+        />
+    </template>
 
-        <script setup>
-        import ComponenteHijo from './ComponenteHijo.vue'
-        </script>
-        ```
-    + Componente hijo con Option API:
-        ```html
-        <template>
-            <div>
-                <h2>Componente hijo</h2>
-                <p>Información del componente padre: {{ props.informacion }}</p>
-            </div>
-        </template>
+    <script setup>
+    import ComponenteHijo from './ComponenteHijo.vue'
+    </script>
+    ```
++ Componente hijo con Option API:
+    ```html
+    <template>
+        <div>
+            <h2>Componente hijo</h2>
+            <p>Información del componente padre: {{ props.informacion }}</p>
+        </div>
+    </template>
 
-        <script>
-        import { defineComponent } from 'vue'
+    <script>
+    import { defineComponent } from 'vue'
 
-        export default defineComponent({
-            props: {
-                informacion: {
-                    type: String,
-                    required: false,
-                    defalut: 'Sin información'
-                }
-            },
-            setup(props) {
-                return {
-                    props
-                }
-            }
-        })
-        </script>
-        ```
-    + Componente hijo con Composition API con el setup definido en el script:
-        ```html
-        <template>
-            <div>
-                <h2>Componente hijo</h2>
-                <p>Información del componente padre: {{ props.informacion }}</p>
-            </div>
-        </template>
-
-        <script setup>
-        import { defineProps } from 'vue'
-
-        const props = defineProps({
+    export default defineComponent({
+        props: {
             informacion: {
                 type: String,
                 required: false,
                 defalut: 'Sin información'
             }
-        })
-        </script>
-        ```
-+ Comunicación vertical ascendente (**emits**):
-    + Componente padre con Option API:
-        ```html
-        <template>
-            <h2>Componente padre</h2>
-            <ComponenteHijo 
-                @comunicarAlComponentePadre="comunicacionDelComponenteHijo"
-            />
-        </template>
-
-        <script>        
-        import { defineComponent } from 'vue'
-
-        export default defineComponent({
-            data() {
-                return {
-                    variable
-                }
+        },
+        setup(props) {
+            return {
+                props
             }
-
-            methods: {
-                comunicacionDelComponenteHijo(variable) {
-                    this.variable = variable
-                }
-            }
-        })
-        </script>
-        ```
-    + Componente hijo con Option API:
-        ```html
-        <template>
-            <div>
-                <h2>Componente hijo</h2>
-                <button @click="enviarComunicacionAlComponentePadre">Enviar información al componente Padre</button>
-            </div>
-        </template>
-
-        <script>
-        import { defineComponent } from 'vue'
-
-        export default defineComponent({
-            emits: ["comunicarAlComponentePadre"],
-            setup(props, { emit }) {
-                const enviarComunicacionAlComponentePadre = () {
-                    emit("comunicarAlComponentePadre", "valor entregado desde el compoenente hijo")
-                }
-                return {
-                    props,
-                    enviarComunicacionAlComponentePadre
-                }
-            },
-        })
-        </script>
-        ```
-    + Componente hijo con Composition API con el setup definido en el script:
-        ```html
-        <template>
-            <div>
-                <h2>Componente hijo</h2>
-                <button @click="enviarComunicacionAlComponentePadre">Enviar información al componente Padre</button>
-            </div>
-        </template>
-
-        <script setup>
-        import { defineProps, defineEmits } from 'vue'
-
-        const emit = defineEmits(['comunicarAlComponentePadre'])
-        const enviarComunicacionAlComponentePadre = () {
-            emit("comunicarAlComponentePadre", "valor entregado desde el compoenente hijo")
         }
-        </script>
-        ```
+    })
+    </script>
+    ```
++ Componente hijo con Composition API con el setup definido en el script:
+    ```html
+    <template>
+        <div>
+            <h2>Componente hijo</h2>
+            <p>Información del componente padre: {{ props.informacion }}</p>
+        </div>
+    </template>
+
+    <script setup>
+    import { defineProps } from 'vue'
+
+    const props = defineProps({
+        informacion: {
+            type: String,
+            required: false,
+            defalut: 'Sin información'
+        }
+    })
+    </script>
+    ```
+### Comunicación vertical ascendente (**emits**)
++ Componente padre con Option API:
+    ```html
+    <template>
+        <h2>Componente padre</h2>
+        <ComponenteHijo 
+            @comunicarAlComponentePadre="comunicacionDelComponenteHijo"
+        />
+    </template>
+
+    <script>        
+    import { defineComponent } from 'vue'
+
+    export default defineComponent({
+        data() {
+            return {
+                variable
+            }
+        }
+
+        methods: {
+            comunicacionDelComponenteHijo(variable) {
+                this.variable = variable
+            }
+        }
+    })
+    </script>
+    ```
++ Componente hijo con Option API:
+    ```html
+    <template>
+        <div>
+            <h2>Componente hijo</h2>
+            <button @click="enviarComunicacionAlComponentePadre">Enviar información al componente Padre</button>
+        </div>
+    </template>
+
+    <script>
+    import { defineComponent } from 'vue'
+
+    export default defineComponent({
+        emits: ["comunicarAlComponentePadre"],
+        setup(props, { emit }) {
+            const enviarComunicacionAlComponentePadre = () {
+                emit("comunicarAlComponentePadre", "valor entregado desde el compoenente hijo")
+            }
+            return {
+                props,
+                enviarComunicacionAlComponentePadre
+            }
+        },
+    })
+    </script>
+    ```
++ Componente hijo con Composition API con el setup definido en el script:
+    ```html
+    <template>
+        <div>
+            <h2>Componente hijo</h2>
+            <button @click="enviarComunicacionAlComponentePadre">Enviar información al componente Padre</button>
+        </div>
+    </template>
+
+    <script setup>
+    import { defineProps, defineEmits } from 'vue'
+
+    const emit = defineEmits(['comunicarAlComponentePadre'])
+    const enviarComunicacionAlComponentePadre = () {
+        emit("comunicarAlComponentePadre", "valor entregado desde el compoenente hijo")
+    }
+    </script>
+    ```
+### Ejemplo práctico de comunicación ascendente y descendente con Composition API
++ Componente padre:
+    ```html title=".../ComponentePadre.vue"
+    <template>
+        <h1>Comunicación ascendente y descendente</h1>
+        <hr>
+        <p>Información ascendente: {{ info_ascendente }}</p>
+        <p>Información descendente: {{ info_descendente }}</p>
+        <hr>
+        <h2>Componente padre</h2>
+        <ComponenteHijo 
+            :info_descendente="info_descendente" 
+            @infoAscendente="handleInfoAscendente"
+        />
+    </template>
+
+    <script>
+    import ComponenteHijo from '.../ComponenteHijo.vu';
+    export default {
+        name: 'ComponentePadre',
+        components: {
+            ComponenteHijo
+        },
+        data() {
+            return {
+                info_descendente="Información para el componente hijo",
+                info_ascendente: null
+            }
+        },
+        methods: {
+            handleInfoAscendente(info_ascendente) {
+                this.info_ascendente = info_ascendente;
+            }
+        }
+    }
+    </script>
+    ```
++ Componente hijo:
+    ```html title=".../ComponenteHijo.vue"
+    <template>
+        <h2>Componente hijo</h2>
+        <p>Información descendente: {{ info_descendente }}</p>
+        <p>Información descendente: {{ info_descendente }}</p>
+        <button @click="enviarInfoAscendente">Enviar información ascendente</button>
+    </template>
+
+    <script>
+    export default {
+        name: 'ComponenteHijo',
+        data() {
+            return {
+                info_ascendente="Información para el componente padre"
+            }
+        },
+        props: {
+            info_descendente: {}
+        },
+        methods: {
+            enviarInfoAscendente() {
+                this.$emit('infoAscendente', this.info_ascendente)
+            }
+        }
+    }
+    </script>
+    ```    
 
 ## Propiedades computadas:
 + Option API:

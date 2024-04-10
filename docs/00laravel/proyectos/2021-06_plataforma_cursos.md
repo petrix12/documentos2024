@@ -2789,123 +2789,127 @@ MINUTO 48
 
 ### Viedo 18. Diseñando la vista show de cursos
 1. Modificar la ruta **courses.show** en **routes\web.php**:
-    >
-        Route::get('cursos/{course}', [CourseController::class, 'show'])->name('courses.show');
+    ```php title=""
+    Route::get('cursos/{course}', [CourseController::class, 'show'])->name('courses.show');
+    ```
 1. Generar el método show en **app\Http\Controllers\CourseController.php**:
-    >
-        public function show(Course $course){
-            $similares = Course::where('category_id', $course->category_id)
-                            ->where('id','!=',$course->id)
-                            ->where('status', 3)
-                            ->latest('id')
-                            ->take(5)
-                            ->get();
-            return view('courses.show',compact('course', 'similares'));
-        }
+    ```php title=""
+    public function show(Course $course){
+        $similares = Course::where('category_id', $course->category_id)
+                        ->where('id','!=',$course->id)
+                        ->where('status', 3)
+                        ->latest('id')
+                        ->take(5)
+                        ->get();
+        return view('courses.show',compact('course', 'similares'));
+    }
+    ```
     Importar al modelo Course:
-    >
-        use App\Models\Course;
+    ```php title=""
+    use App\Models\Course;
+    ```
 1. Crear vista **resources\views\courses\show.blade.php**:
-    >
-        <x-app-layout>
-            <section class="bg-gray-700 py-12 mb-12">
-                <div class="container grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <figure>
-                        <img class="h-60 w-full object-cover" src="{{ Storage::url($course->image->url )}}" alt="">
-                    </figure>
-                    <div class="text-white">
-                        <h1 class="text-4xl">{{ $course->title }}</h1>
-                        <h2 class="text-xl mb-3">{{ $course->subtitle }}</h2>
-                        <p class="mb-2"><i class="fas fa-chart-line"></i> Nivel: {{ $course->level->name }}</p>
-                        <p class="mb-2"><i class=""></i> Categoría: {{ $course->category->name }}</p>
-                        <p class="mb-2"><i class="fas fa-users"></i> Matriculados: {{ $course->students_count }}</p>
-                        <p><i class="far fa-star"></i> Calificación: {{ $course->rating }}</p>
-                    </div>
-                </div>
-            </section>
-
-            <div class="container grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="order-2 lg:col-span-2 lg:order-1">
-                    <section class="card mb-12">
-                        <div class="card-body">
-                            <h1 class="font-bold text-2xl mb-2">Lo que aprenderás</h1>
-                            <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
-                                @foreach ($course->goals as $goal)
-                                    <li class="text-gray-700 text-base"><i class="fas fa-check text-gray-600 mr-2"></i> {{ $goal->name }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </section>
-                    <section class="mb-12">
-                        <h1 class="font-bold text-3xl mb-2">Temario</h1>
-                        @foreach ($course->sections as $section)
-                            <article class="mb-4 shadow" 
-                            @if ($loop->first)
-                            x-data="{ open: true }"
-                            @else
-                            x-data="{ open: false }"    
-                            @endif>
-                                <header class="border border-gray-200 px-4 py-2 cursor-pointer bg-gray-200" x-on:click="open = !open">
-                                    <h1 class="font-bold text-lg text-gray-600">{{ $section->name }}</h1>
-                                </header>
-                                <div class="bg-white py-2 px-4" x-show="open">
-                                    <ul class="grid grid-cols-1 gap-2">
-                                        @foreach ($section->lessons as $lesson)
-                                            <li class="text-gray-700 text-base"><i class="fas fa-play-circle mr-2 text-gray-600"></i> {{ $lesson->name }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            </article>
-                        @endforeach
-                    </section>
-                    <section>
-                        <h1 class="font-bold text-3xl">Requisitos</h1>
-                        <ul class="list-disc list-inside">
-                            @foreach ($course->requirements as $requirement)
-                                <li class="text-gray-700">{{ $requirement->name }}</li>
-                            @endforeach
-                        </ul>
-                    </section>
-                    <section>
-                        <h1 class="font-bold text-3xl">Descripción</h1>
-                        <div class="text-gray-700 text-base">
-                            {{ $course->description }}
-                        </div>
-                    </section>
-                </div>
-                <div class="order-1 lg:order-2">
-                    <section class="card mb-4">
-                        <div class="card-body">
-                            <div class="flex items-center">
-                                <img class="h-12 w-12 object-cover rounded-full shadow-lg" src="{{ $course->teacher->profile_photo_url }}" alt="{{ $course->teacher->name }}">
-                                <div class="ml-4">
-                                    <h1 class="font-bold text-gray-500 text-lg">Prof. {{ $course->teacher->name }}</h1>
-                                    <a class="text-blue-400 text-sm font-bold" href="">{{ '@' . Str::slug($course->teacher->name, '') }}</a>
-                                </div>
-                            </div>
-                            <a href="" class="btn btn-danger btn-block mt-4">Llevar este curso</a>
-                        </div>
-                    </section>
-                    <aside class="hidden lg:block">
-                        @foreach ($similares as $similar)
-                            <article class="flex mb-6">
-                                <img class="h-32 w-40 object-cover" src="{{ Storage::url($similar->image->url) }}" alt="">
-                                <div class="ml-3">
-                                    <h1>
-                                        <a class="font-bold text-gray-500 mb-3" href="{{ route('courses.show', $similar) }}">{{ Str::limit($similar->title, 40) }}</a>
-                                    </h1>
-                                    <div class="flex items-center mb-2">
-                                        <img class="h-8 w-8 object-cover rounded-full shadow-lg" src="{{ $similar->teacher->profile_photo_url }}" alt="">
-                                        <p class="text-gray-700 text-sm ml-2">{{ $similar->teacher->name  }}</p>
-                                    </div>
-                                    <p class="text-sm"><i class="fas fa-star mr-2 text-yellow-400"></i>{{ $similar->rating }}</p>
-                                </div>
-                            </article>
-                        @endforeach
-                    </aside>
+    ```php title=""
+    <x-app-layout>
+        <section class="bg-gray-700 py-12 mb-12">
+            <div class="container grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <figure>
+                    <img class="h-60 w-full object-cover" src="{{ Storage::url($course->image->url )}}" alt="">
+                </figure>
+                <div class="text-white">
+                    <h1 class="text-4xl">{{ $course->title }}</h1>
+                    <h2 class="text-xl mb-3">{{ $course->subtitle }}</h2>
+                    <p class="mb-2"><i class="fas fa-chart-line"></i> Nivel: {{ $course->level->name }}</p>
+                    <p class="mb-2"><i class=""></i> Categoría: {{ $course->category->name }}</p>
+                    <p class="mb-2"><i class="fas fa-users"></i> Matriculados: {{ $course->students_count }}</p>
+                    <p><i class="far fa-star"></i> Calificación: {{ $course->rating }}</p>
                 </div>
             </div>
-        </x-app-layout>
+        </section>
+
+        <div class="container grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="order-2 lg:col-span-2 lg:order-1">
+                <section class="card mb-12">
+                    <div class="card-body">
+                        <h1 class="font-bold text-2xl mb-2">Lo que aprenderás</h1>
+                        <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
+                            @foreach ($course->goals as $goal)
+                                <li class="text-gray-700 text-base"><i class="fas fa-check text-gray-600 mr-2"></i> {{ $goal->name }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </section>
+                <section class="mb-12">
+                    <h1 class="font-bold text-3xl mb-2">Temario</h1>
+                    @foreach ($course->sections as $section)
+                        <article class="mb-4 shadow" 
+                        @if ($loop->first)
+                        x-data="{ open: true }"
+                        @else
+                        x-data="{ open: false }"    
+                        @endif>
+                            <header class="border border-gray-200 px-4 py-2 cursor-pointer bg-gray-200" x-on:click="open = !open">
+                                <h1 class="font-bold text-lg text-gray-600">{{ $section->name }}</h1>
+                            </header>
+                            <div class="bg-white py-2 px-4" x-show="open">
+                                <ul class="grid grid-cols-1 gap-2">
+                                    @foreach ($section->lessons as $lesson)
+                                        <li class="text-gray-700 text-base"><i class="fas fa-play-circle mr-2 text-gray-600"></i> {{ $lesson->name }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </article>
+                    @endforeach
+                </section>
+                <section>
+                    <h1 class="font-bold text-3xl">Requisitos</h1>
+                    <ul class="list-disc list-inside">
+                        @foreach ($course->requirements as $requirement)
+                            <li class="text-gray-700">{{ $requirement->name }}</li>
+                        @endforeach
+                    </ul>
+                </section>
+                <section>
+                    <h1 class="font-bold text-3xl">Descripción</h1>
+                    <div class="text-gray-700 text-base">
+                        {{ $course->description }}
+                    </div>
+                </section>
+            </div>
+            <div class="order-1 lg:order-2">
+                <section class="card mb-4">
+                    <div class="card-body">
+                        <div class="flex items-center">
+                            <img class="h-12 w-12 object-cover rounded-full shadow-lg" src="{{ $course->teacher->profile_photo_url }}" alt="{{ $course->teacher->name }}">
+                            <div class="ml-4">
+                                <h1 class="font-bold text-gray-500 text-lg">Prof. {{ $course->teacher->name }}</h1>
+                                <a class="text-blue-400 text-sm font-bold" href="">{{ '@' . Str::slug($course->teacher->name, '') }}</a>
+                            </div>
+                        </div>
+                        <a href="" class="btn btn-danger btn-block mt-4">Llevar este curso</a>
+                    </div>
+                </section>
+                <aside class="hidden lg:block">
+                    @foreach ($similares as $similar)
+                        <article class="flex mb-6">
+                            <img class="h-32 w-40 object-cover" src="{{ Storage::url($similar->image->url) }}" alt="">
+                            <div class="ml-3">
+                                <h1>
+                                    <a class="font-bold text-gray-500 mb-3" href="{{ route('courses.show', $similar) }}">{{ Str::limit($similar->title, 40) }}</a>
+                                </h1>
+                                <div class="flex items-center mb-2">
+                                    <img class="h-8 w-8 object-cover rounded-full shadow-lg" src="{{ $similar->teacher->profile_photo_url }}" alt="">
+                                    <p class="text-gray-700 text-sm ml-2">{{ $similar->teacher->name  }}</p>
+                                </div>
+                                <p class="text-sm"><i class="fas fa-star mr-2 text-yellow-400"></i>{{ $similar->rating }}</p>
+                            </div>
+                        </article>
+                    @endforeach
+                </aside>
+            </div>
+        </div>
+    </x-app-layout>
+    ```
 1. En la plantilla **resources\views\navigation-dropdown.blade.php**
     Cambiar:
     + 'active' => request()->routeIs('courses.index')
@@ -2915,45 +2919,51 @@ MINUTO 48
 
 ### Viedo 19. Habilitar matricula de alumnos
 1. Crear ruta para matrícular usuario en **routes\web.php**:
-    >
-        Route::post('courses/{course}/enrolled', [CourseController::class, 'enrolled'])->middleware('auth')->name('courses.enrolled');
+    ```php title=""
+    Route::post('courses/{course}/enrolled', [CourseController::class, 'enrolled'])->middleware('auth')->name('courses.enrolled');
+    ```
 1. Crear método **enrolled** en el controlador **app\Http\Controllers\CourseController.php**:
-    >
-        public function enrolled(Course $course){
-            // Agrega un registro a la tabla intermedia course_user
-            $course->students()->attach(auth()->user()->id);
-            return redirect()->route('courses.status', $course);
-        }
+    ```php title=""
+    public function enrolled(Course $course){
+        // Agrega un registro a la tabla intermedia course_user
+        $course->students()->attach(auth()->user()->id);
+        return redirect()->route('courses.status', $course);
+    }
+    ```
 1. En la vista **resources\views\courses\show.blade.php**:
     Reemplazar:
-    >
-        <a href="" class="btn btn-danger btn-block mt-4">Llevar este curso</a>
+    ```php title=""
+    <a href="" class="btn btn-danger btn-block mt-4">Llevar este curso</a>
     Por:
-    >
-        @can('enrolled', $course)
-            <a class="btn btn-danger btn-block mt-4" href="{{ route('courses.status', $course) }}">Continuar con curso</a>
-        @else
-            <form action="{{ route('courses.enrolled', $course) }}" method="POST">
-                @csrf
-                <button class="btn btn-danger btn-block mt-4" type="submit">Llevar este curso</button>
-            </form>
-        @endcan
+    ```php title=""
+    @can('enrolled', $course)
+        <a class="btn btn-danger btn-block mt-4" href="{{ route('courses.status', $course) }}">Continuar con curso</a>
+    @else
+        <form action="{{ route('courses.enrolled', $course) }}" method="POST">
+            @csrf
+            <button class="btn btn-danger btn-block mt-4" type="submit">Llevar este curso</button>
+        </form>
+    @endcan
+    ```
 1. Crear ruta para el control de avance del usuario en **routes\web.php**:
-    >
-        Route::get('course-status/{course}', function ($course) {
-            return "Aquí vas a poder llevar el control de tu avence";
-        })->name('courses.status');
+    ```php title=""
+    Route::get('course-status/{course}', function ($course) {
+        return "Aquí vas a poder llevar el control de tu avence";
+    })->name('courses.status');
+    ```
 1. Crear políticas de acceso a llevar curso o continuar curso:
     >
         $ php artisan make:policy CoursePolicy   
 1. Crear método **enrolled** a la política **app\Policies\CoursePolicy.php**:
-    >
-        public function enrolled(User $user, Course $course){
-            return $course->students->contains($user->id);
-        }
+    ```php title=""
+    public function enrolled(User $user, Course $course){
+        return $course->students->contains($user->id);
+    }
+    ```
     Importar el modelo **Course**:
-    >
-        use App\Models\Course;
+    ```php title=""
+    use App\Models\Course;
+    ```
 
 
 ### Viedo 20. Habilitar el buscador de cursos
@@ -2962,82 +2972,88 @@ MINUTO 48
         $ php artisan make:livewire Search
 1. En la vista **resources\views\welcome.blade.php**:
     Reemplazar:
-    >
-        <div class="pt-2 relative mx-auto text-gray-600">
-            <input class="w-full border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
-            type="search" name="search" placeholder="Search">
-            <!-- extraido de https://v1.tailwindcss.com/components/buttons -->
-            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded absolute right-0 top-0 mt-2">
-                Buscar
-            </button>
-        </div>
+    ```php title=""
+    <div class="pt-2 relative mx-auto text-gray-600">
+        <input class="w-full border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+        type="search" name="search" placeholder="Search">
+        <!-- extraido de https://v1.tailwindcss.com/components/buttons -->
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded absolute right-0 top-0 mt-2">
+            Buscar
+        </button>
+    </div>
+    ```
     Por:
-    >
-        @livewire('search')
+    ```php title=""
+    @livewire('search')
+    ```
 1. Diseñar vista del componente **Search** en **resources\views\livewire\search.blade.php**:
-    >
-        <form class="pt-2 relative mx-auto text-gray-600" autocomplete="off">
-            <input wire:model="search" class="w-full border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
-            type="search" name="search" placeholder="Search">
-            <!-- extraido de https://v1.tailwindcss.com/components/buttons -->
-            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded absolute right-0 top-0 mt-2">
-                Buscar
-            </button>
-            <ul class="absolute z-50 left-0 w-full bg-white mt-1 rounded-lg overflow-hidden">
-                @if ($search)
-                    @forelse ($this->results as $result)
-                        <li class="leading-10 px-5 text-sm cursor-pointer hover:bg-gray-300">
-                            <a href="{{ route('courses.show', $result) }}">{{ $result->title }}</a>
-                        </li>
-                    @empty
-                        <li class="leading-10 px-5 text-sm cursor-pointer hover:bg-gray-300">
-                            No hay ninguna coincidencia :(
-                        </li>
-                    @endforelse
-                @endif
-            </ul>
-        </form>
+    ```php title=""
+    <form class="pt-2 relative mx-auto text-gray-600" autocomplete="off">
+        <input wire:model="search" class="w-full border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+        type="search" name="search" placeholder="Search">
+        <!-- extraido de https://v1.tailwindcss.com/components/buttons -->
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded absolute right-0 top-0 mt-2">
+            Buscar
+        </button>
+        <ul class="absolute z-50 left-0 w-full bg-white mt-1 rounded-lg overflow-hidden">
+            @if ($search)
+                @forelse ($this->results as $result)
+                    <li class="leading-10 px-5 text-sm cursor-pointer hover:bg-gray-300">
+                        <a href="{{ route('courses.show', $result) }}">{{ $result->title }}</a>
+                    </li>
+                @empty
+                    <li class="leading-10 px-5 text-sm cursor-pointer hover:bg-gray-300">
+                        No hay ninguna coincidencia :(
+                    </li>
+                @endforelse
+            @endif
+        </ul>
+    </form>
+    ```
 1. Programar el controlador del componente **Search** en **app\Http\Livewire\Search.php**:
-    >
-        <?php
+    ```php title=""
+    <?php
 
-        namespace App\Http\Livewire;
+    namespace App\Http\Livewire;
 
-        use App\Models\Course;
-        use Livewire\Component;
+    use App\Models\Course;
+    use Livewire\Component;
 
-        class Search extends Component
+    class Search extends Component
+    {
+        public $search;
+
+        public function render()
         {
-            public $search;
-
-            public function render()
-            {
-                return view('livewire.search');
-            }
-
-            // Esta función es una propiedad computada: get[Results]Property
-            // Se le invoca desde la vista como $this->results
-            public function getResultsProperty(){
-                return Course::where('title', 'LIKE', '%' . $this->search . '%')
-                        ->where('status',3)
-                        ->take(8)
-                        ->get();
-            }
+            return view('livewire.search');
         }
+
+        // Esta función es una propiedad computada: get[Results]Property
+        // Se le invoca desde la vista como $this->results
+        public function getResultsProperty(){
+            return Course::where('title', 'LIKE', '%' . $this->search . '%')
+                    ->where('status',3)
+                    ->take(8)
+                    ->get();
+        }
+    }
+    ```
 1. En la vista
     Reemplazar:
-    >
-        <div class="pt-2 relative mx-auto text-gray-600">
-            <input class="w-full border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
-            type="search" name="search" placeholder="Search">
-            <!-- extraido de https://v1.tailwindcss.com/components/buttons -->
-            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded absolute right-0 top-0 mt-2">
-                Buscar
-            </button>
-        </div>
-    Por:
-    >
-        @livewire('search')
+    ```php title=""
+    <div class="pt-2 relative mx-auto text-gray-600">
+        <input class="w-full border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+        type="search" name="search" placeholder="Search">
+        <!-- extraido de https://v1.tailwindcss.com/components/buttons -->
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded absolute right-0 top-0 mt-2">
+            Buscar
+        </button>
+    </div>
+    ```
+    Por:    
+    ```php title=""
+    @livewire('search')
+    ```
 
 
 ## Sección 4: Control del avance del curso
@@ -3045,620 +3061,642 @@ MINUTO 48
 
 ### Viedo 21. Componente Livewire de vista completa
 1. Modificar la ruta **courses.status** en **routes\web.php**:
-    >
-        Route::get('course-status/{course}', [CourseController::class, 'status'])->name('courses.status');
+    ```php title=""
+    Route::get('course-status/{course}', [CourseController::class, 'status'])->name('courses.status');
+    ```
 1. Generar el método **status** en el controlador **app\Http\Controllers\CourseController.php**:
-    >
-        public function status(Course $course){
-            return view('courses.status', compact('course'));
-        }
+    ```php title=""
+    public function status(Course $course){
+        return view('courses.status', compact('course'));
+    }
+    ```
 1. Crear vista **resources\views\courses\status.blade.php**:
-    >
-        <x-app-layout>
-            @livewire('course-status')
-        </x-app-layout>
+    ```php title=""
+    <x-app-layout>
+        @livewire('course-status')
+    </x-app-layout>
+    ```
 1. Crear componente para el status de cursos:
-    >
-        $ php artisan make:livewire CourseStatus
+    ```bash
+    php artisan make:livewire CourseStatus
+    ```
 1. Diseñar vista **resources\views\livewire\course-status.blade.php**:
-    >
-        <div>
-            <h1>{{ $course->title }}</h1>
-        </div>
+    ```php title=""
+    <div>
+        <h1>{{ $course->title }}</h1>
+    </div>
+    ```
 1. En el archivo de rutas **routes\web.php**:
     Importar el componente:
-    >
-        use App\Http\Livewire\CourseStatus;
+    ```php title=""
+    use App\Http\Livewire\CourseStatus;
+    ```
     Modificar ruta **courses.status**:
-    >
-        Route::get('course-status/{course}', CourseStatus::class)->name('courses.status');
+    ```php title=""
+    Route::get('course-status/{course}', CourseStatus::class)->name('courses.status');
+    ```
 1. Eliminar método **status** en el controlador **app\Http\Controllers\CourseController.php**.
 1. Eliminar vista **resources\views\courses\status.blade.php**.
 1. Programar controlador del componente **CourseStatus** **app\Http\Livewire\CourseStatus.php**:
-    >
-        <?php
+    ```php title=""
+    <?php
 
-        namespace App\Http\Livewire;
+    namespace App\Http\Livewire;
 
-        use App\Models\Course;
-        use Livewire\Component;
+    use App\Models\Course;
+    use Livewire\Component;
 
-        class CourseStatus extends Component
-        {
-            public $course;
+    class CourseStatus extends Component
+    {
+        public $course;
 
-            // atrapa el slug del curso en la url (el método debe llamarse mount)
-            public function mount(Course $course){
-                $this->course = $course;
-            }
-
-            public function render()
-            {
-                return view('livewire.course-status');
-            }
+        // atrapa el slug del curso en la url (el método debe llamarse mount)
+        public function mount(Course $course){
+            $this->course = $course;
         }
+
+        public function render()
+        {
+            return view('livewire.course-status');
+        }
+    }
+    ```
 
 
 ### Viedo 22. Recuperando información que se va a mostrar
 1. Modificar la vista **resources\views\livewire\course-status.blade.php**:
-    >
-        <div class="mt-8">
-            <div class="container grid grid-cols-3 gap-8">
-                <div class="col-span-2">
-                    {!! $current->iframe !!}
-                    {{ $current->name }}
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <h1>{{ $course->title }}</h1>
-                        <div class="flex items-center">
-                            <figure>
-                                <img src="{{ $course->teacher->profile_photo_url }}" alt="">
-                            </figure>
-                            <div>
-                                <p>{{ $course->teacher->name }}</p>
-                                <a class="text-blue-500" href="">{{ '@' . Str::slug($course->teacher->name, '') }}</a>
-                            </div>
+    ```php title=""
+    <div class="mt-8">
+        <div class="container grid grid-cols-3 gap-8">
+            <div class="col-span-2">
+                {!! $current->iframe !!}
+                {{ $current->name }}
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h1>{{ $course->title }}</h1>
+                    <div class="flex items-center">
+                        <figure>
+                            <img src="{{ $course->teacher->profile_photo_url }}" alt="">
+                        </figure>
+                        <div>
+                            <p>{{ $course->teacher->name }}</p>
+                            <a class="text-blue-500" href="">{{ '@' . Str::slug($course->teacher->name, '') }}</a>
                         </div>
-                        <ul>
-                            @foreach ($course->sections as $section)
-                                <li>
-                                    <a class="font-bold">{{ $section->name }}</a>
-                                    <ul>
-                                        @foreach ($section->lessons as $lesson)
-                                            <li>
-                                                <a href="">{{ $lesson->id }}
-                                                    @if ($lesson->completed)
-                                                        (Completado)
-                                                    @endif
-                                                </a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </li>
-                            @endforeach
-                        </ul>
                     </div>
+                    <ul>
+                        @foreach ($course->sections as $section)
+                            <li>
+                                <a class="font-bold">{{ $section->name }}</a>
+                                <ul>
+                                    @foreach ($section->lessons as $lesson)
+                                        <li>
+                                            <a href="">{{ $lesson->id }}
+                                                @if ($lesson->completed)
+                                                    (Completado)
+                                                @endif
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                        @endforeach
+                    </ul>
                 </div>
             </div>
         </div>
+    </div>
+    ```
 1. Agregar atributo para comprobar si una lección esta completada en el controlador **app\Models\Lesson.php**:
-    >
-        ≡
-        class Lesson extends Model
-        {
-            use HasFactory;
+    ```php title=""
+    // ...
+    class Lesson extends Model
+    {
+        use HasFactory;
 
-            protected $guarded = ['id'];
+        protected $guarded = ['id'];
 
-            // Esta función es un atributo: get[Completed]Attribute
-            // Comprueba si una lección esta completada
-            public function getCompletedAttribute(){
-                // Para traernos el registro del usuario autentificado
-                return $this->users->contains(auth()->user()->id);
-            }
-            ≡
+        // Esta función es un atributo: get[Completed]Attribute
+        // Comprueba si una lección esta completada
+        public function getCompletedAttribute(){
+            // Para traernos el registro del usuario autentificado
+            return $this->users->contains(auth()->user()->id);
+        }
+        // ...
+    }
+    ```
 1. Modificar controlador **app\Http\Livewire\CourseStatus.php**:
-    >
-        <?php
+    ```php title=""
+    <?php
 
-        namespace App\Http\Livewire;
+    namespace App\Http\Livewire;
 
-        use App\Models\Course;
-        use Livewire\Component;
+    use App\Models\Course;
+    use Livewire\Component;
 
-        class CourseStatus extends Component
-        {
-            public $course;
-            public $current;
+    class CourseStatus extends Component
+    {
+        public $course;
+        public $current;
 
-            // atrapa el slug del curso en la url (el método debe llamarse mount)
-            public function mount(Course $course){
-                $this->course = $course;
-                foreach($course->lessons as $lesson){
-                    if(!$lesson->completed){
-                        $this->current = $lesson;
-                        break;
-                    }
+        // atrapa el slug del curso en la url (el método debe llamarse mount)
+        public function mount(Course $course){
+            $this->course = $course;
+            foreach($course->lessons as $lesson){
+                if(!$lesson->completed){
+                    $this->current = $lesson;
+                    break;
                 }
             }
+        }
 
-            public function render()
-            {
-                return view('livewire.course-status');
-            }
-        }    
+        public function render()
+        {
+            return view('livewire.course-status');
+        }
+    }
+    ```    
 
 
 ### Viedo 23. Habilitar botones next y previous
 1. Modificar controlador **app\Http\Livewire\CourseStatus.php**:
-    >
-        <?php
+    ```php title=""
+    <?php
 
-        namespace App\Http\Livewire;
+    namespace App\Http\Livewire;
 
-        use App\Models\Course;
-        use App\Models\Lesson;
-        use Livewire\Component;
+    use App\Models\Course;
+    use App\Models\Lesson;
+    use Livewire\Component;
 
-        class CourseStatus extends Component
-        {
-            public $course, $current;
+    class CourseStatus extends Component
+    {
+        public $course, $current;
 
-            // atrapa el slug del curso en la url (el método debe llamarse mount)
-            public function mount(Course $course){
-                $this->course = $course;
-                foreach($course->lessons as $lesson){
-                    if(!$lesson->completed){
-                        $this->current = $lesson;
-                        break;
-                    }
+        // atrapa el slug del curso en la url (el método debe llamarse mount)
+        public function mount(Course $course){
+            $this->course = $course;
+            foreach($course->lessons as $lesson){
+                if(!$lesson->completed){
+                    $this->current = $lesson;
+                    break;
                 }
             }
-
-            public function render()
-            {
-                return view('livewire.course-status');
-            }
-
-            public function changeLesson(Lesson $lesson){
-                $this->current = $lesson;
-            }
-
-            // Propiedad computada para index
-            public function getIndexProperty(){
-                return $this->course->lessons->pluck('id')->search($this->current->id);
-            }
-
-            // Propiedad computada para previous
-            public function getPreviousProperty(){
-                if($this->index == 0){
-                    return null;
-                }else{
-                    return $this->course->lessons[$this->index - 1];
-                }
-            }
-
-            // Propiedad computada para next
-            public function getNextProperty(){
-                if($this->index == $this->course->lessons->count() - 1){
-                    return null;
-                }else{
-                    return $this->course->lessons[$this->index + 1];
-                }
-            }   
         }
+
+        public function render()
+        {
+            return view('livewire.course-status');
+        }
+
+        public function changeLesson(Lesson $lesson){
+            $this->current = $lesson;
+        }
+
+        // Propiedad computada para index
+        public function getIndexProperty(){
+            return $this->course->lessons->pluck('id')->search($this->current->id);
+        }
+
+        // Propiedad computada para previous
+        public function getPreviousProperty(){
+            if($this->index == 0){
+                return null;
+            }else{
+                return $this->course->lessons[$this->index - 1];
+            }
+        }
+
+        // Propiedad computada para next
+        public function getNextProperty(){
+            if($this->index == $this->course->lessons->count() - 1){
+                return null;
+            }else{
+                return $this->course->lessons[$this->index + 1];
+            }
+        }   
+    }
+    ```
 1. Modificar vista **resources\views\livewire\course-status.blade.php**:
-    >
-        <div class="mt-8">
-            <div class="container grid grid-cols-3 gap-8">
-                <div class="col-span-2">
-                    {!! $current->iframe !!}
-                    {{ $current->name }}
-                    <p>Indice: {{ $this->index }}</p>
-                    <p>Previous: 
-                        @if ($this->previous)
-                            {{ $this->previous->id }}
-                        @endif   
-                    </p>
-                    <p>Next: 
-                        @if ($this->next)
-                            {{ $this->next->id }}
-                        @endif
-                    </p>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <h1>{{ $course->title }}</h1>
-                        <div class="flex items-center">
-                            <figure>
-                                <img src="{{ $course->teacher->profile_photo_url }}" alt="">
-                            </figure>
-                            <div>
-                                <p>{{ $course->teacher->name }}</p>
-                                <a class="text-blue-500" href="">{{ '@' . Str::slug($course->teacher->name, '') }}</a>
-                            </div>
+    ```php title=""
+    <div class="mt-8">
+        <div class="container grid grid-cols-3 gap-8">
+            <div class="col-span-2">
+                {!! $current->iframe !!}
+                {{ $current->name }}
+                <p>Indice: {{ $this->index }}</p>
+                <p>Previous: 
+                    @if ($this->previous)
+                        {{ $this->previous->id }}
+                    @endif   
+                </p>
+                <p>Next: 
+                    @if ($this->next)
+                        {{ $this->next->id }}
+                    @endif
+                </p>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h1>{{ $course->title }}</h1>
+                    <div class="flex items-center">
+                        <figure>
+                            <img src="{{ $course->teacher->profile_photo_url }}" alt="">
+                        </figure>
+                        <div>
+                            <p>{{ $course->teacher->name }}</p>
+                            <a class="text-blue-500" href="">{{ '@' . Str::slug($course->teacher->name, '') }}</a>
                         </div>
-                        <ul>
-                            @foreach ($course->sections as $section)
-                                <li>
-                                    <a class="font-bold">{{ $section->name }}</a>
-                                    <ul>
-                                        @foreach ($section->lessons as $lesson)
-                                            <li>
-                                                <a class="cursor-pointer" wire:click="changeLesson({{ $lesson }})" >{{ $lesson->id }}
-                                                    @if ($lesson->completed)
-                                                        (Completado)
-                                                    @endif
-                                                </a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </li>
-                            @endforeach
-                        </ul>
                     </div>
+                    <ul>
+                        @foreach ($course->sections as $section)
+                            <li>
+                                <a class="font-bold">{{ $section->name }}</a>
+                                <ul>
+                                    @foreach ($section->lessons as $lesson)
+                                        <li>
+                                            <a class="cursor-pointer" wire:click="changeLesson({{ $lesson }})" >{{ $lesson->id }}
+                                                @if ($lesson->completed)
+                                                    (Completado)
+                                                @endif
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                        @endforeach
+                    </ul>
                 </div>
             </div>
         </div>
+    </div>
+    ```
 
 
 ### Viedo 24. Dar estilos a la página
 1. Agregar estilos a **resources\css\commom.css**:
-    >
-        .embed-responsive{
-            position: relative;
-            overflow: hidden;
-            padding-top: 56.25%;
-        }
+    ```php title=""
+    .embed-responsive{
+        position: relative;
+        overflow: hidden;
+        padding-top: 56.25%;
+    }
 
-        .embed-responsive iframe{
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }   
+    .embed-responsive iframe{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+    }
+    ```
 1. Compilar los estilos creados:
-    >
-        $ npm run dev
+    ```bash
+    npm run dev
+    ```
 1. Modificar la vista **resources\views\livewire\course-status.blade.php**:
-    >
-        <div class="mt-8">
-            <div class="container grid grid-cols-3 gap-8">
-                <div class="col-span-2">
-                    <div class="embed-responsive">
-                        {!! $current->iframe !!}
-                    </div>
-                    <h1 class="text-3xl text-gray-600 font-bold mt-4">
-                    {{ $current->name }} 
-                    </h1>
-                    @if ($current->description)
-                        <div class="text-gray-600">
-                            {{ $current->description->name }}
-                        </div>
-                    @endif
-
-                    <div class="flex items-center mt-4 cursor-pointer">
-                        <i class="fas fa-toggle-off text-2xl text-gray-600"></i>
-                        <p class="text-sm ml-2">Marcar esta unidad como culminada</p>
-                    </div>
-
-                    <div class="card mt-2">
-                        <div class="card-body flex text-gray-500 font-bold">
-                            @if ($this->previous)
-                                <a wire:click="changeLesson({{ $this->previous }})" class="cursor-pointer">Tema anterior</a>
-                            @endif
-                            @if ($this->next)
-                                <a wire:click="changeLesson({{ $this->next }})" class="ml-auto cursor-pointer">Siguiente tema</a>
-                            @endif
-                        </div>
-                    </div>
+    ```php title=""
+    <div class="mt-8">
+        <div class="container grid grid-cols-3 gap-8">
+            <div class="col-span-2">
+                <div class="embed-responsive">
+                    {!! $current->iframe !!}
                 </div>
-                <div class="card">
-                    <div class="card-body">
-                        <h1 class="text-2xl leading-8 text-center mb-4">{{ $course->title }}</h1>
-                        <div class="flex items-center">
-                            <figure>
-                                <img class="h-12 w-12 object-cover rounded-full mr-4" src="{{ $course->teacher->profile_photo_url }}" alt="">
-                            </figure>
-                            <div>
-                                <p>{{ $course->teacher->name }}</p>
-                                <a class="text-blue-500 text-sm" href="">{{ '@' . Str::slug($course->teacher->name, '') }}</a>
-                            </div>
-                        </div>
+                <h1 class="text-3xl text-gray-600 font-bold mt-4">
+                {{ $current->name }} 
+                </h1>
+                @if ($current->description)
+                    <div class="text-gray-600">
+                        {{ $current->description->name }}
+                    </div>
+                @endif
 
-                        <p class="text-gray-600 text-sm mt-2">20% completado</p>
-                        <div class="relative pt-1">
-                            <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-200">
-                                <div style="width:30%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500"></div>
-                            </div>
-                        </div>
+                <div class="flex items-center mt-4 cursor-pointer">
+                    <i class="fas fa-toggle-off text-2xl text-gray-600"></i>
+                    <p class="text-sm ml-2">Marcar esta unidad como culminada</p>
+                </div>
 
-                        <ul>
-                            @foreach ($course->sections as $section)
-                                <li class="text-gray-600 mb-4">
-                                    <a class="font-bold text-base inline-block mb-2">{{ $section->name }}</a>
-                                    <ul>
-                                        @foreach ($section->lessons as $lesson)
-                                            <li class="flex">
-                                                <div>
-                                                    @if ($lesson->completed)
-                                                        @if ($current->id == $lesson->id)
-                                                            <span class="inline-block w-4 h-4 border-2 border-yellow-300 rounded-full mr-2 mt-1"></span>
-                                                        @else
-                                                            <span class="inline-block w-4 h-4 bg-yellow-300 rounded-full mr-2 mt-1"></span>
-                                                        @endif
-                                                    @else
-                                                        @if ($current->id == $lesson->id)
-                                                            <span class="inline-block w-4 h-4 border-2 border-gray-500 rounded-full mr-2 mt-1"></span>
-                                                        @else
-                                                            <span class="inline-block w-4 h-4 bg-gray-500 rounded-full mr-2 mt-1"></span>
-                                                        @endif
-                                                    @endif
-                                                </div>
-                                                <a class="cursor-pointer" wire:click="changeLesson({{ $lesson }})" >{{ $lesson->name }}</a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </li>
-                            @endforeach
-                        </ul>
+                <div class="card mt-2">
+                    <div class="card-body flex text-gray-500 font-bold">
+                        @if ($this->previous)
+                            <a wire:click="changeLesson({{ $this->previous }})" class="cursor-pointer">Tema anterior</a>
+                        @endif
+                        @if ($this->next)
+                            <a wire:click="changeLesson({{ $this->next }})" class="ml-auto cursor-pointer">Siguiente tema</a>
+                        @endif
                     </div>
                 </div>
             </div>
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="text-2xl leading-8 text-center mb-4">{{ $course->title }}</h1>
+                    <div class="flex items-center">
+                        <figure>
+                            <img class="h-12 w-12 object-cover rounded-full mr-4" src="{{ $course->teacher->profile_photo_url }}" alt="">
+                        </figure>
+                        <div>
+                            <p>{{ $course->teacher->name }}</p>
+                            <a class="text-blue-500 text-sm" href="">{{ '@' . Str::slug($course->teacher->name, '') }}</a>
+                        </div>
+                    </div>
+
+                    <p class="text-gray-600 text-sm mt-2">20% completado</p>
+                    <div class="relative pt-1">
+                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-200">
+                            <div style="width:30%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500"></div>
+                        </div>
+                    </div>
+
+                    <ul>
+                        @foreach ($course->sections as $section)
+                            <li class="text-gray-600 mb-4">
+                                <a class="font-bold text-base inline-block mb-2">{{ $section->name }}</a>
+                                <ul>
+                                    @foreach ($section->lessons as $lesson)
+                                        <li class="flex">
+                                            <div>
+                                                @if ($lesson->completed)
+                                                    @if ($current->id == $lesson->id)
+                                                        <span class="inline-block w-4 h-4 border-2 border-yellow-300 rounded-full mr-2 mt-1"></span>
+                                                    @else
+                                                        <span class="inline-block w-4 h-4 bg-yellow-300 rounded-full mr-2 mt-1"></span>
+                                                    @endif
+                                                @else
+                                                    @if ($current->id == $lesson->id)
+                                                        <span class="inline-block w-4 h-4 border-2 border-gray-500 rounded-full mr-2 mt-1"></span>
+                                                    @else
+                                                        <span class="inline-block w-4 h-4 bg-gray-500 rounded-full mr-2 mt-1"></span>
+                                                    @endif
+                                                @endif
+                                            </div>
+                                            <a class="cursor-pointer" wire:click="changeLesson({{ $lesson }})" >{{ $lesson->name }}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
         </div>
+    </div>
+    ```
     La barra de progreso se tomó de:
         https://www.creative-tim.com/learning-lab/tailwind-starter-kit/documentation/css/progressbars
 
 
 ### Viedo 25. Marcar unidad como culminada
 1. Modificar vista del componente **resources\views\livewire\course-status.blade.php**:
-    >
-        <div class="mt-8">
-            <div class="container grid grid-cols1 lg:grid-cols-3 gap-8">
-                <div class="lg:col-span-2">
-                    <div class="embed-responsive">
-                        {!! $current->iframe !!}
-                    </div>
-                    <h1 class="text-3xl text-gray-600 font-bold mt-4">
-                    {{ $current->name }} 
-                    </h1>
-                    @if ($current->description)
-                        <div class="text-gray-600">
-                            {{ $current->description->name }}
-                        </div>
-                    @endif
-
-                    <div class="flex items-center mt-4 cursor-pointer" wire:click="completed">
-                        @if ($current->completed)
-                            <i class="fas fa-toggle-on text-2xl text-blue-600"></i>
-                        @else
-                            <i class="fas fa-toggle-off text-2xl text-gray-600"></i>
-                        @endif
-                        <p class="text-sm ml-2">Marcar esta unidad como culminada</p>
-                    </div>
-
-                    <div class="card mt-2">
-                        <div class="card-body flex text-gray-500 font-bold">
-                            @if ($this->previous)
-                                <a wire:click="changeLesson({{ $this->previous }})" class="cursor-pointer">Tema anterior</a>
-                            @endif
-                            @if ($this->next)
-                                <a wire:click="changeLesson({{ $this->next }})" class="ml-auto cursor-pointer">Siguiente tema</a>
-                            @endif
-                        </div>
-                    </div>
+    ```php title=""
+    <div class="mt-8">
+        <div class="container grid grid-cols1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2">
+                <div class="embed-responsive">
+                    {!! $current->iframe !!}
                 </div>
-                <div class="card">
-                    <div class="card-body">
-                        <h1 class="text-2xl leading-8 text-center mb-4">{{ $course->title }}</h1>
-                        <div class="flex items-center">
-                            <figure>
-                                <img class="h-12 w-12 object-cover rounded-full mr-4" src="{{ $course->teacher->profile_photo_url }}" alt="">
-                            </figure>
-                            <div>
-                                <p>{{ $course->teacher->name }}</p>
-                                <a class="text-blue-500 text-sm" href="">{{ '@' . Str::slug($course->teacher->name, '') }}</a>
-                            </div>
-                        </div>
+                <h1 class="text-3xl text-gray-600 font-bold mt-4">
+                {{ $current->name }} 
+                </h1>
+                @if ($current->description)
+                    <div class="text-gray-600">
+                        {{ $current->description->name }}
+                    </div>
+                @endif
 
-                        <p class="text-gray-600 text-sm mt-2">{{ $this->advance . '%' }} completado</p>
-                        <div class="relative pt-1">
-                            <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-200">
-                                <div style="width:{{ $this->advance . '%' }}" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500 transition-all duration-500"></div>
-                            </div>
-                        </div>
+                <div class="flex items-center mt-4 cursor-pointer" wire:click="completed">
+                    @if ($current->completed)
+                        <i class="fas fa-toggle-on text-2xl text-blue-600"></i>
+                    @else
+                        <i class="fas fa-toggle-off text-2xl text-gray-600"></i>
+                    @endif
+                    <p class="text-sm ml-2">Marcar esta unidad como culminada</p>
+                </div>
 
-                        <ul>
-                            @foreach ($course->sections as $section)
-                                <li class="text-gray-600 mb-4">
-                                    <a class="font-bold text-base inline-block mb-2">{{ $section->name }}</a>
-                                    <ul>
-                                        @foreach ($section->lessons as $lesson)
-                                            <li class="flex">
-                                                <div>
-                                                    @if ($lesson->completed)
-                                                        @if ($current->id == $lesson->id)
-                                                            <span class="inline-block w-4 h-4 border-2 border-yellow-300 rounded-full mr-2 mt-1"></span>
-                                                        @else
-                                                            <span class="inline-block w-4 h-4 bg-yellow-300 rounded-full mr-2 mt-1"></span>
-                                                        @endif
-                                                    @else
-                                                        @if ($current->id == $lesson->id)
-                                                            <span class="inline-block w-4 h-4 border-2 border-gray-500 rounded-full mr-2 mt-1"></span>
-                                                        @else
-                                                            <span class="inline-block w-4 h-4 bg-gray-500 rounded-full mr-2 mt-1"></span>
-                                                        @endif
-                                                    @endif
-                                                </div>
-                                                <a class="cursor-pointer" wire:click="changeLesson({{ $lesson }})" >{{ $lesson->name }}</a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </li>
-                            @endforeach
-                        </ul>
+                <div class="card mt-2">
+                    <div class="card-body flex text-gray-500 font-bold">
+                        @if ($this->previous)
+                            <a wire:click="changeLesson({{ $this->previous }})" class="cursor-pointer">Tema anterior</a>
+                        @endif
+                        @if ($this->next)
+                            <a wire:click="changeLesson({{ $this->next }})" class="ml-auto cursor-pointer">Siguiente tema</a>
+                        @endif
                     </div>
                 </div>
             </div>
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="text-2xl leading-8 text-center mb-4">{{ $course->title }}</h1>
+                    <div class="flex items-center">
+                        <figure>
+                            <img class="h-12 w-12 object-cover rounded-full mr-4" src="{{ $course->teacher->profile_photo_url }}" alt="">
+                        </figure>
+                        <div>
+                            <p>{{ $course->teacher->name }}</p>
+                            <a class="text-blue-500 text-sm" href="">{{ '@' . Str::slug($course->teacher->name, '') }}</a>
+                        </div>
+                    </div>
+
+                    <p class="text-gray-600 text-sm mt-2">{{ $this->advance . '%' }} completado</p>
+                    <div class="relative pt-1">
+                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-200">
+                            <div style="width:{{ $this->advance . '%' }}" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500 transition-all duration-500"></div>
+                        </div>
+                    </div>
+
+                    <ul>
+                        @foreach ($course->sections as $section)
+                            <li class="text-gray-600 mb-4">
+                                <a class="font-bold text-base inline-block mb-2">{{ $section->name }}</a>
+                                <ul>
+                                    @foreach ($section->lessons as $lesson)
+                                        <li class="flex">
+                                            <div>
+                                                @if ($lesson->completed)
+                                                    @if ($current->id == $lesson->id)
+                                                        <span class="inline-block w-4 h-4 border-2 border-yellow-300 rounded-full mr-2 mt-1"></span>
+                                                    @else
+                                                        <span class="inline-block w-4 h-4 bg-yellow-300 rounded-full mr-2 mt-1"></span>
+                                                    @endif
+                                                @else
+                                                    @if ($current->id == $lesson->id)
+                                                        <span class="inline-block w-4 h-4 border-2 border-gray-500 rounded-full mr-2 mt-1"></span>
+                                                    @else
+                                                        <span class="inline-block w-4 h-4 bg-gray-500 rounded-full mr-2 mt-1"></span>
+                                                    @endif
+                                                @endif
+                                            </div>
+                                            <a class="cursor-pointer" wire:click="changeLesson({{ $lesson }})" >{{ $lesson->name }}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
         </div>
+    </div>
+    ```
 1. Modificar controlador del componente **app\Http\Livewire\CourseStatus.php**:
-    >
-        <?php
+    ```php title=""
+    <?php
 
-        namespace App\Http\Livewire;
+    namespace App\Http\Livewire;
 
-        use App\Models\Course;
-        use App\Models\Lesson;
-        use Livewire\Component;
+    use App\Models\Course;
+    use App\Models\Lesson;
+    use Livewire\Component;
 
-        class CourseStatus extends Component
-        {
-            public $course, $current;
+    class CourseStatus extends Component
+    {
+        public $course, $current;
 
-            // atrapa el slug del curso en la url (el método debe llamarse mount)
-            public function mount(Course $course){
-                $this->course = $course;
-                foreach($course->lessons as $lesson){
-                    if(!$lesson->completed){
-                        $this->current = $lesson;
-                        break;
-                    }
-                }
-
-                // En caso de que todas las lecciones esten completadas
-                if(!$this->current){
-                    $this->current = $course->lessons->last();
+        // atrapa el slug del curso en la url (el método debe llamarse mount)
+        public function mount(Course $course){
+            $this->course = $course;
+            foreach($course->lessons as $lesson){
+                if(!$lesson->completed){
+                    $this->current = $lesson;
+                    break;
                 }
             }
 
-            public function render()
-            {
-                return view('livewire.course-status');
-            }
-
-            // MÉTODOS
-
-            public function changeLesson(Lesson $lesson){
-                $this->current = $lesson;
-            }
-
-            public function completed(){
-                if($this->current->completed){
-                    // Eliminar registro
-                    $this->current->users()->detach(auth()->user()->id);
-                }else{
-                    // Agregar registro
-                    $this->current->users()->attach(auth()->user()->id);
-                }
-                $this->current = Lesson::find($this->current->id);
-                $this->course = Course::find($this->course->id);
-            }
-
-            // PROPIEDADES COMPUTADAS
-
-            // Propiedad computada para index
-            public function getIndexProperty(){
-                return $this->course->lessons->pluck('id')->search($this->current->id);
-            }
-
-            // Propiedad computada para previous
-            public function getPreviousProperty(){
-                if($this->index == 0){
-                    return null;
-                }else{
-                    return $this->course->lessons[$this->index - 1];
-                }
-            }
-
-            // Propiedad computada para next
-            public function getNextProperty(){
-                if($this->index == $this->course->lessons->count() - 1){
-                    return null;
-                }else{
-                    return $this->course->lessons[$this->index + 1];
-                }
-            }
-            
-            // Propiedad computada para advance
-            public function getAdvanceProperty(){
-                $i = 0;
-                foreach ($this->course->lessons as $lesson) {
-                    if($lesson->completed){
-                        $i++;
-                    }
-                }
-                $advance = ($i * 100)/($this->course->lessons->count());
-                return round($advance, 2);
+            // En caso de que todas las lecciones esten completadas
+            if(!$this->current){
+                $this->current = $course->lessons->last();
             }
         }
+
+        public function render()
+        {
+            return view('livewire.course-status');
+        }
+
+        // MÉTODOS
+
+        public function changeLesson(Lesson $lesson){
+            $this->current = $lesson;
+        }
+
+        public function completed(){
+            if($this->current->completed){
+                // Eliminar registro
+                $this->current->users()->detach(auth()->user()->id);
+            }else{
+                // Agregar registro
+                $this->current->users()->attach(auth()->user()->id);
+            }
+            $this->current = Lesson::find($this->current->id);
+            $this->course = Course::find($this->course->id);
+        }
+
+        // PROPIEDADES COMPUTADAS
+
+        // Propiedad computada para index
+        public function getIndexProperty(){
+            return $this->course->lessons->pluck('id')->search($this->current->id);
+        }
+
+        // Propiedad computada para previous
+        public function getPreviousProperty(){
+            if($this->index == 0){
+                return null;
+            }else{
+                return $this->course->lessons[$this->index - 1];
+            }
+        }
+
+        // Propiedad computada para next
+        public function getNextProperty(){
+            if($this->index == $this->course->lessons->count() - 1){
+                return null;
+            }else{
+                return $this->course->lessons[$this->index + 1];
+            }
+        }
+        
+        // Propiedad computada para advance
+        public function getAdvanceProperty(){
+            $i = 0;
+            foreach ($this->course->lessons as $lesson) {
+                if($lesson->completed){
+                    $i++;
+                }
+            }
+            $advance = ($i * 100)/($this->course->lessons->count());
+            return round($advance, 2);
+        }
+    }
+    ```
 
 
 ### Viedo 26. Proteger rutas
-1. Modificar el controlador **app\Http\Livewire\CourseStatus.php**:
-    >
-        <?php
+1. Modificar el controlador **app\Http\Livewire\CourseStatus.php**:    
+    ```php title=""
+    <?php
 
-        namespace App\Http\Livewire;
+    namespace App\Http\Livewire;
 
-        use App\Models\Course;
-        use App\Models\Lesson;
-        use Livewire\Component;
-        use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+    use App\Models\Course;
+    use App\Models\Lesson;
+    use Livewire\Component;
+    use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-        class CourseStatus extends Component
-        {
-            use AuthorizesRequests;
-            public $course, $current;
+    class CourseStatus extends Component
+    {
+        use AuthorizesRequests;
+        public $course, $current;
 
-            // atrapa el slug del curso en la url (el método debe llamarse mount)
-            public function mount(Course $course){
-                $this->course = $course;
-                foreach($course->lessons as $lesson){
-                    if(!$lesson->completed){
-                        $this->current = $lesson;
-                        break;
-                    }
+        // atrapa el slug del curso en la url (el método debe llamarse mount)
+        public function mount(Course $course){
+            $this->course = $course;
+            foreach($course->lessons as $lesson){
+                if(!$lesson->completed){
+                    $this->current = $lesson;
+                    break;
                 }
-
-                // En caso de que todas las lecciones esten completadas
-                if(!$this->current){
-                    $this->current = $course->lessons->last();
-                }
-
-                // Verifica si el usuario tiene autorización para ingresar al curso
-                $this->authorize('enrolled', $course);
             }
-            ≡
+
+            // En caso de que todas las lecciones esten completadas
+            if(!$this->current){
+                $this->current = $course->lessons->last();
+            }
+
+            // Verifica si el usuario tiene autorización para ingresar al curso
+            $this->authorize('enrolled', $course);
         }
-1. Modificar ruta **courses.status** en **routes\web.php**:
-            
-    >
-        Route::get('course-status/{course}', CourseStatus::class)->name('courses.status')->middleware('auth');
+        ≡
+    }
+    ```
+1. Modificar ruta **courses.status** en **routes\web.php**:            
+    ```php title=""
+    Route::get('course-status/{course}', CourseStatus::class)->name('courses.status')->middleware('auth');
+    ```
 1. Crear método **published** en **app\Policies\CoursePolicy.php**:
-    >
-        public function published(?User $user, Course $course){
-            if($course->status == 3){
-                return true;
-            }else{
-                return false;
-            }
+    ```php title=""
+    public function published(?User $user, Course $course){
+        if($course->status == 3){
+            return true;
+        }else{
+            return false;
         }
+    }
+    ```
 1. Modificar método **show** en **app\Http\Controllers\CourseController.php**:
-    >
-        public function show(Course $course){
-            $this->authorize('published', $course);
+    ```php title=""
+    public function show(Course $course){
+        $this->authorize('published', $course);
 
-            $similares = Course::where('category_id', $course->category_id)
-                            ->where('id','!=',$course->id)
-                            ->where('status', 3)
-                            ->latest('id')
-                            ->take(5)
-                            ->get();
-            return view('courses.show',compact('course', 'similares'));
-        }
+        $similares = Course::where('category_id', $course->category_id)
+                        ->where('id','!=',$course->id)
+                        ->where('status', 3)
+                        ->latest('id')
+                        ->take(5)
+                        ->get();
+        return view('courses.show',compact('course', 'similares'));
+    }
+    ```
 
 
 ## Sección 5: Roles y permisos
@@ -3666,669 +3704,505 @@ MINUTO 48
 
 ### Video 27. Generar las rutas de acceso para los instructores
 1. Crear archivo de rutas **routes\instructor.php**:
-    >
-        <?php
+    ```php title=""
+    <?php
 
-        use App\Http\Livewire\InstructorCourses;
-        use Illuminate\Support\Facades\Route;
+    use App\Http\Livewire\InstructorCourses;
+    use Illuminate\Support\Facades\Route;
 
-        Route::redirect('', 'instructor/courses');
+    Route::redirect('', 'instructor/courses');
 
-        Route::get('courses', InstructorCourses::class)->name('courses.index');
+    Route::get('courses', InstructorCourses::class)->name('courses.index');
+    ```
 1. Modificar método **boot** de la clase **RouteServiceProvider** en **app\Providers\RouteServiceProvider.php**:
-    >
-        public function boot()
-        {
-            $this->configureRateLimiting();
+    ```php title=""
+    public function boot()
+    {
+        $this->configureRateLimiting();
 
-            $this->routes(function () {
-                Route::prefix('api')
-                    ->middleware('api')
-                    ->namespace($this->namespace)
-                    ->group(base_path('routes/api.php'));
+        $this->routes(function () {
+            Route::prefix('api')
+                ->middleware('api')
+                ->namespace($this->namespace)
+                ->group(base_path('routes/api.php'));
 
-                Route::middleware('web')
-                    ->namespace($this->namespace)
-                    ->group(base_path('routes/web.php'));
+            Route::middleware('web')
+                ->namespace($this->namespace)
+                ->group(base_path('routes/web.php'));
 
-                Route::middleware('web', 'auth')
-                    ->prefix('admin')
-                    ->namespace($this->namespace)
-                    ->group(base_path('routes/admin.php'));
+            Route::middleware('web', 'auth')
+                ->prefix('admin')
+                ->namespace($this->namespace)
+                ->group(base_path('routes/admin.php'));
 
-                Route::middleware('web', 'auth')
-                    ->name('instructor.')
-                    ->prefix('instructor')
-                    ->namespace($this->namespace)
-                    ->group(base_path('routes/instructor.php'));
-            });
-        }
+            Route::middleware('web', 'auth')
+                ->name('instructor.')
+                ->prefix('instructor')
+                ->namespace($this->namespace)
+                ->group(base_path('routes/instructor.php'));
+        });
+    }
+    ```
 1. Crear componentes para cursos de instructores:
-    >
-        $ php artisan make:livewire instructor-courses
+    ```bash
+    php artisan make:livewire instructor-courses
+    ```
 1. Modificar plantilla **resources\views\navigation-dropdown.blade.php**:
-    >
-        ≡
-            <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ml-6">
+    ```php title=""
+    ≡
+        <!-- Settings Dropdown -->
+        <div class="hidden sm:flex sm:items-center sm:ml-6">
 
-                @auth   
-        ≡
-                        <x-slot name="content">
-                            <!-- Account Management -->
-                            <div class="block px-4 py-2 text-xs text-gray-400">
-                                {{ __('Manage Account') }}
-                            </div>
+            @auth   
+    ≡
+                    <x-slot name="content">
+                        <!-- Account Management -->
+                        <div class="block px-4 py-2 text-xs text-gray-400">
+                            {{ __('Manage Account') }}
+                        </div>
 
-                            <x-jet-dropdown-link href="{{ route('profile.show') }}">
-                                Perfil
-                            </x-jet-dropdown-link>
+                        <x-jet-dropdown-link href="{{ route('profile.show') }}">
+                            Perfil
+                        </x-jet-dropdown-link>
 
-                            <x-jet-dropdown-link href="{{ route('instructor.courses.index') }}">
-                                Instructor
-                            </x-jet-dropdown-link>
-        ≡
-        <!-- Responsive Settings Options -->
-        @auth
+                        <x-jet-dropdown-link href="{{ route('instructor.courses.index') }}">
+                            Instructor
+                        </x-jet-dropdown-link>
+    ≡
+    <!-- Responsive Settings Options -->
+    @auth
 
-            <div class="pt-4 pb-1 border-t border-gray-200">
-        ≡
-                <div class="mt-3 space-y-1">
-                    <!-- Account Management -->
-                    <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
-                        Perfil
-                    </x-jet-responsive-nav-link>
+        <div class="pt-4 pb-1 border-t border-gray-200">
+    ≡
+            <div class="mt-3 space-y-1">
+                <!-- Account Management -->
+                <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
+                    Perfil
+                </x-jet-responsive-nav-link>
 
-                    <x-jet-responsive-nav-link href="{{ route('instructor.courses.index') }}" :active="request()->routeIs('instructor.courses.index')">
-                        Instructor
-                    </x-jet-responsive-nav-link>       
-        ≡
+                <x-jet-responsive-nav-link href="{{ route('instructor.courses.index') }}" :active="request()->routeIs('instructor.courses.index')">
+                    Instructor
+                </x-jet-responsive-nav-link>       
+    ≡
+    ```
 
 
 ### Video 28. Instalar Laravel Permission
 ###### https://spatie.be/docs/laravel-permission/v3/basic-usage/basic-usage
 1. Instalar Laravel Permission (sistema de roles y persmisos):
-    >
-        $ composer require spatie/laravel-permission
+    ```bash
+    composer require spatie/laravel-permission
+    ```
 1. Publicar las vistas de Laravel Permission:
-    >
-        $ php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+    ```bash
+    php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+    ```
 1. Ejecutar las migraciones:
-    >
-        $ php artisan migrate
+    ```bash
+    php artisan migrate
+    ```
 1. Modificar modelo **User** en **app\Models\User.php**:
     Importar a la cabecera:
-    >
-        use Spatie\Permission\Traits\HasRoles;
+    ```php title=""
+    use Spatie\Permission\Traits\HasRoles;
+    ```
     Indicar a la clase User que se usará la libreria anterior:
-    >
-        class User extends Authenticatable
-        {
-            use HasApiTokens;
-            use HasFactory;
-            use HasProfilePhoto;
-            use Notifiable;
-            use TwoFactorAuthenticatable;
-            use HasRoles;  
-            ≡
+    ```php title=""
+    class User extends Authenticatable
+    {
+        use HasApiTokens;
+        use HasFactory;
+        use HasProfilePhoto;
+        use Notifiable;
+        use TwoFactorAuthenticatable;
+        use HasRoles;  
+        // ...
+    }
+    ```
 
 
 ### Video 29. Agregar permisos y preparar entorno de trabajo
-1. Ejecutar Tinker e ingresar permisos:
-    >
-        $ php artisan tinker
-        >>> use Spatie\Permission\Models\Permission;
-        >>> Permission::create(['name' => 'Crear cursos']);
-        >>> Permission::create(['name' => 'Leer cursos']);
-        >>> Permission::create(['name' => 'Actualizar cursos']);
-        >>> Permission::create(['name' => 'Eliminar cursos']);
-        >>> exit
-1. Crear controlador para administrar roles:
-    >
-        $ php artisan make:controller Admin/RoleController -r
+1. Ejecutar Tinker e ingresar permisos:    
+    ```bash
+    $ php artisan tinker
+    >>> use Spatie\Permission\Models\Permission;
+    >>> Permission::create(['name' => 'Crear cursos']);
+    >>> Permission::create(['name' => 'Leer cursos']);
+    >>> Permission::create(['name' => 'Actualizar cursos']);
+    >>> Permission::create(['name' => 'Eliminar cursos']);
+    >>> exit
+    ```
+1. Crear controlador para administrar roles:    
+    ```bash
+    php artisan make:controller Admin/RoleController -r
+    ```
 1. Importar el modelo Role de Laravel Permission en **app\Http\Controllers\Admin\RoleController.php**:
-    >
-        use Spatie\Permission\Models\Role;
+    ```php title=""
+    use Spatie\Permission\Models\Role;
+    ```
 1. Modificar el controlador Role en **app\Http\Controllers\Admin\RoleController.php**:
-    >
-        <?php
+    ```php title=""
+    <?php
 
-        namespace App\Http\Controllers\Admin;
+    namespace App\Http\Controllers\Admin;
 
-        use App\Http\Controllers\Controller;
-        use Illuminate\Http\Request;
-        use Spatie\Permission\Models\Role;
+    use App\Http\Controllers\Controller;
+    use Illuminate\Http\Request;
+    use Spatie\Permission\Models\Role;
 
-        class RoleController extends Controller
+    class RoleController extends Controller
+    {
+        /**
+        * Display a listing of the resource.
+        *
+        * @return \Illuminate\Http\Response
+        */
+        public function index()
         {
-            /**
-            * Display a listing of the resource.
-            *
-            * @return \Illuminate\Http\Response
-            */
-            public function index()
-            {
-                return view('admin.roles.index');
-            }
-
-            /**
-            * Show the form for creating a new resource.
-            *
-            * @return \Illuminate\Http\Response
-            */
-            public function create()
-            {
-                return view('admin.roles.create');
-            }
-
-            /**
-            * Store a newly created resource in storage.
-            *
-            * @param  \Illuminate\Http\Request  $request
-            * @return \Illuminate\Http\Response
-            */
-            public function store(Request $request)
-            {
-                //
-            }
-
-            /**
-            * Display the specified resource.
-            *
-            * @param  int  $id
-            * @return \Illuminate\Http\Response
-            */
-            public function show(Role $role)
-            {
-                return view('admin.roles.show', compact('role'));
-            }
-
-            /**
-            * Show the form for editing the specified resource.
-            *
-            * @param  int  $id
-            * @return \Illuminate\Http\Response
-            */
-            public function edit(Role $role)
-            {
-                return view('admin.roles.edit', compact('role'));
-            }
-
-            /**
-            * Update the specified resource in storage.
-            *
-            * @param  \Illuminate\Http\Request  $request
-            * @param  int  $id
-            * @return \Illuminate\Http\Response
-            */
-            public function update(Request $request, Role $role)
-            {
-                //
-            }
-
-            /**
-            * Remove the specified resource from storage.
-            *
-            * @param  int  $id
-            * @return \Illuminate\Http\Response
-            */
-            public function destroy(Role $role)
-            {
-                //
-            }
+            return view('admin.roles.index');
         }
+
+        /**
+        * Show the form for creating a new resource.
+        *
+        * @return \Illuminate\Http\Response
+        */
+        public function create()
+        {
+            return view('admin.roles.create');
+        }
+
+        /**
+        * Store a newly created resource in storage.
+        *
+        * @param  \Illuminate\Http\Request  $request
+        * @return \Illuminate\Http\Response
+        */
+        public function store(Request $request)
+        {
+            //
+        }
+
+        /**
+        * Display the specified resource.
+        *
+        * @param  int  $id
+        * @return \Illuminate\Http\Response
+        */
+        public function show(Role $role)
+        {
+            return view('admin.roles.show', compact('role'));
+        }
+
+        /**
+        * Show the form for editing the specified resource.
+        *
+        * @param  int  $id
+        * @return \Illuminate\Http\Response
+        */
+        public function edit(Role $role)
+        {
+            return view('admin.roles.edit', compact('role'));
+        }
+
+        /**
+        * Update the specified resource in storage.
+        *
+        * @param  \Illuminate\Http\Request  $request
+        * @param  int  $id
+        * @return \Illuminate\Http\Response
+        */
+        public function update(Request $request, Role $role)
+        {
+            //
+        }
+
+        /**
+        * Remove the specified resource from storage.
+        *
+        * @param  int  $id
+        * @return \Illuminate\Http\Response
+        */
+        public function destroy(Role $role)
+        {
+            //
+        }
+    }
+    ```
 1. Crear vistas del CRUD Role:
     + **index.blade.php**:
-    >
-        @extends('adminlte::page')
+    ```php title=""
+    @extends('adminlte::page')
 
-        @section('title', 'Coders Free')
+    @section('title', 'Coders Free')
 
-        @section('content_header')
-            <h1>Coders Free</h1>
-        @stop
+    @section('content_header')
+        <h1>Coders Free</h1>
+    @stop
 
-        @section('content')
-            <p>Welcome to this beautiful admin panel.</p>
-        @stop
+    @section('content')
+        <p>Welcome to this beautiful admin panel.</p>
+    @stop
 
-        @section('css')
-            <link rel="stylesheet" href="/css/admin_custom.css">
-        @stop
+    @section('css')
+        <link rel="stylesheet" href="/css/admin_custom.css">
+    @stop
 
-        @section('js')
-            <script> console.log('Hi!'); </script>
-        @stop
+    @section('js')
+        <script> console.log('Hi!'); </script>
+    @stop
+    ```
     + **create.blade.php**:
-    >
-        @extends('adminlte::page')
+    ```php title=""
+    @extends('adminlte::page')
 
-        @section('title', 'Coders Free')
+    @section('title', 'Coders Free')
 
-        @section('content_header')
-            <h1>Coders Free</h1>
-        @stop
+    @section('content_header')
+        <h1>Coders Free</h1>
+    @stop
 
-        @section('content')
-            <p>Welcome to this beautiful admin panel.</p>
-        @stop
+    @section('content')
+        <p>Welcome to this beautiful admin panel.</p>
+    @stop
 
-        @section('css')
-            <link rel="stylesheet" href="/css/admin_custom.css">
-        @stop
+    @section('css')
+        <link rel="stylesheet" href="/css/admin_custom.css">
+    @stop
 
-        @section('js')
-            <script> console.log('Hi!'); </script>
-        @stop
+    @section('js')
+        <script> console.log('Hi!'); </script>
+    @stop
+    ```
     + **show.blade.php**:
-    >
-        @extends('adminlte::page')
+    ```php title=""
+    @extends('adminlte::page')
 
-        @section('title', 'Coders Free')
+    @section('title', 'Coders Free')
 
-        @section('content_header')
-            <h1>Coders Free</h1>
-        @stop
+    @section('content_header')
+        <h1>Coders Free</h1>
+    @stop
 
-        @section('content')
-            <p>Welcome to this beautiful admin panel.</p>
-        @stop
+    @section('content')
+        <p>Welcome to this beautiful admin panel.</p>
+    @stop
 
-        @section('css')
-            <link rel="stylesheet" href="/css/admin_custom.css">
-        @stop
+    @section('css')
+        <link rel="stylesheet" href="/css/admin_custom.css">
+    @stop
 
-        @section('js')
-            <script> console.log('Hi!'); </script>
-        @stop
+    @section('js')
+        <script> console.log('Hi!'); </script>
+    @stop
+    ```
     + **edit.blade.php**:
-    >
-        @extends('adminlte::page')
+    ```php title=""
+    @extends('adminlte::page')
 
-        @section('title', 'Coders Free')
+    @section('title', 'Coders Free')
 
-        @section('content_header')
-            <h1>Coders Free</h1>
-        @stop
+    @section('content_header')
+        <h1>Coders Free</h1>
+    @stop
 
-        @section('content')
-            <p>Welcome to this beautiful admin panel.</p>
-        @stop
+    @section('content')
+        <p>Welcome to this beautiful admin panel.</p>
+    @stop
 
-        @section('css')
-            <link rel="stylesheet" href="/css/admin_custom.css">
-        @stop
+    @section('css')
+        <link rel="stylesheet" href="/css/admin_custom.css">
+    @stop
 
-        @section('js')
-            <script> console.log('Hi!'); </script>
-        @stop
+    @section('js')
+        <script> console.log('Hi!'); </script>
+    @stop
+    ```
 1. Generar ruta para el CRUD Role en **routes\admin.php**:
-    >
-        Route::get('', [HomeController::class, 'index'])->name('home');
+    ```php title=""
+    Route::get('', [HomeController::class, 'index'])->name('home');
+    ```
 1. Modificar **config\adminlte.php**:
-    >
-        <?php
+    ```php title=""
+    <?php
 
-        return [
+    return [
 
-            ≡
+        ≡
 
-            'logo' => '<b>Coders</b>FREE',
-            'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-            'logo_img_class' => 'brand-image img-circle elevation-3',
-            'logo_img_xl' => null,
-            'logo_img_xl_class' => 'brand-image-xs',
-            'logo_img_alt' => 'AdminLTE',
+        'logo' => '<b>Coders</b>FREE',
+        'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+        'logo_img_class' => 'brand-image img-circle elevation-3',
+        'logo_img_xl' => null,
+        'logo_img_xl_class' => 'brand-image-xs',
+        'logo_img_alt' => 'AdminLTE',
 
-            ≡
+        ≡
 
-            'use_route_url' => false,
+        'use_route_url' => false,
 
-            'dashboard_url' => '/',
+        'dashboard_url' => '/',
 
-            'logout_url' => 'logout',
+        'logout_url' => 'logout',
 
-            'login_url' => 'login',
+        'login_url' => 'login',
 
-            'register_url' => 'register',
+        'register_url' => 'register',
 
-            'password_reset_url' => 'password/reset',
+        'password_reset_url' => 'password/reset',
 
-            'password_email_url' => 'password/email',
+        'password_email_url' => 'password/email',
 
-            'profile_url' => false,
+        'profile_url' => false,
 
-            ≡
+        ≡
 
-            'menu' => [
-                [
-                    'text' => 'search',
-                    'search' => true,
-                    'topnav' => true,
-                ],
-                [
-                    'text' => 'blog',
-                    'url'  => 'admin/blog',
-                    'can'  => 'manage-blog',
-                ],
-                [
-                    'text'        => 'Dashboard',
-                    'route'         => 'admin.home',
-                    'icon'        => 'fas fa-fw fa-tachometer-alt',
-                ],
-                [
-                    'text'        => 'Lista de roles',
-                    'route'         => 'admin.roles.index',
-                    'icon'        => 'fas fa-fw fa-users-cog',
-                ],
-                ['header' => 'account_settings'],
-                [
-                    'text' => 'profile',
-                    'url'  => 'admin/settings',
-                    'icon' => 'fas fa-fw fa-user',
-                ],
-                ≡
+        'menu' => [
+            [
+                'text' => 'search',
+                'search' => true,
+                'topnav' => true,
             ],
-
+            [
+                'text' => 'blog',
+                'url'  => 'admin/blog',
+                'can'  => 'manage-blog',
+            ],
+            [
+                'text'        => 'Dashboard',
+                'route'         => 'admin.home',
+                'icon'        => 'fas fa-fw fa-tachometer-alt',
+            ],
+            [
+                'text'        => 'Lista de roles',
+                'route'         => 'admin.roles.index',
+                'icon'        => 'fas fa-fw fa-users-cog',
+            ],
+            ['header' => 'account_settings'],
+            [
+                'text' => 'profile',
+                'url'  => 'admin/settings',
+                'icon' => 'fas fa-fw fa-user',
+            ],
             ≡
-        ];
-1. Darle nombre a la ruta raíz en **routes\admin.php**:
-    >
-        Route::get('', [HomeController::class, 'index'])->name('home');
-1. Modificar método **boot** en **app\Providers\RouteServiceProvider.php**:
-    >
-        public function boot()
-        {
-            $this->configureRateLimiting();
+        ],
 
-            $this->routes(function () {
-                ≡
-                Route::middleware('web', 'auth')
-                    ->name('admin.')
-                    ->prefix('admin')
-                    ->namespace($this->namespace)
-                    ->group(base_path('routes/admin.php'));
-                ≡
-            });
-        }
+        ≡
+    ];
+    ```
+1. Darle nombre a la ruta raíz en **routes\admin.php**:
+    ```php title=""
+    Route::get('', [HomeController::class, 'index'])->name('home');
+    ```
+1. Modificar método **boot** en **app\Providers\RouteServiceProvider.php**:
+    ```php title=""
+    public function boot()
+    {
+        $this->configureRateLimiting();
+
+        $this->routes(function () {
+            ≡
+            Route::middleware('web', 'auth')
+                ->name('admin.')
+                ->prefix('admin')
+                ->namespace($this->namespace)
+                ->group(base_path('routes/admin.php'));
+            ≡
+        });
+    }
+    ```
 
 
 ### Video 30. Crear un CRUD para roles
 ###### https://hackerthemes.com/bootstrap-cheatsheet/
 ###### https://github.com/jeroennoten/Laravel-AdminLTE/wiki
 1. Modificar el controlador **app\Http\Controllers\Admin\RoleController.php**:
-    >
-        <?php
+    ```php title=""
+    <?php
 
-        namespace App\Http\Controllers\Admin;
+    namespace App\Http\Controllers\Admin;
 
-        use App\Http\Controllers\Controller;
-        use Illuminate\Http\Request;
-        use Spatie\Permission\Models\Role;
-        use Spatie\Permission\Models\Permission;
+    use App\Http\Controllers\Controller;
+    use Illuminate\Http\Request;
+    use Spatie\Permission\Models\Role;
+    use Spatie\Permission\Models\Permission;
 
-        class RoleController extends Controller
+    class RoleController extends Controller
+    {
+        /**
+        * Display a listing of the resource.
+        *
+        * @return \Illuminate\Http\Response
+        */
+        public function index()
         {
-            /**
-            * Display a listing of the resource.
-            *
-            * @return \Illuminate\Http\Response
-            */
-            public function index()
-            {
-                $roles = Role::all();
-                return view('admin.roles.index', compact('roles'));
-            }
-
-            /**
-            * Show the form for creating a new resource.
-            *
-            * @return \Illuminate\Http\Response
-            */
-            public function create()
-            {
-                $permissions = Permission::all();
-                return view('admin.roles.create', compact('permissions'));
-            }
-
-            /**
-            * Store a newly created resource in storage.
-            *
-            * @param  \Illuminate\Http\Request  $request
-            * @return \Illuminate\Http\Response
-            */
-            public function store(Request $request)
-            {
-                $request->validate([
-                    'name' => 'required',
-                    'permissions' => 'required'
-                ]);
-                
-                $role = Role::create([
-                    'name' => $request->name
-                ]);
-
-                $role->permissions()->attach($request->permissions);
-
-                return redirect()->route('admin.roles.index')->with('info', 'El rol se creo satisfactoriamente');
-            }
-
-            /**
-            * Display the specified resource.
-            *
-            * @param  int  $id
-            * @return \Illuminate\Http\Response
-            */
-            public function show(Role $role)
-            {
-                return view('admin.roles.show', compact('role'));
-            }
-
-            /**
-            * Show the form for editing the specified resource.
-            *
-            * @param  int  $id
-            * @return \Illuminate\Http\Response
-            */
-            public function edit(Role $role)
-            {
-                $permissions = Permission::all();
-                return view('admin.roles.edit', compact('role', 'permissions'));
-            }
-
-            /**
-            * Update the specified resource in storage.
-            *
-            * @param  \Illuminate\Http\Request  $request
-            * @param  int  $id
-            * @return \Illuminate\Http\Response
-            */
-            public function update(Request $request, Role $role)
-            {
-                $request->validate([
-                    'name' => 'required',
-                    'permissions' => 'required'
-                ]);
-
-                $role->permissions()->sync($request->permissions);
-
-                return redirect()->route('admin.roles.edit', $role);
-            }
-
-            /**
-            * Remove the specified resource from storage.
-            *
-            * @param  int  $id
-            * @return \Illuminate\Http\Response
-            */
-            public function destroy(Role $role)
-            {
-                $role->delete();
-                return redirect()->route('admin.roles.index')->with('info', 'El rol se eliminó con éxito');
-            }
+            $roles = Role::all();
+            return view('admin.roles.index', compact('roles'));
         }
-1. Modificar vista **resources\views\admin\roles\index.blade.php**:
-    >
-        @extends('adminlte::page')
 
-        @section('title', 'Coders Free')
+        /**
+        * Show the form for creating a new resource.
+        *
+        * @return \Illuminate\Http\Response
+        */
+        public function create()
+        {
+            $permissions = Permission::all();
+            return view('admin.roles.create', compact('permissions'));
+        }
 
-        @section('content_header')
-            <h1>Lista de roles</h1>
-        @stop
+        /**
+        * Store a newly created resource in storage.
+        *
+        * @param  \Illuminate\Http\Request  $request
+        * @return \Illuminate\Http\Response
+        */
+        public function store(Request $request)
+        {
+            $request->validate([
+                'name' => 'required',
+                'permissions' => 'required'
+            ]);
+            
+            $role = Role::create([
+                'name' => $request->name
+            ]);
 
-        @section('content')
-            @if (session('info'))
-                <div class="alert alert-primary" role="alert">
-                    <strong>¡Éxito!</strong> {{ session('info') }}
-                    important alert message.
-                </div>
-                
-            @endif
+            $role->permissions()->attach($request->permissions);
 
-            <div class="card">
-                <div class="card-header">
-                    <a href="{{ route('admin.roles.create') }}">Crear rol</a>
-                </div>
-                <div class="card-body">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th colspan="2"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse ($roles as $role)
-                                <tr>
-                                    <td>{{ $role->id }}</td>
-                                    <td>{{ $role->name }}</td>
-                                    <td width="10px">
-                                        <a class="btn btn-secondary" href="{{ route('admin.roles.edit', $role) }}">Editar</a>
-                                    </td>
-                                    <td width="10px">
-                                        <form action="{{ route('admin.roles.destroy', $role) }}" method="POST">
-                                            @method('delete')
-                                            @csrf
-                                            <button class="btn btn-danger" type="submit">Eliminar</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="4">No hay ningún rol registrado</td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        @stop
+            return redirect()->route('admin.roles.index')->with('info', 'El rol se creo satisfactoriamente');
+        }
 
-        @section('css')
-            <link rel="stylesheet" href="/css/admin_custom.css">
-        @stop
+        /**
+        * Display the specified resource.
+        *
+        * @param  int  $id
+        * @return \Illuminate\Http\Response
+        */
+        public function show(Role $role)
+        {
+            return view('admin.roles.show', compact('role'));
+        }
 
-        @section('js')
-            <script> console.log('Hi!'); </script>
-        @stop
-1. Publicar vista de AdminLTE:
-    >
-        $ php artisan adminlte:install --only=main_views
-    #### En **resources\views\vendor\adminlte\page.blade.php** es de donde se extienden las plantillas.
-1. Instalar Laravel Collective:
-    >
-        $ composer require laravelcollective/html
-    ##### https://laravelcollective.com/docs/6.x/html
-1. Modificar vista **resources\views\admin\roles\create.blade.php**:
-    >
-        @extends('adminlte::page')
+        /**
+        * Show the form for editing the specified resource.
+        *
+        * @param  int  $id
+        * @return \Illuminate\Http\Response
+        */
+        public function edit(Role $role)
+        {
+            $permissions = Permission::all();
+            return view('admin.roles.edit', compact('role', 'permissions'));
+        }
 
-        @section('title', 'Coders Free')
-
-        @section('content_header')
-            <h1>Crear nuevo rol</h1>
-        @stop
-
-        @section('content')
-            <div class="card">
-                <div class="card-body">
-                    {!! Form::open(['route' => 'admin.roles.store']) !!}
-                        @include('admin.roles.partials.form')
-                        {!! Form::submit('Crear Rol', ['class' => 'btn btn-primary mt-2']) !!}
-                    {!! Form::close() !!}
-                </div>
-            </div>
-        @stop
-
-        @section('css')
-            <link rel="stylesheet" href="/css/admin_custom.css">
-        @stop
-
-        @section('js')
-            <script> console.log('Hi!'); </script>
-        @stop
-1. Crear formulario para el rol como **resources\views\admin\roles\partials\form.blade.php**:
-    >
-        <div class="form-group">
-            {!! Form::label('name', 'Nombre: ') !!}
-            {!! Form::text('name', null, ['class' => 'form-control' . ($errors->has('name') ? ' is-invalid' :  ''), 'placeholder' => 'Escriba un nombre']) !!}
-            @error('name')
-                <span class="invalid-feedback">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
-        </div>
-        <strong>Permisos</strong>
-        @error('permissions')
-            <br>
-            <small class="text-danger">
-                <strong>{{ $message }}</strong>
-            </small>
-            <br>
-        @enderror
-        @foreach ($permissions as $permission)
-            <div>
-                <label>
-                    {!! Form::checkbox('permissions[]', $permission->id, null, ['class' => 'mr-1']) !!}
-                    {{ $permission->name }}
-                </label>
-            </div>
-        @endforeach
-1. Modificar vista **resources\views\admin\roles\edit.blade.php**:
-    >
-        @extends('adminlte::page')
-
-        @section('title', 'Coders Free')
-
-        @section('content_header')
-            <h1>Editar rol</h1>
-        @stop
-
-        @section('content')
-            <div class="card">
-                <div class="card-body">
-                    {!! Form::model($role, ['route' => ['admin.roles.update', $role], 'method' => 'put']) !!}
-                        @include('admin.roles.partials.form')
-                        {!! Form::submit('Actualizar Rol', ['class' => 'btn btn-primary mt-2']) !!}
-                    {!! Form::close() !!}
-                </div>
-            </div>
-        @stop
-
-        @section('css')
-            <link rel="stylesheet" href="/css/admin_custom.css">
-        @stop
-
-        @section('js')
-            <script> console.log('Hi!'); </script>
-        @stop
-
-
-### Video 31. Crear un CRUD para usuarios
-1. Modificar el método **update** del controlador **app\Http\Controllers\Admin\RoleController.php**:
-    >
+        /**
+        * Update the specified resource in storage.
+        *
+        * @param  \Illuminate\Http\Request  $request
+        * @param  int  $id
+        * @return \Illuminate\Http\Response
+        */
         public function update(Request $request, Role $role)
         {
             $request->validate([
@@ -4336,433 +4210,213 @@ MINUTO 48
                 'permissions' => 'required'
             ]);
 
-            $role->update([
-                'name' => $request->name
-            ]);
-
             $role->permissions()->sync($request->permissions);
 
             return redirect()->route('admin.roles.edit', $role);
         }
-1. Modificar el archivo de configuración **config\adminlte.php**:
-    >
-        <?php
 
-        return [
-            ≡
-            'menu' => [
-                [
-                    'text'      => 'search',
-                    'search'    => true,
-                    'topnav'    => true,
-                ],
-                [
-                    'text' => 'blog',
-                    'url'  => 'admin/blog',
-                    'can'  => 'manage-blog',
-                ],
-                [
-                    'text'  => 'Dashboard',
-                    'route' => 'admin.home',
-                    'icon'  => 'fas fa-fw fa-tachometer-alt',
-                ],
-                [
-                    'text'      => 'Lista de roles',
-                    'route'     => 'admin.roles.index',
-                    'icon'      => 'fas fa-fw fa-users-cog',
-                    'active'    => ['admin/roles*'],
-                ],
-                [
-                    'text'      => 'Usuarios',
-                    'route'     => 'admin.users.index',
-                    'icon'      => 'fas fa-fw fa-users',
-                    'active'    => ['admin/users*'],
-                ],
-                ≡
-            ],
-            ≡
-            'livewire' => true,
-        ];
-1. Crear controlador **User** para CRUD de usuarios:
-    >
-        $ php artisan make:controller Admin\UserController -r
-1. Programar el controlador **app\Http\Controllers\Admin\UserController.php**:
-    >
-        <?php
-
-        namespace App\Http\Controllers\Admin;
-
-        use App\Http\Controllers\Controller;
-        use App\Models\User;
-        use Illuminate\Http\Request;
-        use Spatie\Permission\Models\Role;
-
-        class UserController extends Controller
+        /**
+        * Remove the specified resource from storage.
+        *
+        * @param  int  $id
+        * @return \Illuminate\Http\Response
+        */
+        public function destroy(Role $role)
         {
-            /**
-            * Display a listing of the resource.
-            *
-            * @return \Illuminate\Http\Response
-            */
-            public function index()
-            {
-                return view('admin.users.index');
-            }
-
-            /**
-            * Show the form for editing the specified resource.
-            *
-            * @param  int  $id
-            * @return \Illuminate\Http\Response
-            */
-            public function edit(User $user)
-            {
-                $roles = Role::all();
-                return view('admin.users.edit', compact('user', 'roles'));
-            }
-
-            /**
-            * Update the specified resource in storage.
-            *
-            * @param  \Illuminate\Http\Request  $request
-            * @param  int  $id
-            * @return \Illuminate\Http\Response
-            */
-            public function update(Request $request, User $user)
-            {
-                $user->roles()->sync($request->roles);
-                return redirect()->route('admin.users.edit', $user);
-            }
+            $role->delete();
+            return redirect()->route('admin.roles.index')->with('info', 'El rol se eliminó con éxito');
         }
-1. Crear las vistas para el CRUD **User**:
-    **resources\views\admin\users\index.blade.php**:
-    >
-        @extends('adminlte::page')
+    }
+    ```
+1. Modificar vista **resources\views\admin\roles\index.blade.php**:
+    ```php title=""
+    @extends('adminlte::page')
 
-        @section('title', 'Coders Free')
+    @section('title', 'Coders Free')
 
-        @section('content_header')
-            <h1>Lista de usuarios</h1>
-        @stop
+    @section('content_header')
+        <h1>Lista de roles</h1>
+    @stop
 
-        @section('content')
-            @livewire('admin-users')
-        @stop
-
-        @section('css')
-            <link rel="stylesheet" href="/css/admin_custom.css">
-        @stop
-
-        @section('js')
-            <script> console.log('Hi!'); </script>
-        @stop
-    **resources\views\admin\users\edit.blade.php**:
-    >
-        @extends('adminlte::page')
-
-        @section('title', 'Coders Free')
-
-        @section('content_header')
-            <h1>Editar usuario</h1>
-        @stop
-
-        @section('content')
-            <div class="card">
-                <div class="card-body">
-                    <h1 class="h5">Nombre:</h1>
-                    <p class="form-control">{{ $user->name }}</p>
-                    <h1 class="h5">Lista de roles</h1>
-                    {!! Form::model($user, ['route' => ['admin.users.update', $user], 'method' => 'put']) !!}
-                        @foreach ($roles as $role)
-                            <div>
-                                <label>
-                                    {!! Form::checkbox('roles[]', $role->id, null, ['class' => 'mr-1']) !!}
-                                    {{ $role->name }}
-                                </label>
-                            </div>
-                        @endforeach
-                        {!! Form::submit('Asignar rol', ['class' => 'btn btn-primary mt-2']) !!}
-                    {!! Form::close() !!}
-                </div>
+    @section('content')
+        @if (session('info'))
+            <div class="alert alert-primary" role="alert">
+                <strong>¡Éxito!</strong> {{ session('info') }}
+                important alert message.
             </div>
-        @stop
+            
+        @endif
 
-        @section('css')
-            <link rel="stylesheet" href="/css/admin_custom.css">
-        @stop
-
-        @section('js')
-            <script> console.log('Hi!'); </script>
-        @stop
-1. Crear ruta para el CRUD **User** en routes\admin.php:
-    >
-        Route::resource('users', UserController::class)->only(['index', 'edit', 'update'])->names('users');
-    Importar controlador **User**:
-    >
-        use App\Http\Controllers\Admin\UserController;
-1. Crear componente de livewire para administrar usuarios:
-    >
-        $ php artisan make:livewire admin-users
-1. Programar controlador del componente **app\Http\Livewire\AdminUsers.php**:
-    >
-        <?php
-
-        namespace App\Http\Livewire;
-
-        use App\Models\User;
-        use Livewire\Component;
-        use Livewire\WithPagination;
-
-        class AdminUsers extends Component
-        {
-            use WithPagination;
-
-            protected $paginationTheme = "bootstrap";
-
-            public $search;
-
-            public function render()
-            {
-                $users = User::where('name', 'LIKE', '%' . $this->search . '%')
-                            ->orWhere('email', 'LIKE', '%' . $this->search . '%')
-                            ->paginate(8);
-                return view('livewire.admin-users', compact('users'));
-            }
-
-            public function limpiar_page(){
-                $this->reset('page');
-            }
-        }
-1. Diseñar vista del componente **resources\views\livewire\admin-users.blade.php**:
-    >
-        <div>
-            <div class="card">
-                <div class="card-header">
-                    <input wire:keydown="limpiar_page" wire:model="search" class="form-control w-100" placeholder="Escriba un nombre ...">
-                </div>
-                @if ($users->count())
-                    <div class="card-body">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Nombre</th>
-                                    <th>Email</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($users as $user)
-                                    <tr>
-                                        <td>{{ $user->id }}</td>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->email }}</td>
-                                        <td width="10px">
-                                            <a class="btn btn-primary" href="{{ route('admin.users.edit', $user) }}">Editar</a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="card-footer">
-                        {{ $users->links() }}
-                    </div>
-                @else
-                    <div class="card-body">
-                        <strong>No hay registros ...</strong>
-                    </div>
-                @endif
+        <div class="card">
+            <div class="card-header">
+                <a href="{{ route('admin.roles.create') }}">Crear rol</a>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th colspan="2"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($roles as $role)
+                            <tr>
+                                <td>{{ $role->id }}</td>
+                                <td>{{ $role->name }}</td>
+                                <td width="10px">
+                                    <a class="btn btn-secondary" href="{{ route('admin.roles.edit', $role) }}">Editar</a>
+                                </td>
+                                <td width="10px">
+                                    <form action="{{ route('admin.roles.destroy', $role) }}" method="POST">
+                                        @method('delete')
+                                        @csrf
+                                        <button class="btn btn-danger" type="submit">Eliminar</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="4">No hay ningún rol registrado</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
             </div>
         </div>
+    @stop
 
+    @section('css')
+        <link rel="stylesheet" href="/css/admin_custom.css">
+    @stop
 
-### Video 32. Restringir botones y rutas por permisos
-1. Modificar plantilla **resources\views\navigation-dropdown.blade.php**:
-    >
-        ≡
-        <nav x-data="{ open: false }" class="bg-white border-b border-gray-100 shadow">
-            <!-- Primary Navigation Menu -->
-            <div class="container">
-                <div class="flex justify-between h-16">
-                    ≡
-                    <!-- Settings Dropdown -->
-                    <div class="hidden sm:flex sm:items-center sm:ml-6">
-                        @auth
-                            <x-jet-dropdown align="right" width="48">
-                                ≡
-                                <x-slot name="content">
-                                    <!-- Account Management -->
-                                    <div class="block px-4 py-2 text-xs text-gray-400">
-                                        {{ __('Manage Account') }}
-                                    </div>
-                                    <x-jet-dropdown-link href="{{ route('profile.show') }}">
-                                        Perfil
-                                    </x-jet-dropdown-link>
+    @section('js')
+        <script> console.log('Hi!'); </script>
+    @stop
+    ```
+1. Publicar vista de AdminLTE:
+    ```bash
+    php artisan adminlte:install --only=main_views
+    ```
+    #### En **resources\views\vendor\adminlte\page.blade.php** es de donde se extienden las plantillas.
+1. Instalar Laravel Collective:
+    ```bash
+    composer require laravelcollective/html
+    ```
+    ##### https://laravelcollective.com/docs/6.x/html
+1. Modificar vista **resources\views\admin\roles\create.blade.php**:
+    ```php title=""
+    @extends('adminlte::page')
 
-                                    @can('Leer cursos')
-                                        <x-jet-dropdown-link href="{{ route('instructor.courses.index') }}">
-                                            Instructor
-                                        </x-jet-dropdown-link>
-                                    @endcan
+    @section('title', 'Coders Free')
 
-                                    @can('Ver dashboard')
-                                        <x-jet-dropdown-link href="{{ route('admin.home') }}">
-                                            Administrador
-                                        </x-jet-dropdown-link>
-                                    @endcan
+    @section('content_header')
+        <h1>Crear nuevo rol</h1>
+    @stop
 
-                                    @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                                        <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">
-                                            {{ __('API Tokens') }}
-                                        </x-jet-dropdown-link>
-                                    @endif
-                                    ≡
-                                </x-slot>
-                            </x-jet-dropdown>
-                        @else
-                            ≡
-                        @endauth
-                    </div>
-
-                    <!-- Hamburger -->
-                    ≡
-                </div>
+    @section('content')
+        <div class="card">
+            <div class="card-body">
+                {!! Form::open(['route' => 'admin.roles.store']) !!}
+                    @include('admin.roles.partials.form')
+                    {!! Form::submit('Crear Rol', ['class' => 'btn btn-primary mt-2']) !!}
+                {!! Form::close() !!}
             </div>
+        </div>
+    @stop
 
-            <!-- Responsive Navigation Menu -->
-            <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-                ≡
-                <!-- Responsive Settings Options -->
-                @auth
-                    <div class="pt-4 pb-1 border-t border-gray-200">
-                        ≡
+    @section('css')
+        <link rel="stylesheet" href="/css/admin_custom.css">
+    @stop
 
-                        <div class="mt-3 space-y-1">
-                            <!-- Account Management -->
-                            <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
-                                Perfil
-                            </x-jet-responsive-nav-link>
-                            
-                            @can('Leer cursos')
-                                <x-jet-responsive-nav-link href="{{ route('instructor.courses.index') }}" :active="request()->routeIs('instructor.courses.index')">
-                                    Instructor
-                                </x-jet-responsive-nav-link>
-                            @endcan
-                    
-                            @can('Ver dashboard')
-                                <x-jet-responsive-nav-link href="{{ route('admin.home') }}" :active="request()->routeIs('admin.home')">
-                                    Administrador
-                                </x-jet-responsive-nav-link>
-                            @endcan
+    @section('js')
+        <script> console.log('Hi!'); </script>
+    @stop
+    ```
+1. Crear formulario para el rol como **resources\views\admin\roles\partials\form.blade.php**:
+    ```php title=""
+    <div class="form-group">
+        {!! Form::label('name', 'Nombre: ') !!}
+        {!! Form::text('name', null, ['class' => 'form-control' . ($errors->has('name') ? ' is-invalid' :  ''), 'placeholder' => 'Escriba un nombre']) !!}
+        @error('name')
+            <span class="invalid-feedback">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+    <strong>Permisos</strong>
+    @error('permissions')
+        <br>
+        <small class="text-danger">
+            <strong>{{ $message }}</strong>
+        </small>
+        <br>
+    @enderror
+    @foreach ($permissions as $permission)
+        <div>
+            <label>
+                {!! Form::checkbox('permissions[]', $permission->id, null, ['class' => 'mr-1']) !!}
+                {{ $permission->name }}
+            </label>
+        </div>
+    @endforeach
+    ```
+1. Modificar vista **resources\views\admin\roles\edit.blade.php**:    
+    ```php title=""
+    @extends('adminlte::page')
 
-                            ≡
-                        </div>
-                    </div>
-                @else
-                    ≡
-                @endauth
-            </div>  
-        </nav>
-1. Modificar ruta **courses.index** en **routes\instructor.php**:
-    >
-        Route::get('courses', InstructorCourses::class)->middleware('can:Leer cursos')->name('courses.index');
-1. Crear seeder para generar roles permisos:
-    >
-        $ php artisan make:seeder RoleSeeder
-        $ php artisan make:seeder PermissionSeeder
-1. Modificar seeder **database\seeders\PermissionSeeder.php**:
-    >
-        <?php
+    @section('title', 'Coders Free')
 
-        namespace Database\Seeders;
+    @section('content_header')
+        <h1>Editar rol</h1>
+    @stop
 
-        use Illuminate\Database\Seeder;
-        use Spatie\Permission\Models\Permission;
+    @section('content')
+        <div class="card">
+            <div class="card-body">
+                {!! Form::model($role, ['route' => ['admin.roles.update', $role], 'method' => 'put']) !!}
+                    @include('admin.roles.partials.form')
+                    {!! Form::submit('Actualizar Rol', ['class' => 'btn btn-primary mt-2']) !!}
+                {!! Form::close() !!}
+            </div>
+        </div>
+    @stop
 
-        class PermissionSeeder extends Seeder
-        {
-            /**
-            * Run the database seeds.
-            *
-            * @return void
-            */
-            public function run()
-            {
-                Permission::create(['name' => 'Crear cursos']);
-                Permission::create(['name' => 'Leer cursos']);
-                Permission::create(['name' => 'Actualizar cursos']);
-                Permission::create(['name' => 'Eliminar cursos']);
-                Permission::create(['name' => 'Ver dashboard']);
-                Permission::create(['name' => 'Crear role']);
-                Permission::create(['name' => 'Listar role']);
-                Permission::create(['name' => 'Editar role']);
-                Permission::create(['name' => 'Eliminar role']);
-                Permission::create(['name' => 'Leer usuarios']);
-                Permission::create(['name' => 'Editar usuarios']);
-            }
-        }
-1. Modificar seeder **database\seeders\RoleSeeder.php**:
-    >
-        <?php
+    @section('css')
+        <link rel="stylesheet" href="/css/admin_custom.css">
+    @stop
 
-        namespace Database\Seeders;
+    @section('js')
+        <script> console.log('Hi!'); </script>
+    @stop
+    ```
 
-        use Illuminate\Database\Seeder;
-        use Spatie\Permission\Models\Role;
 
-        class RoleSeeder extends Seeder
-        {
-            /**
-            * Run the database seeds.
-            *
-            * @return void
-            */
-            public function run()
-            {
-                $role = Role::create(['name' => 'Admin']);
-                $role->permissions()->attach([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
+### Video 31. Crear un CRUD para usuarios
+1. Modificar el método **update** del controlador **app\Http\Controllers\Admin\RoleController.php**:
+    ```php title=""
+    public function update(Request $request, Role $role)
+    {
+        $request->validate([
+            'name' => 'required',
+            'permissions' => 'required'
+        ]);
 
-                $role = Role::create(['name' => 'Instructor']);
-                $role->syncPermissions(['Crear cursos', 'Leer cursos', 'Actualizar cursos', 'Eliminar cursos']);
-            }
-        }
-1. Incluir los seeder de permisos y roles en método **run** de **database\seeders\DatabaseSeeder.php**:
-    >
-        public function run()
-        {
-            Storage::deleteDirectory('cursos');
-            Storage::makeDirectory('cursos');
-            
-            $this->call(PermissionSeeder::class);
-            $this->call(RoleSeeder::class);
+        $role->update([
+            'name' => $request->name
+        ]);
 
-            $this->call(UserSeeder::class);
-            $this->call(LevelSeeder::class);
-            $this->call(CategorySeeder::class);
-            $this->call(PriceSeeder::class);
-            $this->call(PlatformSeeder::class);
-            $this->call(CourseSeeder::class);
-        }
-1. Modificar el método **run** del seeder **database\seeders\UserSeeder.php**:
-    >
-        public function run()
-        {
-            $user = User::create([
-                'name' => 'Pedro Jesús Bazó Canelón',
-                'email' => 'bazo.pedro@gmail.com',
-                'password' => bcrypt('12345678')
-            ]);
+        $role->permissions()->sync($request->permissions);
 
-            $user->assignRole('Admin');
+        return redirect()->route('admin.roles.edit', $role);
+    }
+    ```
+1. Modificar el archivo de configuración **config\adminlte.php**:
+    ```php title=""
+    <?php
 
-            User::factory(99)->create();
-        }  
-1. Ejecutar:
-    >
-        $ php artisan migrate:fresh --seed
-1. Modificar archivo de configuración **config\adminlte.php**:
-    >
+    return [
         ≡
         'menu' => [
             [
@@ -4779,206 +4433,643 @@ MINUTO 48
                 'text'  => 'Dashboard',
                 'route' => 'admin.home',
                 'icon'  => 'fas fa-fw fa-tachometer-alt',
-                'can'   => 'Ver dashboard'
             ],
             [
                 'text'      => 'Lista de roles',
                 'route'     => 'admin.roles.index',
                 'icon'      => 'fas fa-fw fa-users-cog',
-                'can'       => 'Listar role',
                 'active'    => ['admin/roles*'],
             ],
             [
                 'text'      => 'Usuarios',
                 'route'     => 'admin.users.index',
                 'icon'      => 'fas fa-fw fa-users',
-                'can'       => 'Leer usuarios',
                 'active'    => ['admin/users*'],
             ],
             ≡
-1. Proteger ruta **home** en **routes\admin.php**:
-    >
-        Route::get('', [HomeController::class, 'index'])->middleware('can:Ver dashboard')->name('home');
-1. Crear el método **__construct** en el controlador **app\Http\Controllers\Admin\RoleController.php** para proteger las rutas **roles**:
-    >
+        ],
         ≡
-        class RoleController extends Controller
+        'livewire' => true,
+    ];
+    ```
+1. Crear controlador **User** para CRUD de usuarios:
+    ```bash
+    php artisan make:controller Admin\UserController -r
+    ```
+1. Programar el controlador **app\Http\Controllers\Admin\UserController.php**:
+    ```php title=""
+    <?php
+
+    namespace App\Http\Controllers\Admin;
+
+    use App\Http\Controllers\Controller;
+    use App\Models\User;
+    use Illuminate\Http\Request;
+    use Spatie\Permission\Models\Role;
+
+    class UserController extends Controller
+    {
+        /**
+        * Display a listing of the resource.
+        *
+        * @return \Illuminate\Http\Response
+        */
+        public function index()
         {
-            public function __construct(){
-                $this->middleware('can:Listar roles')->only('index');
-                $this->middleware('can:Crear role')->only('create', 'store');
-                $this->middleware('can:Editar role')->only('edit', 'update');
-                $this->middleware('can:Eliminar role')->only('destroy');
-            }
-            ≡
-1. Crear el método **__construct** en el controlador **app\Http\Controllers\Admin\UserController.php** para proteger las rutas **users**:
-    >
-        ≡
-        class UserController extends Controller
-        {
-            public function __construct(){
-                $this->middleware('can:Leer usuarios')->only('index');
-                $this->middleware('can:Editar usuarios')->only('edit', 'update');
-            }
-            ≡
-
-
-## Sección 6: Instructores
-
-
-### Video 33. Mostrar el listado de cursos de un instructor
-1. Modificar el controlador **app\Http\Livewire\InstructorCourses.php**:
-    >
-        <?php
-
-        namespace App\Http\Livewire;
-
-        use App\Models\Course;
-        use Livewire\Component;
-        use Livewire\WithPagination;
-
-        class InstructorCourses extends Component
-        {
-            use WithPagination;
-
-            public $search;
-
-            public function render()
-            {
-                $courses = Course::where('title', 'LIKE', '%' . $this->search . '%')
-                                    ->where('user_id', auth()->user()->id)
-                                    ->paginate(8);
-                return view('livewire.instructor-courses', compact('courses'));
-            }
-
-            public function limpiar_page(){
-                $this->reset('page');
-            }
+            return view('admin.users.index');
         }
-1. Diseñar la vista **resources\views\livewire\instructor-courses.blade.php**:
-    ##### https://tailwindui.com/preview
-    >
-        <div class="container py-8">
-            <x-table-responsive>
-                <div class="px-6 py-4">
-                    <input wire:keydown="limpiar_page" wire:model="search" class="form-input w-full shadow-sm" placeholder="Ingrese el nombre de un curso ...">
-                </div>
-                @if ($courses->count())
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
+
+        /**
+        * Show the form for editing the specified resource.
+        *
+        * @param  int  $id
+        * @return \Illuminate\Http\Response
+        */
+        public function edit(User $user)
+        {
+            $roles = Role::all();
+            return view('admin.users.edit', compact('user', 'roles'));
+        }
+
+        /**
+        * Update the specified resource in storage.
+        *
+        * @param  \Illuminate\Http\Request  $request
+        * @param  int  $id
+        * @return \Illuminate\Http\Response
+        */
+        public function update(Request $request, User $user)
+        {
+            $user->roles()->sync($request->roles);
+            return redirect()->route('admin.users.edit', $user);
+        }
+    }
+    ```
+1. Crear las vistas para el CRUD **User**:
+    **resources\views\admin\users\index.blade.php**:
+    ```php title=""
+    @extends('adminlte::page')
+
+    @section('title', 'Coders Free')
+
+    @section('content_header')
+        <h1>Lista de usuarios</h1>
+    @stop
+
+    @section('content')
+        @livewire('admin-users')
+    @stop
+
+    @section('css')
+        <link rel="stylesheet" href="/css/admin_custom.css">
+    @stop
+
+    @section('js')
+        <script> console.log('Hi!'); </script>
+    @stop
+    ```
+    **resources\views\admin\users\edit.blade.php**:
+    ```php title=""
+    @extends('adminlte::page')
+
+    @section('title', 'Coders Free')
+
+    @section('content_header')
+        <h1>Editar usuario</h1>
+    @stop
+
+    @section('content')
+        <div class="card">
+            <div class="card-body">
+                <h1 class="h5">Nombre:</h1>
+                <p class="form-control">{{ $user->name }}</p>
+                <h1 class="h5">Lista de roles</h1>
+                {!! Form::model($user, ['route' => ['admin.users.update', $user], 'method' => 'put']) !!}
+                    @foreach ($roles as $role)
+                        <div>
+                            <label>
+                                {!! Form::checkbox('roles[]', $role->id, null, ['class' => 'mr-1']) !!}
+                                {{ $role->name }}
+                            </label>
+                        </div>
+                    @endforeach
+                    {!! Form::submit('Asignar rol', ['class' => 'btn btn-primary mt-2']) !!}
+                {!! Form::close() !!}
+            </div>
+        </div>
+    @stop
+
+    @section('css')
+        <link rel="stylesheet" href="/css/admin_custom.css">
+    @stop
+
+    @section('js')
+        <script> console.log('Hi!'); </script>
+    @stop
+    ```
+1. Crear ruta para el CRUD **User** en routes\admin.php:
+    ```php title=""
+    Route::resource('users', UserController::class)->only(['index', 'edit', 'update'])->names('users');
+    ```
+    Importar controlador **User**:
+    ```php title=""
+    use App\Http\Controllers\Admin\UserController;
+    ```
+1. Crear componente de livewire para administrar usuarios:
+    ```bash
+    php artisan make:livewire admin-users
+    ```
+1. Programar controlador del componente **app\Http\Livewire\AdminUsers.php**:
+    ```php title=""
+    <?php
+
+    namespace App\Http\Livewire;
+
+    use App\Models\User;
+    use Livewire\Component;
+    use Livewire\WithPagination;
+
+    class AdminUsers extends Component
+    {
+        use WithPagination;
+
+        protected $paginationTheme = "bootstrap";
+
+        public $search;
+
+        public function render()
+        {
+            $users = User::where('name', 'LIKE', '%' . $this->search . '%')
+                        ->orWhere('email', 'LIKE', '%' . $this->search . '%')
+                        ->paginate(8);
+            return view('livewire.admin-users', compact('users'));
+        }
+
+        public function limpiar_page(){
+            $this->reset('page');
+        }
+    }
+    ```
+1. Diseñar vista del componente **resources\views\livewire\admin-users.blade.php**:
+    ```php title=""
+    <div>
+        <div class="card">
+            <div class="card-header">
+                <input wire:keydown="limpiar_page" wire:model="search" class="form-control w-100" placeholder="Escriba un nombre ...">
+            </div>
+            @if ($users->count())
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
                             <tr>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Nombre
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Matriculados
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Calificación
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Status
-                                </th>
-                                <th scope="col" class="relative px-6 py-3">
-                                    <span class="sr-only">Edit</span>
-                                </th>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th></th>
                             </tr>
                         </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
-                            @foreach ($courses as $course)
+                        <tbody>
+                            @foreach ($users as $user)
                                 <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            <div class="flex-shrink-0 h-10 w-10">
-                                                <img class="h-10 w-10 rounded-full" src="{{ Storage::url($course->image->url) }}" alt="">
-                                            </div>
-                                            <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900">
-                                                    {{ $course->title }}
-                                                </div>
-                                                <div class="text-sm text-gray-500">
-                                                    {{ $course->category->name }}
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <td>{{ $user->id }}</td>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td width="10px">
+                                        <a class="btn btn-primary" href="{{ route('admin.users.edit', $user) }}">Editar</a>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">{{ $course->students->count() }}</div>
-                                        <div class="text-sm text-gray-500">Alumnos matriculados</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900 flex items-center">
-                                            {{ $course->rating }}
-                                            <ul class="flex text-sm ml-2">
-                                                <li class="mr-1">
-                                                    <i class="fas fa-star text-{{ $course->rating >= 1 ? 'yellow' : 'gray' }}-400"></i>
-                                                </li>
-                                                <li class="mr-1">
-                                                    <i class="fas fa-star text-{{ $course->rating >= 2 ? 'yellow' : 'gray' }}-400"></i>
-                                                </li>
-                                                <li class="mr-1">
-                                                    <i class="fas fa-star text-{{ $course->rating >= 3 ? 'yellow' : 'gray' }}-400"></i>
-                                                </li>
-                                                <li class="mr-1">
-                                                    <i class="fas fa-star text-{{ $course->rating >= 4 ? 'yellow' : 'gray' }}-400"></i>
-                                                </li>
-                                                <li class="mr-1">
-                                                    <i class="fas fa-star text-{{ $course->rating == 5 ? 'yellow' : 'gray' }}-400"></i>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="text-sm text-gray-500">Valoración del curso</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        @switch($course->status)
-                                            @case(1)
-                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                                                    Borrador
-                                                </span>   
-                                                @break
-                                            @case(2)
-                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
-                                                    Revisión
-                                                </span>   
-                                                @break
-                                            @case(3)
-                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                                    Publicado
-                                                </span>   
-                                                @break
-                                            @default        
-                                        @endswitch
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                                    </td>
-                                </tr>  
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    <div class="px-6 py-4">
-                        {{ $courses->links() }}
-                    </div>
-                @else
-                    <div class="px-6 py-4">
-                        No hay ningún registro coincidente
-                    </div>
-                @endif
-            </x-table-responsive>
+                </div>
+                <div class="card-footer">
+                    {{ $users->links() }}
+                </div>
+            @else
+                <div class="card-body">
+                    <strong>No hay registros ...</strong>
+                </div>
+            @endif
         </div>
-1. Crear componente **resources\views\components\table-responsive.blade.php**:
-    >
-        <div class="flex flex-col">
-            <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                    <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+    </div>
+    ```
 
-                        {{ $slot }}
 
+### Video 32. Restringir botones y rutas por permisos
+1. Modificar plantilla **resources\views\navigation-dropdown.blade.php**:
+    ```php title=""
+    ≡
+    <nav x-data="{ open: false }" class="bg-white border-b border-gray-100 shadow">
+        <!-- Primary Navigation Menu -->
+        <div class="container">
+            <div class="flex justify-between h-16">
+                ≡
+                <!-- Settings Dropdown -->
+                <div class="hidden sm:flex sm:items-center sm:ml-6">
+                    @auth
+                        <x-jet-dropdown align="right" width="48">
+                            ≡
+                            <x-slot name="content">
+                                <!-- Account Management -->
+                                <div class="block px-4 py-2 text-xs text-gray-400">
+                                    {{ __('Manage Account') }}
+                                </div>
+                                <x-jet-dropdown-link href="{{ route('profile.show') }}">
+                                    Perfil
+                                </x-jet-dropdown-link>
+
+                                @can('Leer cursos')
+                                    <x-jet-dropdown-link href="{{ route('instructor.courses.index') }}">
+                                        Instructor
+                                    </x-jet-dropdown-link>
+                                @endcan
+
+                                @can('Ver dashboard')
+                                    <x-jet-dropdown-link href="{{ route('admin.home') }}">
+                                        Administrador
+                                    </x-jet-dropdown-link>
+                                @endcan
+
+                                @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
+                                    <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">
+                                        {{ __('API Tokens') }}
+                                    </x-jet-dropdown-link>
+                                @endif
+                                ≡
+                            </x-slot>
+                        </x-jet-dropdown>
+                    @else
+                        ≡
+                    @endauth
+                </div>
+
+                <!-- Hamburger -->
+                ≡
+            </div>
+        </div>
+
+        <!-- Responsive Navigation Menu -->
+        <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
+            ≡
+            <!-- Responsive Settings Options -->
+            @auth
+                <div class="pt-4 pb-1 border-t border-gray-200">
+                    ≡
+
+                    <div class="mt-3 space-y-1">
+                        <!-- Account Management -->
+                        <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
+                            Perfil
+                        </x-jet-responsive-nav-link>
+                        
+                        @can('Leer cursos')
+                            <x-jet-responsive-nav-link href="{{ route('instructor.courses.index') }}" :active="request()->routeIs('instructor.courses.index')">
+                                Instructor
+                            </x-jet-responsive-nav-link>
+                        @endcan
+                
+                        @can('Ver dashboard')
+                            <x-jet-responsive-nav-link href="{{ route('admin.home') }}" :active="request()->routeIs('admin.home')">
+                                Administrador
+                            </x-jet-responsive-nav-link>
+                        @endcan
+
+                        ≡
                     </div>
+                </div>
+            @else
+                ≡
+            @endauth
+        </div>  
+    </nav>
+    ```
+1. Modificar ruta **courses.index** en **routes\instructor.php**:
+    ```php title=""
+    Route::get('courses', InstructorCourses::class)->middleware('can:Leer cursos')->name('courses.index');
+    ```
+1. Crear seeder para generar roles permisos:
+    ```bash
+    php artisan make:seeder RoleSeeder
+    php artisan make:seeder PermissionSeeder
+    ```
+1. Modificar seeder **database\seeders\PermissionSeeder.php**:
+    ```php title=""
+    <?php
+
+    namespace Database\Seeders;
+
+    use Illuminate\Database\Seeder;
+    use Spatie\Permission\Models\Permission;
+
+    class PermissionSeeder extends Seeder
+    {
+        /**
+        * Run the database seeds.
+        *
+        * @return void
+        */
+        public function run()
+        {
+            Permission::create(['name' => 'Crear cursos']);
+            Permission::create(['name' => 'Leer cursos']);
+            Permission::create(['name' => 'Actualizar cursos']);
+            Permission::create(['name' => 'Eliminar cursos']);
+            Permission::create(['name' => 'Ver dashboard']);
+            Permission::create(['name' => 'Crear role']);
+            Permission::create(['name' => 'Listar role']);
+            Permission::create(['name' => 'Editar role']);
+            Permission::create(['name' => 'Eliminar role']);
+            Permission::create(['name' => 'Leer usuarios']);
+            Permission::create(['name' => 'Editar usuarios']);
+        }
+    }
+    ```
+1. Modificar seeder **database\seeders\RoleSeeder.php**:
+    ```php title=""
+    <?php
+
+    namespace Database\Seeders;
+
+    use Illuminate\Database\Seeder;
+    use Spatie\Permission\Models\Role;
+
+    class RoleSeeder extends Seeder
+    {
+        /**
+        * Run the database seeds.
+        *
+        * @return void
+        */
+        public function run()
+        {
+            $role = Role::create(['name' => 'Admin']);
+            $role->permissions()->attach([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
+
+            $role = Role::create(['name' => 'Instructor']);
+            $role->syncPermissions(['Crear cursos', 'Leer cursos', 'Actualizar cursos', 'Eliminar cursos']);
+        }
+    }
+    ```
+1. Incluir los seeder de permisos y roles en método **run** de **database\seeders\DatabaseSeeder.php**:
+    ```php title=""
+    public function run()
+    {
+        Storage::deleteDirectory('cursos');
+        Storage::makeDirectory('cursos');
+        
+        $this->call(PermissionSeeder::class);
+        $this->call(RoleSeeder::class);
+
+        $this->call(UserSeeder::class);
+        $this->call(LevelSeeder::class);
+        $this->call(CategorySeeder::class);
+        $this->call(PriceSeeder::class);
+        $this->call(PlatformSeeder::class);
+        $this->call(CourseSeeder::class);
+    }
+    ```
+1. Modificar el método **run** del seeder **database\seeders\UserSeeder.php**:
+    ```php title=""
+    public function run()
+    {
+        $user = User::create([
+            'name' => 'Pedro Jesús Bazó Canelón',
+            'email' => 'bazo.pedro@gmail.com',
+            'password' => bcrypt('12345678')
+        ]);
+
+        $user->assignRole('Admin');
+
+        User::factory(99)->create();
+    }  
+    ```
+1. Ejecutar:
+    ```bash
+    php artisan migrate:fresh --seed
+    ```
+1. Modificar archivo de configuración **config\adminlte.php**:
+    ```php title=""
+    ≡
+    'menu' => [
+        [
+            'text'      => 'search',
+            'search'    => true,
+            'topnav'    => true,
+        ],
+        [
+            'text' => 'blog',
+            'url'  => 'admin/blog',
+            'can'  => 'manage-blog',
+        ],
+        [
+            'text'  => 'Dashboard',
+            'route' => 'admin.home',
+            'icon'  => 'fas fa-fw fa-tachometer-alt',
+            'can'   => 'Ver dashboard'
+        ],
+        [
+            'text'      => 'Lista de roles',
+            'route'     => 'admin.roles.index',
+            'icon'      => 'fas fa-fw fa-users-cog',
+            'can'       => 'Listar role',
+            'active'    => ['admin/roles*'],
+        ],
+        [
+            'text'      => 'Usuarios',
+            'route'     => 'admin.users.index',
+            'icon'      => 'fas fa-fw fa-users',
+            'can'       => 'Leer usuarios',
+            'active'    => ['admin/users*'],
+        ],
+        ≡
+    ```
+1. Proteger ruta **home** en **routes\admin.php**:
+    ```php title=""
+    Route::get('', [HomeController::class, 'index'])->middleware('can:Ver dashboard')->name('home');
+    ```
+1. Crear el método **__construct** en el controlador **app\Http\Controllers\Admin\RoleController.php** para proteger las rutas **roles**:
+    ```php title=""
+    ≡
+    class RoleController extends Controller
+    {
+        public function __construct(){
+            $this->middleware('can:Listar roles')->only('index');
+            $this->middleware('can:Crear role')->only('create', 'store');
+            $this->middleware('can:Editar role')->only('edit', 'update');
+            $this->middleware('can:Eliminar role')->only('destroy');
+        }
+        ≡
+    ```
+1. Crear el método **__construct** en el controlador **app\Http\Controllers\Admin\UserController.php** para proteger las rutas **users**:
+    ```php title=""
+    ≡
+    class UserController extends Controller
+    {
+        public function __construct(){
+            $this->middleware('can:Leer usuarios')->only('index');
+            $this->middleware('can:Editar usuarios')->only('edit', 'update');
+        }
+        ≡
+    ```
+
+
+## Sección 6: Instructores
+### Video 33. Mostrar el listado de cursos de un instructor
+1. Modificar el controlador **app\Http\Livewire\InstructorCourses.php**:
+    ```php title=""
+    <?php
+
+    namespace App\Http\Livewire;
+
+    use App\Models\Course;
+    use Livewire\Component;
+    use Livewire\WithPagination;
+
+    class InstructorCourses extends Component
+    {
+        use WithPagination;
+
+        public $search;
+
+        public function render()
+        {
+            $courses = Course::where('title', 'LIKE', '%' . $this->search . '%')
+                                ->where('user_id', auth()->user()->id)
+                                ->paginate(8);
+            return view('livewire.instructor-courses', compact('courses'));
+        }
+
+        public function limpiar_page(){
+            $this->reset('page');
+        }
+    }
+    ```
+1. Diseñar la vista **resources\views\livewire\instructor-courses.blade.php**:
+    ##### https://tailwindui.com/preview
+    ```php title=""
+    <div class="container py-8">
+        <x-table-responsive>
+            <div class="px-6 py-4">
+                <input wire:keydown="limpiar_page" wire:model="search" class="form-input w-full shadow-sm" placeholder="Ingrese el nombre de un curso ...">
+            </div>
+            @if ($courses->count())
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Nombre
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Matriculados
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Calificación
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Status
+                            </th>
+                            <th scope="col" class="relative px-6 py-3">
+                                <span class="sr-only">Edit</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        @foreach ($courses as $course)
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-10 w-10">
+                                            <img class="h-10 w-10 rounded-full" src="{{ Storage::url($course->image->url) }}" alt="">
+                                        </div>
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900">
+                                                {{ $course->title }}
+                                            </div>
+                                            <div class="text-sm text-gray-500">
+                                                {{ $course->category->name }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">{{ $course->students->count() }}</div>
+                                    <div class="text-sm text-gray-500">Alumnos matriculados</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900 flex items-center">
+                                        {{ $course->rating }}
+                                        <ul class="flex text-sm ml-2">
+                                            <li class="mr-1">
+                                                <i class="fas fa-star text-{{ $course->rating >= 1 ? 'yellow' : 'gray' }}-400"></i>
+                                            </li>
+                                            <li class="mr-1">
+                                                <i class="fas fa-star text-{{ $course->rating >= 2 ? 'yellow' : 'gray' }}-400"></i>
+                                            </li>
+                                            <li class="mr-1">
+                                                <i class="fas fa-star text-{{ $course->rating >= 3 ? 'yellow' : 'gray' }}-400"></i>
+                                            </li>
+                                            <li class="mr-1">
+                                                <i class="fas fa-star text-{{ $course->rating >= 4 ? 'yellow' : 'gray' }}-400"></i>
+                                            </li>
+                                            <li class="mr-1">
+                                                <i class="fas fa-star text-{{ $course->rating == 5 ? 'yellow' : 'gray' }}-400"></i>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="text-sm text-gray-500">Valoración del curso</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    @switch($course->status)
+                                        @case(1)
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                                Borrador
+                                            </span>   
+                                            @break
+                                        @case(2)
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                                Revisión
+                                            </span>   
+                                            @break
+                                        @case(3)
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                Publicado
+                                            </span>   
+                                            @break
+                                        @default        
+                                    @endswitch
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                </td>
+                            </tr>  
+                        @endforeach
+                    </tbody>
+                </table>
+                <div class="px-6 py-4">
+                    {{ $courses->links() }}
+                </div>
+            @else
+                <div class="px-6 py-4">
+                    No hay ningún registro coincidente
+                </div>
+            @endif
+        </x-table-responsive>
+    </div>
+    ```
+1. Crear componente **resources\views\components\table-responsive.blade.php**:
+    ```php title=""
+    <div class="flex flex-col">
+        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+
+                    {{ $slot }}
+
                 </div>
             </div>
         </div>
+    </div>
+    ```
 
 
 ### Video 34. Reorganizar rutas
