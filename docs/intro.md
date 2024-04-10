@@ -60,6 +60,7 @@ sidebar_position: 0
 - [ ] [petrix12/instaclone2022](https://github.com/petrix12/instaclone2022)
 - [ ] [petrix12/voyager2022](https://github.com/petrix12/voyager2022)
 - [ ] [petrix12/laravel-excel-2022](https://github.com/petrix12/laravel-excel-2022)
+- [X] [petrix12/PlataformaDeCursosLaravel](https://github.com/petrix12/PlataformaDeCursosLaravel)
 - [X] [petrix12/AppFileLaravel](https://github.com/petrix12/AppFileLaravel)
 - [X] [petrix12/Sistema-de-Historia-Cl-nica-en-Laravel](https://github.com/petrix12/Sistema-de-Historia-Cl-nica-en-Laravel)
 ### Portafolios
@@ -119,8 +120,6 @@ sidebar_position: 0
 - [ ] [petrix12/awsejemplo](https://github.com/petrix12/awsejemplo)
 - [ ] [petrix12/Desarrollo-Web-Completo-con-HTML5-CSS3-JS-AJAX-PHP-y-MySQL](https://github.com/petrix12/Desarrollo-Web-Completo-con-HTML5-CSS3-JS-AJAX-PHP-y-MySQL)
 - [ ] [petrix12/API-RESTful-con-Laravel-Guia-Definitiva](https://github.com/petrix12/API-RESTful-con-Laravel-Guia-Definitiva)
-- [ ] [petrix12/PlataformaDeCursosLaravel](https://github.com/petrix12/PlataformaDeCursosLaravel)
-- [ ] [aprendible/desarrollo-de-una-api-con-laravel](https://github.com/aprendible/desarrollo-de-una-api-con-laravel)
 
 ### Pruebas
 - [X] [petrix12/octicons](https://github.com/petrix12/octicons)
@@ -128,7 +127,8 @@ sidebar_position: 0
 - [X] [petrix12/autenticacion_firebase](https://github.com/petrix12/autenticacion_firebase)
 - [X] [petrix12/prueba_repositorio](https://github.com/petrix12/prueba_repositorio)
 
-### Compartidos
+### Fork
+- [X] [aprendible/desarrollo-de-una-api-con-laravel](https://github.com/aprendible/desarrollo-de-una-api-con-laravel)
 - [X] [aprendible/aprende-laravel-intermedio](https://github.com/aprendible/aprende-laravel-intermedio)
 - [X] [armandolazarte/aprende-laravel-intermedio](https://github.com/armandolazarte/aprende-laravel-intermedio)
 - [X] [cvva/aprende-laravel-intermedio](https://github.com/cvva/aprende-laravel-intermedio)
