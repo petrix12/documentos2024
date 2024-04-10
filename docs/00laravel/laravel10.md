@@ -1785,6 +1785,10 @@ Route::get('directorio', function() {
     + Método: **hasOne** (Modelo a relacionar, clave foránea, clave primaria) -> Tiene un ...
 + Relación 1:1 inverso (El modelo tiene la clave foránea):
     + Método: **belonsTo** (Modelo a relacionar, clave foránea, clave primaria) -> Pertenece a ...
++ Relacion 1:n (El modelo tiene la clave primaria):
+    + Método: **hasMany** (Modelo a relacionar, clave foránea, clave primaria) -> Tiene unos ...
++ Relacion n:n:
+    + Método: **belongsToMany** (Modelo a relacionar, tabla auxiliar, clave foránea, clave relacionada) -> Tiene unos ...
 :::
 #### Establecer ralación 1:1 de **Modelo** a **OtroModelo** (hasOne -> Tiene)
     ```php
@@ -1841,7 +1845,7 @@ Route::get('directorio', function() {
     class Modelo extends Model {
         // ...
         // Forma simplificada
-        public function otro_modelos() {
+        public function otro_modelos(): HasMany {
             return $this->hasMany('App\Models\OtroModelo');
         }
     }
@@ -1863,12 +1867,14 @@ Route::get('directorio', function() {
     class Modelo extends Model {
         // ...
         // Forma simplificada
-        public function otro_modelos() {
+        public function otro_modelos(): BelongsToMany {
             return $this->belongsToMany('App\Models\OtroModelo')
                 ->withPivot('campo_adicional')
                 ->withTimestamps();
             // El método withPivot sirve para recuperar un campo adicional establecido en la tabla pivote
             // El método withTimesstamps sirve para asignarle valores de creación y actualización a los campos created_at y updated_at
+            // Si queremos acceder al pivote en una vista:
+            // {{ $otro_modelo->pivot->campo_adicional }}
         }
 
         // Ejemplo de código para asignar un valor
@@ -2034,7 +2040,7 @@ Route::get('directorio', function() {
     class Modelo extends Model {
         // ...
         // Relación uno a muchos
-        public function section() {
+        public function section(): HasMany {
             return $this->hasMany(Section::class);
         }
 
