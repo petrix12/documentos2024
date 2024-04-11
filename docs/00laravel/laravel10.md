@@ -1783,12 +1783,38 @@ Route::get('directorio', function() {
 :::tip Tips
 + Relación 1:1 (El modelo tiene la clave primaria):
     + Método: **hasOne** (Modelo a relacionar, clave foránea, clave primaria) -> Tiene un ...
-+ Relación 1:1 inverso (El modelo tiene la clave foránea):
++ Relación 1:1 inversa (El modelo tiene la clave foránea):
     + Método: **belonsTo** (Modelo a relacionar, clave foránea, clave primaria) -> Pertenece a ...
 + Relacion 1:n (El modelo tiene la clave primaria):
     + Método: **hasMany** (Modelo a relacionar, clave foránea, clave primaria) -> Tiene unos ...
 + Relacion n:n:
     + Método: **belongsToMany** (Modelo a relacionar, tabla auxiliar, clave foránea, clave relacionada) -> Tiene unos ...
++ Ralacion 1:1 a traves de:
+    + Método: **hasOneThrough** (Modelo a relacionar, Modelo que tiene la relación directa)
++ Ralacion 1:n a traves de:
+    + Método: **hasManyThrough** (Modelo a relacionar, Modelo que tiene la relación directa)
++ Relación 1:1 polimórfica:
+    + Método: **morphOne** (Clase de la entidad polimórfica, nombre del método de la relación)
++ Relación 1:1 polimórfica inversa:
+    + Método: **morphTo**
++ Relación 1:n polimórfica:
+    + Método: **morphMany** (Clase de la entidad polimórfica, nombre del método de la relación)
+    + **Nota**: no es necesario especificar parámetros si se respetan las convenciones, en caso contrario los parámetros serán:
+        + name
+        + typo
+        + id del tipo
++ Cabecera para tipar las relaciones:
+    ```php
+    use Illuminate\Database\Eloquent\Factories\HasOne;
+    use Illuminate\Database\Eloquent\Factories\BelonsTo;
+    use Illuminate\Database\Eloquent\Factories\HasMany;
+    use Illuminate\Database\Eloquent\Factories\BelongsToMany;
+    use Illuminate\Database\Eloquent\Factories\HasOneThrough;
+    use Illuminate\Database\Eloquent\Factories\HasManyThrough;
+    use Illuminate\Database\Eloquent\Factories\MorphOne;
+    use Illuminate\Database\Eloquent\Factories\MorphTo;
+    use Illuminate\Database\Eloquent\Factories\MorphMany;
+    ```
 :::
 #### Establecer ralación 1:1 de **Modelo** a **OtroModelo** (hasOne -> Tiene)
     ```php
@@ -1902,20 +1928,20 @@ Route::get('directorio', function() {
 + Cuando establezca las relaciones polimórficas del medelo **Tabla** tener en cuenta:
   + En el modelo **Tabla**:
       ```php
-      public function tablanable() {
+      public function tablanable(): MorphTo {
           return $this->morphTo();
       }
       ```
 + En el modelo **Modelo**:
     ```php
     // Relación uno a uno polimórfica
-    public function tabla() {
+    public function tabla(): MorphOne {
         return $this->morphOne('App\Models\Tabla', 'tablaable');
     }
 
     // Relación uno a muchos polimórfica
     // El 2do parámetro es el nombre del método definido en el modelo Tabla
-    public function tablas() {
+    public function tablas(): MorphMany {
         return $this->morphMany('App\Models\Tabla', 'tablaable');   
     }
 
@@ -2029,7 +2055,7 @@ Route::get('directorio', function() {
             return $this->hasOne(Profile::class);
         }
 
-        public function address() {
+        public function address(): HasOneThrough {
             return $this->hasOneThrough(Address::class, Profile::class);
         }
     }
@@ -2045,7 +2071,7 @@ Route::get('directorio', function() {
         }
 
         // Relación uno a mucho a traves de
-        public function lessons() {
+        public function lessons(): HasManyThrough {
             return $this->hasManyhrough(Lesson::class, Section::class);
         }
     }

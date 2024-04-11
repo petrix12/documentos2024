@@ -20,9 +20,9 @@ sidebar_position: 98
     + Visual Studio Code: https://code.visualstudio.com
     + Node Js: https://nodejs.org/es
     + Workbench: https://dev.mysql.com/downloads/workbench
-    #### Opción emergente: (https://www.malavida.com/es/soft/mysql-workbench/#gref)
+    + Opción emergente: (https://www.malavida.com/es/soft/mysql-workbench/#gref)
 
-1. Aumentar la memoria de php:
+2. Aumentar la memoria de php:
     + Ejecutar el panel de control de XAMPP
     + Presionar **Config** de **Apache** e ir a **PHP (php.ini)**
         Cambiar:
@@ -37,19 +37,24 @@ sidebar_position: 98
 
 ### Video 3. Creación de un nuevo proyecto
 1. Crear nuevo proyecto:
-    >
-        $ laravel new codersfree --jet
-    Seleccionar **liwewire** y responder **no** para la pregunta de trabajar con equipos.
-1. Para cargar todos los estilos de Tailwind ejecutar:
-    >
-        $ npm install
-        $ npm run dev
-1. Crear dominio local:
+    ```bash
+    laravel new codersfree --jet
+    ```
+    + Seleccionar **liwewire** y responder **no** para la pregunta de trabajar con equipos.
+2. Para cargar todos los estilos de Tailwind ejecutar:
+    ```bash
+    npm install
+    npm run dev
+    ```
+3. Crear dominio local:
     + Agregar el siguiente código al final del archivo **C:\Windows\System32\drivers\etc\hosts**
-        >
-            # Host virtual Plataforma de cursos Lado del cliente
-            127.0.0.1	codersfree.test
-        ##### **Nota**: Editar con el block de notas en modo de administrador.
+        ```
+        # Host virtual Plataforma de cursos Lado del cliente
+        127.0.0.1	codersfree.test
+        ```
+        :::warning Nota
+        Editar con el block de notas en modo de administrador.
+        :::
     + Agregar el siguiente código al final del archivo **C:\xampp\apache\conf\extra\httpd-vhosts.conf**
         ```
         # Host virtual Plataforma de cursos Lado del servidor
@@ -74,32 +79,37 @@ sidebar_position: 98
         ```
         no deben estar comentada con #.
     + Reiniciar el servidor Apache.
-1. Crear base de datos **codersfree** en MySQL.
-1. Hacer coincidir los parámetros de base de datos y de dominio del proyecto en **.env** en caso de ser necesario
-    >
-        ≡
-        APP_URL=http://codersfree.test
-        ≡
-        DB_CONNECTION=mysql
-        DB_HOST=127.0.0.1
-        DB_PORT=3306
-        DB_DATABASE=codersfree
-        DB_USERNAME=root
-        DB_PASSWORD=
-        ≡  
-1. Modificar **config\filesystems.php**
+4. Crear base de datos **codersfree** en MySQL.
+5. Hacer coincidir los parámetros de base de datos y de dominio del proyecto en **.env** en caso de ser necesario
+    ```env
+    # ...
+    APP_URL=http://codersfree.test
+    # ...
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=codersfree
+    DB_USERNAME=root
+    DB_PASSWORD=
+    # ...
+    ```  
+6. Modificar **config\filesystems.php**
     Cambiar:
-    >
-        'default' => env('FILESYSTEM_DRIVER', 'local'),
+    ```php
+    'default' => env('FILESYSTEM_DRIVER', 'local'),
+    ```
     Por:
-    >
-        'default' => env('FILESYSTEM_DRIVER', 'public'),
-1. Descomentar en **config\jetstream.php**
-    >
-        Features::profilePhotos(),
-1. Ejecutar migraciones:
-    >
-        $ php artisan migrate
+    ```php
+    'default' => env('FILESYSTEM_DRIVER', 'public'),
+    ```
+7. Descomentar en **config\jetstream.php**
+    ```php
+    Features::profilePhotos(),
+    ```
+8. Ejecutar migraciones:
+    ```bash
+    php artisan migrate
+    ```
 
 
 ## Sección 2: Diseño y creación de la base de datos
@@ -110,14 +120,14 @@ sidebar_position: 98
     + Añadir un modelo dando clic en "+".
     + Añadir un diagrama.
     + Guardar el diagrama como **000 Soportes\cursos.mwb**
-1. Diseñar tabla **users**:
+2. Diseñar tabla **users**:
     + Crear tabla **users**
     + Crear campos:
         + id: INT, PK, NN.
         + name: VARCHAR(45), NN.
         + email: VARCHAR(45), NN.
         + password: VARCHAR(45), NN.
-1. Diseñar tabla **profiles**:
+3. Diseñar tabla **profiles**:
     + Crear tabla **profiles**
     + Crear campos:
         + id: INT, PK, NN.
@@ -127,9 +137,9 @@ sidebar_position: 98
         + facebook: VARCHAR(45).
         + lnkedin: VARCHAR(45).
         + youtube: VARCHAR(45).
-1. Relacionar tabla **users** con tabla **profiles** (Relación 1:1)
+4. Relacionar tabla **users** con tabla **profiles** (Relación 1:1)
     + Dar clic en icono de relación 1:1 y luego seleccionar primero la tabla **profiles** que es donde se debe crear la llave foranea.
-1. Diseñar tabla **courses**:
+5. Diseñar tabla **courses**:
     + Crear tabla **courses**
     + Crear campos:
         + id: INT, PK, NN.
@@ -137,143 +147,144 @@ sidebar_position: 98
         + subtitle: VARCHAR(45), NN.
         + description: VARCHAR(45), NN.
         + status: INT, NN.
-1. Relacionar tabla **users** con tabla **courses** (Relación 1:n)
+6. Relacionar tabla **users** con tabla **courses** (Relación 1:n)
     + Dar clic en icono de relación 1:n y luego seleccionar primero la tabla **courses** que es donde se debe crear la llave foranea.
-1. Diseñar tabla pivote entre **courses** y **users**:
+7. Diseñar tabla pivote entre **courses** y **users**:
     + Crear tabla **course_user**
-1. Relacionar tabla **users** con tabla **course_user** (Relación 1:n)
+8. Relacionar tabla **users** con tabla **course_user** (Relación 1:n)
     + Dar clic en icono de relación 1:n y luego seleccionar primero la tabla **course_user** que es donde se debe crear la llave foranea.
-1. Relacionar tabla **courses** con tabla **course_user** (Relación 1:n)
+9. Relacionar tabla **courses** con tabla **course_user** (Relación 1:n)
     + Dar clic en icono de relación 1:n y luego seleccionar primero la tabla **course_user** que es donde se debe crear la llave foranea.
-1. Diseñar tabla **reviews** (Calificaciones de los cursos):
+10. Diseñar tabla **reviews** (Calificaciones de los cursos):
     + Crear tabla **reviews**
     + Crear campos:
         + id: INT, PK, NN.
         + comment: VARCHAR(45).
         + rating: VARCHAR(45).
-1. Relacionar tabla **users** con tabla **reviews** (Relación 1:n)
+11. Relacionar tabla **users** con tabla **reviews** (Relación 1:n)
     + Dar clic en icono de relación 1:n y luego seleccionar primero la tabla **reviews** que es donde se debe crear la llave foranea.
-1. Relacionar tabla **courses** con tabla **reviews** (Relación 1:n)
+12. Relacionar tabla **courses** con tabla **reviews** (Relación 1:n)
     + Dar clic en icono de relación 1:n y luego seleccionar primero la tabla **reviews** que es donde se debe crear la llave foranea.
-1. Diseñar tabla **levels**:
+13. Diseñar tabla **levels**:
     + Crear tabla **levels**
     + Crear campos:
         + id: INT, PK, NN.
         + name: VARCHAR(45).
-1. Relacionar tabla **levels** con tabla **courses** (Relación 1:n)
+14. Relacionar tabla **levels** con tabla **courses** (Relación 1:n)
     + Dar clic en icono de relación 1:n y luego seleccionar primero la tabla **courses** que es donde se debe crear la llave foranea.
-1. Diseñar tabla **categories**:
+15. Diseñar tabla **categories**:
     + Crear tabla **categories**
     + Crear campos:
         + id: INT, PK, NN.
         + name: VARCHAR(45).
-1. Relacionar tabla **categories** con tabla **courses** (Relación 1:n)
+16. Relacionar tabla **categories** con tabla **courses** (Relación 1:n)
     + Dar clic en icono de relación 1:n y luego seleccionar primero la tabla **courses** que es donde se debe crear la llave foranea.
-1. Diseñar tabla **prices**:
+17. Diseñar tabla **prices**:
     + Crear tabla **prices**
     + Crear campos:
         + id: INT, PK, NN.
         + name: VARCHAR(45).
         + value: INT.
-1. Relacionar tabla **prices** con tabla **courses** (Relación 1:n)
+18. Relacionar tabla **prices** con tabla **courses** (Relación 1:n)
     + Dar clic en icono de relación 1:n y luego seleccionar primero la tabla **courses** que es donde se debe crear la llave foranea.
-1. Diseñar tabla **goals** (Metas del curso):
+19. Diseñar tabla **goals** (Metas del curso):
     + Crear tabla **goals**
     + Crear campos:
         + id: INT, PK, NN.
         + name: VARCHAR(45).
-1. Relacionar tabla **courses** con tabla **goals** (Relación 1:n)
+20. Relacionar tabla **courses** con tabla **goals** (Relación 1:n)
     + Dar clic en icono de relación 1:n y luego seleccionar primero la tabla **goals** que es donde se debe crear la llave foranea.
-1. Diseñar tabla **requirements** (Requerimientos del curso):
+21. Diseñar tabla **requirements** (Requerimientos del curso):
     + Crear tabla **requirements**
     + Crear campos:
         + id: INT, PK, NN.
         + name: VARCHAR(45).
-1. Relacionar tabla **courses** con tabla **requirements** (Relación 1:n)
+22. Relacionar tabla **courses** con tabla **requirements** (Relación 1:n)
     + Dar clic en icono de relación 1:n y luego seleccionar primero la tabla **requirements** que es donde se debe crear la llave foranea.
-1. Diseñar tabla **audiences** (Tipo de audiencia del curso):
+23. Diseñar tabla **audiences** (Tipo de audiencia del curso):
     + Crear tabla **requirements**
     + Crear campos:
         + id: INT, PK, NN.
         + name: VARCHAR(45).
-1. Relacionar tabla **courses** con tabla **audiences** (Relación 1:n)
+24. Relacionar tabla **courses** con tabla **audiences** (Relación 1:n)
     + Dar clic en icono de relación 1:n y luego seleccionar primero la tabla **audiences** que es donde se debe crear la llave foranea.
-1. Diseñar tabla **sections** (Secciones de los curso):
+25. Diseñar tabla **sections** (Secciones de los curso):
     + Crear tabla **sections**
     + Crear campos:
         + id: INT, PK, NN.
         + name: VARCHAR(45).
-1. Relacionar tabla **courses** con tabla **sections** (Relación 1:n)
+26. Relacionar tabla **courses** con tabla **sections** (Relación 1:n)
     + Dar clic en icono de relación 1:n y luego seleccionar primero la tabla **sections** que es donde se debe crear la llave foranea.
-1. Diseñar tabla **lessons** (Lecciones por sección):
+27. Diseñar tabla **lessons** (Lecciones por sección):
     + Crear tabla **lessons**
     + Crear campos:
         + id: INT, PK, NN.
         + name: VARCHAR(45).
         + url: VARCHAR(45).
         + iframe: VARCHAR(45).
-1. Relacionar tabla **sections** con tabla **lessons** (Relación 1:n)
+28. Relacionar tabla **sections** con tabla **lessons** (Relación 1:n)
     + Dar clic en icono de relación 1:n y luego seleccionar primero la tabla **lessons** que es donde se debe crear la llave foranea.
-1. Diseñar tabla **platforms** (Lecciones por sección):
+29. Diseñar tabla **platforms** (Lecciones por sección):
     + Crear tabla **platforms**
     + Crear campos:
         + id: INT, PK, NN.
         + name: VARCHAR(45).
-1. Relacionar tabla **platforms** con tabla **lessons** (Relación 1:n)
+30. Relacionar tabla **platforms** con tabla **lessons** (Relación 1:n)
     + Dar clic en icono de relación 1:n y luego seleccionar primero la tabla **lessons** que es donde se debe crear la llave foranea.
-1. Diseñar tabla **descriptions** (Descripción de la lección):
+32. Diseñar tabla **descriptions** (Descripción de la lección):
     + Crear tabla **descriptions**
     + Crear campos:
         + id: INT, PK, NN.
         + name: VARCHAR(45).
-1. Relacionar tabla **lessons** con tabla **descriptions** (Relación 1:1)
+33. Relacionar tabla **lessons** con tabla **descriptions** (Relación 1:1)
     + Dar clic en icono de relación 1:1 y luego seleccionar primero la tabla **descriptions** que es donde se debe crear la llave foranea.
-1. Diseñar tabla **resources** (Recursos de la lección):
+34. Diseñar tabla **resources** (Recursos de la lección):
     + Crear tabla **resources**
     + Crear campos:
         + id: INT, PK, NN.
         + url: VARCHAR(45).
         + resourceable_id: INT.
         + resourceable_type: VARCHAR(45).
-1. Diseñar tabla pivote entre **lesson** y **users**:
+35. Diseñar tabla pivote entre **lesson** y **users**:
     + Crear tabla **lesson_user**
-1. Relacionar tabla **users** con tabla **lesson_user** (Relación 1:n)
+36. Relacionar tabla **users** con tabla **lesson_user** (Relación 1:n)
     + Dar clic en icono de relación 1:n y luego seleccionar primero la tabla **lesson_user** que es donde se debe crear la llave foranea.
-1. Relacionar tabla **lesson** con tabla **lesson_user** (Relación 1:n)
+37. Relacionar tabla **lesson** con tabla **lesson_user** (Relación 1:n)
     + Dar clic en icono de relación 1:n y luego seleccionar primero la tabla **lesson_user** que es donde se debe crear la llave foranea.
-1. Diseñar tabla **comments**:
+38. Diseñar tabla **comments**:
     + Crear tabla **comments**
     + Crear campos:
         + id: INT, PK, NN.
         + name: VARCHAR(45).
         + commentable_id: INT.
         + commentable_type: VARCHAR(45).
-1. Relacionar tabla **users** con tabla **comments** (Relación 1:n)
+39. Relacionar tabla **users** con tabla **comments** (Relación 1:n)
     + Dar clic en icono de relación 1:n y luego seleccionar primero la tabla **comments** que es donde se debe crear la llave foranea.
-1. Diseñar tabla **likes**:
+40. Diseñar tabla **likes**:
     + Crear tabla **likes**
     + Crear campos:
         + id: INT, PK, NN.
         + value: INT.
         + likeable_id: INT.
         + likeable_type: VARCHAR(45).
-1. Relacionar tabla **users** con tabla **likes** (Relación 1:n)
+41. Relacionar tabla **users** con tabla **likes** (Relación 1:n)
     + Dar clic en icono de relación 1:n y luego seleccionar primero la tabla **likes** que es donde se debe crear la llave foranea.
-1. Diseñar tabla **images**:
+42. Diseñar tabla **images**:
     + Crear tabla **images**
     + Crear campos:
         + id: INT, PK, NN.
         + url: VARCHAR(45).
         + imageable_id: INT.
         + imageable_type: VARCHAR(45).
-1. Para seguir las convenciones de Laravel cambiar el nombre de todas las llaves foraneas a singular.
+43. Para seguir las convenciones de Laravel cambiar el nombre de todas las llaves foraneas a singular.
 
 
 ### Video 5. Creación de base de datos - Parte 1
 1. Crear modelo y migración Level:
-    >
-        $ php artisan make:model Level -m
-1. Agregar campo **name** a la migración **Level** en **database\migrations\2021_04_17_121231_create_levels_table.php**
+    ```bash
+    php artisan make:model Level -m
+    ```
+2. Agregar campo **name** a la migración **Level** en **database\migrations\2021_04_17_121231_create_levels_table.php**
     ```php title="database\migrations\2021_04_17_121231_create_levels_table.php"
     // ...
     public function up()
@@ -286,10 +297,11 @@ sidebar_position: 98
     }
     // ...
     ```
-1. Crear modelo y migración Category:
-    >
-        $ php artisan make:model Category -m
-1. Agregar campo **name** a la migración **Category** en **database\migrations\2021_04_17_121841_create_categories_table.php**
+3. Crear modelo y migración Category:
+    ```bash
+    php artisan make:model Category -m
+    ```
+4. Agregar campo **name** a la migración **Category** en **database\migrations\2021_04_17_121841_create_categories_table.php**
     ```php title="database\migrations\2021_04_17_121841_create_categories_table.php"
     // ...
     public function up()
@@ -302,10 +314,11 @@ sidebar_position: 98
     }
     // ...
     ```
-1. Crear modelo y migración Price:
-    >
-        $ php artisan make:model Price -m
-1. Agregar campos **name** y **value** a la migración **Price** en **database\migrations\2021_04_17_122207_create_prices_table.php**
+5. Crear modelo y migración Price:
+    ```bash
+    php artisan make:model Price -m
+    ```
+6. Agregar campos **name** y **value** a la migración **Price** en **database\migrations\2021_04_17_122207_create_prices_table.php**
     ```php title="database\migrations\2021_04_17_122207_create_prices_table.php"
     // ...
     public function up()
@@ -319,10 +332,11 @@ sidebar_position: 98
     }
     // ...
     ```
-1. Crear modelo y migración Course:
-    >
-        $ php artisan make:model Course -m
-1. Definir constantes relacionadas con el campo **status** del modelo **Course** en **app\Models\Course.php**
+7. Crear modelo y migración Course:
+    ```bash
+    php artisan make:model Course -m
+    ```
+8. Definir constantes relacionadas con el campo **status** del modelo **Course** en **app\Models\Course.php**
     ```php title="app\Models\Course.php"
     // ...
     class Course extends Model
@@ -335,7 +349,7 @@ sidebar_position: 98
     }
     // ...
     ```
-1. Agregar campos y restricciones de llaves foraneas a la migración **Course** en **database\migrations\2021_04_17_122742_create_courses_table.php** y agregar llamada al modelo **Course**
+9. Agregar campos y restricciones de llaves foraneas a la migración **Course** en **database\migrations\2021_04_17_122742_create_courses_table.php** y agregar llamada al modelo **Course**
     ```php title="database\migrations\2021_04_17_122742_create_courses_table.php"
     // ...
     use App\Models\Course;
@@ -365,10 +379,11 @@ sidebar_position: 98
         }
         // ...
     }
-1. Crear migración para tabla pivote **course_user**:
-    >
-        $ php artisan make:migration create_course_user_table
-1. Agregar campos para las llaves foraneas y sus restricciones a la migración **course_user** en **database\migrations\2021_04_17_133630_create_course_user_table.php**
+10. Crear migración para tabla pivote **course_user**:
+    ```bash
+    php artisan make:migration create_course_user_table
+    ```
+11. Agregar campos para las llaves foraneas y sus restricciones a la migración **course_user** en **database\migrations\2021_04_17_133630_create_course_user_table.php**
     ```php title="database\migrations\2021_04_17_133630_create_course_user_table.php"
     public function up()
     {
@@ -382,10 +397,11 @@ sidebar_position: 98
         });
     }
     ```
-1. Crear modelo y migración Review:
-    >
-        $ php artisan make:model Review -m
-1. Agregar campos, llaves foraneas y restricciones a la migración **Review** en **database\migrations\2021_04_17_134806_create_reviews_table.php**
+12. Crear modelo y migración Review:
+    ```bash
+    php artisan make:model Review -m
+    ```
+13. Agregar campos, llaves foraneas y restricciones a la migración **Review** en **database\migrations\2021_04_17_134806_create_reviews_table.php**
     ```php title="database\migrations\2021_04_17_134806_create_reviews_table.php"
     // ...
     public function up()
@@ -403,10 +419,11 @@ sidebar_position: 98
     }
     // ...
     ```
-1. Crear modelo y migración Profile:
-    >
-        $ php artisan make:model Profile -m
-1. Agregar campos, llave foranea y restricción a la migración **Profile** en **database\migrations\2021_04_17_135614_create_profiles_table.php**
+14. Crear modelo y migración Profile:
+    ```bash
+    php artisan make:model Profile -m
+    ```
+15. Agregar campos, llave foranea y restricción a la migración **Profile** en **database\migrations\2021_04_17_135614_create_profiles_table.php**
     ```php title="database\migrations\2021_04_17_135614_create_profiles_table.php"
     // ...
     public function up()
@@ -426,10 +443,11 @@ sidebar_position: 98
     }
     // ...
     ```
-1. Ejecutar migraciones
-    >
-        $ php artisan migrate
-1. Establecer relación entre el modelo **User** y los modelos **Profile**, **Course** y **Review**.
+16. Ejecutar migraciones
+    ```bash
+    php artisan migrate
+    ```
+17. Establecer relación entre el modelo **User** y los modelos **Profile**, **Course** y **Review**.
     Modelo **User** (**app\Models\User.php**);
     ```php title="app\Models\User.php"
     // ...
@@ -498,7 +516,7 @@ sidebar_position: 98
         }
     }
     ```
-1. Establecer relación entre el modelo **Course** y los meodelos **Review**, **Level**, **Category** y **Price**.
+18. Establecer relación entre el modelo **Course** y los meodelos **Review**, **Level**, **Category** y **Price**.
     Modelo **Course** (**app\Models\Course.php**)
     ```php title="app\Models\Course.php"
     // ...
@@ -578,9 +596,10 @@ sidebar_position: 98
 
 ### Video 6. Creación de base de datos - Parte 2
 1. Crear modelo Requerimientos del curso con su migración:
-    >
-        $ php artisan make:model Requeriment -m
-1. Agregar campo **name** y llave foranea a la migración **Requeriment** en **database\migrations\2021_04_18_134250_create_requeriments_table.php**
+    ```bash
+    php artisan make:model Requeriment -m
+    ```
+2. Agregar campo **name** y llave foranea a la migración **Requeriment** en **database\migrations\2021_04_18_134250_create_requeriments_table.php**
     ```php title="database\migrations\2021_04_18_134250_create_requeriments_table.php"
     // ...
     public function up()
@@ -595,10 +614,11 @@ sidebar_position: 98
     }
     // ...
     ```
-1. Crear modelo para las metas del curso con su migración:
-    >
-        $ php artisan make:model Goal -m
-1. Agregar campo **name** y llave foranea a la migración **Goal** en **database\migrations\2021_04_18_134530_create_goals_table.php**
+3. Crear modelo para las metas del curso con su migración:
+    ```bash
+    php artisan make:model Goal -m
+    ```
+4. Agregar campo **name** y llave foranea a la migración **Goal** en **database\migrations\2021_04_18_134530_create_goals_table.php**
     ```php title="database\migrations\2021_04_18_134530_create_goals_table.php"
     // ...
     public function up()
@@ -613,10 +633,11 @@ sidebar_position: 98
     }
     // ...
     ```
-1. Crear modelo Audience con su migración:
-    >
-        $ php artisan make:model Audience -m
-1. Agregar campo **name** y llave foranea a la migración **Audience** en **database\migrations\2021_04_18_134712_create_audiences_table.php**
+5. Crear modelo Audience con su migración:
+    ```bash
+    php artisan make:model Audience -m
+    ```
+6. Agregar campo **name** y llave foranea a la migración **Audience** en **database\migrations\2021_04_18_134712_create_audiences_table.php**
     ```php title="database\migrations\2021_04_18_134712_create_audiences_table.php"
     // ...
     public function up()
@@ -631,10 +652,11 @@ sidebar_position: 98
     }
     // ...
     ```
-1. Crear modelo Section con su migración:
-    >
-        $ php artisan make:model Section -m
-1. Agregar campo **name** y llave foranea a la migración **Section** en **database\migrations\2021_04_18_134820_create_sections_table.php**
+7. Crear modelo Section con su migración:
+    ```bash
+    php artisan make:model Section -m
+    ```
+8. Agregar campo **name** y llave foranea a la migración **Section** en **database\migrations\2021_04_18_134820_create_sections_table.php**
     ```php title="database\migrations\2021_04_18_134820_create_sections_table.php"
     // ...
     public function up()
@@ -649,11 +671,12 @@ sidebar_position: 98
     }
     // ...
     ```
-1. Ejecutar las migraciones:
-    >
-        $ php artisan migrate
-1. Establecer relación entre el modelo **Course** y los modelos **Requeriment**, **Goal**, **Audience** y **Section**.
-    Modelo **Course** (**app\Models\Course.php**);
+9. Ejecutar las migraciones:
+    ```bash
+    php artisan migrate
+    ```
+10. Establecer relación entre el modelo **Course** y los modelos **Requeriment**, **Goal**, **Audience** y **Section**.
+    + Modelo **Course** (**app\Models\Course.php**);
     ```php title="app\Models\Course.php"
     // ...
     class Course extends Model
@@ -680,7 +703,7 @@ sidebar_position: 98
         }
     }
     ```
-    Modelo **Requeriment** (**app\Models\Requeriment.php**);
+    + Modelo **Requeriment** (**app\Models\Requeriment.php**);
     ```php title="app\Models\Requeriment.ph"
     // ...
     class Requeriment extends Model
@@ -692,7 +715,7 @@ sidebar_position: 98
         }
     }
     ```
-    Modelo **Goal** (**app\Models\Goal.php**);
+    + Modelo **Goal** (**app\Models\Goal.php**);
     ```php title="app\Models\Goal.php"
     // ...
     class Goal extends Model
@@ -704,7 +727,7 @@ sidebar_position: 98
         }
     }
     ```
-    Modelo **Audience** (**app\Models\Audience.php**);
+    + Modelo **Audience** (**app\Models\Audience.php**);
     ```php title="app\Models\Audience.php"
     // ...
     class Audience extends Model
@@ -715,8 +738,9 @@ sidebar_position: 98
             return $this->belongsTo('App\Models\Course');
         }
     }
-    Modelo **Section** (**app\Models\Section.php**);
-    >
+    ```
+    + Modelo **Section** (**app\Models\Section.php**);
+    ```php title="app\Models\Section.php"
     // ...
     class Audience extends Section
     {
@@ -727,10 +751,11 @@ sidebar_position: 98
         }
     }
     ```
-1. Crear modelo Platform del curso con su migración:
-    >
-        $ php artisan make:model Platform -m
-1. Agregar campo **name** a la migración **Platform** en **database\migrations\2021_04_18_142158_create_platforms_table.php**
+11. Crear modelo Platform del curso con su migración:
+    ```bash
+    php artisan make:model Platform -m
+    ```
+12. Agregar campo **name** a la migración **Platform** en **database\migrations\2021_04_18_142158_create_platforms_table.php**
     ```php title="database\migrations\2021_04_18_142158_create_platforms_table.php"
     // ...
     public function up()
@@ -743,10 +768,11 @@ sidebar_position: 98
     }
     // ...
     ```
-1. Crear modelo Lesson con su migración:
-    >
-        $ php artisan make:model Lesson -m
-1. Agregar campos y llaves foraneas a la migración **Lesson** en **database\migrations\2021_04_18_142530_create_lessons_table.php**
+13. Crear modelo Lesson con su migración:
+    ```bash
+    php artisan make:model Lesson -m
+    ```
+14. Agregar campos y llaves foraneas a la migración **Lesson** en **database\migrations\2021_04_18_142530_create_lessons_table.php**
     ```php title="database\migrations\2021_04_18_142530_create_lessons_table.php"
     // ...
     public function up()
@@ -765,10 +791,11 @@ sidebar_position: 98
     }
     // ...
     ```
-1. Crear modelo Description con su migración:
-    >
-        $ php artisan make:model Description -m
-1. Agregar campos y llaves foraneas a la migración **Description** en **database\migrations\2021_04_18_143318_create_descriptions_table.php**
+15. Crear modelo Description con su migración:
+    ```bash
+    php artisan make:model Description -m
+    ```
+16. Agregar campos y llaves foraneas a la migración **Description** en **database\migrations\2021_04_18_143318_create_descriptions_table.php**
     ```php title="database\migrations\2021_04_18_143318_create_descriptions_table.php"
     // ...
     public function up()
@@ -783,10 +810,11 @@ sidebar_position: 98
     }
     // ...
     ```
-1. Crear migración para tabla pivote **lesson_user**:
-    >
-        $ php artisan make:migration create_lesson_user_table
-1. Agregar campos para las llaves foraneas y sus restricciones a la migración **lesson_user** en **database\migrations\2021_04_18_144934_create_lesson_user_table.php**
+17. Crear migración para tabla pivote **lesson_user**:
+    ```bash
+    php artisan make:migration create_lesson_user_table
+    ```
+18. Agregar campos para las llaves foraneas y sus restricciones a la migración **lesson_user** en **database\migrations\2021_04_18_144934_create_lesson_user_table.php**
     ```php title="database\migrations\2021_04_18_144934_create_lesson_user_table.php"
     public function up()
     {
@@ -800,11 +828,12 @@ sidebar_position: 98
         });
     }
     ```
-1. Ejecutar migraciones:
-    >
-        $ php artisan migrate
-1. Establecer relaciones entre el modelo **Lesson** y los modelos: **Section**, **Platform**, **Description** y **User**.
-    Modelo **Lesson** (**app\Models\Lesson.php**)
+19. Ejecutar migraciones:
+    ```bash
+    php artisan migrate
+    ```
+20. Establecer relaciones entre el modelo **Lesson** y los modelos: **Section**, **Platform**, **Description** y **User**.
+    + Modelo **Lesson** (**app\Models\Lesson.php**)
     ```php title="app\Models\Lesson.php"
     // ...
     class Lesson extends Model
@@ -831,7 +860,7 @@ sidebar_position: 98
         }        
     }
     ```
-    Modelo **Section** (**app\Models\Section.php**)
+    + Modelo **Section** (**app\Models\Section.php**)
     ```php title="app\Models\Section.php"
     // ...
     class Section extends Model
@@ -843,7 +872,7 @@ sidebar_position: 98
         }
     }
     ```
-    Modelo **Platform** (**app\Models\Platform.php**)
+    + Modelo **Platform** (**app\Models\Platform.php**)
     ```php title="app\Models\Platform.php"
     // ...
     class Platform extends Model
@@ -855,7 +884,7 @@ sidebar_position: 98
         }
     }
     ```
-    Modelo **Description** (**app\Models\Description.php**)
+    + Modelo **Description** (**app\Models\Description.php**)
     ```php title="app\Models\Description.php"
     // ...
     class Description extends Model
@@ -867,7 +896,7 @@ sidebar_position: 98
         }
     }
     ```
-    Modelo **User** (**app\Models\User.php**)
+    + Modelo **User** (**app\Models\User.php**)
     ```php title="app\Models\User.php"
     // ...
     class User extends Model
@@ -883,9 +912,10 @@ sidebar_position: 98
 
 ### Video 7. Creación de base de datos - Parte 3
 1. Crear modelo Resource jutno con su migración:
-    >
-        $ php artisan make:model Resource -m
-1. Agregar campos a la migración de Resource en **database\migrations\2021_04_19_113720_create_resources_table.php**
+    ```bash
+    php artisan make:model Resource -m
+    ```
+2. Agregar campos a la migración de Resource en **database\migrations\2021_04_19_113720_create_resources_table.php**
     ```php title="database\migrations\2021_04_19_113720_create_resources_table.php"
     public function up()
     {
@@ -898,10 +928,11 @@ sidebar_position: 98
         });
     }
     ```
-1. Crear modelo Comment jutno con su migración:
-    >
-        $ php artisan make:model Comment -m
-1. Agregar campos a la migración de Comment en **database\migrations\2021_04_19_114438_create_comments_table.php**
+3. Crear modelo Comment jutno con su migración:
+    ```bash
+    php artisan make:model Comment -m
+    ```
+4. Agregar campos a la migración de Comment en **database\migrations\2021_04_19_114438_create_comments_table.php**
     ```php title="database\migrations\2021_04_19_114438_create_comments_table.php"
     public function up()
     {
@@ -916,23 +947,25 @@ sidebar_position: 98
         });
     }
     ```
-1. Crear modelo Reaction jutno con su migración:
-    >
-        $ php artisan make:model Reaction -m
-1. Agregar constantes **LIKE** y **DISLIKE** al modelo **Reaction** en **app\Models\Reaction.php**
+5. Crear modelo Reaction jutno con su migración:
+    ```bash
+    php artisan make:model Reaction -m
+    ```
+6. Agregar constantes **LIKE** y **DISLIKE** al modelo **Reaction** en **app\Models\Reaction.php**
     ```php title="app\Models\Reaction.php"
-    ≡
+    // ...
     class Reaction extends Model
     {
-        ≡
+        // ...
         const LIKE = 1;
         const DISLIKE = 2;
     }
     ```
-1. Importar modelo **Reaction** a su migración en **database\migrations\2021_04_19_115056_create_reactions_table.php**
-    >
-        use App\Models\Reaction;
-1. Agregar campos a la migración de Reaction en **database\migrations\2021_04_19_115056_create_reactions_table.php**
+7. Importar modelo **Reaction** a su migración en **database\migrations\2021_04_19_115056_create_reactions_table.php**
+    ```php title="database\migrations\2021_04_19_115056_create_reactions_table.php"
+    use App\Models\Reaction;
+    ```
+8. Agregar campos a la migración de Reaction en **database\migrations\2021_04_19_115056_create_reactions_table.php**
     ```php title="database\migrations\2021_04_19_115056_create_reactions_table.php"
     public function up()
     {
@@ -947,10 +980,11 @@ sidebar_position: 98
         });
     }
     ```
-1. Crear modelo Image jutno con su migración:
-    >
-        $ php artisan make:model Image -m
-1. Agregar campos a la migración de Image en **database\migrations\2021_04_19_120629_create_images_table.php**
+9. Crear modelo Image jutno con su migración:
+    ```bash
+    php artisan make:model Image -m
+    ```
+10. Agregar campos a la migración de Image en **database\migrations\2021_04_19_120629_create_images_table.php**
     ```php title="database\migrations\2021_04_19_120629_create_images_table.php"
     public function up()
     {
@@ -963,60 +997,61 @@ sidebar_position: 98
         });
     }
     ```
-1. Ejecutar migraciones:
-    >
-        $ php artisan migrate
-1. Establecer relación polimorfica en el modelo **Comment** en **app\Models\Comment.php**
+11. Ejecutar migraciones:
+    ```bash
+    php artisan migrate
+    ```
+12. Establecer relación polimorfica en el modelo **Comment** en **app\Models\Comment.php**
     ```php title="app\Models\Comment.php"
-    ≡
+    // ...
     class Comment extends Model
     {
-        ≡
+        // ...
         public function commentable(){
             return $this->morphTo();
         }
     }
     ```
-1. Establecer relación polimorfica en el modelo **Reaction** en **app\Models\Reaction.php**
+13. Establecer relación polimorfica en el modelo **Reaction** en **app\Models\Reaction.php**
     ```php title="app\Models\Reaction.php"
-    ≡
+    // ...
     class Reaction extends Model
     {
-        ≡
+        // ...
         public function reactionable(){
             return $this->morphTo();
         }
     }
     ```
-1. Establecer relación polimorfica en el modelo **Image** en **app\Models\Image.php**
+14. Establecer relación polimorfica en el modelo **Image** en **app\Models\Image.php**
     ```php title="app\Models\Image.php"
-    ≡
+    // ...
     class Image extends Model
     {
-        ≡
+        // ...
         public function imageable(){
             return $this->morphTo();
         }
     }
     ```
-1. Establecer relación polimorfica en el modelo **Resource** en **app\Models\Resource.php**
+15. Establecer relación polimorfica en el modelo **Resource** en **app\Models\Resource.php**
     ```php title="app\Models\Resource.php"
-    ≡
+    // ...
     class Resource extends Model
     {
-        ≡
+        // ...
         public function resourceable(){
             return $this->morphTo();
         }
     }
     ```
-1. Establecer relaciones polimorficas entre el modelo **Lesson** y los modelos **Resource**, **Comment**, **Reaction** e **Image**.
-    Modelo **Lesson** (**app\Models\Lesson.php**)
+16. Establecer relaciones polimorficas entre el modelo **Lesson** y los modelos **Resource**, **Comment**, **Reaction** e **Image**.
+    + Modelo **Lesson** (**app\Models\Lesson.php**)
     ```php title="app\Models\Lesson.php"
-    ≡
+    // ...
     class Lesson extends Model
     {
-        ≡
+        // ...
         // Relación 1:1 polimorfica Lesson - Resource
         public function resource(){
             return $this->morphOne('App\Models\Resource','resourceable');
@@ -1033,12 +1068,12 @@ sidebar_position: 98
         }
     }
     ```
-    Modelo **Comment** (**app\Models\Comment.php**)
+    + Modelo **Comment** (**app\Models\Comment.php**)
     ```php title="app\Models\Comment.php"
-    ≡
+    // ...
     class Comment extends Model
     {
-        ≡
+        // ...
         // Relación 1:n polimorfica
         public function comments(){
             return $this->morphMany('App\Models\Comment','commentable');
@@ -1049,39 +1084,39 @@ sidebar_position: 98
         }
     }
     ```
-1. Establecer relación polimorfica entre los modelos **Course** e **Image**.
-    Modelo **Course** (**app\Models\Course.php**)
+17. Establecer relación polimorfica entre los modelos **Course** e **Image**.
+    + Modelo **Course** (**app\Models\Course.php**)
     ```php title="app\Models\Course.php"
-    ≡
+    // ...
     class Course extends Model
     {
-        ≡
+        // ...
         // Relación 1:1 polimorfica Course - Image
         public function image(){
             return $this->morphOne('App\Models\Image','imageable');
         }
     }
     ```
-1. Establecer ralción **Course**, **Lesson**, **Section**.
-    Modelo **Course** (**app\Models\Course.php**)
+18. Establecer ralción **Course**, **Lesson**, **Section**.
+    + Modelo **Course** (**app\Models\Course.php**)
     ```php title="app\Models\Course.php"
-    ≡
+    // ...
     class Course extends Model
     {
-        ≡
+        // ...
         // Relación entre Course - Lesson y Section como tabla intermedia
         public function lessons(){
             return $this->hasManyThrough('App\Models\Lesson', 'App\Models\Section');
         }
     }
     ```
-1. Relación entre el modelo **User** y los modelos **Comment** y **Reaction**.
-    Modelo **User** (**app\Models\User.php**)
+19. Relación entre el modelo **User** y los modelos **Comment** y **Reaction**.
+    + Modelo **User** (**app\Models\User.php**)
     ```php title="app\Models\User.php"
-    ≡
+    // ...
     class User extends Model
     {
-        ≡
+        // ...
         // Relación 1:n User - Comment
         public function comments(){
             return $this->hasMany('App\Models\Comment');
@@ -1093,24 +1128,24 @@ sidebar_position: 98
         }
     }
     ```
-    Modelo **Comment** (**app\Models\Comment.php**)
+    + Modelo **Comment** (**app\Models\Comment.php**)
     ```php title="app\Models\Comment.php"
-    ≡
+    // ...
     class Comment extends Model
     {
-        ≡
+        // ...
         // Relación 1:n User - Reaction (inversa)
         public function user(){
             return $this->belongsTo('App\Models\User');
         }
     }
     ```
-    Modelo **Reaction** (**app\Models\Reaction.php**)
+    + Modelo **Reaction** (**app\Models\Reaction.php**)
     ```php title="pp\Models\Reaction.php"
-    ≡
+    // ...
     class Reaction extends Model
     {
-        ≡
+        // ...
         // Relación 1:n User - Reaction (inversa)
         public function user(){
             return $this->belongsTo('App\Models\User');
@@ -1118,7 +1153,7 @@ sidebar_position: 98
     }
     ```
 
-
+# -----------------------------------------
 
 
 ### Video 8. Habilitar asignación masiva
