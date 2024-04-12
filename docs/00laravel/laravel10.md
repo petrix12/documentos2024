@@ -1803,6 +1803,10 @@ Route::get('directorio', function() {
         + name
         + typo
         + id del tipo
++ Relación n:n polímórfica: (Nombre tabla auxiliar: **modeloable**, y sus campos: **modelo_id**, **modeloable_id** y **modeloable_type**)
+    + Método: **morphToMany** (Clase de la entidad polimórfica, nombre del método de la relación)
++ Relación n:n polímórfica inversa:
+    + Método: **morphedByMany** (Modelo relacionado, nombre del método relacionado)
 + Cabecera para tipar las relaciones:
     ```php
     use Illuminate\Database\Eloquent\Factories\HasOne;
@@ -1814,6 +1818,7 @@ Route::get('directorio', function() {
     use Illuminate\Database\Eloquent\Factories\MorphOne;
     use Illuminate\Database\Eloquent\Factories\MorphTo;
     use Illuminate\Database\Eloquent\Factories\MorphMany;
+    use Illuminate\Database\Eloquent\Factories\MorphToMany
     ```
 :::
 #### Establecer ralación 1:1 de **Modelo** a **OtroModelo** (hasOne -> Tiene)
@@ -1947,13 +1952,13 @@ Route::get('directorio', function() {
 
     // Relación muchos a muchos polimórfica
     // El 2do parámetro es el nombre de la tabla intermedia en singular
-    public function tablas2() {
+    public function tablas2(): MorphToMany {
         return $this->morphToMany('App\Models\Tabla', 'tablaable');
     }
 
     // Relación muchos a muchos inversa polimórficas
     // El 2do parámetro es el nombre de la tabla intermedia en singular
-    public function tablas3() {
+    public function tablas3(): MorphToMany {
         return $this->morphedByMany('App\Models\Tabla', 'tablaable');
     }
     ```
