@@ -307,11 +307,11 @@ contract MyToken is ERC20 {
 
 :::tip Despliegue
 Para el despliegue proporcionar los siguientes valores:
-NAME_: ejemplo
-SYMBOL_: tkn
-DECIMALS_: 18
-INITIALBALANCE_: 10000
-FEERECEIVER_: 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4 (Dirección del dueño del contrato) 
++ NAME_: ejemplo
++ SYMBOL_: tkn
++ DECIMALS_: 18
++ INITIALBALANCE_: 10000
++ FEERECEIVER_: 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4 (Dirección del dueño del contrato) 
 :::
 :::tip Pruebas
 Para las pruebas comenzar en este orden:

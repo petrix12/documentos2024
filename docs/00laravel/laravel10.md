@@ -2832,36 +2832,90 @@ Se genera el archivo **app\Http\Requests\StoreModelo.php**.
     
 
 ## Middlewares:
-+ Ejemplo de creación de un middleware:
-    + Crear middleware:
-        + $ php artisan make:middleware MiddlewarePrueba
-        + **Nota:** esta acción crea el middleware en **app\Http\Middleware\MiddlewarePrueba.php**.
-    + Establecer lógica del middleware en **app\Http\Middleware\MiddlewarePrueba.php**:
-        ```php
-        ```
-    + Registrar middleware en **app\Http\Kernel.php**:
-        ```php
+### Ejemplo de creación de un middleware:
+1. Crear middleware:
+    ```bash
+    php artisan make:middleware MiddlewarePrueba
+    ```
+    :::tip Nota
+    Esta acción crea el middleware en **app\Http\Middleware\MiddlewarePrueba.php**.
+    :::
+2. Establecer lógica del middleware:
+    ```php title="app\Http\Middleware\MiddlewarePrueba.php"
+    // ...
+    public function handle(Request $request, Closure $next): Response
+    {
+        if($request->autorizado) {
+            return $next($request);
+        } else {
+            return redirect('noautorizado');
+        }
+    }
+    // ...
+    ```
+3. Registrar middleware:
+  ```php title="app\Http\Kernel.php"
+  // ...  
+  protected $middlewareAliases = [
+      // ...
+      'prueba' => \App\Http\Middleware\MiddlewarePrueba::class
+  ];
+  /* A partir de cierta versión de Laravel este array se llama: $routeMiddleware */
+  // ...        
+  ```
+4. Crear rutas para probar middleware:
+    ```php title="routes\web.php"
+    Route::get('prueba', function() {
+        return "Has accedido correctamente a esta ruta";
+    })->middleware('prueba');
+
+    Route::get('prueba2', function() {
+        return "Has accedido correctamente a esta ruta";
+    })->middleware(['prueba', 'auth:sanctum']);
+
+    Route::get('noautorizado', function() {
+        return "No estas autorizado para acceder a esta ruta";
+    });
+    ```
+### Formas de proteger una ruta:
++ Desde el archivo de rutas:
+    ```php title="routes\mi_archivo_de_rutas.php"
+    // Aplicar middleware a una ruta
+    Route::middleware('mi_middleware')->get('mi_ruta', [MiControlador::class, 'mi_metodo']);
+
+    // Aplicar middleware a un grupo de rutas
+    Route::middleware('mi_middleware')->group(function () {
+        Route::get('mi_ruta1', [MiControlador1::class, 'mi_metodo1']);
+        Route::get('mi_ruta2', [MiControlador2::class, 'mi_metodo2']);
         // ...
-        protected $middlewareAliases = [
-            // ...
-            'prueba' => \App\Http\Middleware\MiddlewarePrueba::class
-        ];
-        // ...        
-        ```
-    + Crear rutas en **wireui2024\routes\web.php** para probar middleware:
-        ```php
-        Route::get('prueba', function() {
-            return "Has accedido correctamente a esta ruta";
-        })->middleware('prueba');
+    });
+    
+    // Aplicar varios middlewares a una ruta
+    Route::middleware(['mi_middleware1', 'mi_middleware2', 'mi_middleware3'])->get('mi_ruta', [MiControlador::class, 'mi_metodo']);
 
-        Route::get('prueba2', function() {
-            return "Has accedido correctamente a esta ruta";
-        })->middleware(['prueba', 'auth:sanctum']);
+    // Aplicar varios middlewares a un grupo de rutas
+    Route::middleware(['mi_middleware1', 'mi_middleware2', 'mi_middleware3'])->group(function () {
+        Route::get('mi_ruta1', [MiControlador1::class, 'mi_metodo1']);
+        Route::get('mi_ruta2', [MiControlador2::class, 'mi_metodo2']);
+        // No aplicar el middleware mi_middleware2 a la siguiente ruta
+        Route::get('mi_ruta3', [MiControlador3::class, 'mi_metodo3'])->withoutMiddleware('mi_middleware2');
+        // ...
+    });
+    ```
++ Desde el controlador:
+    ```php title="app\Http\Controllers\ModeloController.php"
+    // ...
+    class ModeloController extends Controller
+    {
+        public function _construct() {
+            $this->middleware('mi_middleware')
+        }
+        // ...
+    }
 
-        Route::get('noautorizado', function() {
-            return "No estas autorizado para acceder a esta ruta";
-        });
-        ```
+
+
+
 
 ## Storage:
 + Acceder al storage:
