@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -53,3 +54,13 @@ Route::get('/opciones', function(Request $request) {
         ->get();
     return $opciones;
 })->name('api.opciones.index');
+
+Route::post('create', [AuthController::class, 'createUser'])->name('api.users.create');
+Route::post('login', [AuthController::class, 'loginUser'])->name('api.users.login');
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
+// Para ingresar a la ruta protegidas por el middleware auth:sanctum, es será necesario en la petición colocar el token de autenticación obtenido en las rutas create o login.
+// Headers -> Accept: application/json
+// Headers -> Authorization: Bearer <API TOKEN>
+// Headers -> Content-Type: application/json

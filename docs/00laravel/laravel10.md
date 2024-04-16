@@ -2914,9 +2914,6 @@ Se genera el archivo **app\Http\Requests\StoreModelo.php**.
     }
 
 
-
-
-
 ## Storage:
 + Acceder al storage:
     ```php
@@ -3918,6 +3915,118 @@ https://spatie.be/index.php/docs/laravel-permission/v6/introduction
 
 
 ## Tips generales:
+### Crear un sistema de autenticación
+1. Crear controlado **AuthController**:
+    ```bash
+    php artisan make:controller AuthController
+    ```
+2. Crear custom request **CreateUserRequest** y **LoginUserRequest**:
+    ```bash
+    php artisan make:request CreateUserRequest    
+    php artisan make:request LoginUserRequest
+    ```
+3. Programar el custom request **CreateUserRequest**
+    ```php title="app\Http\Requests\CreateUserRequest.php"
+    // ...
+    class CreateUserRequest extends FormRequest
+    {
+        // ...
+        public function authorize(): bool
+        {
+            return true;
+        }
+        // ...
+        public function rules(): array
+        {
+            return [
+                'name' => 'required',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required'
+            ];
+        }
+    }
+    ```
+4. Programar el custom request **LoginUserRequest**
+    ```php title="app\Http\Requests\LoginUserRequest.php"
+    // ...
+    class CreateUserRequest extends FormRequest
+    {
+        // ...
+        public function authorize(): bool
+        {
+            return true;
+        }
+        // ...
+        public function rules(): array
+        {
+            return [
+                'email' => 'required|email',
+                'password' => 'required'
+            ];
+        }
+    }
+    ```
+5. Programar controlador **AuthController**:
+    ```php title="app\Http\Controllers\AuthController.php"
+    // ...
+    use App\Http\Requests\CreateUserRequest;
+    use App\Http\Requests\LoginUserRequest;
+    use App\Models\User;
+    use Illuminate\Support\Facades\Auth;
+    //use Illuminate\Http\Request;
+    use Illuminate\Support\Facades\Hash;
+
+    class AuthController extends Controller
+    {
+        public function createUser(CreateUserRequest $request) {
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password)
+            ]);
+
+            return response()->json([
+                'status' => true,
+                'message' => 'User created successfully',
+                'token' => $user->createToken("API TOKEN")->plainTextToken
+            ], 200);
+        }
+        public function loginUser(LoginUserRequest $request) {
+            // Auth::attempt(['email' => $request->email, 'password' => $request->password]);
+            if(!Auth::attempt($request->only('email', 'password'))) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Unauthorized'
+                ], 401);
+            }
+
+            $user = User::where('email', $request['email'])->first();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'User logged successfully',
+                'token' => $user->createToken("API TOKEN")->plainTextToken
+            ], 200);
+        }
+    }    
+    ```
+6. Crear rutas api:
+    ```php title="routes\api.php"
+    Route::post('create', [AuthController::class, 'createUser'])->name('api.users.create');
+    Route::post('login', [AuthController::class, 'loginUser'])->name('api.users.login');
+    // Ruta protegida con el middleware 'auth:sanctum'
+    Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+        return $request->user();
+    });
+    ```
+    :::tip Nota
+    Para ingresar a la ruta protegidas por el middleware auth:sanctum, será necesario en la petición colocar el token de autenticación obtenido en las rutas create o login.
+    + Headers -> Accept: application/json
+    + Headers -> Authorization: Bearer <API TOKEN>
+    + Headers -> Content-Type: application/json        
+    :::
+
+
 ### Crear un arreglo a partir de un campo de una colección:
 ```php
 $coleccion = Modelo::pluck('campo1');
