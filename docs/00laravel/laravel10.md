@@ -41,14 +41,40 @@ sidebar_position: 1
 
 ## Instalación Laravel
 + Instalar el instalador de Laravel:
-    + $ composer global require laravel/installer
+    ```bash
+    composer global require laravel/installer
+    ```
 + Instalación de un proyecto Laravel:
     + Vía composer (no requiere del instalador de Laravel):
-        + $ composer create-project laravel/laravel mi_proyecto_laravel
+        ```bash
+        composer create-project laravel/laravel mi_proyecto_laravel
+        ```
     + Vía instalador de Laravel:
-        + $ laravel new mi_proyecto_laravel
+        ```bash
+        laravel new mi_proyecto_laravel
+        ```
 + Crear un proyecto con Jetstream desde el instalador de Laravel:
-    + $ laravel new mi_proyecto_laravel --jet
+    ```bash
+    laravel new mi_proyecto_laravel --jet
+    ```
++ Instalar el paquete de Laravel Breeze:
+    ```bash
+    composer require laravel/breeze --dev
+    ```
++ Crear un proyecto con Laravel Breeze con el instalador de Laravel
+    ```bash
+    laravel new mi_proyecto
+    ```
+    + Seleccionar breeze y continuar
++ Otra forma de crear un proyecto de Laravel Breeze:
+    ```bash
+    laravel new mi_proyecto_laravel
+    composer require laravel/breeze --dev
+    php artisan breeze:install    
+    php artisan migrate
+    npm install
+    npm run dev    
+    ```
 
 ## Estructura de carpetas de un proyecto Laravel:
 + **app**: lógica principal de la aplicación (backend).
@@ -3292,9 +3318,13 @@ El provider se creo en **app\Providers\PruebaServiceProvider.php**.
 
 ## Algunos comandos artisan:
 + Levantar un servidor web local:
-    + $ php artisan serve
+    ```bash
+    php artisan serve
+    ```
 + Crear un enlace simbólico o acceso directo a el storage de la aplicación:
-    + $ php artisan storage:link
+    ```bash
+    php artisan storage:link
+    ```
 
 ## Caché de Laravel:
 + Archivo de configuración: config\cache.php
@@ -4022,7 +4052,7 @@ https://spatie.be/index.php/docs/laravel-permission/v6/introduction
     :::tip Nota
     Para ingresar a la ruta protegidas por el middleware auth:sanctum, será necesario en la petición colocar el token de autenticación obtenido en las rutas create o login.
     + Headers -> Accept: application/json
-    + Headers -> Authorization: Bearer <API TOKEN>
+    + Headers -> Authorization: Bearer "API TOKEN obtenido"
     + Headers -> Content-Type: application/json        
     :::
 
