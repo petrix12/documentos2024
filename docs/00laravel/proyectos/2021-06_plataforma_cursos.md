@@ -1153,176 +1153,175 @@ sidebar_position: 98
     }
     ```
 
-# -----------------------------------------
-
 
 ### Video 8. Habilitar asignación masiva
-1. Definir campos de asignación para el modelo **Audience** (app\Models\Audience.php):
-    ```php title=
-    ≡
+1. Definir campos de asignación para el modelo **Audience**:
+    ```php title="app\Models\Audience.php"
+    // ...
     class Audience extends Model
     {
         protected $guarded = ['id'];
-        ≡
+        // ...
     }
     ```
-1. Definir campos de asignación para el modelo **Category** (app\Models\Category.php):
-    ```php title=
-    ≡
+2. Definir campos de asignación para el modelo **Category**:
+    ```php title="app\Models\Category.php"
+    // ...
     class Category extends Model
     {
         protected $guarded = ['id'];
-        ≡
+        // ...
     }
     ```
-1. Definir campos de asignación para el modelo **Comment** (app\Models\Comment.php):
-    ```php title=
-    ≡
+3. Definir campos de asignación para el modelo **Comment**:
+    ```php title="app\Models\Comment.php"
+    // ...
     class Comment extends Model
     {
         protected $guarded = ['id'];
-        ≡
+        // ...
     }
     ```
-1. Definir campos de asignación para el modelo **Course** (app\Models\Course.php):
-    ```php title=""
-    ≡
+4. Definir campos de asignación para el modelo **Course**:
+    ```php title="app\Models\Course.php"
+    // ...
     class Course extends Model
     {
         protected $guarded = ['id', 'status'];
-        ≡
+        // ...
     }
     ```
-1. Definir campos de asignación para el modelo **Description** (app\Models\Description.php):
-    ```php title=""
-    ≡
+5. Definir campos de asignación para el modelo **Description**:
+    ```php title="app\Models\Description.php"
+    // ...
     class Description extends Model
     {
         protected $guarded = ['id'];
-        ≡
+        // ...
     }
     ```
-1. Definir campos de asignación para el modelo **Goal** (app\Models\Goal.php):
-    ```php title=""
-    ≡
+6. Definir campos de asignación para el modelo **Goal**:
+    ```php title="app\Models\Goal.php"
+    // ...
     class Goal extends Model
     {
         protected $guarded = ['id'];
-        ≡
+        // ...
     }
     ```
-1. Definir campos de asignación para el modelo **Image** (app\Models\Image.php):
-    ```php title=""
-    ≡
+7. Definir campos de asignación para el modelo **Image**:
+    ```php title="app\Models\Image.php"
+    // ...
     class Image extends Model
     {
         protected $guarded = ['id'];
-        ≡
+        // ...
     }
     ```
-1. Definir campos de asignación para el modelo **Lesson** (app\Models\Lesson.php):
-    ```php title=""
-    ≡
+8. Definir campos de asignación para el modelo **Lesson**:
+    ```php title="app\Models\Lesson.php"
+    // ...
     class Lesson extends Model
     {
         protected $guarded = ['id'];
-        ≡
+        // ...
     }
     ```
-1. Definir campos de asignación para el modelo **Level** (app\Models\Level.php):
-    ```php title=""
-    ≡
+9. Definir campos de asignación para el modelo **Level**:
+    ```php title="app\Models\Level.php"
+    // ...
     class Level extends Model
     {
         protected $guarded = ['id'];
-        ≡
+        // ...
     }
     ```
-1. Definir campos de asignación para el modelo **Platform** (app\Models\Platform.php):
-    ```php title=""
-    ≡
+10. Definir campos de asignación para el modelo **Platform**:
+    ```php title="app\Models\Platform.php"
+    // ...
     class Platform extends Model
     {
         protected $guarded = ['id'];
-        ≡
+        // ...
     }
     ```
-1. Definir campos de asignación para el modelo **Price** (app\Models\Price.php):
-    ```php title=""
-    ≡
+11. Definir campos de asignación para el modelo **Price** ():
+    ```php title="app\Models\Price.php"
+    // ...
     class Price extends Model
     {
         protected $guarded = ['id'];
-        ≡
+        // ...
     }
     ```
-1. Definir campos de asignación para el modelo **Profile** (app\Models\Profile.php):
-    ```php title=""
-    ≡
+12. Definir campos de asignación para el modelo **Profile**:
+    ```php title="app\Models\Profile.php"
+    // ...
     class Profile extends Model
     {
         protected $guarded = ['id'];
-        ≡
+        // ...
     }
     ```
-1. Definir campos de asignación para el modelo **Reaction** (app\Models\Reaction.php):
-    ```php title=""
-    ≡
+13. Definir campos de asignación para el modelo **Reaction**:
+    ```php title="app\Models\Reaction.php"
+    // ...
     class Reaction extends Model
     {
         protected $guarded = ['id'];
-        ≡
+        // ...
     }
     ```
-1. Definir campos de asignación para el modelo **Requeriment** (app\Models\Requeriment.php):
-    ```php title=""
-    ≡
+14. Definir campos de asignación para el modelo **Requeriment**:
+    ```php title="app\Models\Requeriment.php"
+    // ...
     class Requeriment extends Model
     {
         protected $guarded = ['id'];
-        ≡
+        // ...
     }
     ```
-1. Definir campos de asignación para el modelo **Resource** (app\Models\Resource.php):
-    ```php title=""
-    ≡
+15. Definir campos de asignación para el modelo **Resource**:
+    ```php title="app\Models\Resource.php"
+    // ...
     class Resource extends Model
     {
         protected $guarded = ['id'];
-        ≡
+        // ...
     }
     ```
-1. Definir campos de asignación para el modelo **Review** (app\Models\Review.php):
-    ```php title=""
-    ≡
+16. Definir campos de asignación para el modelo **Review**:
+    ```php title="app\Models\Review.php"
+    // ...
     class Review extends Model
     {
         protected $guarded = ['id'];
-        ≡
+        // ...
     }
     ```
-1. Definir campos de asignación para el modelo **Section** (app\Models\Section.php):
-    ```php title=""
-    ≡
+17. Definir campos de asignación para el modelo **Section**:
+    ```php title="app\Models\Section.php"
+    // ...
     class Section extends Model
     {
         protected $guarded = ['id'];
-        ≡
+        // ...
     }
     ```
 
 
 ### Video 9. Llenar la bbdd con datos de prueba
 1. Generar seeder para usuarios:
-    >
-        $ php artisan make:seeder UserSeeder
-1. En el seeder de usuario (database\seeders\UserSeeder.php):
+    ```bash
+    php artisan make:seeder UserSeeder
+    ```
+2. En el seeder **UserSeeder**:
     Importar modelo **User**:
-    ```php title=""
+    ```php title="database\seeders\UserSeeder.php"
     use App\Models\User;
     ```
     Programar método **run**:
-    ```php title=""
+    ```php title="database\seeders\UserSeeder.php"
     public function run()
     {
         User::create([
@@ -1334,25 +1333,26 @@ sidebar_position: 98
         User::factory(99)->create();
     }
     ```
-1. Invocar seeder de usuario desde método **run** de **database\seeders\DatabaseSeeder.php**
-    ```php title=""
+3. Invocar seeder **DatabaseSeeder** desde método **run**:
+    ```php title="database\seeders\DatabaseSeeder.php"
     public function run()
     {
         $this->call(UserSeeder::class);
     }
     ```
-1. Generar seeder para niveles, categorias y precios:
-    >
-        $ php artisan make:seeder LevelSeeder
-        $ php artisan make:seeder CategorySeeder
-        $ php artisan make:seeder PriceSeeder
-1. En el seeder de niveles (database\seeders\LevelSeeder.php):
+4. Generar seeder para niveles, categorias y precios:
+    ```bash
+    php artisan make:seeder LevelSeeder
+    php artisan make:seeder CategorySeeder
+    php artisan make:seeder PriceSeeder
+    ```
+5. En el seeder **LevelSeeder**:
     Importar modelo **Level**:
-    ```php title=""
+    ```php title="database\seeders\LevelSeeder.php"
     use App\Models\Level;
     ```
     Programar método **run**:
-    ```php title=""
+    ```php title="database\seeders\LevelSeeder.php"
     public function run()
     {
         Level::create([
@@ -1368,21 +1368,21 @@ sidebar_position: 98
         ]);
     }
     ```
-1. Invocar seeder de niveles desde método **run** de **database\seeders\DatabaseSeeder.php**
-    ```php title=""
+6. Invocar seeder **DatabaseSeeder** desde método **run**:
+    ```php title="database\seeders\DatabaseSeeder.php"
     public function run()
     {
         ≡
         $this->call(LevelSeeder::class);
     }
     ```
-1. En el seeder de categorias (database\seeders\CategorySeeder.php):
+7. En el seeder **CategorySeeder**:
     Importar modelo **Category**:
-    ```php title=""
+    ```php title="database\seeders\CategorySeeder.php"
     use App\Models\Category;
     ```
     Programar método **run**:
-    ```php title=""
+    ```php title="database\seeders\CategorySeeder.php"
     public function run()
     {
         Category::create([
@@ -1398,21 +1398,21 @@ sidebar_position: 98
         ]);
     }
     ```
-1. Invocar seeder de precios desde método **run** de **database\seeders\DatabaseSeeder.php**
-    ```php title=""
+8. Invocar seeder de precios desde método **run** de **DatabaseSeeder**:
+    ```php title="database\seeders\DatabaseSeeder.php"
     public function run()
     {
-        ≡
+        // ...
         $this->call(CategorySeeder::class);
     }
     ```
-1. En el seeder de precios (database\seeders\PriceSeeder.php):
+9.  En el seeder **PriceSeeder**:
     Importar modelo **Price**:
-    ```php title=""
+    ```php title="database\seeders\PriceSeeder.php"
     use App\Models\Price;
     ```
     Programar método **run**:
-    ```php title=""
+    ```php title="database\seeders\PriceSeeder.php"
     public function run()
     {
         Price::create([
@@ -1436,25 +1436,28 @@ sidebar_position: 98
         ]);
     }
     ```
-1. Invocar seeder de precios desde método **run** de **database\seeders\DatabaseSeeder.php**
-    ```php title=""
+10. Invocar seeder de precios desde método **run** de **DatabaseSeeder**:
+    ```php title="database\seeders\DatabaseSeeder.php"
     public function run()
     {
-        ≡
+        // ...
         $this->call(PriceSeeder::class);
     }
     ```
-1. Refrescar la base de datos y ejecutar los seeder:
-    >
-        $ php artisan migrate:fresh --seed
-1. Generar seeder para cursos:
-    >
-        $ php artisan make:seeder CourseSeeder
-1. Generar factory para cursos:
-    >
-        $ php artisan make:factory CourseFactory
-1. Programar el método **definition** del factory cursos (database\factories\CourseFactory.php);
-    ```php title=""
+11. Refrescar la base de datos y ejecutar los seeder:
+    ```bash
+    php artisan migrate:fresh --seed
+    ```
+12. Generar seeder para cursos:
+    ```bash
+    php artisan make:seeder CourseSeeder
+    ```
+13. Generar factory para cursos:
+    ```bash
+    php artisan make:factory CourseFactory
+    ```
+14. Programar el método **definition** del factory **CourseFactory**;
+    ```php title="database\factories\CourseFactory.php"
     public function definition()
     {
         $title = $this->faker->sentence();
@@ -1472,7 +1475,7 @@ sidebar_position: 98
     }
     ```
     Importar los modelos Course, User, Level, Category y Price y la clase Str:
-    ```php title=""
+    ```php title="database\factories\CourseFactory.php"
     use App\Models\Category;
     use App\Models\Course;
     use App\Models\Level;
@@ -1480,14 +1483,14 @@ sidebar_position: 98
     use App\Models\User;
     use Illuminate\Support\Str;
     ```
-1. En el seeder de cursos (database\seeders\CourseSeeder.php):
+15. En el seeder **CourseSeeder**:
     Importar modelos **Course** e **Image**:
-    ```php title=""
+    ```php title="database\seeders\CourseSeeder.php"
     use App\Models\Course;
     use App\Models\Image;
     ```
     Programar método **run**:
-    ```php title=""
+    ```php title="database\seeders\CourseSeeder.php"
     public function run()
     {
         $courses = Course::factory(40)->create();
@@ -1500,44 +1503,46 @@ sidebar_position: 98
         // ...
     }
     ```
-1. Invocar seeder de cursos desde método **run** de **database\seeders\DatabaseSeeder.php**
-    ```php title=""
+16. Invocar seeder de cursos desde método **run** de **DatabaseSeeder**:
+    ```php title="database\seeders\DatabaseSeeder.php"
     public function run()
     {
-        ≡
+        // ...
         $this->call(CourseSeeder::class);
     }
     ```
-1. Generar factory para imagenes de cursos:
-    >
-        $ php artisan make:factory ImageFactory
-1. Programar el método **definition** del factory imagenes (database\factories\ImageFactory.php);
-    >
-        ***
-1. Indicar la creación de la carpeta **storage/cursos** en **database\seeders\DatabaseSeeder.php**
+17. Generar factory para imagenes de cursos:
+    ```bash
+    php artisan make:factory ImageFactory
+    ```
+18. Programar el método **definition** del factory imagenes (database\factories\ImageFactory.php)
+19. Indicar la creación de la carpeta **storage/cursos** en **DatabaseSeeder**:
     Importar clase **Storage**:
-    >
+    ```php title="database\seeders\DatabaseSeeder.php"
     use Illuminate\Support\Facades\Storage;
+    ```
     Programar en el método **run** la creación de la carpeta
-    ```php title=""
+    ```php title="database\seeders\DatabaseSeeder.php"
     public function run()
     {
         Storage::deleteDirectory('cursos');
         Storage::makeDirectory('cursos');
-        ≡
+        // ...
     }
     ```
-1. Refrescar la base de datos y ejecutar los seeder:
-    >
-        $ php artisan migrate:fresh --seed
-1. Generar factory para los requerimientos, metas, audiencias y secciones:
-    >
-        $ php artisan make:factory RequerimentFactory
-        $ php artisan make:factory GoalFactory
-        $ php artisan make:factory AudienceFactory
-        $ php artisan make:factory SectionFactory
-1. Para los factory requerimientos, metas, audiencias y secciones, programar la generación campo **name** en el método **definition** de sus respectivos factories.
-    ```php title=""
+20. Refrescar la base de datos y ejecutar los seeder:
+    ```bash
+    php artisan migrate:fresh --seed
+    ```
+21. Generar factory para los requerimientos, metas, audiencias y secciones:
+    ```bash
+    php artisan make:factory RequerimentFactory
+    php artisan make:factory GoalFactory
+    php artisan make:factory AudienceFactory
+    php artisan make:factory SectionFactory
+    ```
+22. Para los factory requerimientos, metas, audiencias y secciones, programar la generación campo **name** en el método **definition** de sus respectivos factories.
+    ```php
     public function definition()
     {
         return [
@@ -1545,15 +1550,16 @@ sidebar_position: 98
         ];
     }
     ```
-1. Generar los seeder en cursos para los requerimientos, metas, audiencias y secciones en **database\seeders\CourseSeeder.php**
+23. Generar los seeder en cursos para los requerimientos, metas, audiencias y secciones en **database\seeders\CourseSeeder.php**
     Importar modelos **Requeriment**, **Goal**, **Audience** y **Section**:
-    ```php title=""
+    ```php title="database\seeders\CourseSeeder.php"
     use App\Models\Audience;
     use App\Models\Goal;
     use App\Models\Requeriment;
     use App\Models\Section;
+    ```
     Programar método **run**:
-    ```php title=""
+    ```php title="database\seeders\CourseSeeder.php"
     public function run()
     {
         $courses = Course::factory(40)->create();
@@ -1577,18 +1583,21 @@ sidebar_position: 98
         }
     }
     ```
-1. Refrescar la base de datos y ejecutar los seeder:
-    >
-        $ php artisan migrate:fresh --seed
-1. Generar seeder para plataformas:
-    >
-        $ php artisan make:seeder PlatformSeeder
-1. Importar el modelo **Platform** y programar método **run** para el seeder plataformas (database\seeders\PlatformSeeder.php)
+24. Refrescar la base de datos y ejecutar los seeder:
+    ```bash
+    php artisan migrate:fresh --seed
+    ```
+25. Generar seeder para plataformas:
+    ```bash
+    php artisan make:seeder PlatformSeeder
+    ```
+26. Importar el modelo **Platform** y programar método **run** para el seeder plataformas:
     Importar modelo:
-    >
+    ```php title="database\seeders\PlatformSeeder.php"
     use App\Models\Platform;
+    ```
     Método:
-    ```php title=""
+    ```php title="database\seeders\PlatformSeeder.php"
     public function run()
     {
         Platform::create([
@@ -1600,8 +1609,8 @@ sidebar_position: 98
         ]);
     }
     ```
-1. Agregar el seede Platform a **database\seeders\DatabaseSeeder.php** (antes de CourseSeeder)
-    ```php title=""
+27. Agregar el seede Platform a **database\seeders\DatabaseSeeder.php** (antes de CourseSeeder)
+    ```php title="database\seeders\DatabaseSeeder.php"
     public function run()
     {
         Storage::deleteDirectory('cursos');
@@ -1615,11 +1624,12 @@ sidebar_position: 98
         $this->call(CourseSeeder::class);
     }
     ```
-1. Crear factory para las descripciones:
-    >
-        $ php artisan make:factory DescriptionFactory
-1. Programar método **definition** de **database\factories\DescriptionFactory.php**
-    ```php title=""
+28. Crear factory para las descripciones:
+    ```bash
+    php artisan make:factory DescriptionFactory
+    ```
+29. Programar método **definition** de **DescriptionFactory**:
+    ```php title="database\factories\DescriptionFactory.php"
     public function definition()
     {
         return [
@@ -1627,11 +1637,12 @@ sidebar_position: 98
         ];
     } 
     ``` 
-1. Generar factory para lecciones:
-    >
-     $ php artisan make:factory LessonFactory
-1. Programar método **definition** en **database\factories\LessonFactory.php**
-    ```php title=""
+30. Generar factory para lecciones:
+    ```bash
+    php artisan make:factory LessonFactory
+    ```
+31. Programar método **definition** en **LessonFactory**:
+    ```php title="database\factories\LessonFactory.php"
     public function definition()
     {
         return [
@@ -1642,8 +1653,8 @@ sidebar_position: 98
         ];
     }
     ```
-1. Redefinir método **run** en **database\seeders\CourseSeeder.php**
-    ```php title=""
+32. Redefinir método **run** en **CourseSeeder**:
+    ```php title="database\seeders\CourseSeeder.php"
     public function run()
     {
         $courses = Course::factory(40)->create();
@@ -1678,10 +1689,13 @@ sidebar_position: 98
         }
     }
     ```
-    Importar modelos Lesson y Description:
-        use App\Models\Lesson;
-        use App\Models\Description;
+    + Importar modelos Lesson y Description:
+    ```php
+    use App\Models\Lesson;
+    use App\Models\Description;
+    ```
 
+# -----------------------------------------
 
 ## Sección 3: Frontend de la aplicación
 ### Viedo 10. Instalar la plantilla AdminLTE

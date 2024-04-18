@@ -40,6 +40,7 @@ sidebar_position: 1
 + [Laravel Lang](https://laravel-lang.com/installation.html).
 
 ## Instalación Laravel
+### Instalación de un proyecto de Laravel
 + Instalar el instalador de Laravel:
     ```bash
     composer global require laravel/installer
@@ -53,10 +54,43 @@ sidebar_position: 1
         ```bash
         laravel new mi_proyecto_laravel
         ```
+### Instalación de un proyecto de Laravel Jetstream
 + Crear un proyecto con Jetstream desde el instalador de Laravel:
     ```bash
     laravel new mi_proyecto_laravel --jet
     ```
++ Otra forma de instalar un proyecto con Jetstream:
+    ```bash
+    laravel new mi_proyecto_laravel
+    cd mi_proyecto_laravel
+    composer require laravel/jetstream
+    php artisan jetstream:install livewire  
+    php artisan migrate
+    npm run dev
+    ```
+    :::tip Livewire o Inertia
+    Si se desea instalar con inertia en lugar de livewire, reemplazar:
+    ```bash
+    php artisan jetstream:install livewire
+    ```
+    por:
+    ```bash
+    php artisan jetstream:install inertia
+    ```
+    :::
+    
+    :::tip Instalación con equipos o modo dark
+    Incluir al final de la instrucción de instalación:
+    + Si se desea instalar con equipos:
+        ```bash
+        --teams
+        ```
+    + Si se desea instalar con modo dark:
+        ```bash
+        --dark
+        ```
+    :::
+### Instalación de un proyecto de Laravel Breeze    
 + Instalar el paquete de Laravel Breeze:
     ```bash
     composer require laravel/breeze --dev
@@ -69,6 +103,7 @@ sidebar_position: 1
 + Otra forma de crear un proyecto de Laravel Breeze:
     ```bash
     laravel new mi_proyecto_laravel
+    cd mi_proyecto_laravel
     composer require laravel/breeze --dev
     php artisan breeze:install    
     php artisan migrate
@@ -1337,6 +1372,14 @@ Route::get('directorio', function() {
     @else
         <!-- Se muestra solo si no existe un usuario autenticado -->
     @endauth
+    ```   
++ guest:
+    ```php
+    @guest
+        <!-- Se muestra solo si no existe un usuario autenticado -->
+    @else
+        <!-- Se muestra solo si existe un usuario autenticado -->
+    @endguest
     ```
 + foreach:
     ```php
