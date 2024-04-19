@@ -1695,7 +1695,6 @@ sidebar_position: 98
     use App\Models\Description;
     ```
 
-# -----------------------------------------
 
 ## Sección 3: Frontend de la aplicación
 ### Viedo 10. Instalar la plantilla AdminLTE
@@ -1703,13 +1702,15 @@ sidebar_position: 98
 ##### Plantilla: https://adminlte.io/themes/v3/index.html
 1. En **app\Providers\RouteServiceProvider.php**:
     Cambiar:
-    >
-        public const HOME = '/dashboard';
+    ```php
+    public const HOME = '/dashboard';
+    ```
     Por:
-    >
-        public const HOME = '/';
-1. Crear archivo de rutas **routes\admin.php**
-    ```php title=""
+    ```php
+    public const HOME = '/';
+    ```
+2. Crear archivo de rutas:
+    ```php title="routes\admin.php"
     <?php
 
     use Illuminate\Support\Facades\Route;
@@ -1717,8 +1718,8 @@ sidebar_position: 98
 
     Route::get('',[HomeController::class, 'index']);
     ```
-1. Establecer a **routes\admin.php** como archivo de rutas en **app\Providers\RouteServiceProvider.php** modificando el método **boot**
-    ```php title=""
+3. Establecer a **routes\admin.php** como archivo de rutas en **RouteServiceProvider** modificando el método **boot**:
+    ```php title="app\Providers\RouteServiceProvider.php"
     public function boot()
     {
         $this->configureRateLimiting();
@@ -1740,23 +1741,23 @@ sidebar_position: 98
         });
     } 
     ```       
-1. Definir contralador para administrador:
-    >
-        $ php artisan make:controller Admin\HomeController
-1. Crear método **index** en el controlador **Admin\HomeController**:
-    ```php title=""
+4. Definir contralador para administrador:
+    ```bash
+    php artisan make:controller Admin\HomeController
+    ```
+5. Crear método **index** en el controlador **HomeController**:
+    ```php title="Admin\HomeController"
     public function index(){
         return view('admin.index');
     }
     ```
-1. Integrar AdminLTE: 
-	>
-		$ composer require jeroennoten/laravel-adminlte
-1. Ejecutar: 
-	>
-		$ php artisan adminlte:install
-1. Crear vista **resources\views\admin\index.blade.php**:
-    ```php title=""
+6. Integrar AdminLTE:
+	```bash
+	composer require jeroennoten/laravel-adminlte
+    php artisan adminlte:install
+    ```
+7. Crear vista **resources\views\admin\index.blade.php**:
+    ```php title="resources\views\admin\index.blade.php"
     @extends('adminlte::page')
 
     @section('title', 'Coders Free')
@@ -1778,10 +1779,9 @@ sidebar_position: 98
     @stop
     ```
 
-
 ### Viedo 11. Reutilizar la plantilla Jetstream
-1. Modificar plantilla **resources\views\layouts\app.blade.php**
-    ```php title=""
+1. Modificar plantilla **resources\views\layouts\app.blade.php**:
+    ```php title="resources\views\layouts\app.blade.php"
     <!DOCTYPE html>
     <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
         <head>
@@ -1820,8 +1820,8 @@ sidebar_position: 98
         </body>
     </html>
     ```
-1. Modificar plantilla **resources\views\navigation-menu.blade.php**
-    ```php title=""
+2. Modificar plantilla **resources\views\navigation-menu.blade.php**
+    ```php title="resources\views\navigation-menu.blade.php"
     @php
         $nav_links = [
             [
@@ -2070,13 +2070,16 @@ sidebar_position: 98
         </div>
     </nav>
     ```
-1. Publicar componentes de Jetstream:
-    ###### https://jetstream.laravel.com/2.x/introduction.html
-    >
-        $ php artisan vendor:publish --tag=jetstream-views
+3. Publicar componentes de Jetstream:
+    + Documentación: https://jetstream.laravel.com/2.x/introduction.html
+    ```bash
+    php artisan vendor:publish --tag=jetstream-views
+    ```
+    :::tip Nota
     Todos los componentes de Jetstream se copiaran a **resources\views\vendor\jetstream\components**
-1. Modificar archivo de rutas **routes\web.php**
-    ```php title=""
+    :::
+4. Modificar archivo de rutas:
+    ```php title="routes\web.php"
     <?php
 
     use Illuminate\Support\Facades\Route;
@@ -2089,8 +2092,8 @@ sidebar_position: 98
         return view('dashboard');
     })->name('dashboard');
     ```
-1. Modificar vista **resources\views\welcome.blade.php**
-    ```php title=""
+5. Modificar vista **resources\views\welcome.blade.php**:
+    ```php title="resources\views\welcome.blade.php"
     <x-app-layout>
         
     </x-app-layout>
@@ -2098,9 +2101,9 @@ sidebar_position: 98
 
 
 ### Viedo 12. Clonar repositorio con el avance del curso
-###### Repositorio: https://github.com/coders-free/udemy
-1. Modificar método **definition** en **database\factories\CourseFactory.php**
-    ```php title=""
++ **Repositorio**: https://github.com/coders-free/udemy
+1. Modificar método **definition** en **CourseFactory**:
+    ```php title="database\factories\CourseFactory.php"
     public function definition()
     {
         $title = $this->faker->sentence();
@@ -2117,28 +2120,37 @@ sidebar_position: 98
         ];
     }  
     ``` 
-1. Eliminar proyecto.
-1. Clonar repositorio https://github.com/coders-free/udemy
-    >
-        $ git clone https://github.com/coders-free/udemy.git
-1. Cambiar el nombre de la carpeta del proyecto de **udemy** a **codersfree**.
-1. Instalar las dependencias de **composer** y **npm**.
-    >
-        $ composer install
-        $ npm install
-1. Crear archivo **.env** a partir de **.env.example** y modificar las siguientes variables de entorno:
-    + APP_URL=http://codersfree.test
-    + DB_DATABASE=codersfree
-1. Generar APP_KEY:
-    >
-        $ php artisan key:generate
-1. Generar enlace a almacenamiento:
-    >
-        $ php artisan storage:link 
-1. Refrescar la base de datos:
-    >
-        $ php artisan migrate:fresh --seed
+2. Eliminar proyecto.
+3. Clonar repositorio https://github.com/coders-free/udemy
+    ```bash
+    git clone https://github.com/coders-free/udemy.git
+    ```
+4. Cambiar el nombre de la carpeta del proyecto de **udemy** a **codersfree**.
+5. Instalar las dependencias de **composer** y **npm**.
+    ```bash
+    composer install
+    npm install
+    ```
+6. Crear archivo **.env** a partir de **.env.example** y modificar las siguientes variables de entorno:
+    ```env title=".env"
+    APP_URL=http://codersfree.test
+    DB_DATABASE=codersfree
+    ```
+7. Generar APP_KEY:
+    ```bash
+    php artisan key:generate
+    ```
+8. Generar enlace a almacenamiento:
+    ```bash
+    php artisan storage:link 
+    ```
+9.  Refrescar la base de datos:
+    ```bash
+    php artisan migrate:fresh --seed
+    ```
 
+
+# -----------------------------------------
 
 ### Viedo 13. Recuperar registros de cursos
 1. Crear contraolador **Home**:
