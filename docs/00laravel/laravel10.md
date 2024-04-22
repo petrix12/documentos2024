@@ -4100,7 +4100,7 @@ https://spatie.be/index.php/docs/laravel-permission/v6/introduction
     :::
 
 
-### Crear un arreglo a partir de un campo de una colección:
+### Crear un arreglo a partir de un campo de una colección
 ```php
 $coleccion = Modelo::pluck('campo1');
 ```
@@ -4114,12 +4114,12 @@ $coleccion = Modelo::pluck('campo1');
     ]
     ```
 
-### Encriptar una contraseña:
+### Encriptar una contraseña
 ```php
 $password = bcrypt('12345678');
 ```
 
-### Crear un objeto llave valor a partir de una colección:
+### Crear un objeto llave valor a partir de una colección
 ```php
 $coleccion = Modelo::pluck('valor', 'llave');   
 // Ejemplo: valor puede ser nombre y llave puede ser el id de la colección
@@ -4134,7 +4134,36 @@ $coleccion = Modelo::pluck('valor', 'llave');
     }
     ```
 
-### Evitar que un código se ejecute desde consola:
+### Integrar sweetalert2
++ **Página de Sweetalert2**: https://sweetalert2.github.io
+1. Agregar CDN de Sweetalert2 en la plantilla principal:
+    ```php title="...\resources\views\layouts\app.blade.php"
+    <!-- ... -->
+    <head>
+        <!-- ... -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- ... -->
+        <script>
+            @if(session('swal'))
+                Swal.fire({!! json_encode(session('swal')) !!});
+                // También se puede usar:
+                // Swal.fire(@json(session('swal')));
+            @endif          
+        </script>
+    </head>
+    ```
+2. Para activar sweetalert2 desde un controlador:
+    ```php
+    session()->flash('swal', [
+        'type' => 'success'
+        'title'=> "Título del mensaje",
+        'text'=> "Texto del mensaje a mostrar",
+        'icon'=> "question"
+    ]);
+    ```
+
+
+### Evitar que un código se ejecute desde consola
 ```php
 // ...
 public function mi_metodo() {
@@ -4145,7 +4174,7 @@ public function mi_metodo() {
 // ...
 ```
 
-### Incorparar un select2 utilizando un plugin de jQuery:
+### Incorparar un select2 utilizando un plugin de jQuery
 + Documentación: 
     + https://select2.org
     + https://releases.jquery.com
@@ -4210,7 +4239,7 @@ public function mi_metodo() {
     // ...
     ```
 
-### Incorparar un select2 pasando datos por ajax:
+### Incorparar un select2 pasando datos por ajax
 + Documentación: 
     + https://select2.org
     + https://releases.jquery.com
@@ -4374,7 +4403,7 @@ public function mi_metodo() {
         // ...
         ``` 
 
-### Textarea con formato enriquecido:
+### Textarea con formato enriquecido
 :::tip Documentación
 **CKEditor**: https://ckeditor.com
 :::
@@ -4440,7 +4469,7 @@ Para establecer el alto mínimo y máximo y añadir un scroll bar:
     ```
 :::
 
-### Instalar redis:
+### Instalar redis
 + **Documentación**: https://laravel.com/docs/10.x/redis
 + $ php artisan sail:add
 + Seleccionar: [3] redis
@@ -4485,7 +4514,7 @@ Para establecer el alto mínimo y máximo y añadir un scroll bar:
         + rememberForever()
     + Página con ejemplos de uso: https://kinsta.com/es/blog/laravel-caching
 
-### Alugnos métodos de utilidad:
+### Alugnos métodos de utilidad
 #### isEmpty e isNotEmpty
     ```php title="isEmpty e isNotEmpty"
     <!-- ... -->
