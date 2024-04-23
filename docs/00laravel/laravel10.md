@@ -404,100 +404,101 @@ Route::get('directorio', function() {
 
 
 ## Controladores
-+ Crear controlador:
-    + $ php artisan make:controller Carpeta/NombreController
-+ Ejemplo de un controlador para un CRUD
-    + app\Http\Controllers\ModeloController.php
-        ```php
-        // ...
-        use App\Models\Modelo;
-        use Illuminate\Http\RedirectResponse;
-        use Illuminate\Http\Request;
-        use Illuminate\View\View;
-        // ...
-        class ModeloController extends Controller
-        {
-            public function index(): View {
-                $modelos = Modelo::paginate();
-                return view('crud.modelos.index', compact('modelos'));
-            }
+### Crear controlador
+    ```bash
+    php artisan make:controller Carpeta/NombreController
+    ```
+### Ejemplo de un controlador para un CRUD
+    ```php title="app\Http\Controllers\ModeloController.php"
+    // ...
+    use App\Models\Modelo;
+    use Illuminate\Http\RedirectResponse;
+    use Illuminate\Http\Request;
+    use Illuminate\View\View;
+    // ...
+    class ModeloController extends Controller
+    {
+        public function index(): View {
+            $modelos = Modelo::paginate();
+            return view('crud.modelos.index', compact('modelos'));
+        }
 
-            public function create(): View {
-                return view('crud.modelos.create');
-            }
+        public function create(): View {
+            return view('crud.modelos.create');
+        }
 
-            public function store(Request $request): RedirectResponse {
-                $request->validate([
-                    'propiedad1' => 'required|min:12'
-                    // Forma alternativa:
-                    // 'propiedad1' => ['required', 'min:12']
-                ]);
-                // Forma 1:
-                /*
-                $modelo = new Modelo();
-                $modelo->propiedad1 = $request->propiedad1;
-                $modelo->save();
-                */
+        public function store(Request $request): RedirectResponse {
+            $request->validate([
+                'propiedad1' => 'required|min:12'
+                // Forma alternativa:
+                // 'propiedad1' => ['required', 'min:12']
+            ]);
+            // Forma 1:
+            /*
+            $modelo = new Modelo();
+            $modelo->propiedad1 = $request->propiedad1;
+            $modelo->save();
+            */
 
-                // Forma 2:
-                /*
-                $modelo = Modelo::create([
-                    'propiedad1' => $request->propiedad1
-                ]);
-                */
+            // Forma 2:
+            /*
+            $modelo = Modelo::create([
+                'propiedad1' => $request->propiedad1
+            ]);
+            */
 
-                // Forma 3:
-                $modelo = Modelo::create($request->all());
+            // Forma 3:
+            $modelo = Modelo::create($request->all());
 
-                return redirect()->route('modelos.show', $modelo);
-            }
+            return redirect()->route('modelos.show', $modelo);
+        }
 
-            public function show(Modelo $modelo): View {
-                return view('crud.modelos.show', compact('modelo'));
-            }
+        public function show(Modelo $modelo): View {
+            return view('crud.modelos.show', compact('modelo'));
+        }
 
-            public function edit(Modelo $modelo): View {
-                return view('crud.modelos.edit', compact('modelo'));
-            }
+        public function edit(Modelo $modelo): View {
+            return view('crud.modelos.edit', compact('modelo'));
+        }
 
-            public function update(Request $request, Modelo $modelo): RedirectResponse {
-                $request->validate([
-                    // Reglas de validación
-                    'propiedad1' => 'required|min:12'
-                ], [
-                    // Personalización de los mensajes de error
-                    'propiedad1.required' => 'La propiedad 1 es obligatoria'
-                ], [
-                    // Personalización de los atributos
-                    'propiedad1' => 'Cambio de nombre'
-                ]);
+        public function update(Request $request, Modelo $modelo): RedirectResponse {
+            $request->validate([
+                // Reglas de validación
+                'propiedad1' => 'required|min:12'
+            ], [
+                // Personalización de los mensajes de error
+                'propiedad1.required' => 'La propiedad 1 es obligatoria'
+            ], [
+                // Personalización de los atributos
+                'propiedad1' => 'Cambio de nombre'
+            ]);
 
-                // Forma 1:
-                /*
-                $modelo->propiedad1 = $request->propiedad1;
-                $modelo->save();
-                */
+            // Forma 1:
+            /*
+            $modelo->propiedad1 = $request->propiedad1;
+            $modelo->save();
+            */
 
-                // Forma 2:
-                $modelo->update(['propiedad1' => $request->propiedad1]);
+            // Forma 2:
+            $modelo->update(['propiedad1' => $request->propiedad1]);
 
-                // Forma 3:
-                $modelo->update($request->all());
+            // Forma 3:
+            $modelo->update($request->all());
 
-                return redirect()->route('modelos.show', $modelo);
-            }
+            return redirect()->route('modelos.show', $modelo);
+        }
 
-            public function destroy(Modelo $modelo): RedirectResponse {
-                $modelo->delete();
-                return redirect()->route('modelos.index');
-                /* 
-                    El método redirect también puede recibir la ruta en lugar de su nombre:
-                    return redirect('ruta_a_redirigir');
-                */
-            }
-        }        
-        ```
-+ Emitir una variable de sesión (forma 1):
+        public function destroy(Modelo $modelo): RedirectResponse {
+            $modelo->delete();
+            return redirect()->route('modelos.index');
+            /* 
+                El método redirect también puede recibir la ruta en lugar de su nombre:
+                return redirect('ruta_a_redirigir');
+            */
+        }
+    }        
+    ```
+### Emitir una variable de sesión (forma 1)
     ```php
     // ...
     public function destroy(Modelo $modelo) {
@@ -507,7 +508,7 @@ Route::get('directorio', function() {
     }
     // ...
     ```
-+ Emitir una variable de sesión (forma 2):
+### Emitir una variable de sesión (forma 2)
     ```php
     // ...
     public function destroy(Modelo $modelo) {
@@ -516,11 +517,19 @@ Route::get('directorio', function() {
     }
     // ...
     ```
-+ Crear un controlador tipo resource:
-    + $ php artisan make:controller NameController -r   // --resource
-    + **Nota**: este comando genera un controlador con los métodos necesarios para un CRUD:
-        + index, create, store, show, edit, update y destroy.
-+ Llamar una vista:
+### Crear un controlador tipo resource
+    ```bash
+    php artisan make:controller NameController -r   // --resource
+    ```
+    :::tip Nota
+    Este comando genera un controlador con los métodos necesarios para un CRUD:
+    + index, create, store, show, edit, update y destroy.
+    :::
+### Crear controlador tipo resource asociado a un modelo
+    ```bash
+    php artisan make:controller Carpeta/NombreController -r --model="Modelo"
+    ```
+### Llamar una vista:
     ```php
     // ...
     public function mi_metodo1() {
@@ -537,7 +546,9 @@ Route::get('directorio', function() {
         return view('mi_vista1', compact('mi_variable'));
     }
     ```
-    + **Nota**: se recomienda nombrar las vista igual que el método.
+    :::tip Nota
+    Se recomienda nombrar las vista igual que el método.
+    :::
 
 
 ## Query Builder:
@@ -2403,6 +2414,7 @@ Faker: https://fakerphp.github.io
                     // false: /imagen.jpg
                     'propiedad8' => $this->faker->image('public/storage/img', 640, 480, null, true),
                     'propiedad9' => Hash::make('12345678'), // Encripta el valor contenido en el método make
+                    'url_img' => $this->faker->imageUrl(1280, 720),
 
                     'job' => fake()->jobTitle(),
                     'phone' => fake()->phoneNumber(),
@@ -2900,7 +2912,7 @@ Se genera el archivo **app\Http\Requests\StoreModelo.php**.
         ```
     
 
-## Middlewares:
+## Middlewares
 ### Ejemplo de creación de un middleware:
 1. Crear middleware:
     ```bash
@@ -3148,7 +3160,7 @@ El provider se creo en **app\Providers\PruebaServiceProvider.php**.
     }
     ```
 
-## Pasar parámetros a determinadas vistas:
+## Pasar parámetros a determinadas vistas
 1. Crear archivo **app\View\Composers\ViewComposer.php**:
     ```php
     <?php
@@ -3340,7 +3352,7 @@ El provider se creo en **app\Providers\PruebaServiceProvider.php**.
             ```
             
 
-## Publicar recursos de Laravel:
+## Publicar recursos de Laravel
 + Publicar idiomas:
     + $ php artisan lang:publish
     + **Nota:** para traducir los mensajes al español, crear carpeta **es** y copiar traducidos al español los archivos contenidos en **en**.
@@ -3359,7 +3371,7 @@ El provider se creo en **app\Providers\PruebaServiceProvider.php**.
     <!-- ... -->
     ```
 
-## Algunos comandos artisan:
+## Algunos comandos artisan
 + Levantar un servidor web local:
     ```bash
     php artisan serve
@@ -3369,7 +3381,7 @@ El provider se creo en **app\Providers\PruebaServiceProvider.php**.
     php artisan storage:link
     ```
 
-## Caché de Laravel:
+## Caché de Laravel
 + Archivo de configuración: config\cache.php
 + Aplicar caché a un Controlador:
     ```php

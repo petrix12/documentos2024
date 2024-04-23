@@ -2150,33 +2150,33 @@ sidebar_position: 98
     ```
 
 
-# -----------------------------------------
-
 ### Viedo 13. Recuperar registros de cursos
 1. Crear contraolador **Home**:
-    >
-        $ php artisan make:controller HomeController
-1. Definir método **__invoke** en el controlador **Home** (app\Http\Controllers\HomeController.php):
-    ```php title=""
+    ```bash
+    php artisan make:controller HomeController
+    ```
+2. Definir método **__invoke** en el controlador **Home**:
+    ```php title="app\Http\Controllers\HomeController.php"
     public function __invoke()
     {
         $courses = Course::where('status','3')->latest()->get();
         return view('welcome', compact('courses'));
     }
-    Importar el modelo Course:
-    ```php title=""
+    ```
+    Importar el modelo **Course**:
+    ```php title="app\Http\Controllers\HomeController.php"
     use App\Models\Course;
     ```
-1. Redefinir ruta raíz en **routes\web.php**
-    ```php title=""
+3. Redefinir ruta raíz:
+    ```php title="routes\web.php"
     Route::get('/', HomeController::class)->name('home');
     ```
-    Importar controlador Home:
-    ```php title=""
+    Importar controlador **HomeController**:
+    ```php title="routes\web.php"
     use App\Http\Controllers\HomeController;
     ```
-1. Modificar modelo **Course** (app\Models\Course.php):
-    ```php title=""
+4. Modificar modelo **Course**:
+    ```php title="app\Models\Course.php"
     ≡
     class Course extends Model
     {
@@ -2201,18 +2201,19 @@ sidebar_position: 98
 
 
 ### Viedo 14. Diseña el home de la plataforma
-###### https://tailwindcomponents.com/
-###### https://tailwindcss.com/docs
-###### https://v1.tailwindcss.com/components
++ Documentación:
+    + https://tailwindcomponents.com/
+    + https://tailwindcss.com/docs
+    + https://v1.tailwindcss.com/components
 1. Buscar y descargar una imagen de portada para el curso (de 1920 x 1280).
-    ###### https://pixabay.com/es/
-    ###### https://www.pexels.com/es-es/
-1. Optimizar imagen:
+    + https://pixabay.com/es/
+    + https://www.pexels.com/es-es/
+2. Optimizar imagen:
     + Ir a https://tinypng.com/
-1. Guardar imagen en el proyecto:
+3. Guardar imagen en el proyecto:
     + public\img\home\img_portada.jpg
-1. Modificar vista **welcome** (resources\views\welcome.blade.php):
-    ```php title=""
+4. Modificar vista **welcome**:
+    ```php title="resources\views\welcome.blade.php"
     <x-app-layout>
         <section class="bg-cover" style="background-image: url({{ asset('img/home/img_portada.jpg') }})">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-36">
@@ -2325,69 +2326,68 @@ sidebar_position: 98
         </section>
     </x-app-layout>
     ```
-1. Descargar 4 imagenes (640 x 426) al azar en https://pixabay.com/es/ y guardarlas en **public\img\home** con los nombres:
+5. Descargar 4 imagenes (640 x 426) al azar en https://pixabay.com/es/ y guardarlas en **public\img\home** con los nombres:
     + imagen_1.jpg
     + imagen_2.jpg
     + imagen_3.jpg
     + imagen_4.jpg
-1. Generar ruta cursos en **routes\web.php**
-    ```php title=""
+6. Generar ruta cursos:
+    ```php title="routes\web.php"
     Route::get('cursos', function(){
         return "Aquí se mostrará la lista de cursos";
     })->name('courses.index');
     ```
-1. Importar los estilos de **fontawesome-free** en **resources\views\layouts\app.blade.php**
-    ```php title=""
+7. Importar los estilos de **fontawesome-free** en **app.blade.php**:
+    ```php title="resources\views\layouts\app.blade.php"
     <!DOCTYPE html>
     <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
         <head>
-            ≡
+            <!-- ... -->
             <!-- Styles -->
-            ≡
+            <!-- ... -->
             <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
-            ≡
+            <!-- ... -->
         </head>
-        ≡­
+        <!-- ... -->­
     </html>
     ```
-1. Modificar método run de **database\seeders\CourseSeeder.php**
-    ```php title=""
+8. Modificar método run de **CourseSeeder**
+    ```php title="database\seeders\CourseSeeder.php"
     public function run()
     {
         $courses = Course::factory(100)->create();
-        ≡
+        // ...
     }
     ```
-1. Ejecutar:
-    >
-        $ php artisan migrate:fresh --seed
-1. Modificar el método **__invoke** de **app\Http\Controllers\HomeController.php**
-    ```php title=""
+9. Ejecutar:
+    ```bash
+    php artisan migrate:fresh --seed
+    ```
+10. Modificar el método **__invoke**:
+    ```php title="app\Http\Controllers\HomeController.php"
     public function __invoke()
     {
         $courses = Course::where('status','3')->latest()->get()->take(12);
-        ≡
+        // ...
     }
     ```
-1. Generar ruta ir a un curso en partícular en **routes\web.php**
-    ```php title=""
+11. Generar ruta ir a un curso en partícular:
+    ```php title="routes\web.php"
     Route::get('cursos/{course}', function($course){
         return "Aquí se va a mostrar la información del curso";
     })->name('courses.show');
     ```
-1. Agregar método **getRouteKeyName** al modelo **app\Models\Course.php**
-    ```php title=""
+12. Agregar método **getRouteKeyName** al modelo **Course**
+    ```php title="app\Models\Course.php"
     public function getRouteKeyName(){
         return "slug";
     }
     ```
 
 
-MINUTO 48
-
 ### Viedo 15. Diseñando la vista index de cursos
-1. Modificar **resources\views\navigation-dropdown.blade.php**:
-    ```php title=""
+1. Modificar **navigation-dropdown**:
+    ```php title="resources\views\navigation-dropdown.blade.php"
     @php
         $nav_links = [
             [
@@ -2402,27 +2402,28 @@ MINUTO 48
             ],
         ];
     @endphp
-    ≡
+    <!-- ... -->
     ```
-1. Crear controlador **Course**:
-    >
-        $ php artisan make:controller CourseController       
-1. Crear método **index** en **app\Http\Controllers\CourseController.php**:
-    ```php title=""
+2. Crear controlador **Course**:
+    ```bash
+    php artisan make:controller CourseController       
+    ```
+3. Crear método **index** en **CourseController**:
+    ```php title="app\Http\Controllers\CourseController.php"
     public function index(){
         return view('courses.index');
     }
     ```
-1. Modificar la ruta **cursos** en **routes\web.php**:
-    ```php title=""
+4. Modificar la ruta **cursos**:
+    ```php title="routes\web.php"
     Route::get('cursos', [CourseController::class, 'index'])->name('courses.index');
     ```
     Importar el controlador **Course**:
-    ```php title=""
+    ```php title="routes\web.php"
     use App\Http\Controllers\CourseController;
     ```
-1. Crear vista **resources\views\courses\index.blade.php**:
-    ```php title=""
+5. Crear vista **courses\index**:
+    ```php title="resources\views\courses\index.blade.php"
     <x-app-layout>
         <section class="bg-cover" style="background-image: url({{ asset('img/cursos/img_cursos.jpg') }})">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-36">
@@ -2444,14 +2445,15 @@ MINUTO 48
         @livewire('course-index')
     </x-app-layout>
     ```
-1. Descargar imagen (1920 x 1281) en https://pixabay.com/es/ y nombrarla:
+6. Descargar imagen (1920 x 1281) en https://pixabay.com/es/ y nombrarla:
     + public\img\cursos\img_cursos.jpg
-1. Optimizar imagen en https://tinypng.com/
-1. Crear componente de livewire **CourseIndex**:
-    >
-        $ php artisan make:livewire CourseIndex
-1. Modificar **resources\views\livewire\course-index.blade.php**
-    ```php title=""
+7. Optimizar imagen en https://tinypng.com/
+8. Crear componente de livewire **CourseIndex**:
+    ```bash
+    php artisan make:livewire CourseIndex
+    ```
+9. Modificar **resources\views\livewire\course-index.blade.php**
+    ```php title="resources\views\livewire\course-index.blade.php"
     <div>
         <div class="bg-gray-200 mb-16">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex">
@@ -2539,8 +2541,8 @@ MINUTO 48
         </div>
     </div>
     ```
-1. Modificar método **render** en **app\Http\Livewire\CourseIndex.php**
-    ```php title=""
+10. Modificar método **render** en **app\Http\Livewire\CourseIndex.php**
+    ```php title="app\Http\Livewire\CourseIndex.php"
     public function render()
     {
         $courses = Course::where('status', 3)->latest('id')->paginate(8);
@@ -2555,7 +2557,7 @@ MINUTO 48
 
 ### Viedo 16. Habilitar filtrado de cursos
 1. Modificar el controlador **app\Http\Livewire\CourseIndex.php**
-    ```php title=""
+    ```php title="app\Http\Livewire\CourseIndex.php"
     <?php
 
     namespace App\Http\Livewire;
@@ -2590,8 +2592,8 @@ MINUTO 48
         }
     }
     ```
-1. Modificar la vista **resources\views\livewire\course-index.blade.php**
-    ```php title=""
+2. Modificar la vista **resources\views\livewire\course-index.blade.php**
+    ```php title="resources\views\livewire\course-index.blade.php"
     <div>
         <div class="bg-gray-200 mb-16">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex">
@@ -2639,7 +2641,7 @@ MINUTO 48
         </div>
     </div>
     ```
-1. Agregar métodos query scopes en el modelo **Course** ():
+3. Agregar métodos query scopes en el modelo **Course**:
     ```php title=""
     // Query scope Category
     public function scopeCategory($query, $category_id){
@@ -2655,9 +2657,8 @@ MINUTO 48
         }
     }
     ```
-1. Crear componente de Blade para los cursos:
-    + resources\views\components\course-card.blade.php
-    ```php title=""
+4. Crear componente de Blade para los cursos:
+    ```php title="resources\views\components\course-card.blade.php"
     @props(['course'])
 
     <article class="bg-white shadow-lg rounded overflow-hidden">
@@ -2694,10 +2695,10 @@ MINUTO 48
         </div>
     </article>
     ```
-1. Modificar vista **welcome** (resources\views\welcome.blade.php) para reemplazar la llamada de los cursos por un componente:
-    ```php title=""
+5. Modificar vista **welcome** para reemplazar la llamada de los cursos por un componente:
+    ```php title="resources\views\welcome.blade.php"
     <x-app-layout>
-        ≡
+        <!-- ... -->
         <section class="my-24">
             <h1 class="text-center text-3xl text-gray-600">ÚLTIMOS CURSOS</h1>
             <p class="text-center text-gray-500 text-sm mb-6">Trabajo duro para seguir subiendo cursos</p>
@@ -2712,12 +2713,11 @@ MINUTO 48
 
 
 ### Viedo 17. Crear clases de estilos personalizadas
-1. Deshabilitar la clase container de tailwind en **tailwind.config.js**:
-    ```js title=""
-    ≡
+1. Deshabilitar la clase container de tailwind:
+    ```js title="tailwind.config.js"
+    // ...
     module.exports = {
-        ≡
-        
+        // ...        
         corePlugins: {
             // ...
         container: false,
@@ -2727,8 +2727,8 @@ MINUTO 48
     };
     // ...
     ```
-1. Crear archivo de **estilos resources\css\commom.css**
-    ```css title=""
+2. Crear archivo de **estilos**:
+    ```css title="estilos resources\css\commom.css"
     .container{
         @apply max-w-7xl mx-auto px-4;
     }
@@ -2757,55 +2757,58 @@ MINUTO 48
         }
     }
     ```
-    ##### https://tailwindcss.com/docs/container
-1. Importar **resources\css\commom.css** en **resources\css\app.css**:
-    ```css title=""
+    + https://tailwindcss.com/docs/container
+3. Importar **resources\css\commom.css** en **resources\css\app.css**:
+    ```css title="resources\css\app.css"
     ≡
     @import 'commom.css';
     ```
-1. Compilar los nuevos estilos:
-    >
-        $ npm run watch
+4. Compilar los nuevos estilos:
+    ```bash
+    npm run watch
+    ```
     En caso de error:
-    >
-        $ npm uninstall cross-env (Luego borrar el directorio node_modules)
-        $ npm install --global cross-env
-        $ npm install --no-bin-links
-        $ npm audit fix --force
-        $ npm install
-        $ npm run watch
+        ```bash
+        npm uninstall cross-env (Luego borrar el directorio node_modules)
+        npm install --global cross-env
+        npm install --no-bin-links
+        npm audit fix --force
+        npm install
+        npm run watch
+        ```
     Otra posible solución:
-    >
+        ```bash
         Eliminar direcotorio node_modules
         Eliminar package-lock.json
         $ npm cache clear --force
         $ npm install cross-env
         $ npm install
         $ npm run dev
-1. En la plantilla **resources\views\navigation-dropdown.blade.php**:
+        ```
+5. En la plantilla **resources\views\navigation-dropdown.blade.php**:
     Cambiars:
-    ```php title=""
+    ```php title="resources\views\navigation-dropdown.blade.php"
     class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
     ```
     Por:
-    ```php title=""
+    ```php title="resources\views\navigation-dropdown.blade.php"
     class="container"
     ```
-1. En la vista **resources\views\components\course-card.blade.php**:
+6. En la vista **resources\views\components\course-card.blade.php**:
     Cambiar las clases:
-    ```php title=""
+    ```php title="resources\views\components\course-card.blade.ph"
     class="bg-white shadow-lg rounded overflow-hidden"
     class="px-6 py-4"
     class="text-xl text-gray-700 mb-2 leading-6"
     ```
     Por las clases respectivamente:
-    ```php title=""
+    ```php title="resources\views\components\course-card.blade.ph"
     class="card"
     class="card-body"
     class="card-title"
     ```
-1. Crear archivo de **resources\css\buttons.css**
-    ```css title=""
+7. Crear archivo de **resources\css\buttons.css**
+    ```css title="resources\css\buttons.css"
     .btn {
         @apply font-bold py-2 px-4 rounded;
     }
@@ -2830,28 +2833,32 @@ MINUTO 48
         @apply bg-red-700;
     }
     ```
-    ##### https://v1.tailwindcss.com/components/buttons
-1. Importar **resources\css\buttons.css** en **resources\css\app.css**:
-    ```css title=""
+    + https://v1.tailwindcss.com/components/buttons
+8. Importar **resources\css\buttons.css** en **resources\css\app.css**:
+    ```css title="resources\css\app.css"
     ≡
     @import 'buttons.css';
     ```
-1. En la vista **resources\views\components\course-card.blade.php**:
+9. En la vista **resources\views\components\course-card.blade.php**:
     Reemplazar los textos:
+    ```
     + bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded
     + block text-center w-full
+    ```
     Por estos otros respectivamente:
+    ```
     + btn btn-primary
     + btn-block
+    ```
 
 
 ### Viedo 18. Diseñando la vista show de cursos
-1. Modificar la ruta **courses.show** en **routes\web.php**:
-    ```php title=""
+1. Modificar la ruta **courses.show**:
+    ```php title="routes\web.php"
     Route::get('cursos/{course}', [CourseController::class, 'show'])->name('courses.show');
     ```
-1. Generar el método show en **app\Http\Controllers\CourseController.php**:
-    ```php title=""
+2. Generar el método show en **app\Http\Controllers\CourseController.php**:
+    ```php title="app\Http\Controllers\CourseController.php"
     public function show(Course $course){
         $similares = Course::where('category_id', $course->category_id)
                         ->where('id','!=',$course->id)
@@ -2863,11 +2870,11 @@ MINUTO 48
     }
     ```
     Importar al modelo Course:
-    ```php title=""
+    ```php title="app\Http\Controllers\CourseController.php"
     use App\Models\Course;
     ```
-1. Crear vista **resources\views\courses\show.blade.php**:
-    ```php title=""
+3. Crear vista **resources\views\courses\show.blade.php**:
+    ```php title="resources\views\courses\show.blade.php"
     <x-app-layout>
         <section class="bg-gray-700 py-12 mb-12">
             <div class="container grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -2968,32 +2975,37 @@ MINUTO 48
         </div>
     </x-app-layout>
     ```
-1. En la plantilla **resources\views\navigation-dropdown.blade.php**
+4. En la plantilla **resources\views\navigation-dropdown.blade.php**
     Cambiar:
-    + 'active' => request()->routeIs('courses.index')
+    ```php
+    'active' => request()->routeIs('courses.index')
+    ```
     Por:
-    + 'active' => request()->routeIs('courses.*')
+    ```php
+    'active' => request()->routeIs('courses.*')
+    ```
 
 
 ### Viedo 19. Habilitar matricula de alumnos
 1. Crear ruta para matrícular usuario en **routes\web.php**:
-    ```php title=""
+    ```php title="routes\web.php"
     Route::post('courses/{course}/enrolled', [CourseController::class, 'enrolled'])->middleware('auth')->name('courses.enrolled');
     ```
-1. Crear método **enrolled** en el controlador **app\Http\Controllers\CourseController.php**:
-    ```php title=""
+2. Crear método **enrolled** en el controlador **app\Http\Controllers\CourseController.php**:
+    ```php title="app\Http\Controllers\CourseController.php"
     public function enrolled(Course $course){
         // Agrega un registro a la tabla intermedia course_user
         $course->students()->attach(auth()->user()->id);
         return redirect()->route('courses.status', $course);
     }
     ```
-1. En la vista **resources\views\courses\show.blade.php**:
+3. En la vista **resources\views\courses\show.blade.php**:
     Reemplazar:
-    ```php title=""
+    ```php title="resources\views\courses\show.blade.php"
     <a href="" class="btn btn-danger btn-block mt-4">Llevar este curso</a>
+    ```
     Por:
-    ```php title=""
+    ```php title="resources\views\courses\show.blade.php"
     @can('enrolled', $course)
         <a class="btn btn-danger btn-block mt-4" href="{{ route('courses.status', $course) }}">Continuar con curso</a>
     @else
@@ -3003,27 +3015,28 @@ MINUTO 48
         </form>
     @endcan
     ```
-1. Crear ruta para el control de avance del usuario en **routes\web.php**:
-    ```php title=""
+4. Crear ruta para el control de avance del usuario en **routes\web.php**:
+    ```php title="routes\web.php"
     Route::get('course-status/{course}', function ($course) {
         return "Aquí vas a poder llevar el control de tu avence";
     })->name('courses.status');
     ```
-1. Crear políticas de acceso a llevar curso o continuar curso:
-    >
-        $ php artisan make:policy CoursePolicy   
-1. Crear método **enrolled** a la política **app\Policies\CoursePolicy.php**:
-    ```php title=""
+5. Crear políticas de acceso a llevar curso o continuar curso:
+    ```bash
+    php artisan make:policy CoursePolicy
+    ```
+6. Crear método **enrolled** a la política **app\Policies\CoursePolicy.php**:
+    ```php title="app\Policies\CoursePolicy.php"
     public function enrolled(User $user, Course $course){
         return $course->students->contains($user->id);
     }
     ```
     Importar el modelo **Course**:
-    ```php title=""
+    ```php title="app\Policies\CoursePolicy.php"
     use App\Models\Course;
     ```
 
-
+# -----------------------------------------
 ### Viedo 20. Habilitar el buscador de cursos
 1. Crear componente **Search**:
     >
