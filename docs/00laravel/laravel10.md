@@ -4526,7 +4526,7 @@ Para establecer el alto mínimo y máximo y añadir un scroll bar:
         + rememberForever()
     + Página con ejemplos de uso: https://kinsta.com/es/blog/laravel-caching
 
-### Alugnos métodos de utilidad
+### Alugnos métodos o funciones de utilidad
 #### isEmpty e isNotEmpty
     ```php title="isEmpty e isNotEmpty"
     <!-- ... -->
@@ -4541,4 +4541,8 @@ Para establecer el alto mínimo y máximo y añadir un scroll bar:
     @else
         <!-- colección $registros vacia -->
     @endif
+    ```
+#### Limitar la cantidad de texto
+    ```php
+    <p>{{ Str::limit($variable, 200) }}</p>
     ```
