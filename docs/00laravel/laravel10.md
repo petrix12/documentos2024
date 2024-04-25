@@ -2563,7 +2563,8 @@ Se genera el archivo **app\Http\Requests\StoreModelo.php**.
                 'propiedad3' => "required|unique:nombre_tabla,propiedad3,$modelo_id",
                 'propiedad4' => 'in:1,2',
                 'propiedad5_file' => 'image',
-                'option_id' => 'required|exists:tabla_options,id'
+                'option_id' => 'required|exists:tabla_options,id',
+                'category_id' => 'required|exists:categories,id'
             ];
         }
 
@@ -4546,3 +4547,30 @@ Para establecer el alto mínimo y máximo y añadir un scroll bar:
     ```php
     <p>{{ Str::limit($variable, 200) }}</p>
     ```
+
+#### Alpine
+##### Mantenerse a la escucha de una variable
+```php
+<!-- ... -->
+<form 
+    action="..." 
+    method="POST" 
+    x-data="data()"
+    x-init="$watch('title', value => { string_to_mayusc(value) })"
+>
+    <input type="text" x-model=title />
+    <input type="title_mayusc" x-model=title_mayusc />
+</form>
+<!-- ... -->
+<script>
+    function data() {
+        return {
+            title: '',
+            title_mayusc: '',
+            string_to_mayusc(str) {
+                title_mayusc = str.toUpperCase();
+            }
+        }
+    }
+</script>
+```
