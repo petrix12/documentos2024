@@ -29,3 +29,30 @@ También puedes generar una imagen de un avatar de ti, utilizando la aplicación
 2. Clic en **Crear videos**.
 3. Subir la foto de tu avatar.
 4. Generar video y descargar.
+
+https://suno.com/create
+Ritmos de música:
++ acoustic punk
++ atmospheric anime
++ atmospheric reggae
++ bouncy ballad
++ bouncy grunge
++ chill pop
++ dreamy hip hop
++ dreamy kids music
++ electronic gospel
++ epic j-pop
++ epic salsa
++ folk
++ grime
++ groovy hip hop
++ groovy rap
++ heartfelt new wave
++ powerful ballad
++ powerful dance
++ powerful edm
++ psychedelic raga
++ psychedelic drum and bass
++ uplifting uk garage
++ raga
++ 

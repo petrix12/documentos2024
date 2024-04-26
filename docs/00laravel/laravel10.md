@@ -402,7 +402,6 @@ Route::get('directorio', function() {
 ```
 
 
-
 ## Controladores
 ### Crear controlador
     ```bash
@@ -2464,58 +2463,76 @@ Faker: https://fakerphp.github.io
             ```
 
 ## Mutadores y accesores
-1. Agregar un mutador y un accesor a el modelo **Modelo**:
-    + Modificar el modelo **app\Models\Modelo.php**:
-        ```php
+### Agregar un mutador y un accesor a el modelo **Modelo**:
++ Modificar el modelo:
+    ```php title="app\Models\Modelo.php"
+    // ...
+    use Illuminate\Database\Eloquent\Casts\Attribute;
+
+    class Modelo extends Model
+    {
         // ...
-        use Illuminate\Database\Eloquent\Casts\Attribute;
-
-        class Modelo extends Model
-        {
-            // ...
-            // Definir método para administrar el mutador y el accesor
-            // El método debe recibir el nombre del atributo que se desea modificar
-            // Usando la forma tradicional
-            protected function propiedad1(): Attribute {
-                return new Attribute(
-                    // Accesor
-                    get: function($value) {
-                        // retornar el valor aplicando la transformación deseada
-                        return ucwords($value);
-                    },
-                    // Mutador
-                    set: function($value) {
-                        // retornar el valor aplicando la transformación deseada
-                        return strtolower($value);
-                    }
-                );
-            }
-
-            // Definir método para administrar el mutador y el accesor
-            // El método debe recibir el nombre del atributo que se desea modificar
-            // Usando funciones flecha
-            protected function propiedad2(): Attribute {
-                return new Attribute(
-                    // Accesor
-                    get: fn($value) => ucwords($value),
-                    // Mutador
-                    set: fn($value) => strtolower($value)
-                );
-            }
-
-            // Definir método para administrar el mutador y el accesor
-            // El método debe recibir el nombre del atributo que se desea modificar
-            // Usando la forma antigua
-            // Accesor
-            protected function getPropiedad3Attribute($value) {
-                return  ucwords($value);
-            }
-            // Mutador
-            protected function setPropiedad3Attribute($value) {
-                $this->attributes['propiedad3'] = strtolower($value);
-            }
+        // Definir método para administrar el mutador y el accesor
+        // El método debe recibir el nombre del atributo que se desea modificar
+        // Usando la forma tradicional
+        protected function propiedad1(): Attribute {
+            return new Attribute(
+                // Accesor
+                get: function($value) {
+                    // retornar el valor aplicando la transformación deseada
+                    return ucwords($value);
+                },
+                // Mutador
+                set: function($value) {
+                    // retornar el valor aplicando la transformación deseada
+                    return strtolower($value);
+                }
+            );
         }
-        ```
+
+        // Definir método para administrar el mutador y el accesor
+        // El método debe recibir el nombre del atributo que se desea modificar
+        // Usando funciones flecha
+        protected function propiedad2(): Attribute {
+            return new Attribute(
+                // Accesor
+                get: fn($value) => ucwords($value),
+                // Mutador
+                set: fn($value) => strtolower($value)
+            );
+        }
+
+        // Definir método para administrar el mutador y el accesor
+        // El método debe recibir el nombre del atributo que se desea modificar
+        // Usando la forma antigua
+        // Accesor
+        protected function getPropiedad3Attribute($value) {
+            return  ucwords($value);
+        }
+        // Mutador
+        protected function setPropiedad3Attribute($value) {
+            $this->attributes['propiedad3'] = strtolower($value);
+        }
+    }
+    ```
+### Modificar el valor de un campo cuando este tiene el valor de NULL en BD
+    ```php title="app\Models\Modelo.php"
+    // ...
+    use Illuminate\Database\Eloquent\Casts\Attribute;
+
+    class Modelo extends Model
+    {
+        // ...
+        protected function propiedad2(): Attribute {
+            return new Attribute(
+                // Accesor
+                get: fn() => $this->propiedad2 ?? 'Valor en caso de NULL',
+                // Mutador
+                // ...
+            );
+        }
+    }
+    ```
 
 ## Custom Request (Form Request)
 ### Crear un Custom Request:
@@ -2563,6 +2580,7 @@ Se genera el archivo **app\Http\Requests\StoreModelo.php**.
                 'propiedad3' => "required|unique:nombre_tabla,propiedad3,$modelo_id",
                 'propiedad4' => 'in:1,2',
                 'propiedad5_file' => 'image',
+                'propiedad6' => 'nullable',
                 'option_id' => 'required|exists:tabla_options,id',
                 'category_id' => 'required|exists:categories,id'
             ];
