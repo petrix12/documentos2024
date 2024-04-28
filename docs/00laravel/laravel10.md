@@ -40,20 +40,19 @@ sidebar_position: 1
 + [Laravel Lang](https://laravel-lang.com/installation.html).
 
 ## Instalación Laravel
-### Instalación de un proyecto de Laravel
-+ Instalar el instalador de Laravel:
+### Instalación del instalador de Laravel
+```bash
+composer global require laravel/installer
+```
+### Instalación de un proyecto Laravel:
++ Vía composer (no requiere del instalador de Laravel):
     ```bash
-    composer global require laravel/installer
+    composer create-project laravel/laravel mi_proyecto_laravel
     ```
-+ Instalación de un proyecto Laravel:
-    + Vía composer (no requiere del instalador de Laravel):
-        ```bash
-        composer create-project laravel/laravel mi_proyecto_laravel
-        ```
-    + Vía instalador de Laravel:
-        ```bash
-        laravel new mi_proyecto_laravel
-        ```
++ Vía instalador de Laravel:
+    ```bash
+    laravel new mi_proyecto_laravel
+    ```
 ### Instalación de un proyecto de Laravel Jetstream
 + Crear un proyecto con Jetstream desde el instalador de Laravel:
     ```bash
@@ -110,6 +109,37 @@ sidebar_position: 1
     npm install
     npm run dev    
     ```
+:::tip Instalar Laravel Breeze con Vue.js o React.js
++ Para instalar con Vue.js:
+    ```bash
+    php artisan breeze:install vue
+    ```
++ Para instalar con React.js:
+    ```bash
+    php artisan breeze:install react
+    ```
++ Para instalar con Vue.js con posicionamiento en CEO:
+    ```bash
+    php artisan breeze:install vue --ssr
+    ```
++ Para instalar con React.js con posicionamiento en CEO:
+    ```bash
+    php artisan breeze:install react --ssr
+    ```
++ Con --ssr se pierde algo de velocidad pero se gana en posicionamiento CEO.
++ Para instalar con Vue.js con Next:
+    ```bash
+    php artisan breeze:install vue api
+    ```
++ Para instalar con React.js con Nuxt:
+    ```bash
+    php artisan breeze:install react api
+    ```
++ Para instalar con Modo oscuro:
+    ```bash
+    php artisan breeze:install vue --dark
+    ```
+:::
 
 ## Estructura de carpetas de un proyecto Laravel:
 + **app**: lógica principal de la aplicación (backend).
@@ -516,38 +546,41 @@ Route::get('directorio', function() {
     }
     // ...
     ```
+
 ### Crear un controlador tipo resource
-    ```bash
-    php artisan make:controller NameController -r   // --resource
-    ```
-    :::tip Nota
-    Este comando genera un controlador con los métodos necesarios para un CRUD:
-    + index, create, store, show, edit, update y destroy.
-    :::
+```bash
+php artisan make:controller NameController -r   // --resource
+```
+:::tip Nota
+Este comando genera un controlador con los métodos necesarios para un CRUD:
++ index, create, store, show, edit, update y destroy.
+:::
+
 ### Crear controlador tipo resource asociado a un modelo
-    ```bash
-    php artisan make:controller Carpeta/NombreController -r --model="Modelo"
-    ```
+```bash
+php artisan make:controller Carpeta/NombreController -r --model="Modelo"
+```
+
 ### Llamar una vista:
-    ```php
-    // ...
-    public function mi_metodo1() {
-        return view('mi_vista1');
-    }
-    // ...
-    // Enviar variables a la vista
-    // Forma 1:
-    public function mi_metodo1($mi_variable) {
-        return view('mi_vista1', ['mi_variable' => $mi_variable]);
-    }    
-    // Forma 2:
-    public function mi_metodo1($mi_variable) {
-        return view('mi_vista1', compact('mi_variable'));
-    }
-    ```
-    :::tip Nota
-    Se recomienda nombrar las vista igual que el método.
-    :::
+```php
+// ...
+public function mi_metodo1() {
+    return view('mi_vista1');
+}
+// ...
+// Enviar variables a la vista
+// Forma 1:
+public function mi_metodo1($mi_variable) {
+    return view('mi_vista1', ['mi_variable' => $mi_variable]);
+}    
+// Forma 2:
+public function mi_metodo1($mi_variable) {
+    return view('mi_vista1', compact('mi_variable'));
+}
+```
+:::tip Nota
+Se recomienda nombrar las vista igual que el método.
+:::
 
 
 ## Query Builder:
@@ -3264,111 +3297,145 @@ El provider se creo en **app\Providers\PruebaServiceProvider.php**.
     ```
 
 ## Livewire:
-+ Crear un componente Livewire:
-    + $ php artisan make:livewire componente-livewire
-    + Vista del compoente: resources\views\livewire\componente-livewire.blade.php
-    + Controlador del componente: app\Livewire\ComponenteLivewire.php
-    + Para llamar al componennte desde una vista:
-        ```php
-        @livewire('componente-livewire')
-        ```
-+ Para indicar a un controlador de livewire que:
-    + Use la paginación de Tailwind:
-        ```php
+### Crear un componente Livewire:
+```bash
+php artisan make:livewire componente-livewire
+```
++ Vista del compoente: resources\views\livewire\componente-livewire.blade.php
++ Controlador del componente: app\Livewire\ComponenteLivewire.php
++ Para llamar al componennte desde una vista:
+  ```php
+  @livewire('componente-livewire')
+  ```
++ Otra forma de llamar al componennte desde una vista:
+  ```php
+  <livewire:componente-livewire />
+  ```
+### Bindeo de variables en un componente livewire:
+    ```php title="app\Livewire\ComponenteLivewire.php"
+    // ...
+    class MiComponenteLiveWire extends Component {
         // ...
-        use Livewire\WithPagination;
+        public $variable;
+        // ...
+    }
+    ```
+    ```html title="resources\views\livewire\componente-livewire.blade.php"
+    <!-- ... -->
+    <input type=text wire:model="variable" />
+    <!-- ... -->
+    ```
+### Ciclos de vida de un componente livewire:
+    ```php
+    // ...
+    class MiComponenteLiveWire extends Component {
+        // ...
+        public $variable;
+        // Montar componente
+        public function mount() {
+            // Acciones a ejecutar al montar componente
+            $this->fill(['variable' => 20]);
+        }
+        // ...
+    }
+    ```
+### Para indicar a un controlador de livewire que:
++ Use la paginación de Tailwind:
+    ```php
+    // ...
+    use Livewire\WithPagination;
 
-        class MiComponenteLiveWire extends Component {
-            use WithPagination;
-            // ...
-        }
-        ```
-    + Use el tema de paginación de Bootstrap:
-        ```php
+    class MiComponenteLiveWire extends Component {
+        use WithPagination;
         // ...
-        class MiComponenteLiveWire extends Component {
-            // ...
-            protected $paginationTheme = "bootstrap";
-            // ...
-        }
-        ```
-    + Resetear la paginación cuando se modifique la variable de búsqueda ($search):
-        ```php
+    }
+    ```
++ Use el tema de paginación de Bootstrap:
+    ```php
+    // ...
+    class MiComponenteLiveWire extends Component {
         // ...
-        class MiComponenteLiveWire extends Component {
-            // ...
-            public $search; // Variable de búsqueda
+        protected $paginationTheme = "bootstrap";
+        // ...
+    }
+    ```
++ Resetear la paginación cuando se modifique la variable de búsqueda ($search):
+    ```php
+    // ...
+    class MiComponenteLiveWire extends Component {
+        // ...
+        public $search; // Variable de búsqueda
 
-            public updatingSerach() {
-                $this->resetPage();
-            }
-            // ...
+        public updatingSerach() {
+            $this->resetPage();
         }
-        ```
-+ Integrar **select2** en livewire:
-    + **Página de SELECT2**: https://select2.org
-    + **Página de jQuery**: https://releases.jquery.com 
-    1. Copiar los CDN de select2 y jQuery en la plantilla principal **resources\views\layouts\app.blade.php**:
-        ```html
+        // ...
+    }
+    ```
+### Integrar **select2** en livewire:
++ **Página de SELECT2**: https://select2.org
++ **Página de jQuery**: https://releases.jquery.com 
+1. Copiar los CDN de select2 y jQuery en la plantilla principal **resources\views\layouts\app.blade.php**:
+    ```html
+    <!-- ... -->
+    <head>
         <!-- ... -->
-        <head>
-            <!-- ... -->
-            <!-- Styles -->
-            <!-- ... -->
-            <!-- Colocar en la parte de los css -->
-            <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <!-- Styles -->
+        <!-- ... -->
+        <!-- Colocar en la parte de los css -->
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
-            <!-- Scripts -->
-            <!-- ... -->
-            <!-- Colocar en la parte de los scripts -->
-            <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-            <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>        
-        </head>
+        <!-- Scripts -->
+        <!-- ... -->
+        <!-- Colocar en la parte de los scripts -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>        
+    </head>
+    ```
+2. Ejemplo de uso:
+    1. Crear un compoente livewire: 
+        + $ php artisan make:livewire select2
+    2. Incluir el nuevo compoenente en la vista **resources\views\dashboard.blade.php**:
+        ```php
+        <!-- ... -->
+        @livewire('select2')
+        <!-- ... -->
         ```
-    3. Ejemplo de uso:
-        1. Crear un compoente livewire: 
-            + $ php artisan make:livewire select2
-        2. Incluir el nuevo compoenente en la vista **resources\views\dashboard.blade.php**:
-            ```php
-            <!-- ... -->
-            @livewire('select2')
-            <!-- ... -->
-            ```
-        4. Programar el controlador livewire **app\Livewire\Select2.php**:
-            ```php
+    3. Programar el controlador livewire **app\Livewire\Select2.php**:
+        ```php
+        // ...
+        class Select2 extends Component
+        {
+            public $opcion = 3;
             // ...
-            class Select2 extends Component
-            {
-                public $opcion = 3;
-                // ...
-            }            
-            ```
-        5. Diseñar la vista livewire **resources\views\livewire\select2.blade.php**:
-            ```html
-            <div class="m-5">
-                <p>{{ $opcion }}</p>
-                <div wire:ignore>
-                    <select class="select2" wire:model="opcion">
-                        <option value="1">Laravel</option>
-                        <option value="2">Vue.js</option>
-                        <option value="3">PHP</option>
-                        <option value="4">Javascript</option>
-                        <option value="5">MySQL</option>
-                        <option value="6">Node.js</option>
-                        <option value="7">React.js</option>
-                    </select>
-                </div>
-
-                <script>
-                    $(document).ready(function() {
-                        $('.select2').select2();
-                        $('.select2').on('change', function() {
-                            @this.set('opcion', this.value);
-                        });
-                    });
-                </script>
+        }            
+        ```
+    4. Diseñar la vista livewire **resources\views\livewire\select2.blade.php**:
+        ```html
+        <div class="m-5">
+            <p>{{ $opcion }}</p>
+            <div wire:ignore>
+                <select class="select2" wire:model="opcion">
+                    <option value="1">Laravel</option>
+                    <option value="2">Vue.js</option>
+                    <option value="3">PHP</option>
+                    <option value="4">Javascript</option>
+                    <option value="5">MySQL</option>
+                    <option value="6">Node.js</option>
+                    <option value="7">React.js</option>
+                </select>
             </div>
-            ```
+
+            <script>
+                $(document).ready(function() {
+                    $('.select2').select2();
+                    $('.select2').on('change', function() {
+                        @this.set('opcion', this.value);
+                    });
+                });
+            </script>
+        </div>
+        ```
             
 
 ## Publicar recursos de Laravel
