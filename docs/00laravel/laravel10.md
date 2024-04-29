@@ -2614,6 +2614,8 @@ Se genera el archivo **app\Http\Requests\StoreModelo.php**.
                 'propiedad4' => 'in:1,2',
                 'propiedad5_file' => 'image',
                 'propiedad6' => 'nullable',
+                'publicado' => 'required|boolean',
+                'descripcion' => $request->publicado ? 'required' : 'nullable',
                 'option_id' => 'required|exists:tabla_options,id',
                 'category_id' => 'required|exists:categories,id'
             ];
@@ -4611,6 +4613,47 @@ Para establecer el alto mínimo y máximo y añadir un scroll bar:
         + remember()
         + rememberForever()
     + Página con ejemplos de uso: https://kinsta.com/es/blog/laravel-caching
+
+
+### Previsualizar una imagen
++ https://codersfree.com/posts/previsualizar-una-imagen-con-javascript
+```html title="vista.php"
+<!-- ... -->
+<div class="relative">
+    <figure>
+        <img id="imgPreview" src="{{ $imagen }}"/>
+        <div class="absolute">
+            <label>
+                Actualizar imagen
+                <input type="file" name="imagen" class="hidden" onchange="previewImage(event, '#imgPreview')">
+            </label>
+        </div>
+    </figure>
+    <script>
+        function previewImage(event, querySelector){
+
+            //Recuperamos el input que desencadeno la acción
+            const input = event.target;
+            
+            //Recuperamos la etiqueta img donde cargaremos la imagen
+            $imgPreview = document.querySelector(querySelector);
+
+            // Verificamos si existe una imagen seleccionada
+            if(!input.files.length) return
+            
+            //Recuperamos el archivo subido
+            file = input.files[0];
+
+            //Creamos la url
+            objectURL = URL.createObjectURL(file);
+            
+            //Modificamos el atributo src de la etiqueta img
+            $imgPreview.src = objectURL;                        
+        }        
+    </script>
+</div>
+<!-- ... -->
+```
 
 ### Alugnos métodos o funciones de utilidad
 #### isEmpty e isNotEmpty
