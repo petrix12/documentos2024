@@ -4655,6 +4655,30 @@ Para establecer el alto mínimo y máximo y añadir un scroll bar:
 <!-- ... -->
 ```
 
+### Trabajar con imagenes en en controlador
+```php
+// ...
+use Illuminate\Support\Facades\Storage;
+
+class ModeloController extends Controller
+{
+    // ...
+    public function mi_metodo(Request $request) {
+        if($request->file('archivo')) {
+            // Subir archivo a la carpeta indicada y retorna la ubicación
+            $path = Storage::put('carpeta', $request->archivo);
+
+            // Subir archivo con un nombre específico a la carpeta indicada y retorna la ubicación
+            $path = Storage::putFileAs('carpeta', $request->archivo, 'nombre_del_archivo' . $request->file('archivo')->getClientOriginalExtension());
+
+            // Eliminar archivo
+            Storage::delete($url_archivo);
+        }
+    }
+    // ...
+}
+```
+
 ### Alugnos métodos o funciones de utilidad
 #### isEmpty e isNotEmpty
     ```php title="isEmpty e isNotEmpty"
