@@ -3054,6 +3054,53 @@ Se genera el archivo **app\Http\Requests\StoreModelo.php**.
     ```php
     <img src="{{ Storage::url($ruta) }}" alt="">
     ```
++ Verificar si un archivo existe:
+    ```php
+    if(Storage::exists($path)) {
+        // Acción a tomar si existe
+        $path = str_replace('.ext', '-copia.ext', $path);
+    }
+    ```
++ Copiar un archivo:
+    ```php
+    $archivo_original = "ruta_completa_original";
+    $archivo_copia = "ruta_completa_copia";
+    Storage::copy($archivo_original, $archivo_copia);
+    ```
++ Mover un archivo:
+    ```php
+    $archivo_origen = "ruta_completa_origen";
+    $archivo_destino = "ruta_completa_destino";
+    Storage::copy($archivo_origen, $archivo_destino);
+    ```
++ Lista de los paths de todos los archivos contenidos en una carpeta:
+    ```php
+    $array_de_archivo = Storage::files('carpeta');
+    ```
++ Lista de los paths de todos los archivos contenidos en una carpeta con los archivos contenidos en sus subcarpetas:
+    ```php
+    $array_de_archivo = Storage::allFiles('carpeta');
+    ```
++ Lista de los paths de todos los directorios contenidos en una carpeta:
+    ```php
+    $array_de_archivo = Storage::directories('carpeta');
+    ```
++ Lista de los paths de todos los directorios y subdirectorios contenidos en una carpeta:
+    ```php
+    $array_de_archivo = Storage::allDirectories('carpeta');
+    ```
++ Crear un directorio:
+    ```php
+    Storage::makeDirectory('carpeta/directorio');
+    ```
++ Eliminar un directorio:
+    ```php
+    Storage::deleteDirectory('carpeta/directorio');
+    ```
++ Descargar un archivo:
+    ```php
+    return Storage::download($path);
+    ```
 
 ## Provider:
 ### Indicar vista con la que se iniciará la aplicación:
