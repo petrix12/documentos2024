@@ -140,6 +140,65 @@ composer global require laravel/installer
     php artisan breeze:install vue --dark
     ```
 :::
+### Instalación de un proyecto de Laravel con Inertia  
++ Crear un proyecto Laravel con inertia
+    ```bash
+    laravel new mi_proyecto
+    cd mi_proyecto
+    composer require laravel/jetstream
+    php artisan jetstream:install inertia    
+    ```
++ Configurar el archivo de variables de entorn **.env**.
++ Ejecutar las migraciones:
+    ```bash
+    php artisan migrate
+    ```
++ Para retornar una vista:
+    ```php
+    // ...
+    use Inertia\Inertia;
+    // ...
+    return Inertia::render('Vista', ['parametro1' => 'valor1', ...]);
+    // ...
+    ```
+    :::tip Nota
+    Los parámetros que se envían con la vista, son recibidos en en componente vue como **props**.
+    :::
++ Ejemplo de la vista **Vista** como componente vue:
+    ```vue title="resources/js/Pages/Vista"
+    <template>
+        <h1>Vista</h1>
+        <p>{{ counter }}</p>
+        <button @click="increment">Increment</button>
+        <!-- Para utilizar el enrutador de Laravel desde vue -->
+        <NavLink :href="route('ruta_laravel')">Ruta Laravel</NavLink>
+    </template>
+
+    <script setup>
+    import {ref} from 'vue'
+    import NavLink from '../Components/NavLink.vue'
+
+    const counter = ref(0)
+    const increment = () => {
+        counter.value++
+    }
+    </script>
+
+    <style scoped>
+    </style>
+    ```
++ Las vista se deberán diseñar en la ruta: **resources/js/Pages**.
++ Para generar los archivos estáticos del frontend ejecutar:
+    + En desarrollo:
+        ```bash
+        npm run dev
+        ```
+    + En producción:
+        ```bash
+        npm run build
+        ```
+
+
 
 ## Estructura de carpetas de un proyecto Laravel:
 + **app**: lógica principal de la aplicación (backend).
