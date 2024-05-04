@@ -3036,14 +3036,14 @@ sidebar_position: 98
     use App\Models\Course;
     ```
 
-# -----------------------------------------
 ### Viedo 20. Habilitar el buscador de cursos
 1. Crear componente **Search**:
-    >
-        $ php artisan make:livewire Search
-1. En la vista **resources\views\welcome.blade.php**:
+    ```bash
+    php artisan make:livewire Search
+    ```
+2. En la vista **welcome**:
     Reemplazar:
-    ```php title=""
+    ```php title="resources\views\welcome.blade.php"
     <div class="pt-2 relative mx-auto text-gray-600">
         <input class="w-full border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
         type="search" name="search" placeholder="Search">
@@ -3054,11 +3054,11 @@ sidebar_position: 98
     </div>
     ```
     Por:
-    ```php title=""
+    ```php title="resources\views\welcome.blade.php"
     @livewire('search')
     ```
-1. Diseñar vista del componente **Search** en **resources\views\livewire\search.blade.php**:
-    ```php title=""
+3. Diseñar vista del componente **Search**:
+    ```php title="resources\views\livewire\search.blade.php"
     <form class="pt-2 relative mx-auto text-gray-600" autocomplete="off">
         <input wire:model="search" class="w-full border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
         type="search" name="search" placeholder="Search">
@@ -3081,8 +3081,8 @@ sidebar_position: 98
         </ul>
     </form>
     ```
-1. Programar el controlador del componente **Search** en **app\Http\Livewire\Search.php**:
-    ```php title=""
+4. Programar el controlador del componente **Search**:
+    ```php title="app\Http\Livewire\Search.php"
     <?php
 
     namespace App\Http\Livewire;
@@ -3109,9 +3109,9 @@ sidebar_position: 98
         }
     }
     ```
-1. En la vista
+5. En la vista
     Reemplazar:
-    ```php title=""
+    ```php
     <div class="pt-2 relative mx-auto text-gray-600">
         <input class="w-full border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
         type="search" name="search" placeholder="Search">
@@ -3122,51 +3122,52 @@ sidebar_position: 98
     </div>
     ```
     Por:    
-    ```php title=""
+    ```php
     @livewire('search')
     ```
 
+
 ## Sección 4: Control del avance del curso
 ### Viedo 21. Componente Livewire de vista completa
-1. Modificar la ruta **courses.status** en **routes\web.php**:
-    ```php title=""
+1. Modificar la ruta **courses.status**:
+    ```php title="routes\web.php"
     Route::get('course-status/{course}', [CourseController::class, 'status'])->name('courses.status');
     ```
-1. Generar el método **status** en el controlador **app\Http\Controllers\CourseController.php**:
-    ```php title=""
+2. Generar el método **status** en el controlador **CourseController**:
+    ```php title="app\Http\Controllers\CourseController.php"
     public function status(Course $course){
         return view('courses.status', compact('course'));
     }
     ```
-1. Crear vista **resources\views\courses\status.blade.php**:
-    ```php title=""
+3. Crear vista **status**:
+    ```php title="resources\views\courses\status.blade.php"
     <x-app-layout>
         @livewire('course-status')
     </x-app-layout>
     ```
-1. Crear componente para el status de cursos:
+4. Crear componente para el status de cursos:
     ```bash
     php artisan make:livewire CourseStatus
     ```
-1. Diseñar vista **resources\views\livewire\course-status.blade.php**:
-    ```php title=""
+5. Diseñar vista **course-status**:
+    ```php title=""resources\views\livewire\course-status.blade.php
     <div>
         <h1>{{ $course->title }}</h1>
     </div>
     ```
-1. En el archivo de rutas **routes\web.php**:
+6. En el archivo de rutas:
     Importar el componente:
-    ```php title=""
+    ```php title="routes\web.php"
     use App\Http\Livewire\CourseStatus;
     ```
     Modificar ruta **courses.status**:
-    ```php title=""
+    ```php title="routes\web.php"
     Route::get('course-status/{course}', CourseStatus::class)->name('courses.status');
     ```
-1. Eliminar método **status** en el controlador **app\Http\Controllers\CourseController.php**.
-1. Eliminar vista **resources\views\courses\status.blade.php**.
-1. Programar controlador del componente **CourseStatus** **app\Http\Livewire\CourseStatus.php**:
-    ```php title=""
+7. Eliminar método **status** en el controlador **app\Http\Controllers\CourseController.php**.
+8. Eliminar vista **resources\views\courses\status.blade.php**.
+9. Programar controlador del componente **CourseStatus**:
+    ```php title="app\Http\Livewire\CourseStatus.php"
     <?php
 
     namespace App\Http\Livewire;
@@ -3190,10 +3191,9 @@ sidebar_position: 98
     }
     ```
 
-
 ### Viedo 22. Recuperando información que se va a mostrar
-1. Modificar la vista **resources\views\livewire\course-status.blade.php**:
-    ```php title=""
+1. Modificar la vista **course-status**:
+    ```php title="resources\views\livewire\course-status.blade.php"
     <div class="mt-8">
         <div class="container grid grid-cols-3 gap-8">
             <div class="col-span-2">
@@ -3235,8 +3235,8 @@ sidebar_position: 98
         </div>
     </div>
     ```
-1. Agregar atributo para comprobar si una lección esta completada en el controlador **app\Models\Lesson.php**:
-    ```php title=""
+2. Agregar atributo para comprobar si una lección esta completada en el controlador **Lesson**:
+    ```php title="app\Models\Lesson.php"
     // ...
     class Lesson extends Model
     {
@@ -3253,8 +3253,8 @@ sidebar_position: 98
         // ...
     }
     ```
-1. Modificar controlador **app\Http\Livewire\CourseStatus.php**:
-    ```php title=""
+3. Modificar controlador **CourseStatus**:
+    ```php title="app\Http\Livewire\CourseStatus.php"
     <?php
 
     namespace App\Http\Livewire;
@@ -3287,8 +3287,8 @@ sidebar_position: 98
 
 
 ### Viedo 23. Habilitar botones next y previous
-1. Modificar controlador **app\Http\Livewire\CourseStatus.php**:
-    ```php title=""
+1. Modificar controlador **CourseStatus**:
+    ```php title="app\Http\Livewire\CourseStatus.php"
     <?php
 
     namespace App\Http\Livewire;
@@ -3345,8 +3345,8 @@ sidebar_position: 98
         }   
     }
     ```
-1. Modificar vista **resources\views\livewire\course-status.blade.php**:
-    ```php title=""
+2. Modificar vista **course-status**:
+    ```php title="resources\views\livewire\course-status.blade.php"
     <div class="mt-8">
         <div class="container grid grid-cols-3 gap-8">
             <div class="col-span-2">
@@ -3403,7 +3403,7 @@ sidebar_position: 98
 
 ### Viedo 24. Dar estilos a la página
 1. Agregar estilos a **resources\css\commom.css**:
-    ```php title=""
+    ```css title="resources\css\commom.css"
     .embed-responsive{
         position: relative;
         overflow: hidden;
@@ -3419,12 +3419,12 @@ sidebar_position: 98
         border: 0;
     }
     ```
-1. Compilar los estilos creados:
+2. Compilar los estilos creados:
     ```bash
     npm run dev
     ```
-1. Modificar la vista **resources\views\livewire\course-status.blade.php**:
-    ```php title=""
+3. Modificar la vista **course-status**:
+    ```php title="resources\views\livewire\course-status.blade.php"
     <div class="mt-8">
         <div class="container grid grid-cols-3 gap-8">
             <div class="col-span-2">
@@ -3510,13 +3510,13 @@ sidebar_position: 98
         </div>
     </div>
     ```
-    La barra de progreso se tomó de:
-        https://www.creative-tim.com/learning-lab/tailwind-starter-kit/documentation/css/progressbars
+    + La barra de progreso se tomó de:
+        + https://www.creative-tim.com/learning-lab/tailwind-starter-kit/documentation/css/progressbars
 
 
 ### Viedo 25. Marcar unidad como culminada
 1. Modificar vista del componente **resources\views\livewire\course-status.blade.php**:
-    ```php title=""
+    ```php title="resources\views\livewire\course-status.blade.php"
     <div class="mt-8">
         <div class="container grid grid-cols1 lg:grid-cols-3 gap-8">
             <div class="lg:col-span-2">
@@ -3606,8 +3606,8 @@ sidebar_position: 98
         </div>
     </div>
     ```
-1. Modificar controlador del componente **app\Http\Livewire\CourseStatus.php**:
-    ```php title=""
+2. Modificar controlador del componente **CourseStatus**:
+    ```php title="app\Http\Livewire\CourseStatus.php"
     <?php
 
     namespace App\Http\Livewire;
@@ -3700,8 +3700,8 @@ sidebar_position: 98
 
 
 ### Viedo 26. Proteger rutas
-1. Modificar el controlador **app\Http\Livewire\CourseStatus.php**:    
-    ```php title=""
+1. Modificar el controlador **CourseStatus**:
+    ```php title="app\Http\Livewire\CourseStatus.php"
     <?php
 
     namespace App\Http\Livewire;
@@ -3737,12 +3737,12 @@ sidebar_position: 98
         ≡
     }
     ```
-1. Modificar ruta **courses.status** en **routes\web.php**:            
-    ```php title=""
+2. Modificar ruta **courses.status**:            
+    ```php title="outes\web.php"
     Route::get('course-status/{course}', CourseStatus::class)->name('courses.status')->middleware('auth');
     ```
-1. Crear método **published** en **app\Policies\CoursePolicy.php**:
-    ```php title=""
+3. Crear método **published** en **CoursePolicy**:
+    ```php title="app\Policies\CoursePolicy.php"
     public function published(?User $user, Course $course){
         if($course->status == 3){
             return true;
@@ -3751,8 +3751,8 @@ sidebar_position: 98
         }
     }
     ```
-1. Modificar método **show** en **app\Http\Controllers\CourseController.php**:
-    ```php title=""
+4. Modificar método **show** en **CourseController**:
+    ```php title="app\Http\Controllers\CourseController.php"
     public function show(Course $course){
         $this->authorize('published', $course);
 
@@ -3768,8 +3768,8 @@ sidebar_position: 98
 
 ## Sección 5: Roles y permisos
 ### Video 27. Generar las rutas de acceso para los instructores
-1. Crear archivo de rutas **routes\instructor.php**:
-    ```php title=""
+1. Crear archivo de rutas **instructor**:
+    ```php title="routes\instructor.php"
     <?php
 
     use App\Http\Livewire\InstructorCourses;
@@ -3779,8 +3779,8 @@ sidebar_position: 98
 
     Route::get('courses', InstructorCourses::class)->name('courses.index');
     ```
-1. Modificar método **boot** de la clase **RouteServiceProvider** en **app\Providers\RouteServiceProvider.php**:
-    ```php title=""
+2. Modificar método **boot** de la clase **RouteServiceProvider**:
+    ```php title="app\Providers\RouteServiceProvider.php"
     public function boot()
     {
         $this->configureRateLimiting();
@@ -3808,18 +3808,18 @@ sidebar_position: 98
         });
     }
     ```
-1. Crear componentes para cursos de instructores:
+3. Crear componentes para cursos de instructores:
     ```bash
     php artisan make:livewire instructor-courses
     ```
-1. Modificar plantilla **resources\views\navigation-dropdown.blade.php**:
-    ```php title=""
-    ≡
+4. Modificar plantilla **navigation-dropdown**:
+    ```php title="resources\views\navigation-dropdown.blade.php"
+    <!-- ... -->
         <!-- Settings Dropdown -->
         <div class="hidden sm:flex sm:items-center sm:ml-6">
 
             @auth   
-    ≡
+    <!-- ... -->
                     <x-slot name="content">
                         <!-- Account Management -->
                         <div class="block px-4 py-2 text-xs text-gray-400">
@@ -3833,12 +3833,12 @@ sidebar_position: 98
                         <x-jet-dropdown-link href="{{ route('instructor.courses.index') }}">
                             Instructor
                         </x-jet-dropdown-link>
-    ≡
+    <!-- ... -->
     <!-- Responsive Settings Options -->
     @auth
 
         <div class="pt-4 pb-1 border-t border-gray-200">
-    ≡
+    <!-- ... -->
             <div class="mt-3 space-y-1">
                 <!-- Account Management -->
                 <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
@@ -3848,31 +3848,31 @@ sidebar_position: 98
                 <x-jet-responsive-nav-link href="{{ route('instructor.courses.index') }}" :active="request()->routeIs('instructor.courses.index')">
                     Instructor
                 </x-jet-responsive-nav-link>       
-    ≡
+    <!-- ... -->
     ```
 
 
 ### Video 28. Instalar Laravel Permission
-###### https://spatie.be/docs/laravel-permission/v3/basic-usage/basic-usage
++ https://spatie.be/docs/laravel-permission/v3/basic-usage/basic-usage
 1. Instalar Laravel Permission (sistema de roles y persmisos):
     ```bash
     composer require spatie/laravel-permission
     ```
-1. Publicar las vistas de Laravel Permission:
+2. Publicar las vistas de Laravel Permission:
     ```bash
     php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
     ```
-1. Ejecutar las migraciones:
+3. Ejecutar las migraciones:
     ```bash
     php artisan migrate
     ```
-1. Modificar modelo **User** en **app\Models\User.php**:
+4. Modificar modelo **User**:
     Importar a la cabecera:
-    ```php title=""
+    ```php title="app\Models\User.php"
     use Spatie\Permission\Traits\HasRoles;
     ```
     Indicar a la clase User que se usará la libreria anterior:
-    ```php title=""
+    ```php title="app\Models\User.php"
     class User extends Authenticatable
     {
         use HasApiTokens;
@@ -3887,7 +3887,7 @@ sidebar_position: 98
 
 
 ### Video 29. Agregar permisos y preparar entorno de trabajo
-1. Ejecutar Tinker e ingresar permisos:    
+1. Ejecutar Tinker e ingresar permisos:
     ```bash
     $ php artisan tinker
     >>> use Spatie\Permission\Models\Permission;
@@ -3897,16 +3897,16 @@ sidebar_position: 98
     >>> Permission::create(['name' => 'Eliminar cursos']);
     >>> exit
     ```
-1. Crear controlador para administrar roles:    
+2. Crear controlador para administrar roles:    
     ```bash
     php artisan make:controller Admin/RoleController -r
     ```
-1. Importar el modelo Role de Laravel Permission en **app\Http\Controllers\Admin\RoleController.php**:
-    ```php title=""
+3. Importar el modelo Role de Laravel Permission en **RoleController**:
+    ```php title="app\Http\Controllers\Admin\RoleController.php"
     use Spatie\Permission\Models\Role;
     ```
-1. Modificar el controlador Role en **app\Http\Controllers\Admin\RoleController.php**:
-    ```php title=""
+4. Modificar el controlador Role en **RoleController**:
+    ```php title="app\Http\Controllers\Admin\RoleController.php"
     <?php
 
     namespace App\Http\Controllers\Admin;
@@ -3994,9 +3994,9 @@ sidebar_position: 98
         }
     }
     ```
-1. Crear vistas del CRUD Role:
-    + **index.blade.php**:
-    ```php title=""
+5. Crear vistas del CRUD Role:
+    + **index**:
+    ```php title="index.blade.php"
     @extends('adminlte::page')
 
     @section('title', 'Coders Free')
@@ -4017,8 +4017,8 @@ sidebar_position: 98
         <script> console.log('Hi!'); </script>
     @stop
     ```
-    + **create.blade.php**:
-    ```php title=""
+    + **create**:
+    ```php title="create.blade.php"
     @extends('adminlte::page')
 
     @section('title', 'Coders Free')
@@ -4039,8 +4039,8 @@ sidebar_position: 98
         <script> console.log('Hi!'); </script>
     @stop
     ```
-    + **show.blade.php**:
-    ```php title=""
+    + **show**:
+    ```php title="show.blade.php"
     @extends('adminlte::page')
 
     @section('title', 'Coders Free')
@@ -4061,8 +4061,8 @@ sidebar_position: 98
         <script> console.log('Hi!'); </script>
     @stop
     ```
-    + **edit.blade.php**:
-    ```php title=""
+    + **edit**:
+    ```php title="edit.blade.php"
     @extends('adminlte::page')
 
     @section('title', 'Coders Free')
@@ -4083,17 +4083,17 @@ sidebar_position: 98
         <script> console.log('Hi!'); </script>
     @stop
     ```
-1. Generar ruta para el CRUD Role en **routes\admin.php**:
-    ```php title=""
+6. Generar ruta para el CRUD Role:
+    ```php title="routes\admin.php"
     Route::get('', [HomeController::class, 'index'])->name('home');
     ```
-1. Modificar **config\adminlte.php**:
-    ```php title=""
+7. Modificar **config\adminlte.php**:
+    ```php title="config\adminlte.php"
     <?php
 
     return [
 
-        ≡
+        // ...
 
         'logo' => '<b>Coders</b>FREE',
         'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
@@ -4102,7 +4102,7 @@ sidebar_position: 98
         'logo_img_xl_class' => 'brand-image-xs',
         'logo_img_alt' => 'AdminLTE',
 
-        ≡
+        // ...
 
         'use_route_url' => false,
 
@@ -4120,7 +4120,7 @@ sidebar_position: 98
 
         'profile_url' => false,
 
-        ≡
+        // ...
 
         'menu' => [
             [
@@ -4149,18 +4149,18 @@ sidebar_position: 98
                 'url'  => 'admin/settings',
                 'icon' => 'fas fa-fw fa-user',
             ],
-            ≡
+            // ...
         ],
 
-        ≡
+        // ...
     ];
     ```
-1. Darle nombre a la ruta raíz en **routes\admin.php**:
-    ```php title=""
+8. Darle nombre a la ruta raíz en **routes\admin.php**:
+    ```php title="routes\admin.php"
     Route::get('', [HomeController::class, 'index'])->name('home');
     ```
-1. Modificar método **boot** en **app\Providers\RouteServiceProvider.php**:
-    ```php title=""
+9. Modificar método **boot** en **RouteServiceProvider**:
+    ```php title="app\Providers\RouteServiceProvider.php"
     public function boot()
     {
         $this->configureRateLimiting();
@@ -4177,7 +4177,7 @@ sidebar_position: 98
     }
     ```
 
-
+# -----------------------------------------
 ### Video 30. Crear un CRUD para roles
 ###### https://hackerthemes.com/bootstrap-cheatsheet/
 ###### https://github.com/jeroennoten/Laravel-AdminLTE/wiki
