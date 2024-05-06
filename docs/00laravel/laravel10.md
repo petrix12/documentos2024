@@ -4785,6 +4785,50 @@ class ModeloController extends Controller
 }
 ```
 
+### Recuperar imagenes archivos desde servidores S3 (AWS o Digital Ocean)
+1. Crear controlador **ArchivoController**:
+    ```bash
+    php artisan make:controller ArchivoController
+    ```
+2. Programar controlador **ArchivoController**:
+    ```php
+    // ...
+    class ArchivoController extends Controller {
+        public function archivo(Modelo $modelo) {
+            $archivo = Storage::get($modelo->archivo_url);
+            return response($archivo)->header('Content-Type', 'image/jpeg');
+        }
+    }
+    ```
+3. Crear ruta **/archivo/{modelo}/archivo**:
+    ```php
+    Route::get('/archivo/{modelo}/archivo', [ArchivoController::class, archivo])->name('archivo');
+    ```
+4. Configurar el accesor del modelo **Modelo**:
+    ```php title="app\Models\Modelo.php"
+    // ...
+    use Illuminate\Database\Eloquent\Casts\Attribute;
+
+    class Modelo extends Model
+    {
+        // ...
+        protected function archivo(): Attribute {
+            return new Attribute(
+                // Accesor
+                get: function() {                    
+                    return route('archivo', $this);
+                },
+                // Mutador
+                set: function($value) {                    
+                    return 'https://imagen_por_defecto';
+                }
+            );
+        }
+        // ...
+    }
+    ```
+
+
 ### Alugnos métodos o funciones de utilidad
 #### isEmpty e isNotEmpty
     ```php title="isEmpty e isNotEmpty"
