@@ -4192,6 +4192,79 @@ https://spatie.be/index.php/docs/laravel-permission/v6/introduction
     }
     ```
 
+## Jobs
+1. Crear un job **Tarea**:
+    ```bash
+    php artisan make:job Tarea
+    ```
+:::tip Nota
+Este comando creara el archivo **app\Jobs\Tarea.php**
+:::
+2. Programar job **Tarea**:
+    ```php title="app\Jobs\Tarea.php"
+    // ...
+    class Tarea implements ShouldQueue
+    {
+        // ...
+        public $parametro;
+        // ...
+        public function __construct($parametro)
+        {
+            $this->parametro = $parametro;
+        }
+        // ...
+        public function handle(): void
+        {
+            // Programar tarea relacionada con $parametro
+        }
+    }    
+    ```
+3. Ejecutar job **Tarea**:
+    ```php
+    // ...
+    use App\Jobs\Tarea;
+    // ...
+    Tarea::dispatch($parametro);
+    // ...
+    ```
+
+## Queues (Colas)
+:::tip Documentación
+https://laravel.com/docs/10.x/queues
+:::
+1. Crear tabla para tareas en cola:
+    ```bash
+    php artisan queue:table 
+    php artisan migrate
+    ```
+:::tip Nota
+Este comando crea una nueva migración para crear la tabla **jobs**
+:::
+2. Modificar el archivo de variables de entorno:
+    ```env
+    QUEUE_CONNECTION=database
+    ```
+:::tip Nota
+Ahora todos los **jobs** en lugar de ejecutarse, se registrará la instrucciones de ejecución en la tabla **jobs**.
+:::
+3. Ejecutar los **jobs** registrados en la tabla **jobs** mediante línea de comando:
+    ```bash
+    php artisan queque:work
+    ```
+4. Ejecutar los **jobs** registrados en la tabla **jobs** mediante código php:
+    + Forma no asincrónico:
+        ```php
+        // ...
+        use Illuminate\Support\Facades\Artisan;
+        // ...
+        Artisan::call('queue:work');
+        // ...
+        ```
+    + Forma asincrónico:
+        ```php
+        exec('php artisan queue:work > /dev/null 2>&1 &');
+        ```
+
 
 ## Tips generales:
 ### Crear un sistema de autenticación
@@ -4785,7 +4858,7 @@ class ModeloController extends Controller
 }
 ```
 
-### Recuperar imagenes archivos desde servidores S3 (AWS o Digital Ocean)
+### Recuperar archivos desde servidores S3 (AWS o Digital Ocean)
 1. Crear controlador **ArchivoController**:
     ```bash
     php artisan make:controller ArchivoController
@@ -4797,6 +4870,9 @@ class ModeloController extends Controller
         public function archivo(Modelo $modelo) {
             $archivo = Storage::get($modelo->archivo_url);
             return response($archivo)->header('Content-Type', 'image/jpeg');
+
+            // Retornar una url temporal
+            // return Storage::temporaryUrl($modelo->archivo_url, now()->addMinutes(7));
         }
     }
     ```
