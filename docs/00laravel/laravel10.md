@@ -3261,6 +3261,66 @@ El provider se creo en **app\Providers\PruebaServiceProvider.php**.
         // ...
     ];
     ```
+### Proteger rutas y líneas de código con Gate
++ Definir gate en provider **AppServiceProvider**:
+    ```php title="...\app\Providers\AppServiceProvider.php"
+    // ...
+    use Illuminate\Support\Facades\Gate;
+    // ...
+    class AppServiceProvider extends ServiceProvider
+    {
+        // ...
+        public function boot(): void
+        {
+            Gate::define('name_gate', function ($users, $otros_parametros) {
+                // Establecer lógica
+                // debe retornar true o false
+            });
+        }
+    }    
+    ```
++ Proteger líneas de código:
+    ```php
+    @can('name_gate)
+        <!-- Código a proteger -->
+    @endcan    
+    ```
++ Proteger rutas desde el provider **RouteServiceProvider**:
+    ```php title="...\app\Providers\RouteServiceProvider.php"
+    // ...
+    public function boot(): void
+    {
+        // ...
+        $this->routes(function () {
+            // ...
+            Route::middleware('web, 'can:name_gate')
+                ->group(base_path('routes/web.php'));
+        });
+    }
+    // ...
+    ```
++ Proteger desde un controlador
+    + Forma 1:
+        ```php
+        // ...
+        public function metodo_controlador() {
+            if(!Gate::allows('name_gate', $otros_parametros)) {
+                abort(403, 'Sin permiso');
+            }
+            // ...
+        }
+        // ...
+        ```
+    + Forma 2:
+        ```php
+        // ...
+        public function metodo_controlador() {
+            $this->autorize('name_gate', $otros_parametros);
+            // ...
+        }
+        // ...
+        ```
+
 
 ## Observer:
 + Crear un observer:
