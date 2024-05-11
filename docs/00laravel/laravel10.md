@@ -4936,7 +4936,7 @@ class ModeloController extends Controller
         }
     }
     ```
-3. Crear ruta **/archivo/{modelo}/archivo**:
+3. Crear ruta **/archivo/\{modelo}/archivo**:
     ```php
     Route::get('/archivo/{modelo}/archivo', [ArchivoController::class, archivo])->name('archivo');
     ```
