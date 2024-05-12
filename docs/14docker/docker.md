@@ -45,33 +45,82 @@ sidebar_position: 1
 
 
 ## Instalar Docker en Ubuntu
-1. Actualizar la lista de paquetes:
+1. Actualizar el sistema:
     ```bash
     sudo apt update
+    sudo apt upgrade
     ```
-2. Agregar el repositorio de Docker
+2. Instalar paquetes necesarios:
     ```bash
-    sudo apt-get install \
-        apt-transport-https \
-        ca-certificates \
-        curl \-
+    sudo apt install apt-transport-https ca-certificates curl software-properties-common
+    ```
+3. Agregar la clave GPG oficial de Docker:
+    ```bash
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-    echo \
-        "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-        $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     ```
-3. Actualizar la lista de paquetes nuevamente
+4. Agregar el repositorio de Docker:
+    ```bash
+    echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    ```
+5. Actualizar la lista de paquetes:
     ```bash
     sudo apt update
     ```
-4. Instalar Docker:
+6. Instalar Docker Engine:
     ```bash
-    sudo apt install docker-ce
+    sudo apt install docker-ce docker-ce-cli containerd.io
     ```
-5. Evitar que docker requiera la contraseña de root:
+    :::tip Nota
+    Verificar la instalación: Una vez completada la instalación, puedes verificar si Docker se instaló correctamente ejecutando el siguiente comando para verificar la versión instalada:
+    ```bash
+    docker --version
+    ```
+    :::
+7. Evitar que docker requiera la contraseña de root:
     ```bash
     sudo usermod -aG docker ${USER}
     su - ${USER}
     # Pedirá la contraseña de root
     id -nG
+    ```
+
+## Iniciar Docker
+1. Agregar tu usuario al grupo docker:
+    ```bash
+    sudo usermod -aG docker $USER
+    ```
+    :::tip Nota
+    Este comando agrega tu usuario actual al grupo docker. Después de ejecutar este comando, cierra sesión y vuelve a iniciar sesión para que los cambios surtan efecto.
+    :::
+2. Iniciar el servicio Docker:
+    ```bash
+    sudo systemctl start docker
+    ```
+    :::tip Nota
+    Si deseas que Docker se inicie automáticamente cada vez que arranque tu sistema, puedes habilitar el servicio Docker para que se inicie automáticamente ejecutando el siguiente comando:
+    ```bash
+    sudo systemctl enable docker
+    ```
+    :::
+
+
+## Imagenes Docker
+1. Mostrar imagenes Docker:
+    ```bash
+    docker images
+    ```
+    :::tip Nota
+    Web oficial de imagenes de Docker: https://hub.docker.com
+    + Ejemplo para descargar imagen de python:
+    ```bash
+    docker pull python
+    ```
+    :::
+2. Descargar una imagen:
+    ```bash
+    docker pull nombre_imagen
+    ```
+3. Eliminar una imagen:
+    ```bash
+    docker rmi nombre_imagen
     ```

@@ -51,7 +51,9 @@ sidebar_position: 2
 9. Para actualizar y hacer nuevamente deploy:
     + $ npm run build
     + $ cmd /C 'set "GIT_USER=petrix12" && npm run deploy'
-
+    :::tip Página
+    https://petrix12.github.io/documentos2024
+    :::
 
 
 
