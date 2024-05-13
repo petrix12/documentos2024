@@ -4177,12 +4177,14 @@ sidebar_position: 98
     }
     ```
 
-# -----------------------------------------
+
 ### Video 30. Crear un CRUD para roles
-###### https://hackerthemes.com/bootstrap-cheatsheet/
-###### https://github.com/jeroennoten/Laravel-AdminLTE/wiki
-1. Modificar el controlador **app\Http\Controllers\Admin\RoleController.php**:
-    ```php title=""
+:::tip URL de interes
++ https://hackerthemes.com/bootstrap-cheatsheet/
++ https://github.com/jeroennoten/Laravel-AdminLTE/wiki
+:::
+1. Modificar el controlador **RoleController**:
+    ```php title="app\Http\Controllers\Admin\RoleController.php"
     <?php
 
     namespace App\Http\Controllers\Admin;
@@ -4293,8 +4295,8 @@ sidebar_position: 98
         }
     }
     ```
-1. Modificar vista **resources\views\admin\roles\index.blade.php**:
-    ```php title=""
+2. Modificar vista **index**:
+    ```php title="resources\views\admin\roles\index.blade.php"
     @extends('adminlte::page')
 
     @section('title', 'Coders Free')
@@ -4360,18 +4362,22 @@ sidebar_position: 98
         <script> console.log('Hi!'); </script>
     @stop
     ```
-1. Publicar vista de AdminLTE:
+3. Publicar vista de AdminLTE:
     ```bash
     php artisan adminlte:install --only=main_views
     ```
-    #### En **resources\views\vendor\adminlte\page.blade.php** es de donde se extienden las plantillas.
-1. Instalar Laravel Collective:
+    :::tip Nota
+    En **resources\views\vendor\adminlte\page.blade.php** es de donde se extienden las plantillas.
+    :::
+4. Instalar Laravel Collective:
     ```bash
     composer require laravelcollective/html
     ```
-    ##### https://laravelcollective.com/docs/6.x/html
-1. Modificar vista **resources\views\admin\roles\create.blade.php**:
-    ```php title=""
+    :::tip Documentación
+    https://laravelcollective.com/docs/6.x/html
+    :::
+5. Modificar vista **create**:
+    ```php title="resources\views\admin\roles\create.blade.php"
     @extends('adminlte::page')
 
     @section('title', 'Coders Free')
@@ -4399,8 +4405,8 @@ sidebar_position: 98
         <script> console.log('Hi!'); </script>
     @stop
     ```
-1. Crear formulario para el rol como **resources\views\admin\roles\partials\form.blade.php**:
-    ```php title=""
+6. Crear formulario para el rol:
+    ```php title="resources\views\admin\roles\partials\form.blade.php"
     <div class="form-group">
         {!! Form::label('name', 'Nombre: ') !!}
         {!! Form::text('name', null, ['class' => 'form-control' . ($errors->has('name') ? ' is-invalid' :  ''), 'placeholder' => 'Escriba un nombre']) !!}
@@ -4427,8 +4433,8 @@ sidebar_position: 98
         </div>
     @endforeach
     ```
-1. Modificar vista **resources\views\admin\roles\edit.blade.php**:    
-    ```php title=""
+7. Modificar vista **edit**:    
+    ```php title="resources\views\admin\roles\edit.blade.php"
     @extends('adminlte::page')
 
     @section('title', 'Coders Free')
@@ -4459,8 +4465,8 @@ sidebar_position: 98
 
 
 ### Video 31. Crear un CRUD para usuarios
-1. Modificar el método **update** del controlador **app\Http\Controllers\Admin\RoleController.php**:
-    ```php title=""
+1. Modificar el método **update** del controlador **RoleController**:
+    ```php title="app\Http\Controllers\Admin\RoleController.php"
     public function update(Request $request, Role $role)
     {
         $request->validate([
@@ -4477,8 +4483,8 @@ sidebar_position: 98
         return redirect()->route('admin.roles.edit', $role);
     }
     ```
-1. Modificar el archivo de configuración **config\adminlte.php**:
-    ```php title=""
+2. Modificar el archivo de configuración **adminlte**:
+    ```php title="config\adminlte.php"
     <?php
 
     return [
@@ -4517,12 +4523,12 @@ sidebar_position: 98
         'livewire' => true,
     ];
     ```
-1. Crear controlador **User** para CRUD de usuarios:
+3. Crear controlador **User** para CRUD de usuarios:
     ```bash
     php artisan make:controller Admin\UserController -r
     ```
-1. Programar el controlador **app\Http\Controllers\Admin\UserController.php**:
-    ```php title=""
+4. Programar el controlador **UserController**:
+    ```php title="app\Http\Controllers\Admin\UserController.php"
     <?php
 
     namespace App\Http\Controllers\Admin;
@@ -4570,9 +4576,9 @@ sidebar_position: 98
         }
     }
     ```
-1. Crear las vistas para el CRUD **User**:
-    **resources\views\admin\users\index.blade.php**:
-    ```php title=""
+5. Crear las vistas para el CRUD **User**:
+    **index**:
+    ```php title="resources\views\admin\users\index.blade.php"
     @extends('adminlte::page')
 
     @section('title', 'Coders Free')
@@ -4593,8 +4599,8 @@ sidebar_position: 98
         <script> console.log('Hi!'); </script>
     @stop
     ```
-    **resources\views\admin\users\edit.blade.php**:
-    ```php title=""
+    **edit**:
+    ```php title="resources\views\admin\users\edit.blade.php"
     @extends('adminlte::page')
 
     @section('title', 'Coders Free')
@@ -4632,20 +4638,20 @@ sidebar_position: 98
         <script> console.log('Hi!'); </script>
     @stop
     ```
-1. Crear ruta para el CRUD **User** en routes\admin.php:
-    ```php title=""
+6. Crear ruta para el CRUD **User**:
+    ```php title="routes\admin.php"
     Route::resource('users', UserController::class)->only(['index', 'edit', 'update'])->names('users');
     ```
     Importar controlador **User**:
     ```php title=""
     use App\Http\Controllers\Admin\UserController;
     ```
-1. Crear componente de livewire para administrar usuarios:
+7. Crear componente de livewire para administrar usuarios:
     ```bash
     php artisan make:livewire admin-users
     ```
-1. Programar controlador del componente **app\Http\Livewire\AdminUsers.php**:
-    ```php title=""
+8. Programar controlador del componente **AdminUsers**:
+    ```php title="app\Http\Livewire\AdminUsers.php"
     <?php
 
     namespace App\Http\Livewire;
@@ -4675,8 +4681,8 @@ sidebar_position: 98
         }
     }
     ```
-1. Diseñar vista del componente **resources\views\livewire\admin-users.blade.php**:
-    ```php title=""
+9.  Diseñar vista del componente **admin-users**:
+    ```php title="resources\views\livewire\admin-users.blade.php"
     <div>
         <div class="card">
             <div class="card-header">
@@ -4721,19 +4727,19 @@ sidebar_position: 98
 
 
 ### Video 32. Restringir botones y rutas por permisos
-1. Modificar plantilla **resources\views\navigation-dropdown.blade.php**:
-    ```php title=""
-    ≡
+1. Modificar plantilla **navigation-dropdown**:
+    ```php title="resources\views\navigation-dropdown.blade.php"
+    // ...
     <nav x-data="{ open: false }" class="bg-white border-b border-gray-100 shadow">
         <!-- Primary Navigation Menu -->
         <div class="container">
             <div class="flex justify-between h-16">
-                ≡
+                // ...
                 <!-- Settings Dropdown -->
                 <div class="hidden sm:flex sm:items-center sm:ml-6">
                     @auth
                         <x-jet-dropdown align="right" width="48">
-                            ≡
+                            // ...
                             <x-slot name="content">
                                 <!-- Account Management -->
                                 <div class="block px-4 py-2 text-xs text-gray-400">
@@ -4760,26 +4766,26 @@ sidebar_position: 98
                                         {{ __('API Tokens') }}
                                     </x-jet-dropdown-link>
                                 @endif
-                                ≡
+                                // ...
                             </x-slot>
                         </x-jet-dropdown>
                     @else
-                        ≡
+                        // ...
                     @endauth
                 </div>
 
                 <!-- Hamburger -->
-                ≡
+                // ...
             </div>
         </div>
 
         <!-- Responsive Navigation Menu -->
         <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-            ≡
+            // ...
             <!-- Responsive Settings Options -->
             @auth
                 <div class="pt-4 pb-1 border-t border-gray-200">
-                    ≡
+                    // ...
 
                     <div class="mt-3 space-y-1">
                         <!-- Account Management -->
@@ -4799,26 +4805,26 @@ sidebar_position: 98
                             </x-jet-responsive-nav-link>
                         @endcan
 
-                        ≡
+                        // ...
                     </div>
                 </div>
             @else
-                ≡
+                // ...
             @endauth
         </div>  
     </nav>
     ```
-1. Modificar ruta **courses.index** en **routes\instructor.php**:
-    ```php title=""
+2. Modificar ruta **courses.index**:
+    ```php title="routes\instructor.php"
     Route::get('courses', InstructorCourses::class)->middleware('can:Leer cursos')->name('courses.index');
     ```
-1. Crear seeder para generar roles permisos:
+3. Crear seeder para generar roles permisos:
     ```bash
     php artisan make:seeder RoleSeeder
     php artisan make:seeder PermissionSeeder
     ```
-1. Modificar seeder **database\seeders\PermissionSeeder.php**:
-    ```php title=""
+4. Modificar seeder **PermissionSeeder**:
+    ```php title="database\seeders\PermissionSeeder.php"
     <?php
 
     namespace Database\Seeders;
@@ -4849,8 +4855,8 @@ sidebar_position: 98
         }
     }
     ```
-1. Modificar seeder **database\seeders\RoleSeeder.php**:
-    ```php title=""
+5. Modificar seeder **RoleSeeder**:
+    ```php title="database\seeders\RoleSeeder.php"
     <?php
 
     namespace Database\Seeders;
@@ -4875,8 +4881,8 @@ sidebar_position: 98
         }
     }
     ```
-1. Incluir los seeder de permisos y roles en método **run** de **database\seeders\DatabaseSeeder.php**:
-    ```php title=""
+6. Incluir los seeder de permisos y roles en método **run** de **DatabaseSeeder**:
+    ```php title="database\seeders\DatabaseSeeder.php"
     public function run()
     {
         Storage::deleteDirectory('cursos');
@@ -4893,8 +4899,8 @@ sidebar_position: 98
         $this->call(CourseSeeder::class);
     }
     ```
-1. Modificar el método **run** del seeder **database\seeders\UserSeeder.php**:
-    ```php title=""
+7. Modificar el método **run** del seeder **UserSeeder**:
+    ```php title="database\seeders\UserSeeder.php"
     public function run()
     {
         $user = User::create([
@@ -4908,12 +4914,12 @@ sidebar_position: 98
         User::factory(99)->create();
     }  
     ```
-1. Ejecutar:
+8. Ejecutar:
     ```bash
     php artisan migrate:fresh --seed
     ```
-1. Modificar archivo de configuración **config\adminlte.php**:
-    ```php title=""
+9. Modificar archivo de configuración **adminlte**:
+    ```php title="config\adminlte.php"
     ≡
     'menu' => [
         [
@@ -4948,13 +4954,13 @@ sidebar_position: 98
         ],
         ≡
     ```
-1. Proteger ruta **home** en **routes\admin.php**:
-    ```php title=""
+10. Proteger ruta **home**:
+    ```php title="routes\admin.php"
     Route::get('', [HomeController::class, 'index'])->middleware('can:Ver dashboard')->name('home');
     ```
-1. Crear el método **__construct** en el controlador **app\Http\Controllers\Admin\RoleController.php** para proteger las rutas **roles**:
-    ```php title=""
-    ≡
+11. Crear el método **__construct** en el controlador **RoleController** para proteger las rutas **roles**:
+    ```php title="app\Http\Controllers\Admin\RoleController.php"
+    // ...
     class RoleController extends Controller
     {
         public function __construct(){
@@ -4963,24 +4969,27 @@ sidebar_position: 98
             $this->middleware('can:Editar role')->only('edit', 'update');
             $this->middleware('can:Eliminar role')->only('destroy');
         }
-        ≡
+        // ...
+    }
     ```
-1. Crear el método **__construct** en el controlador **app\Http\Controllers\Admin\UserController.php** para proteger las rutas **users**:
-    ```php title=""
-    ≡
+12. Crear el método **__construct** en el controlador **UserController** para proteger las rutas **users**:
+    ```php title="app\Http\Controllers\Admin\UserController.php"
+    // ...
     class UserController extends Controller
     {
         public function __construct(){
             $this->middleware('can:Leer usuarios')->only('index');
             $this->middleware('can:Editar usuarios')->only('edit', 'update');
         }
-        ≡
+        // ...
+    }
     ```
+
 
 ## Sección 6: Instructores
 ### Video 33. Mostrar el listado de cursos de un instructor
-1. Modificar el controlador **app\Http\Livewire\InstructorCourses.php**:
-    ```php title=""
+1. Modificar el controlador **InstructorCourses**:
+    ```php title="app\Http\Livewire\InstructorCourses.php"
     <?php
 
     namespace App\Http\Livewire;
@@ -5008,9 +5017,9 @@ sidebar_position: 98
         }
     }
     ```
-1. Diseñar la vista **resources\views\livewire\instructor-courses.blade.php**:
-    ##### https://tailwindui.com/preview
-    ```php title=""
+1. Diseñar la vista **instructor-courses**:
+    + https://tailwindui.com/preview
+    ```php title="resources\views\livewire\instructor-courses.blade.php"
     <div class="container py-8">
         <x-table-responsive>
             <div class="px-6 py-4">
@@ -5120,8 +5129,8 @@ sidebar_position: 98
         </x-table-responsive>
     </div>
     ```
-1. Crear componente **resources\views\components\table-responsive.blade.php**:
-    ```php title=""
+1. Crear componente **table-responsive**:
+    ```php title="resources\views\components\.blade.php"
     <div class="flex flex-col">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -5135,7 +5144,7 @@ sidebar_position: 98
     </div>
     ```
 
-
+# -----------------------------------------
 ### Video 34. Reorganizar rutas
 1. Modificar archivo de rutas **routes\instructor.php**:
     ```php title=""

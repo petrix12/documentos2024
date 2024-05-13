@@ -120,7 +120,58 @@ sidebar_position: 1
     ```bash
     docker pull nombre_imagen
     ```
-3. Eliminar una imagen:
+3. Descargar una imagen indicando la versión:
+    ```bash
+    docker pull nombre_imagen:nombre_version
+    ```
+4. Eliminar una imagen:
     ```bash
     docker rmi nombre_imagen
     ```
+    :::tip Nota
+    Para eliminar una imagen, no debe haber un contenedor en ejecución con dicha imagen.
+    :::
+
+## Contenedores Docker
+1. Crear un contenedor a partir de una imagen:
+    ```bash
+    docker run -it --name mi_contenedor nombre_de_la_imagen:etiqueta
+    ```
+    + O simplemente ejecutar:
+    ```bash
+    docker run -it nombre_de_la_imagen:etiqueta
+    ```
+    :::tip Nota
+    Podemos reemplazar -it por -d para ejecutar el contenedor en segundo plano.
+    :::
+2. Ver contenedores en ejecución:
+    ```bash
+    docker ps -a
+    ```
+3. Eliminar un contenedor:
+    ```bash
+    docker rm [container id o name del el contenedor parcial o completo]
+    ```
+4. Eliminar todos los contenedores:
+    ```bash
+    docker rm $(docker ps -aq)
+    ```
+5. Ejecutar un contenedor:
+    ```bash
+    docker start [container id o name del el contenedor parcial o completo]
+    ```
+6. Para un contenedor:
+    ```bash
+    docker stop [container id o name del el contenedor parcial o completo]
+    ```
+7. Entrar dentro del contenedor:
+    ```bash
+    docker exec -it nombre_del_contenedor bash
+    ```
+
+
+
+    mmm:
+    ```bash
+    ```
+
