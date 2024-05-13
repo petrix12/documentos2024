@@ -12,8 +12,8 @@ sidebar_position: 1
         dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
         dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
         ```
-2. Descargar e instalar Ubuntu 22.04.6 LTS
-    + Ir a Microsoft Store en Windows 10/11, buscar e instalar: Ubuntu 22.04.6 LTS
+2. Descargar e instalar Ubuntu 22.04.3 LTS
+    + Ir a Microsoft Store en Windows 10/11, buscar e instalar: Ubuntu 22.04.3 LTS
     :::tip Nota
     En caso de ser necesario descargar e instalar la actualización del kernel de Linux:
     + https://learn.microsoft.com/es-es/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package
@@ -42,6 +42,12 @@ sidebar_position: 1
     $ mv archivo.ext dir2 (mueve el archivo archivo.ext al directorio dir2, de igual forma se puede mover carpetas)
     ```
     :::
+4. Acceder los archivos de Ubuntu desde una carpeta de Windows:
+    + Abrir el Explorador de Archivos de Windows.
+    + En la barra de direcciones del Explorador de Archivos, introduce la siguiente ruta y presiona Enter:
+        ```
+        \\wsl$
+        ```
 
 
 ## Instalar Docker en Ubuntu
@@ -196,6 +202,40 @@ sidebar_position: 1
     docker run -it nombre_de_mi_imagen
     ```
 
+## Copiar archivos desde el PC a un contenedor Docker
+1. Crear una carpeta de proyecto e ingresar en ella:
+    ```bash
+    mkdir proyecto_prueba
+    cd proyecto_prueba
+    ```
+2. Crear archivo **Dockerfile**:
+    ```bash
+    sudo nano Dockerfile
+    ```
+3. Configurar Dockerfile:
+    ```
+    FROM ubuntu
+    RUN apt update
+    COPY mi_archivo.txt /home/mi_carpeta/    
+    ```
+4. Construir imagen a partir del **Dockerfile**:
+    ```bash
+    docker build -t nombre_de_mi_imagen .
+    ```
+5. Ingrear a la imgaen:
+    ```bash
+    docker run -it nombre_de_mi_imagen
+    ```
+
+## Eliminar todas los contenedores e imagenes de Docker
++ Eliminar todos los contenedores en ejecución:
+    ```bash
+    docker rm -f $(docker ps -aq)
+    ```
++ Eliminar todas las imágenes:
+    ```bash
+    docker rmi -f $(docker images -aq)
+    ```
 
 
 
