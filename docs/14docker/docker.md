@@ -169,6 +169,35 @@ sidebar_position: 1
     docker exec -it nombre_del_contenedor bash
     ```
 
+## Crear una imagen de Docker
+1. Crear una carpeta de proyecto e ingresar en ella:
+    ```bash
+    mkdir proyecto_prueba
+    cd proyecto_prueba
+    ```
+2. Crear archivo **Dockerfile**:
+    ```bash
+    sudo nano Dockerfile
+    ```
+    :::tip Ejemplo
+    Ejemplo de una imagen de Ubuntu con Python:
+    ```
+    FROM ubuntu
+    RUN apt update
+    RUN apt install python3 -y
+    ```
+    :::
+3. Construir imagen a partir del **Dockerfile**:
+    ```bash
+    docker build --tag nombre_de_mi_imagen .
+    ```
+4. Ingrear a la imgaen:
+    ```bash
+    docker run -it nombre_de_mi_imagen
+    ```
+
+
+
 
 
     mmm:
