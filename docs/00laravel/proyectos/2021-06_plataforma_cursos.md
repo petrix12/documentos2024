@@ -1697,7 +1697,7 @@ sidebar_position: 98
 
 
 ## Sección 3: Frontend de la aplicación
-### Viedo 10. Instalar la plantilla AdminLTE
+### Video 10. Instalar la plantilla AdminLTE
 ##### Documentación: https://github.com/jeroennoten/Laravel-AdminLTE
 ##### Plantilla: https://adminlte.io/themes/v3/index.html
 1. En **app\Providers\RouteServiceProvider.php**:
@@ -1779,7 +1779,7 @@ sidebar_position: 98
     @stop
     ```
 
-### Viedo 11. Reutilizar la plantilla Jetstream
+### Video 11. Reutilizar la plantilla Jetstream
 1. Modificar plantilla **resources\views\layouts\app.blade.php**:
     ```php title="resources\views\layouts\app.blade.php"
     <!DOCTYPE html>
@@ -2100,7 +2100,7 @@ sidebar_position: 98
     ```
 
 
-### Viedo 12. Clonar repositorio con el avance del curso
+### Video 12. Clonar repositorio con el avance del curso
 + **Repositorio**: https://github.com/coders-free/udemy
 1. Modificar método **definition** en **CourseFactory**:
     ```php title="database\factories\CourseFactory.php"
@@ -2150,7 +2150,7 @@ sidebar_position: 98
     ```
 
 
-### Viedo 13. Recuperar registros de cursos
+### Video 13. Recuperar registros de cursos
 1. Crear contraolador **Home**:
     ```bash
     php artisan make:controller HomeController
@@ -2200,7 +2200,7 @@ sidebar_position: 98
     ```
 
 
-### Viedo 14. Diseña el home de la plataforma
+### Video 14. Diseña el home de la plataforma
 + Documentación:
     + https://tailwindcomponents.com/
     + https://tailwindcss.com/docs
@@ -2385,7 +2385,7 @@ sidebar_position: 98
     ```
 
 
-### Viedo 15. Diseñando la vista index de cursos
+### Video 15. Diseñando la vista index de cursos
 1. Modificar **navigation-dropdown**:
     ```php title="resources\views\navigation-dropdown.blade.php"
     @php
@@ -2555,7 +2555,7 @@ sidebar_position: 98
     ```
 
 
-### Viedo 16. Habilitar filtrado de cursos
+### Video 16. Habilitar filtrado de cursos
 1. Modificar el controlador **app\Http\Livewire\CourseIndex.php**
     ```php title="app\Http\Livewire\CourseIndex.php"
     <?php
@@ -2712,7 +2712,7 @@ sidebar_position: 98
     ```
 
 
-### Viedo 17. Crear clases de estilos personalizadas
+### Video 17. Crear clases de estilos personalizadas
 1. Deshabilitar la clase container de tailwind:
     ```js title="tailwind.config.js"
     // ...
@@ -2852,7 +2852,7 @@ sidebar_position: 98
     ```
 
 
-### Viedo 18. Diseñando la vista show de cursos
+### Video 18. Diseñando la vista show de cursos
 1. Modificar la ruta **courses.show**:
     ```php title="routes\web.php"
     Route::get('cursos/{course}', [CourseController::class, 'show'])->name('courses.show');
@@ -2986,7 +2986,7 @@ sidebar_position: 98
     ```
 
 
-### Viedo 19. Habilitar matricula de alumnos
+### Video 19. Habilitar matricula de alumnos
 1. Crear ruta para matrícular usuario en **routes\web.php**:
     ```php title="routes\web.php"
     Route::post('courses/{course}/enrolled', [CourseController::class, 'enrolled'])->middleware('auth')->name('courses.enrolled');
@@ -3036,7 +3036,7 @@ sidebar_position: 98
     use App\Models\Course;
     ```
 
-### Viedo 20. Habilitar el buscador de cursos
+### Video 20. Habilitar el buscador de cursos
 1. Crear componente **Search**:
     ```bash
     php artisan make:livewire Search
@@ -3128,7 +3128,7 @@ sidebar_position: 98
 
 
 ## Sección 4: Control del avance del curso
-### Viedo 21. Componente Livewire de vista completa
+### Video 21. Componente Livewire de vista completa
 1. Modificar la ruta **courses.status**:
     ```php title="routes\web.php"
     Route::get('course-status/{course}', [CourseController::class, 'status'])->name('courses.status');
@@ -3191,7 +3191,7 @@ sidebar_position: 98
     }
     ```
 
-### Viedo 22. Recuperando información que se va a mostrar
+### Video 22. Recuperando información que se va a mostrar
 1. Modificar la vista **course-status**:
     ```php title="resources\views\livewire\course-status.blade.php"
     <div class="mt-8">
@@ -3286,7 +3286,7 @@ sidebar_position: 98
     ```    
 
 
-### Viedo 23. Habilitar botones next y previous
+### Video 23. Habilitar botones next y previous
 1. Modificar controlador **CourseStatus**:
     ```php title="app\Http\Livewire\CourseStatus.php"
     <?php
@@ -3401,7 +3401,7 @@ sidebar_position: 98
     ```
 
 
-### Viedo 24. Dar estilos a la página
+### Video 24. Dar estilos a la página
 1. Agregar estilos a **resources\css\commom.css**:
     ```css title="resources\css\commom.css"
     .embed-responsive{
@@ -3514,7 +3514,7 @@ sidebar_position: 98
         + https://www.creative-tim.com/learning-lab/tailwind-starter-kit/documentation/css/progressbars
 
 
-### Viedo 25. Marcar unidad como culminada
+### Video 25. Marcar unidad como culminada
 1. Modificar vista del componente **resources\views\livewire\course-status.blade.php**:
     ```php title="resources\views\livewire\course-status.blade.php"
     <div class="mt-8">
@@ -3699,7 +3699,7 @@ sidebar_position: 98
     ```
 
 
-### Viedo 26. Proteger rutas
+### Video 26. Proteger rutas
 1. Modificar el controlador **CourseStatus**:
     ```php title="app\Http\Livewire\CourseStatus.php"
     <?php
@@ -5144,10 +5144,10 @@ sidebar_position: 98
     </div>
     ```
 
-# -----------------------------------------
+
 ### Video 34. Reorganizar rutas
-1. Modificar archivo de rutas **routes\instructor.php**:
-    ```php title=""
+1. Modificar archivo de rutas **instructor**:
+    ```php title="routes\instructor.php"
     <?php
 
     use App\Http\Controllers\Instructor\CourseController;
@@ -5157,12 +5157,12 @@ sidebar_position: 98
 
     Route::resource('courses', CourseController::class)->names('courses');
     ```
-1. Crear controlador para administrar las rutas relacionadas con los cursos de los instructores:
-    ```php title=""
+2. Crear controlador para administrar las rutas relacionadas con los cursos de los instructores:
+    ```bash
     php artisan make:controller Instructor\CourseController -r
     ```
-1. Programar controlador **app\Http\Controllers\Instructor\CourseController.php**:
-    ```php title=""
+3. Programar controlador **CourseController**:
+    ```php title="app\Http\Controllers\Instructor\CourseController.php"
     <?php
 
     namespace App\Http\Controllers\Instructor;
@@ -5250,36 +5250,36 @@ sidebar_position: 98
         }
     }
     ```
-1. Crear las vistas para el controlador anterior:
-    **resources\views\instructor\courses\index.blade.php**:
-    ```php title=""
+4. Crear las vistas para el controlador anterior:
+    **index**:
+    ```php title="resources\views\instructor\courses\index.blade.php"
     <x-app-layout>
         @livewire('instructor.courses-index')
     </x-app-layout>
     ```
-    **resources\views\instructor\courses\create.blade.php**:
-    ```php title=""
+    **create**:
+    ```php title="resources\views\instructor\courses\create.blade.php"
     <x-app-layout></x-app-layout>
     ```
-    **resources\views\instructor\courses\edit.blade.php**:
-    ```php title=""
+    **edit**:
+    ```php title="resources\views\instructor\courses\edit.blade.php"
     <x-app-layout></x-app-layout>
     ```
-    **resources\views\instructor\courses\show.blade.php**:
-    ```php title=""
+    **show**:
+    ```php title="resources\views\instructor\courses\show.blade.php"
     <x-app-layout></x-app-layout>
     ```
-1. Reubicar y cambiar nombre a componente controlador de livewire:
+5. Reubicar y cambiar nombre a componente controlador de livewire:
     De:
-    ```php title=""
+    ```php
     app\Http\Livewire\InstructorCourses.php
     ```
     A:
-    ```php title=""
+    ```php
     app\Http\Livewire\Instructor\CoursesIndex.php
     ```
-1. Modificar el controlador del componente **app\Http\Livewire\Instructor\CoursesIndex.php**:
-    ```php title=""
+6. Modificar el controlador del componente **CoursesIndex**:
+    ```php title="app\Http\Livewire\Instructor\CoursesIndex.php"
     <?php
 
     namespace App\Http\Livewire\Instructor;
@@ -5307,26 +5307,26 @@ sidebar_position: 98
         }
     }
     ```
-1. Reubicar y cambiar nombre a componente vista de livewire:
+7. Reubicar y cambiar nombre a componente vista de livewire:
     De:
-    ```php title=""
+    ```php
     resources\views\livewire\instructor-courses.blade.php
     ```
     A:
-    ```php title=""
+    ```php
     resources\views\livewire\instructor\courses-index.blade.php
     ```
-1. Cambiar nombre a componente controlador de livewire:
+8. Cambiar nombre a componente controlador de livewire:
     De:
-    ```php title=""
+    ```php
     app\Http\Livewire\CourseIndex.php
     ```
     A:
-    ```php title=""
+    ```php
     app\Http\Livewire\CoursesIndex.php
     ```
-1. Modificar controlador **app\Http\Livewire\CoursesIndex.php**:
-    ```php title=""
+9. Modificar controlador **CoursesIndex**:
+    ```php title="app\Http\Livewire\CoursesIndex.php"
     <?php
 
     namespace App\Http\Livewire;
@@ -5361,15 +5361,16 @@ sidebar_position: 98
         }
     }
     ```
-1. Cambiar nombre a componente vista de livewire:
+10. Cambiar nombre a componente vista de livewire:
     De:
-    ```php title=""
+    ```php
     resources\views\livewire\course-index.blade.php
+    ```
     A:
-    ```php title=""
+    ```php
     resources\views\livewire\courses-index.blade.php
-1. Modificar vista **resources\views\courses\index.blade.php**:
-    ```php title=""
+11. Modificar vista **index**:
+    ```php title="resources\views\courses\index.blade.php"
     <x-app-layout>
         <section class="bg-cover" style="background-image: url({{ asset('img/cursos/img_cursos.jpg') }})">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-36">
@@ -5384,17 +5385,17 @@ sidebar_position: 98
         @livewire('courses-index')
     </x-app-layout>
     ```
-1. Reubicar y cambiar nombre a componente controlador de livewire:
+12. Reubicar y cambiar nombre a componente controlador de livewire:
     De:
-    ```php title=""
+    ```php
     app\Http\Livewire\AdminUsers.php
     ```
     A:
-    ```php title=""
+    ```php
     app\Http\Livewire\Admin\UsersIndex.php
     ```
-1. Modificar el controlador del componente **app\Http\Livewire\Admin\UsersIndex.php**:
-    ```php title=""
+13. Modificar el controlador del componente **UsersIndex**:
+    ```php title="app\Http\Livewire\Admin\UsersIndex.php"
     <?php
 
     namespace App\Http\Livewire\Admin;
@@ -5424,17 +5425,17 @@ sidebar_position: 98
         }
     }
     ```
-1. Reubicar y cambiar nombre a componente vista de livewire:
+14. Reubicar y cambiar nombre a componente vista de livewire:
     De:
-    ```php title=""
+    ```php
     resources\views\livewire\admin-users.blade.php
     ```
     A:
-    ```php title=""
+    ```php
     resources\views\livewire\admin\users-index.blade.php
     ```
-1. Modificar vista **resources\views\admin\users\index.blade.php**:
-    ```php title=""
+15. Modificar vista **index**:
+    ```php title="resources\views\admin\users\index.blade.php"
     @extends('adminlte::page')
 
     @section('title', 'Coders Free')
@@ -5458,19 +5459,19 @@ sidebar_position: 98
 
 
 ### Video 35. Formulario para actualizar información básica de curso
-###### https://ckeditor.com/
-###### https://ckeditor.com/ckeditor-5/download/
-1. En resources\views\livewire\instructor\courses-index.blade.php:
++ https://ckeditor.com
++ https://ckeditor.com/ckeditor-5/download
+1. En **courses-index**:
     Cambiar:
-    ```php title=""
+    ```php title="resources\views\livewire\instructor\courses-index.blade.php"
     <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
     ```
     Por:
-    ```php title=""
+    ```php title="resources\views\livewire\instructor\courses-index.blade.php"
     <a href="{{ route('instructor.courses.edit', $course) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
     ```
-1. Diseñar la vista **resources\views\instructor\courses\edit.blade.php**:
-    ```php title=""
+2. Diseñar la vista **edit**:
+    ```php title="resources\views\instructor\courses\edit.blade.php"
     <x-app-layout>
         <div class="container py-8 grid grid-cols-5">
             <aside>
@@ -5600,8 +5601,8 @@ sidebar_position: 98
         </x-slot>
     </x-app-layout>
     ```
-1. Modificar la plantilla **resources\views\layouts\app.blade.php**:
-    ```php title=""
+3. Modificar la plantilla **app**:
+    ```php title="resources\views\layouts\app.blade.php"
     <!DOCTYPE html>
     <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
         <head>
@@ -5618,8 +5619,8 @@ sidebar_position: 98
         </body>
     </html>
     ```
-1. Modificar el controlador **app\Http\Controllers\Instructor\CourseController.php**:
-    ```php title=""
+4. Modificar el controlador **CourseController**:
+    ```php title="app\Http\Controllers\Instructor\CourseController.php"
     <?php
 
     namespace App\Http\Controllers\Instructor;
@@ -5718,18 +5719,18 @@ sidebar_position: 98
 
 
 ### Video 36. Formulario para crear un nuevo curso
-1. Modificar **resources\views\livewire\instructor\courses-index.blade.php**:
-    ```php title=""
+1. Modificar **courses-index**:
+    ```php title="resources\views\livewire\instructor\courses-index.blade.php"
     <div class="container py-8">
         <x-table-responsive>
             <div class="px-6 py-4 flex">
                 <input wire:keydown="limpiar_page" wire:model="search" class="form-input flex-1 shadow-sm" placeholder="Ingrese el nombre de un curso ...">
                 <a class="btn btn-danger ml-2" href="{{ route('instructor.courses.create') }}">Crear nuevo curso</a>
             </div>
-            ≡
+            <!-- ... -->
     ```
-1. Modificar la vista **resources\views\instructor\courses\create.blade.php**:
-    ```php title=""
+2. Modificar la vista **create**:
+    ```php title="resources\views\instructor\courses\create.blade.php"
     <x-app-layout>
         <div class="container py-8">
             <div class="card">
@@ -5754,8 +5755,8 @@ sidebar_position: 98
         </x-slot>
     </x-app-layout>
     ```
-1. Crar vista **resources\views\instructor\courses\partials\form.blade.php**:
-    ```php title=""
+3. Crar vista **form**:
+    ```php title="resources\views\instructor\courses\partials\form.blade.php"
     <div class="mb-4">
         {!! Form::label('title', 'Título del curso') !!}
         {!! Form::text('title', null, ['class' => 'form-input block w-full mt-1']) !!}
@@ -5801,9 +5802,9 @@ sidebar_position: 98
         </div>
     </div>
     ```
-    ##### Ir a https://www.pexels.com/es-es/buscar/course/ y copiar la dirección de una imagen
-1. Modificar vista **resources\views\instructor\courses\edit.blade.php**:
-    ```php title=""
+    + Ir a https://www.pexels.com/es-es/buscar/course/ y copiar la dirección de una imagen
+4. Modificar vista **edit**:
+    ```php title="resources\views\instructor\courses\edit.blade.php"
     <x-app-layout>
         <div class="container py-8 grid grid-cols-5">
             <aside>
@@ -5844,8 +5845,8 @@ sidebar_position: 98
         </x-slot>
     </x-app-layout>
     ```
-1. Modificar método **create** del controlador **app\Http\Controllers\Instructor\CourseController.php**:
-    ```php title=""
+5. Modificar método **create** del controlador **CourseController**:
+    ```php title="app\Http\Controllers\Instructor\CourseController.php"
     public function create()
     {
         // de esta forma recuperamos una colección con todos los nombres de las categorias y
@@ -5856,8 +5857,8 @@ sidebar_position: 98
         return view('instructor.courses.create', compact('categories','levels','prices'));
     }
     ```
-1. Crear archivo js en **public\js\instructor\courses\form.js**:
-    ```php title=""
+6. Crear archivo js en **form**:
+    ```js title="public\js\instructor\courses\form.js"
     //Slug automático
     document.getElementById("title").addEventListener('keyup', slugChange);
 
@@ -5912,8 +5913,8 @@ sidebar_position: 98
 
 
 ### Video 37. Crear nuevo curso
-1. Programar método **store** del controlador **app\Http\Controllers\Instructor\CourseController.php**:
-    ```php title=""
+1. Programar método **store** del controlador **CourseController**:
+    ```php title="app\Http\Controllers\Instructor\CourseController.php"
     public function store(Request $request)
     {
         $request->validate([
@@ -5948,8 +5949,8 @@ sidebar_position: 98
     ```php title=""
     use Illuminate\Support\Facades\Storage;
     ```
-1. Incluir los errores de validación en la vista **resources\views\instructor\courses\partials\form.blade.php**:
-    ```php title=""
+2. Incluir los errores de validación en la vista **form**:
+    ```php title="resources\views\instructor\courses\partials\form.blade.php"
     <div class="mb-4">
         {!! Form::label('title', 'Título del curso') !!}
         {!! Form::text('title', null, ['class' => 'form-input block w-full mt-1' . ($errors->has('title') ? ' border-red-600' : '')]) !!}
@@ -6007,36 +6008,36 @@ sidebar_position: 98
         </div>
     </div>
     ```
-1. En **resources\views\livewire\instructor\courses-index.blade.php**:
+3. En **courses-index**:
     Reemplazar:
-    ```php title=""
+    ```php title="resources\views\livewire\instructor\courses-index.blade.php"
     <img class="h-10 w-10 rounded-full" src="{{ Storage::url($course->image->url) }}" alt="">
     ```
     Por:
-    ```php title=""
+    ```php title="resources\views\livewire\instructor\courses-index.blade.php"
     @isset($course->image)
         <img class="h-10 w-10 rounded-full object-cover object-center" src="{{ Storage::url($course->image->url) }}" alt="">
     @else
         <img class="h-10 w-10 rounded-full object-cover object-center" src="https://images.pexels.com/photos/5940721/pexels-photo-5940721.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">   
     @endisset    
     ```   
-1. En **app\Http\Livewire\Instructor\CoursesIndex.php**:
+4. En **CoursesIndex**:
     Reemplazar:
-    ```php title=""
+    ```php title="app\Http\Livewire\Instructor\CoursesIndex.php"
     $courses = Course::where('title', 'LIKE', '%' . $this->search . '%')
                         ->where('user_id', auth()->user()->id)
                         ->paginate(8);
     ```
     Por:
-    ```php title=""
+    ```php title="app\Http\Livewire\Instructor\CoursesIndex.php"
     $courses = Course::where('title', 'LIKE', '%' . $this->search . '%')
                         ->where('user_id', auth()->user()->id)
                         ->latest('id')
                         ->paginate(8);
     ```
-1. En **database\factories\ImageFactory.php**:
+5. En **ImageFactory**:
     Cambiar:
-    ```php title=""
+    ```php title="database\factories\ImageFactory.php"
     public function definition()
     {
         return [
@@ -6045,7 +6046,7 @@ sidebar_position: 98
     }    
     ```
     Por:
-    ```php title=""
+    ```php title="database\factories\ImageFactory.php"
     public function definition()
     {
         return [
@@ -6053,9 +6054,9 @@ sidebar_position: 98
         ];
     }
     ```
-1. En **database\seeders\DatabaseSeeder.php**:
+6. En **DatabaseSeeder**:
     Cambiar:
-    ```php title=""
+    ```php title="database\seeders\DatabaseSeeder.php"
     Storage::deleteDirectory('cursos');
     Storage::makeDirectory('cursos');
     ```
@@ -6064,16 +6065,16 @@ sidebar_position: 98
     Storage::deleteDirectory('courses');
     Storage::makeDirectory('courses');
     ```
-1. Borrar el directorio **storage\app\public\cursos**.
-1. Ejecutar:
+7. Borrar el directorio **storage\app\public\cursos**.
+8. Ejecutar:
     ```bash
     php artisan migrate:fresh --seed
     ```
 
 
 ### Video 38. Actualizar información de curso
-1. Programar método **update** del controlador **app\Http\Controllers\Instructor\CourseController.php**:
-    ```php title=""
+1. Programar método **update** del controlador **CourseController**:
+    ```php title="app\Http\Controllers\Instructor\CourseController.php"
     public function update(Request $request, Course $course)
     {
         $request->validate([
@@ -6114,21 +6115,21 @@ sidebar_position: 98
 
 
 ### Video 39. Agregar regla de validación para las imagenes
-1. Modificar formulario **resources\views\instructor\courses\partials\form.blade.php**:
+1. Modificar formulario **form**:
     Reemplazar:
-    ```php title=""
+    ```php title="resources\views\instructor\courses\partials\form.blade.php"
     {!! Form::file('file', ['class' => 'form-input w-full', 'id' => 'file']) !!}
     ```
     Por:
-    ```php title=""
+    ```php title="resources\views\instructor\courses\partials\form.blade.php"
     {!! Form::file('file', ['class' => 'form-input w-full'. ($errors->has('file') ? ' border-red-600' : ''), 'id' => 'file', 'accept' => 'image/*']) !!}
     @error('file')
         <strong class="text-xs text-red-600">{{ $message }}</strong>
     @enderror
     ```
-1. Modificar reglas de validación en el controlador **app\Http\Controllers\Instructor\CourseController.php**:
-    ```php title=""
-    ≡
+2. Modificar reglas de validación en el controlador **CourseController**:
+    ```php title="app\Http\Controllers\Instructor\CourseController.php"
+    // ...
     public function store(Request $request)
     {
         $request->validate([
@@ -6141,9 +6142,9 @@ sidebar_position: 98
             'price_id' => 'required',
             'file' => 'image'
         ]);
-        ≡
+        // ...
     }
-    ≡
+    // ...
     public function update(Request $request, Course $course)
     {
         $request->validate([
@@ -6156,19 +6157,19 @@ sidebar_position: 98
             'price_id' => 'required',
             'file' => 'image'
         ]);
-        ≡
+        // ...
     }
     ```
 
 
 ### Video 40. Lo que desarrollaremos
-###### Breve explicación de lo que haremos.
++ Breve explicación de lo que haremos.
 
 
 ### Video 41. Crear nueva plantilla para instructores
 1. Duplicar la vista **resources\views\layouts\app.blade.php** y renombrarla como **resources\views\layouts\instructor.blade.php**.
-1. Rediseñar la nueva plantilla **resources\views\layouts\instructor.blade.php**:
-    ```php title=""
+2. Rediseñar la nueva plantilla **instructor**:
+    ```php title="resources\views\layouts\instructor.blade.php"
     <!DOCTYPE html>
     <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
         <head>
@@ -6231,8 +6232,8 @@ sidebar_position: 98
         </body>
     </html>
     ```
-1. Rediseñar la vista **resources\views\instructor\courses\edit.blade.php**:
-    ```php title=""
+3. Rediseñar la vista **edit**:
+    ```php title="resources\views\instructor\courses\edit.blade.php"
     <x-instructor-layout>
         <x-slot name="course">
             {{ $course->slug }}
@@ -6254,18 +6255,22 @@ sidebar_position: 98
         </x-slot>
     </x-instructor-layout>
     ```
-1. Crea componente de clase para extender la nueva plantilla **resources\views\layouts\instructor.blade.php**:
+4. Crea componente de clase para extender la nueva plantilla **resources\views\layouts\instructor.blade.php**:
     ```bash
     php artisan make:component InstructorLayout
     ```
-1. Cambiar la vista del método render del controlador del nuevo componente en **app\View\Components\InstructorLayout.php**:
+5. Cambiar la vista del método render del controlador del nuevo componente en **app\View\Components\InstructorLayout.php**:
     Cambiar:
-    + return view('components.instructor-layout');
+    ```php
+    return view('components.instructor-layout');
+    ```
     Por:
-    + return view('layouts.instructor');
-1. Eliminar la vista **resources\views\components\instructor-layout.blade.php**.
-1. Modificar el archivo de rutas **routes\instructor.php**:
-    ```php title=""
+    ```php
+    return view('layouts.instructor');
+    ```
+6. Eliminar la vista **resources\views\components\instructor-layout.blade.php**.
+7. Modificar el archivo de rutas **instructor**:
+    ```php title="routes\instructor.php"
     <?php
 
     use App\Http\Controllers\Instructor\CourseController;
@@ -6278,12 +6283,12 @@ sidebar_position: 98
 
     Route::get('courses/{course}/curriculum', CoursesCurriculum::class)->name('courses.curriculum');
     ```
-1. Para el control de la rutas **courses.curriculum** crearemos un componente de livewire:
+8. Para el control de la rutas **courses.curriculum** crearemos un componente de livewire:
     ```bash
     php artisan make:livewire Instructor/CoursesCurriculum
     ```
-1. Reprogramar el controlador **app\Http\Livewire\Instructor\CoursesCurriculum.php**:
-    ```php title=""
+9.  Reprogramar el controlador **CoursesCurriculum**:
+    ```php title="app\Http\Livewire\Instructor\CoursesCurriculum.php"
     <?php
 
     namespace App\Http\Livewire\Instructor;
@@ -6306,16 +6311,16 @@ sidebar_position: 98
         }
     }
     ```
-1. Diseñar vista **resources\views\livewire\instructor\courses-curriculum.blade.php**:
-    ```php title=""
+10. Diseñar vista **courses-curriculum**:
+    ```php title="resources\views\livewire\instructor\courses-curriculum.blade.php"
     <div>
         <x-slot name="course">
             {{ $course->slug }}
         </x-slot>
     </div>
     ```
-1. Generar nuevas directivas de Blade modificando **app\Providers\AppServiceProvider.php**:
-    ```php title=""
+11. Generar nuevas directivas de Blade modificando **AppServiceProvider**:
+    ```php title="app\Providers\AppServiceProvider.php"
     <?php
 
     namespace App\Providers;
@@ -6351,8 +6356,8 @@ sidebar_position: 98
 
 
 ### Video 42. Agregar un crud para las secciones de un curso
-1. Modificar vista **resources\views\livewire\instructor\courses-curriculum.blade.php**:
-    ```php title=""
+1. Modificar vista **courses-curriculum**:
+    ```php title="resources\views\livewire\instructor\courses-curriculum.blade.php"
     <div>
         <x-slot name="course">
             {{ $course->slug }}
@@ -6406,8 +6411,8 @@ sidebar_position: 98
         </div>
     </div>
     ```
-1. Modificar controlador **app\Http\Livewire\Instructor\CoursesCurriculum.php**:
-    ```php title=""
+2. Modificar controlador **CoursesCurriculum**:
+    ```php title="app\Http\Livewire\Instructor\CoursesCurriculum.php"
     <?php
 
     namespace App\Http\Livewire\Instructor;
@@ -6474,8 +6479,8 @@ sidebar_position: 98
     ```bash
     php artisan make:livewire Instructor/CoursesLesson
     ```
-1. Modificar vista **resources\views\livewire\instructor\courses-curriculum.blade.php** para llamar al nuevo componente:
-    ```php title=""
+2. Modificar vista **courses-curriculum** para llamar al nuevo componente:
+    ```php title="resources\views\livewire\instructor\courses-curriculum.blade.php"
     <div>
         <x-slot name="course">
             {{ $course->slug }}
@@ -6532,8 +6537,8 @@ sidebar_position: 98
         </div>
     </div>
     ```
-1. Programar el controlador **app\Http\Livewire\Instructor\CoursesLesson.php**:
-    ```php title=""
+3. Programar el controlador **CoursesLesson**:
+    ```php title="app\Http\Livewire\Instructor\CoursesLesson.php"
     <?php
 
     namespace App\Http\Livewire\Instructor;
@@ -6618,8 +6623,8 @@ sidebar_position: 98
         }
     }
     ```
-1. Diseñar vista **resources\views\livewire\instructor\courses-lesson.blade.php**:
-    ```php title=""
+4. Diseñar vista **courses-lesson**:
+    ```php title="resources\views\livewire\instructor\courses-lesson.blade.php"
     <div>
         @foreach ($section->lessons as $item)
             <article class="card mt-4">
@@ -6720,12 +6725,12 @@ sidebar_position: 98
         </div>
     </div>
     ```
-1. Crear observer para el modelo **Lesson**:
+5. Crear observer para el modelo **Lesson**:
     ```bash
     php artisan make:observer LessonObserver
     ```
-1. Programar el observer **app\Observers\LessonObserver.php**:
-    ```php title=""
+6. Programar el observer **LessonObserver**:
+    ```php title="app\Observers\LessonObserver.php"
     <?php
 
     namespace App\Observers;
@@ -6767,8 +6772,8 @@ sidebar_position: 98
         }
     }
     ```
-1. Modificar el archivo **app\Providers\AppServiceProvider.php** para registrar el observer **LessonObserver**
-    ```php title=""
+7. Modificar el archivo **AppServiceProvider** para registrar el observer **LessonObserver**
+    ```php title="app\Providers\AppServiceProvider.php"
     <?php
 
     namespace App\Providers;
@@ -6807,8 +6812,8 @@ sidebar_position: 98
 
 
 ### Video 44. Agregar descripción a una lección
-1. Modificar vista **resources\views\livewire\instructor\courses-lesson.blade.php**:
-    ```php title=""
+1. Modificar vista **courses-lesson**:
+    ```php title="resources\views\livewire\instructor\courses-lesson.blade.php"
     <div>
         @foreach ($section->lessons as $item)
             <article class="card mt-4">
@@ -6913,12 +6918,12 @@ sidebar_position: 98
         </div>
     </div>
     ```
-1. Crear componente de livewire:
+2. Crear componente de livewire:
     ```bash
     php artisan make:livewire Instructor/LessonDescription
     ```
-1. Programar el controlador del componente **app\Http\Livewire\Instructor\LessonDescription.php**:
-    ```php title=""
+3. Programar el controlador del componente **LessonDescription**:
+    ```php title="app\Http\Livewire\Instructor\LessonDescription.php"
     <?php
 
     namespace App\Http\Livewire\Instructor;
@@ -6967,8 +6972,8 @@ sidebar_position: 98
         }
     }
     ```
-1. Diseñar la vista del componente **resources\views\livewire\instructor\lesson-description.blade.php**:
-    ```php title=""
+4. Diseñar la vista del componente **lesson-description**:
+    ```php title="resources\views\livewire\instructor\lesson-description.blade.php"
     <div>
         <article class="card" x-data="{open: false}">
             <div class="card-body bg-gray-100">
@@ -7013,8 +7018,8 @@ sidebar_position: 98
     ```bash
     php artisan make:livewire Instructor/LessonResources
     ```
-1. Modificar la vista **resources\views\livewire\instructor\courses-lesson.blade.php** para incluir el componente de recursos:
-    ```php title=""
+2. Modificar la vista **courses-lesson** para incluir el componente de recursos:
+    ```php title="resources\views\livewire\instructor\courses-lesson.blade.php"
     <div>
         @foreach ($section->lessons as $item)
             <article class="card mt-4" x-data="{open: false}">
@@ -7123,8 +7128,8 @@ sidebar_position: 98
         </div>
     </div>
     ```
-1. Programar controlador del componente **app\Http\Livewire\Instructor\LessonResources.php**:
-    ```php title=""
+3. Programar controlador del componente **LessonResources**:
+    ```php title="app\Http\Livewire\Instructor\LessonResources.php"
     <?php
 
     namespace App\Http\Livewire\Instructor;
@@ -7174,8 +7179,8 @@ sidebar_position: 98
         }
     }
     ```
-1. Diseñar vista del componente **resources\views\livewire\instructor\lesson-resources.blade.php**:
-    ```php title=""
+4. Diseñar vista del componente **lesson-resources**:
+    ```php title="resources\views\livewire\instructor\lesson-resources.blade.php"
     <div class="card" x-data="{ open: false }">
         <div class="card-body bg-gray-100">
             <header>
@@ -7208,8 +7213,8 @@ sidebar_position: 98
         </div>
     </div>
     ```
-1. Agregar el método **deleting** en **app\Observers\LessonObserver.php**:
-    ```php title=""
+5. Agregar el método **deleting** en **LessonObserver**:
+    ```php title="app\Observers\LessonObserver.php"
     public function deleting(Lesson $lesson){
         if($lesson->resource){
             Storage::delete($lesson->resource->url);
@@ -7221,12 +7226,12 @@ sidebar_position: 98
     ```php title=""
     use Illuminate\Support\Facades\Storage;
     ```
-1. Crear un observador para el modelo **Section**:
+6. Crear un observador para el modelo **Section**:
     ```bash
     php artisan make:observer SectionObserver
     ```
-1. Registrar el observador SectionObserever en **app\Providers\AppServiceProvider.php**:
-    ```php title=""
+7. Registrar el observador SectionObserever en **AppServiceProvider**:
+    ```php title="app\Providers\AppServiceProvider.php"
     <?php
 
     namespace App\Providers;
@@ -7265,8 +7270,8 @@ sidebar_position: 98
         }
     }
     ```
-1. Programar **app\Observers\SectionObserver.php**:
-    ```php title=""
+8. Programar **SectionObserver**:
+    ```php title="app\Observers\SectionObserver.php"
     <?php
 
     namespace App\Observers;
@@ -7286,8 +7291,8 @@ sidebar_position: 98
         }
     }
     ```
-1. Modificar la vista **resources\views\livewire\instructor\courses-lesson.blade.php**:
-    ```php title=""
+9. Modificar la vista **courses-lesson**:
+    ```php title="resources\views\livewire\instructor\courses-lesson.blade.php"
     <div>
         @foreach ($section->lessons as $item)
             <article class="card mt-4" x-data="{open: false}">
@@ -7308,8 +7313,8 @@ sidebar_position: 98
         ≡
     </div>
     ```
-1. Modificar la vista **resources\views\livewire\instructor\courses-curriculum.blade.php**:
-    ```php title=""
+10. Modificar la vista **courses-curriculum**:
+    ```php title=""resources\views\livewire\instructor\courses-curriculum.blade.php
     <div>
         <x-slot name="course">
             {{ $course->slug }}
@@ -7340,9 +7345,9 @@ sidebar_position: 98
 
 
 ### Video 46. Pequeña corrección
-1. Corregir asignación de llaves en componentes en la vista **resources\views\livewire\instructor\courses-lesson.blade.php**:
-    ```php title=""
-    ≡
+1. Corregir asignación de llaves en componentes en la vista **courses-lesson**:
+    ```php title="resources\views\livewire\instructor\courses-lesson.blade.php"
+    <!-- ... -->
     <div class="mb-4">
         @livewire('instructor.lesson-description', ['lesson' => $item], key('lesson-description' . $item->id))
     </div>
@@ -7350,23 +7355,23 @@ sidebar_position: 98
     <div>
         @livewire('instructor.lesson-resources', ['lesson' => $item], key('lesson-resources' . $item->id))
     </div>
-    ≡
+    <!-- ... -->
     ```
 
 
 ### Video 47. Metas del curso
-1. Crear ruta para metas del curso en **routes\instructor.php**:
-    ```php title=""
+1. Crear ruta para metas del curso en **instructor**:
+    ```php title="routes\instructor.php"
     Route::get('courses/{course}/goals', [CourseController::class, 'goals'])->name('courses.goals');
     ```
-1. Crear método **goals** en el controlador **app\Http\Controllers\Instructor\CourseController.php**:
-    ```php title=""
+2. Crear método **goals** en el controlador **CourseController**:
+    ```php title="app\Http\Controllers\Instructor\CourseController.php"
     public function goals(Course $course){
         return view('instructor.courses.goals', compact('course'));
     }
     ```
-1. Crear vista **resources\views\instructor\courses\goals.blade.php**:
-    ```php title=""
+3. Crear vista **goals**:
+    ```php title="resources\views\instructor\courses\goals.blade.php"
     <x-instructor-layout>
         <x-slot name="course">
             {{ $course->slug }}
@@ -7385,8 +7390,8 @@ sidebar_position: 98
         </div>
     </x-instructor-layout>
     ```
-1. Modificar plantilla **resources\views\layouts\instructor.blade.php**:
-    ```php title=""
+4. Modificar plantilla **instructor**:
+    ```php title="resources\views\layouts\instructor.blade.php"
     ≡
     <h1 class="font-bold text-lg mb-4">Edición del curso</h1>
     <ul class="text-sm text-gray-600">
@@ -7405,14 +7410,14 @@ sidebar_position: 98
     </ul>
     ≡
     ```
-1. Crear componentes livewire:
+5. Crear componentes livewire:
     ```bash
     php artisan make:livewire Instructor/CoursesGoals
     php artisan make:livewire Instructor/CoursesRequirements
     php artisan make:livewire Instructor/CoursesAudiences
     ```
-1. Programar controlador del componente **app\Http\Livewire\Instructor\CoursesGoals.php**:
-    ```php title=""
+6. Programar controlador del componente **CoursesGoals**:
+    ```php title="app\Http\Livewire\Instructor\CoursesGoals.php"
     <?php
 
     namespace App\Http\Livewire\Instructor;
@@ -7467,8 +7472,8 @@ sidebar_position: 98
         }
     }
     ```
-1. Diseñar vista del componente **resources\views\livewire\instructor\courses-goals.blade.php**:
-    ```php title=""
+7. Diseñar vista del componente **courses-goals**:
+    ```php title="resources\views\livewire\instructor\courses-goals.blade.php"
     <section>
         <h1 class="text-2xl font-bold">METAS DEL CURSO</h1>
         <hr class="mt-2 mb-6">
@@ -7511,8 +7516,8 @@ sidebar_position: 98
         </article>
     </section>
     ```
-1. Programar controlador del componente **app\Http\Livewire\Instructor\CoursesRequirements.php**:
-    ```php title=""
+8. Programar controlador del componente **CoursesRequirements**:
+    ```php title="app\Http\Livewire\Instructor\CoursesRequirements.php"
     <section>
         <h1 class="text-2xl font-bold">METAS DEL CURSO</h1>
         <hr class="mt-2 mb-6">
@@ -7555,8 +7560,8 @@ sidebar_position: 98
         </article>
     </section>
     ```
-1. Diseñar vista del componente **resources\views\livewire\instructor\courses-requirements.blade.php**:
-    ```php title=""
+9. Diseñar vista del componente **courses-requirements**:
+    ```php title="resources\views\livewire\instructor\courses-requirements.blade.php"
     <section>
         <h1 class="text-2xl font-bold">REQUERIMIENTOS DEL CURSO</h1>
         <hr class="mt-2 mb-6">
@@ -7599,8 +7604,8 @@ sidebar_position: 98
         </article>
     </section>
     ```
-1. Programar controlador del componente **app\Http\Livewire\Instructor\CoursesAudiences.php**:
-    ```php title=""
+10. Programar controlador del componente **CoursesAudiences**:
+    ```php title="app\Http\Livewire\Instructor\CoursesAudiences.php"
     <?php
 
     namespace App\Http\Livewire\Instructor;
@@ -7655,8 +7660,8 @@ sidebar_position: 98
         }
     }
     ```
-1. Diseñar vista del componente **resources\views\livewire\instructor\courses-audiences.blade.php**:
-    ```php title=""
+11. Diseñar vista del componente **courses-audiences**:
+    ```php title="resources\views\livewire\instructor\courses-audiences.blade.php"
     <section>
         <h1 class="text-2xl font-bold">AUDIENCIA DEL CURSO</h1>
         <hr class="mt-2 mb-6">
@@ -7702,20 +7707,20 @@ sidebar_position: 98
 
 
 ### Video 48. Estudiantes del curso
-1. Crear ruta **courses.estudents** en **routes\instructor.php**:
-    ```php title=""
+1. Crear ruta **courses.estudents** en **instructor**:
+    ```php title="routes\instructor.php"
     Route::get('courses/{course}/students', CoursesStudents::class)->name('courses.students');
     ```
     Importar componente:
-    ```php title=""
+    ```php title="routes\instructor.php"
     use App\Http\Livewire\Instructor\CoursesStudents;
     ```
-1. Crear componente de livewire para el control de la nueva ruta **courses.estudents**:
-    ```php title=""
+2. Crear componente de livewire para el control de la nueva ruta **courses.estudents**:
+    ```bash
     php artisan make:livewire Instructor/CoursesStudents
     ```
-1. Programar el controlador del componente **app\Http\Livewire\Instructor\CoursesStudents.php**:
-    ```php title=""
+3. Programar el controlador del componente **CoursesStudents**:
+    ```php title="app\Http\Livewire\Instructor\CoursesStudents.php"
     <?php
 
     namespace App\Http\Livewire\Instructor;
@@ -7747,8 +7752,8 @@ sidebar_position: 98
         }
     }
     ```
-1. Diseñar la vista del componente **resources\views\livewire\instructor\courses-students.blade.php**:
-    ```php title=""
+4. Diseñar la vista del componente **courses-students**:
+    ```php title="resources\views\livewire\instructor\courses-students.blade.php"
     <div>
         <x-slot name="course">
             {{ $course->slug }}
@@ -7811,9 +7816,9 @@ sidebar_position: 98
         </x-table-responsive>   
     </div>
     ```
-1. Modificar plantilla **resources\views\layouts\instructor.blade.php**:
-    ```php title=""
-    ≡
+5. Modificar plantilla **instructor**:
+    ```php title="resources\views\layouts\instructor.blade.php"
+    // ...
     <aside>
         <h1 class="font-bold text-lg mb-4">Edición del curso</h1>
         <ul class="text-sm text-gray-600">
@@ -7831,22 +7836,26 @@ sidebar_position: 98
             </li>
         </ul>
     </aside>
-    ≡
+    // ...
     ```
 
 
 ### Video 49. Agregar policies a los cursos
 1. Reemplazar línea de código en **database\factories\CourseFactory.php**:
     Cambiar:
-    + 'user_id' => 1,
+    ```php
+    'user_id' => 1,
+    ```
     Por:
-    + 'user_id' => $this->faker->randomElement([1, 2, 3, 4, 5]),
-1. Reestablecer la base de datos:
+    ```php
+    'user_id' => $this->faker->randomElement([1, 2, 3, 4, 5]),
+    ```
+2. Reestablecer la base de datos:
     ```bash
     php artisan migrate:fresh --seed
     ```
-1. Crear método **dicatated** en **app\Policies\CoursePolicy.php**:
-    ```php title=""
+3. Crear método **dicatated** en **CoursePolicy**:
+    ```php title="app\Policies\CoursePolicy.php"
     public function dicatated(User $user, Course $course){
         if($course->user_id == $user->id){
             return true;
@@ -7855,12 +7864,12 @@ sidebar_position: 98
         }
     }
     ```
-1. Agregar la siguiente línea de código al principio de los métodos **edit**, **update** y **goals** del controlador **app\Http\Controllers\Instructor\CourseController.php**:
-    ```php title=""
+4. Agregar la siguiente línea de código al principio de los métodos **edit**, **update** y **goals** del controlador **CourseController**:
+    ```php title="app\Http\Controllers\Instructor\CourseController.php"
     $this->authorize('dicatated', $course);
     ```
-1. Modificar el controlador del componente **app\Http\Livewire\Instructor\CoursesCurriculum.php**:
-    ```php title=""
+5. Modificar el controlador del componente **CoursesCurriculum**:
+    ```php title="app\Http\Livewire\Instructor\CoursesCurriculum.php"
     <?php
 
     namespace App\Http\Livewire\Instructor;
@@ -7885,10 +7894,11 @@ sidebar_position: 98
             $this->section = new Section();
             $this->authorize('dicatated', $course);
         }
-        ≡
+        // ...
+    }
     ```
-1. Modificar el controlador del componente **app\Http\Livewire\Instructor\CoursesStudents.php**:
-    ```php title=""
+6. Modificar el controlador del componente **CoursesStudents**:
+    ```php title="app\Http\Livewire\Instructor\CoursesStudents.php"
     <?php
 
     namespace App\Http\Livewire\Instructor;
@@ -7909,10 +7919,11 @@ sidebar_position: 98
             $this->course = $course;
             $this->authorize('dicatated', $course);
         }
-        ≡
+        // ...
+    }
     ```
-1. Agregar el método **__construct** al principio de la clase **CourseController** del controlador **app\Http\Controllers\Instructor\CourseController.php**:
-    ```php title=""
+7. Agregar el método **__construct** al principio de la clase **CourseController** del controlador **CourseController**:
+    ```php title="app\Http\Controllers\Instructor\CourseController.php"
     public function __construct(){
         $this->middleware('can:Leer cursos')->only('index');
         $this->middleware('can:Crear cursos')->only('create', 'store');
@@ -7920,8 +7931,8 @@ sidebar_position: 98
         $this->middleware('can:Eliminar cursos')->only('destroy');
     }
     ```
-1. Agregar middleware a las rutas del archivo routes\instructor.php:
-    ```php title=""
+8. Agregar middleware a las rutas del archivo **instructor**:
+    ```php title="routes\instructor.php"
     <?php
 
     use App\Http\Controllers\Instructor\CourseController;
@@ -7940,6 +7951,7 @@ sidebar_position: 98
     Route::get('courses/{course}/students', CoursesStudents::class)->middleware('can:Actualizar cursos')->name('courses.students');
     ```
 
+# -----------------------------------------
 ## Sección 7: Áprobación de un curso
 ### Video 50. Agregar botón que solicite aprobación
 1. Modificar plantilla **resources\views\layouts\instructor.blade.php**:
