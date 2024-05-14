@@ -202,7 +202,7 @@ sidebar_position: 1
     docker run -it nombre_de_mi_imagen
     ```
 
-## Copiar archivos desde el PC a un contenedor Docker
+## Copiar archivos desde el PC a una imagen de Docker
 1. Crear una carpeta de proyecto e ingresar en ella:
     ```bash
     mkdir proyecto_prueba
@@ -237,7 +237,33 @@ sidebar_position: 1
     docker rmi -f $(docker images -aq)
     ```
 
+## Crear variables de entorno en el Dockerfile
++ Editar el Dockerfile:
+    ```
+    ...
+    ENV variable "Valor de la variable"
+    ```
+    :::tip Nota
+    Para ver el valor de la variable de entorno dentro del contenedor:
+    ```bash
+    echo $variable
+    ```
+    Para ver todas las variables de entorno:
+    ```bash
+    env
+    ```
+    :::
 
+## Establecer un directorio por defecto en el Dockerfile
++ Editar el Dockerfile:
+    ```
+    ...
+    WORKDIR /home
+    COPY archivo.txt .
+    ```
+    :::tip Nota
+    Al copiar el archivo **archivo.txt**, este se copiará en el directorio por defecto.
+    :::
 
 
     mmm:
