@@ -7951,11 +7951,11 @@ sidebar_position: 98
     Route::get('courses/{course}/students', CoursesStudents::class)->middleware('can:Actualizar cursos')->name('courses.students');
     ```
 
-# -----------------------------------------
+
 ## Sección 7: Áprobación de un curso
 ### Video 50. Agregar botón que solicite aprobación
-1. Modificar plantilla **resources\views\layouts\instructor.blade.php**:
-    ```php title=""
+1. Modificar plantilla **instructor**:
+    ```php title="resources\views\layouts\instructor.blade.php"
     <!DOCTYPE html>
     <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
         <head>
@@ -8042,20 +8042,20 @@ sidebar_position: 98
         </body>
     </html>
     ```
-1. Agregar ruta para status del curso en el archivo de rutas **routes\instructor.php**:
-    ```php title=""
+2. Agregar ruta para status del curso en el archivo de rutas **instructor**:
+    ```php title="routes\instructor.php"
     Route::post('courses/{course}/status', [CourseController::class, 'status'])->name('courses.status');
     ```
-1. Crear método **status** en el controlador **app\Http\Controllers\Instructor\CourseController.php**:
-    ```php title=""
+3. Crear método **status** en el controlador **CourseController**:
+    ```php title="app\Http\Controllers\Instructor\CourseController.php"
     public function status(Course $course){
         $course->status = 2;
         $course->save();
         return back();
     }
     ```
-1. Modificar la vista **resources\views\instructor\courses\edit.blade.php**:
-    ```php title=""
+4. Modificar la vista **edit**:
+    ```php title="resources\views\instructor\courses\edit.blade.php"
     <x-instructor-layout :course="$course">
         <h1 class="text-2xl font-bold">INFORMACIÓN DEL CURSO</h1>
         <hr class="mt-2 mb-6">
@@ -8074,8 +8074,8 @@ sidebar_position: 98
         </x-slot>
     </x-instructor-layout>
     ```
-1. Modificar **app\View\Components\InstructorLayout.php**:
-    ```php title=""
+5. Modificar **InstructorLayout**:
+    ```php title="app\View\Components\InstructorLayout.php"
     <?php
 
     namespace App\View\Components;
@@ -8106,22 +8106,22 @@ sidebar_position: 98
         }
     }
     ```
-1. Modificar el método render del controlador **app\Http\Livewire\Instructor\CoursesCurriculum.php**:
-    ```php title=""
+6. Modificar el método render del controlador **CoursesCurriculum**:
+    ```php title="app\Http\Livewire\Instructor\CoursesCurriculum.php"
     public function render()
     {
         // Le indicaremos que queremos utilizar una plantilla con la vista
         return view('livewire.instructor.courses-curriculum')->layout('layouts.instructor', ['course' => $this->course]);
     }
     ```
-1. Eliminar las siguiente línes de código de la vista **resources\views\livewire\instructor\courses-curriculum.blade.php**:
-    ```php title=""
+7. Eliminar las siguiente línes de código de la vista **courses-curriculum**:
+    ```php title="resources\views\livewire\instructor\courses-curriculum.blade.php"
     <x-slot name="course">
         {{ $course->slug }}
     </x-slot>
     ```
-1. Modificar la vista **resources\views\instructor\courses\goals.blade.php**:
-    ```php title=""
+8. Modificar la vista **goals**:
+    ```php title="resources\views\instructor\courses\goals.blade.php"
     <x-instructor-layout :course="$course">
         <div>
             @livewire('instructor.courses-goals', ['course' => $course], key('courses-goals' . $course->id))
@@ -8136,8 +8136,8 @@ sidebar_position: 98
         </div>
     </x-instructor-layout>
     ```
-1. Modificar el método **render** del controlador del componente **app\Http\Livewire\Instructor\CoursesStudents.php**:
-    ```php title=""
+9. Modificar el método **render** del controlador del componente **CoursesStudents**:
+    ```php title="app\Http\Livewire\Instructor\CoursesStudents.php"
     public function render()
     {
         $students = $this->course->students()
@@ -8146,8 +8146,8 @@ sidebar_position: 98
         return view('livewire.instructor.courses-students', compact('students'))->layout('layouts.instructor', ['course' => $this->course]);
     }
     ```
-1. Eliminar las siguientes líneas de código de la vista del componente **resources\views\livewire\instructor\courses-students.blade.php**:    
-    ```php title=""
+10. Eliminar las siguientes líneas de código de la vista del componente **courses-students**:    
+    ```php title="resources\views\livewire\instructor\courses-students.blade.php"
     <x-slot name="course">
         {{ $course->slug }}
     </x-slot>
@@ -8155,18 +8155,20 @@ sidebar_position: 98
 
 
 ### Video 51. Cursos pendientes de aprobación
-1. Modificar el archivo de configuración **config\adminlte.php**:
-    ```php title=""
+1. Modificar el archivo de configuración **adminlte**:
+    ```php title="config\adminlte.php"
     <?php
 
     return [
-        ≡
+        // ...
         'layout_topnav' => null,
         'layout_boxed' => null,
         'layout_fixed_sidebar' => true,
         'layout_fixed_navbar' => null,
         'layout_fixed_footer' => null,
-        ≡
+        // ...
+    ]
+    // ...
         'menu' => [
             [
                 'text'      => 'search',
@@ -8209,22 +8211,23 @@ sidebar_position: 98
                 'url'  => 'admin/settings',
                 'icon' => 'fas fa-fw fa-lock',
             ],
-            ≡   
+            // ...
+        ]   
     ```  
-1. Crear controlador para administrar cursos:
+2. Crear controlador para administrar cursos:
     ```bash
     php artisan make:controller Admin\CourseController
     ```  
-1. Crear ruta para la aprobación de cursos en **routes\admin.php**:
-    ```php title=""
+3. Crear ruta para la aprobación de cursos en **admin**:
+    ```php title="routes\admin.php"
     Route::get('courses',[CourseController::class, 'index'])->name('courses.index');
     ```  
     Importar controlador **app\Http\Controllers\Admin\CourseController.php**:
-    ```php title=""
+    ```php title="routes\admin.php"
     use App\Http\Controllers\Admin\CourseController;
     ```  
-1. Programar el controlador **app\Http\Controllers\Admin\CourseController.php**:
-    ```php title=""
+4. Programar el controlador **CourseController**:
+    ```php title="app\Http\Controllers\Admin\CourseController.php"
     <?php
 
     namespace App\Http\Controllers\Admin;
@@ -8241,8 +8244,8 @@ sidebar_position: 98
         }
     }
     ```  
-1. Crear vista **resources\views\admin\courses\index.blade.php**:
-    ```php title=""
+5. Crear vista **index**:
+    ```php title="resources\views\admin\courses\index.blade.php"
     @extends('adminlte::page')
 
     @section('title', 'Coders Free')
@@ -8290,27 +8293,27 @@ sidebar_position: 98
         <script> console.log('Hi!'); </script>
     @stop
     ```  
-1. Publicar vistas de paginación:
+6. Publicar vistas de paginación:
     ```bash
     php artisan vendor:publish --tag=laravel-pagination
     ```  
 
 
 ### Video 52. Aprobar curso
-###### https://tailwind-starter-kit.vercel.app/docs/badges
-1. Crear ruta para la revisión de cursos en **routes\admin.php**:
-    ```php title=""
++ https://tailwind-starter-kit.vercel.app/docs/badges
+1. Crear ruta para la revisión de cursos en **admin**:
+    ```php title="routes\admin.php"
     Route::get('courses/{course}',[CourseController::class, 'show'])->name('courses.show');
     ```  
-1. Crear método **show** en el controlador **app\Http\Controllers\Admin\CourseController.php**:
-    ```php title=""
+2. Crear método **show** en el controlador **CourseController**:
+    ```php title="app\Http\Controllers\Admin\CourseController.php"
     public function show(Course $course){
         $this->authorize('revision', $course);
         return view('admin.courses.show', compact('course'));
     }
     ```  
-1. Modificar vista **resources\views\admin\courses\index.blade.php**:
-    ```php title=""
+3. Modificar vista **index**:
+    ```php title="resources\views\admin\courses\index.blade.php"
     @extends('adminlte::page')
 
     @section('title', 'Coders Free')
@@ -8364,8 +8367,8 @@ sidebar_position: 98
         <script> console.log('Hi!'); </script>
     @stop
     ```  
-1. Copiar **resources\views\courses\show.blade.php** y pegar en **resources\views\admin\courses\show.blade.php** y modificar:
-    ```php title=""
+4. Copiar **resources\views\courses\show.blade.php** y pegar en **show** y modificar:
+    ```php title="resources\views\admin\courses\show.blade.php"
     <x-app-layout>
         <section class="bg-gray-700 py-12 mb-12">
             <div class="container grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -8487,8 +8490,8 @@ sidebar_position: 98
         </div>
     </x-app-layout>
     ```  
-1. En la vista **resources\views\courses\show.blade.php** reemplazar:
-    ```php title=""
+5. En la vista **show** reemplazar:
+    ```php title="resources\views\courses\show.blade.php"
     <section>
         <h1 class="font-bold text-3xl">Descripción</h1>
         <div class="text-gray-700 text-base">
@@ -8497,7 +8500,7 @@ sidebar_position: 98
     </section>  
     ```  
     Por:
-    ```php title=""
+    ```php title="resources\views\courses\show.blade.php"
     <section>
         <h1 class="font-bold text-3xl">Descripción</h1>
         <div class="text-gray-700 text-base">
@@ -8505,12 +8508,12 @@ sidebar_position: 98
         </div>
     </section>        
     ```  
-1. Crear ruta para la aprobación de cursos en **routes\admin.php**:
-    ```php title=""
+6. Crear ruta para la aprobación de cursos en **admin**:
+    ```php title="routes\admin.php"
     Route::post('courses/{course}/approved',[CourseController::class, 'approved'])->name('courses.approved');
     ```  
-1. Crear método **approved** en el controlador **app\Http\Controllers\Admin\CourseController.php**:
-    ```php title=""
+7. Crear método **approved** en el controlador **CourseController**:
+    ```php title="app\Http\Controllers\Admin\CourseController.php"
     public function approved(Course $course){
         $this->authorize('revision', $course);
         if(!$course->lessons || !$course->goals || !$course->requirements || !$course->image){
@@ -8521,8 +8524,8 @@ sidebar_position: 98
         return redirect()->route('admin.courses.index')->with('info', 'El curso se publicó con éxito');
     }
     ```  
-1. Crear método **revision** en **app\Policies\CoursePolicy.php**:
-    ```php title=""
+8. Crear método **revision** en **CoursePolicy**:
+    ```php title="app\Policies\CoursePolicy.php"
     public function revision(User $user, Course $course){
         if($course->status == 2){
             return true;
@@ -8535,7 +8538,7 @@ sidebar_position: 98
 
 ### Video 53. Enviar correo de aprobación de curso
 1. Indicar las credenciales de Mailtrap en **.env**:
-    ```env
+    ```env title=".env"
     MAIL_MAILER=smtp
     MAIL_HOST=smtp.mailtrap.io
     MAIL_PORT=2525
@@ -8543,23 +8546,23 @@ sidebar_position: 98
     MAIL_PASSWORD=8f37b2d25228ba
     MAIL_ENCRYPTION=tls
     ```
-1. Modificar las siguientes variables de entorno en **.env**:
+2. Modificar las siguientes variables de entorno en **.env**:
     Cambiar:
-    ```env
+    ```env title=".env"
     MAIL_FROM_ADDRESS=null
     MAIL_FROM_NAME="${APP_NAME}"
     ```
     Por:
-    ```env
+    ```env title=".env"
     MAIL_FROM_ADDRESS=petrix@solucionespp.com
     MAIL_FROM_NAME="SOLUCIONES ++"
     ```
-1. Crear un **maillable** para correos de cursos aprobados:
+3. Crear un **maillable** para correos de cursos aprobados:
     ```bash
     php artisan make:mail ApprovedCourse
     ```
-1. Programar el archivo **app\Mail\ApprovedCourse.php**:
-    ```php title=""
+4. Programar el archivo **ApprovedCourse**:
+    ```php title="app\Mail\ApprovedCourse.php"
     <?php
 
     namespace App\Mail;
@@ -8598,8 +8601,8 @@ sidebar_position: 98
         }
     }
     ```
-1. Crear vista para correo en **resources\views\mail\approved-course.blade.php**:
-    ```php title=""
+5. Crear vista para correo en **approved-course**:
+    ```php title="resources\views\mail\approved-course.blade.php"
     <!DOCTYPE html>
     <html lang="es">
     <head>
@@ -8619,8 +8622,8 @@ sidebar_position: 98
     </body>
     </html>
     ```
-1. Modificar método **approved** en **app\Http\Controllers\Admin\CourseController.php**:
-    ```php title=""
+6. Modificar método **approved** en **CourseController**:
+    ```php title="app\Http\Controllers\Admin\CourseController.php"
     public function approved(Course $course){
         $this->authorize('revision', $course);
         if(!$course->lessons || !$course->goals || !$course->requirements || !$course->image){
@@ -8646,14 +8649,14 @@ sidebar_position: 98
 ### Video 54. Enviar coreos con Queues
 1. Modificar varible de entorno en **.env**:
     Cambiar:
-    ```env
+    ```env title=".env"
     QUEUE_CONNECTION=sync    
     ```
     Por:
-    ```env
+    ```env title=".env"
     QUEUE_CONNECTION=database    
     ```
-1. Crear tabla **jobs** para las colas de trabajo:
+2. Crear tabla **jobs** para las colas de trabajo:
     ```bash
     php artisan queue:table
     php artisan migrate    
@@ -8662,13 +8665,13 @@ sidebar_position: 98
     ```bash
     php artisan queue:work    
     ```
-1. Cambiar la siguiente línea de código en el método **approved** del controlador **app\Http\Controllers\Admin\CourseController.php**:
+3. Cambiar la siguiente línea de código en el método **approved** del controlador **CourseController**:
     Cambiar:
-    ```php title=""
+    ```php title="app\Http\Controllers\Admin\CourseController.php"
     Mail::to($course->teacher->email)->send($mail);    
     ```
     Por:
-    ```php title=""
+    ```php title="app\Http\Controllers\Admin\CourseController.php"
     Mail::to($course->teacher->email)->queue($mail);    
     ```
 
@@ -8678,8 +8681,8 @@ sidebar_position: 98
     ```bash
     php artisan make:model Observation -m    
     ```
-1. Modificar método **up** da la migración **database\migrations\2021_06_14_112904_create_observations_table.php**:
-    ```php title=""
+2. Modificar método **up** da la migración **2021_06_14_112904_create_observations_table**:
+    ```php title="database\migrations\2021_06_14_112904_create_observations_table.php"
     public function up()
     {
         Schema::create('observations', function (Blueprint $table) {
@@ -8691,8 +8694,8 @@ sidebar_position: 98
         });
     }    
     ```
-1. Habilitar la asignación masiva en modelo **app\Models\Observation.php**:
-    ```php title=""
+3. Habilitar la asignación masiva en modelo **Observation**:
+    ```php title="app\Models\Observation.php"
     ≡
     class Observation extends Model
     {
@@ -8704,28 +8707,28 @@ sidebar_position: 98
         ];
     }           
     ```
-1. Agregar la relación Observation-Course:
-    + **app\Models\Course.php**:
-    ```php title=""
+4. Agregar la relación **Observation-Course**:
+    + **Course**:
+    ```php title="app\Models\Course.php"
     // Relación 1:1
     public function observation(){
         return $this->hasOne('App\Models\Observation');
     }    
     ```
-    + **app\Models\Observation.php**
-    ```php title=""
+    + **Observation**
+    ```php title="app\Models\Observation.php"
     // Relación 1:1 inversa
     public function course(){
         return $this->belongsTo('App\Models\Course');
     }    
     ```
-1. Ejecutar las migraciones:
+5. Ejecutar las migraciones:
     ```bash
     php artisan migrate    
     ```
-1. Modificar vista **resources\views\admin\courses\show.blade.php**:
-    ```php title=""
-    ≡
+6. Modificar vista **show**:
+    ```php title="resources\views\admin\courses\show.blade.php"
+    <!-- ... -->
             <div class="order-1 lg:order-2">
                 <section class="card mb-4">
                     <div class="card-body">
@@ -8747,20 +8750,20 @@ sidebar_position: 98
         </div>
     </x-app-layout>    
     ```
-1. Crear ruta para observar curso en **routes\admin.php**:
-    ```php title=""
+7. Crear ruta para observar curso en **admin**:
+    ```php title="routes\admin.php"
     Route::get('courses/{course}/observation',[CourseController::class, 'observation'])->name('courses.observation');    
     ```
-1. Crear método **observation** en el controlador **app\Http\Controllers\Admin\CourseController.php**:
-    ```php title=""
+8. Crear método **observation** en el controlador **CourseController**:
+    ```php title="app\Http\Controllers\Admin\CourseController.php"
     public function observation(Course $course){
         return view('admin.courses.observation', compact('course'));
     }    
     ```
-1. Crear vista **resources\views\admin\courses\observation.blade.php**:
-    ##### CDN: https://ckeditor.com/ckeditor-5/download/?undefined-addons=
-    ##### Activación: https://ckeditor.com/docs/ckeditor5/latest/builds/guides/quick-start.html
-    ```php title=""
+9. Crear vista **observation**:
+    + CDN: https://ckeditor.com/ckeditor-5/download/?undefined-addons=
+    + Activación: https://ckeditor.com/docs/ckeditor5/latest/builds/guides/quick-start.html
+    ```php title="resources\views\admin\courses\observation.blade.php"
     @extends('adminlte::page')
 
     @section('title', 'Coders Free')
@@ -8801,12 +8804,12 @@ sidebar_position: 98
         </script>
     @stop    
     ```
-1. Crear ruta para rechazar curso en **routes\admin.php**:
-    ```php title=""
+10. Crear ruta para rechazar curso en **admin**:
+    ```php title="routes\admin.php"
     Route::post('courses/{course}/reject',[CourseController::class, 'reject'])->name('courses.reject');    
     ```
-1. Crear método **reject** en el controlador **app\Http\Controllers\Admin\CourseController.php**:
-    ```php title=""
+11. Crear método **reject** en el controlador **CourseController**:
+    ```php title="app\Http\Controllers\Admin\CourseController.php"
     public function reject(Request $request, Course $course){
         $request->validate([
             'body' => 'required'
@@ -8824,15 +8827,15 @@ sidebar_position: 98
     }    
     ```
     Importar:
-    ```php title=""
+    ```php title="app\Http\Controllers\Admin\CourseController.php"
     use App\Mail\RejectCourse;    
     ```
-1. Crear maillable para indicar al instructor que su curso se ha rechazado:
+12. Crear maillable para indicar al instructor que su curso se ha rechazado:
     ```bash
     php artisan make:mail RejectCourse    
     ```
-1. Programar controlador app\Mail\RejectCourse.php:
-    ```php title=""
+13. Programar controlador **RejectCourse**:
+    ```php title="app\Mail\RejectCourse.php"
     <?php
 
     namespace App\Mail;
@@ -8871,8 +8874,8 @@ sidebar_position: 98
         }
     }    
     ```
-1. Crear vista **resources\views\mail\reject-course.blade.php**:
-    ```php title=""
+14. Crear vista **reject-course**:
+    ```php title="resources\views\mail\reject-course.blade.php"
     <!DOCTYPE html>
     <html lang="es">
     <head>
@@ -8894,13 +8897,13 @@ sidebar_position: 98
     </body>
     </html>    
     ```
-1. Para que los queue se ejecuten:
+15. Para que los queue se ejecuten:
     ```bash
     php artisan queue:work    
     ```
-1. Modificar plantilla **resources\views\layouts\instructor.blade.php**:
-    ```php title=""
-    ≡
+16. Modificar plantilla **instructor**:
+    ```php title="resources\views\layouts\instructor.blade.php"
+    <!-- ... -->
     <!-- Page Content -->
     <div class="container py-8 grid grid-cols-5 gap-6">
         <aside>
@@ -8924,20 +8927,20 @@ sidebar_position: 98
                 </li>
                 @endif
             </ul>
-            ≡    
+            <!-- ... -->    
     ```
-1. Crear ruta para mostrar las observaciones en **routes\instructor.php**:
-    ```php title=""
+17. Crear ruta para mostrar las observaciones en **instructor**:
+    ```php title="routes\instructor.php"
     Route::get('courses/{course}/observation', [CourseController::class, 'observation'])->name('courses.observation');    
     ```
-1. Crear método **observation** en el controlador **app\Http\Controllers\Instructor\CourseController.php**:
-    ```php title=""
+18. Crear método **observation** en el controlador **CourseController**:
+    ```php title="app\Http\Controllers\Instructor\CourseController.php"
     public function observation(Course $course){
         return view('instructor.courses.observation', compact('course'));
     }    
     ```
-1. Crear la vista **resources\views\instructor\courses\observation.blade.php**:
-    ```php title=""
+19. Crear la vista **observation**:
+    ```php title="resources\views\instructor\courses\observation.blade.php"
     <x-instructor-layout :course="$course">
         <h1 class="text-2xl font-bold">OBSERVACIONES DEL CURSO</h1>
         <hr class="mt-2 mb-6">
@@ -8947,8 +8950,8 @@ sidebar_position: 98
         </div>
     </x-instructor-layout>    
     ```
-1. Modificar el método **status** del controlador **app\Http\Controllers\Instructor\CourseController.php**:
-    ```php title=""
+20. Modificar el método **status** del controlador **CourseController**:
+    ```php title="app\Http\Controllers\Instructor\CourseController.php"
     public function status(Course $course){
         $course->status = 2;
         $course->save();
@@ -8959,6 +8962,7 @@ sidebar_position: 98
     }    
     ```
 
+## -----------------------------------------
 ## Sección 8: Crud pendientes
 ### Video 56. CRUD de categorías
 1. Crear ruta para CRUD categorias en **routes\admin.php**:

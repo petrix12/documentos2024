@@ -3896,6 +3896,10 @@ https://spatie.be/index.php/docs/laravel-permission/v6/introduction
     @can('permiso1')
         <!-- ... -->
     @endcan
+    <!-- ... -->
+    @canany(['permiso1', 'permiso2'] ?? [null])
+        <!-- ... -->
+    @endcanany    
     ```
 + Proteger rutas desde un archivo de rutas (proteger ruta):
     ```php
