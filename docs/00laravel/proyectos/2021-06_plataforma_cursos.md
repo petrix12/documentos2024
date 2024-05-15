@@ -1372,7 +1372,7 @@ sidebar_position: 98
     ```php title="database\seeders\DatabaseSeeder.php"
     public function run()
     {
-        ≡
+        // ...
         $this->call(LevelSeeder::class);
     }
     ```
@@ -1564,7 +1564,7 @@ sidebar_position: 98
     {
         $courses = Course::factory(40)->create();
         foreach($courses as $course){
-            ≡
+            // ...
             Requeriment::factory(4)->create([
                 'course_id' => $course->id
             ]);
@@ -2177,10 +2177,10 @@ sidebar_position: 98
     ```
 4. Modificar modelo **Course**:
     ```php title="app\Models\Course.php"
-    ≡
+    // ...
     class Course extends Model
     {
-        ≡
+        // ...
         protected $guarded = ['id', 'status'];
         protected $withCount = ['students', 'reviews'];
 
@@ -2195,7 +2195,7 @@ sidebar_position: 98
                 return 5;
             }
         }
-        ≡
+        // ...
     }
     ```
 
@@ -2760,7 +2760,7 @@ sidebar_position: 98
     + https://tailwindcss.com/docs/container
 3. Importar **resources\css\commom.css** en **resources\css\app.css**:
     ```css title="resources\css\app.css"
-    ≡
+    /* ... */
     @import 'commom.css';
     ```
 4. Compilar los nuevos estilos:
@@ -2836,7 +2836,7 @@ sidebar_position: 98
     + https://v1.tailwindcss.com/components/buttons
 8. Importar **resources\css\buttons.css** en **resources\css\app.css**:
     ```css title="resources\css\app.css"
-    ≡
+    /* ... */
     @import 'buttons.css';
     ```
 9. En la vista **resources\views\components\course-card.blade.php**:
@@ -3734,7 +3734,7 @@ sidebar_position: 98
             // Verifica si el usuario tiene autorización para ingresar al curso
             $this->authorize('enrolled', $course);
         }
-        ≡
+        // ...
     }
     ```
 2. Modificar ruta **courses.status**:            
@@ -4166,13 +4166,13 @@ sidebar_position: 98
         $this->configureRateLimiting();
 
         $this->routes(function () {
-            ≡
+            // ...
             Route::middleware('web', 'auth')
                 ->name('admin.')
                 ->prefix('admin')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/admin.php'));
-            ≡
+            // ...
         });
     }
     ```
@@ -4488,7 +4488,7 @@ sidebar_position: 98
     <?php
 
     return [
-        ≡
+        // ...
         'menu' => [
             [
                 'text'      => 'search',
@@ -4517,9 +4517,9 @@ sidebar_position: 98
                 'icon'      => 'fas fa-fw fa-users',
                 'active'    => ['admin/users*'],
             ],
-            ≡
+            // ...
         ],
-        ≡
+        // ...
         'livewire' => true,
     ];
     ```
@@ -4920,7 +4920,7 @@ sidebar_position: 98
     ```
 9. Modificar archivo de configuración **adminlte**:
     ```php title="config\adminlte.php"
-    ≡
+    // ...
     'menu' => [
         [
             'text'      => 'search',
@@ -4952,7 +4952,7 @@ sidebar_position: 98
             'can'       => 'Leer usuarios',
             'active'    => ['admin/users*'],
         ],
-        ≡
+        // ...
     ```
 10. Proteger ruta **home**:
     ```php title="routes\admin.php"
@@ -5606,11 +5606,10 @@ sidebar_position: 98
     <!DOCTYPE html>
     <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
         <head>
-            ≡
+            <!-- ... -->
         </head>
         <body class="font-sans antialiased">
-            ≡
-
+            <!-- ... -->
             @livewireScripts
 
             @isset($js)
@@ -7298,19 +7297,19 @@ sidebar_position: 98
             <article class="card mt-4" x-data="{open: false}">
                 <div class="card-body">
                     @if ($lesson->id == $item->id)
-                        ≡
+                        <!-- ... -->
                     @else
                         <header>
                             <h1 x-on:click="open = !open" class="cursor-pointer"><i class="far fa-play-circle text-blue-500 mr-1"></i> Lección: {{ $item->name }}</h1>
                         </header>
                         <div x-show="open">
-                            ≡
+                            <!-- ... -->
                         </div>     
                     @endif
                 </div>
             </article>
         @endforeach
-        ≡
+        <!-- ... -->
     </div>
     ```
 10. Modificar la vista **courses-curriculum**:
@@ -7326,11 +7325,11 @@ sidebar_position: 98
             <article class="card mb-6" x-data="{open: true}">
                 <div class="card-body bg-gray-100">
                     @if ($section->id == $item->id)
-                        ≡
+                        <!-- ... -->
                     @else
                         <header class="flex justify-between items-center">
                             <h1 x-on:click="open = !open" class="cursor-pointer"><strong>Sección:</strong> {{ $item->name }}</h1>
-                            ≡
+                            <!-- ... -->
                         </header>
                         <div x-show="open">
                             @livewire('instructor.courses-lesson', ['section' => $item], key($item->id))
@@ -7339,7 +7338,7 @@ sidebar_position: 98
                 </div>
             </article>
         @endforeach
-        ≡
+        <!-- ... -->
     </div>
     ```
 
@@ -7392,7 +7391,7 @@ sidebar_position: 98
     ```
 4. Modificar plantilla **instructor**:
     ```php title="resources\views\layouts\instructor.blade.php"
-    ≡
+    <!-- ... -->
     <h1 class="font-bold text-lg mb-4">Edición del curso</h1>
     <ul class="text-sm text-gray-600">
         <li class="leading-7 mb-1 border-l-4 @routeIs('instructor.courses.edit', $course) border-indigo-400 @else border-transparent @endif pl-2">
@@ -7408,7 +7407,7 @@ sidebar_position: 98
             <a href="">Estudiantes</a>
         </li>
     </ul>
-    ≡
+    <!-- ... -->
     ```
 5. Crear componentes livewire:
     ```bash
@@ -8696,7 +8695,7 @@ sidebar_position: 98
     ```
 3. Habilitar la asignación masiva en modelo **Observation**:
     ```php title="app\Models\Observation.php"
-    ≡
+    // ...
     class Observation extends Model
     {
         use HasFactory;
@@ -8962,23 +8961,23 @@ sidebar_position: 98
     }    
     ```
 
-## -----------------------------------------
+
 ## Sección 8: Crud pendientes
 ### Video 56. CRUD de categorías
-1. Crear ruta para CRUD categorias en **routes\admin.php**:
-    ```php title=""
+1. Crear ruta para CRUD categorias en **admin**:
+    ```php title="routes\admin.php"
     Route::resource('categories', CategoryController::class)->names('categories');  
     ```
     Importar:
     ```php title=""
     use App\Http\Controllers\Admin\CategoryController;  
     ```
-1. Crear controlador para el CRUD categorias:
+2. Crear controlador para el CRUD categorias:
     ```bash
     php artisan make:controller Admin\CategoryController -r  
     ```
-1. Programar el controlador **app\Http\Controllers\Admin\CategoryController.php**:
-    ```php title=""
+3. Programar el controlador **CategoryController**:
+    ```php title="app\Http\Controllers\Admin\CategoryController.php"
     <?php
 
     namespace App\Http\Controllers\Admin;
@@ -9076,9 +9075,9 @@ sidebar_position: 98
         }
     }  
     ```
-1. Crear vistas:
-    + **resources\views\admin\categories\index.blade.php**:
-        ```php title=""
+4. Crear vistas:
+    + **index**:
+        ```php title="resources\views\admin\categories\index.blade.php"
         @extends('adminlte::page')
 
         @section('title', 'Coders Free')
@@ -9131,8 +9130,8 @@ sidebar_position: 98
             </div>
         @stop  
         ```
-    + **resources\views\admin\categories\create.blade.php**:
-        ```php title=""
+    + **create**:
+        ```php title="resources\views\admin\categories\create.blade.php"
         @extends('adminlte::page')
 
         @section('title', 'Coders Free')
@@ -9166,8 +9165,8 @@ sidebar_position: 98
             <script> console.log('Hi!'); </script>
         @stop  
         ```
-    + **resources\views\admin\categories\edit.blade.php**:
-        ```php title=""
+    + **edit**:
+        ```php title="resources\views\admin\categories\edit.blade.php"
         @extends('adminlte::page')
 
         @section('title', 'Coders Free')
@@ -9206,8 +9205,8 @@ sidebar_position: 98
             <script> console.log('Hi!'); </script>
         @stop  
         ```
-    + **resources\views\admin\categories\show.blade.php**:
-        ```php title=""
+    + **show**:
+        ```php title="resources\views\admin\categories\show.blade.php"
         @extends('adminlte::page')
 
         @section('title', 'Coders Free')
@@ -9228,9 +9227,9 @@ sidebar_position: 98
             <script> console.log('Hi!'); </script>
         @stop  
         ```
-1. Agregar menú de categorías en el archivo de configuración **config\adminlte.php**:
-    ```php title=""
-    ≡
+5. Agregar menú de categorías en el archivo de configuración **adminlte**:
+    ```php title="config\adminlte.php"
+    // ...
     ['header' => 'OPCIONES DE CURSO'],
     [
         'text' => 'Categoría',
@@ -9242,25 +9241,25 @@ sidebar_position: 98
         'route'  => 'admin.courses.index',
         'icon' => 'fas fa-fw fa-user',
     ],
-    ≡  
+    // ...  
     ```
 
 
 ### Video 57. CRUD de niveles
-1. Crear ruta **levels** en **routes\admin.php**:
-    ```php title=""
+1. Crear ruta **levels** en **admin**:
+    ```php title="routes\admin.php"
     Route::resource('levels', LevelController::class)->names('levels');  
     ```
     Importar:
-    ```php title=""
+    ```php title="routes\admin.php"
     use App\Http\Controllers\Admin\LevelController;  
     ```
-1. Crear controlador para la ruta **levels**:
+2. Crear controlador para la ruta **levels**:
     ```bash
     php artisan make:controller Admin\LevelController -r  
     ```
-1. Programar el controlador **app\Http\Controllers\Admin\LevelController.php**:
-    ```php title=""
+3. Programar el controlador **LevelController**:
+    ```php title="app\Http\Controllers\Admin\LevelController.php"
     <?php
 
     namespace App\Http\Controllers\Admin;
@@ -9358,9 +9357,9 @@ sidebar_position: 98
         }
     }  
     ```
-1. Crear las vistas para adiministra niveles:
-    + **resources\views\admin\levels\index.blade.php**
-        ```php title=""
+4. Crear las vistas para adiministra niveles:
+    + **index**
+        ```php title="resources\views\admin\levels\index.blade.php"
         @extends('adminlte::page')
 
         @section('title', 'Coders Free')
@@ -9421,8 +9420,8 @@ sidebar_position: 98
             <script> console.log('Hi!'); </script>
         @stop  
         ```
-    + **resources\views\admin\levels\create.blade.php**
-        ```php title=""
+    + **create**
+        ```php title="resources\views\admin\levels\create.blade.php"
         @extends('adminlte::page')
 
         @section('title', 'Coders Free')
@@ -9456,8 +9455,8 @@ sidebar_position: 98
             <script> console.log('Hi!'); </script>
         @stop  
         ```
-    + **resources\views\admin\levels\edit.blade.php**
-        ```php title=""
+    + **edit**
+        ```php title="resources\views\admin\levels\edit.blade.php"
         @extends('adminlte::page')
 
         @section('title', 'Coders Free')
@@ -9496,8 +9495,8 @@ sidebar_position: 98
             <script> console.log('Hi!'); </script>
         @stop  
         ```
-    + **resources\views\admin\levels\show.blade.php**
-        ```php title=""
+    + **show**
+        ```php title="resources\views\admin\levels\show.blade.php"
         @extends('adminlte::page')
 
         @section('title', 'Coders Free')
@@ -9518,9 +9517,9 @@ sidebar_position: 98
             <script> console.log('Hi!'); </script>
         @stop  
         ```
-1. Agregar menú de niveles en el archivo de configuración **config\adminlte.php**:
-    ```php title=""
-    ≡        
+5. Agregar menú de niveles en el archivo de configuración **adminlte**:
+    ```php title="config\adminlte.php"
+    // ...        
     ['header' => 'OPCIONES DE CURSO'],
     [
         'text' => 'Categoría',
@@ -9532,14 +9531,14 @@ sidebar_position: 98
         'route'  => 'admin.levels.index',
         'icon' => 'fas fa-fw fa-chart-line',
     ],
-    ≡  
+    // ...  
     ```
 
 
 ### Video 58. CRUD de precios
-1. Modificar el archivo de configuración **config\adminlte.php** para incluir el menú precios:
-    ```php title=""
-    ≡
+1. Modificar el archivo de configuración **adminlte** para incluir el menú precios:
+    ```php title="config\adminlte.php"
+    // ...
         ['header' => 'OPCIONES DE CURSO'],
         [
             'text' => 'Categoría',
@@ -9574,22 +9573,22 @@ sidebar_position: 98
     | https://github.com/jeroennoten/Laravel-AdminLTE/#83-custom-menu-filters
     |
     */
-    ≡  
+    // ...  
     ```
-1. Crear ruta para administrar CRUD de precios en **routes\admin.php**:
-    ```php title=""
+2. Crear ruta para administrar CRUD de precios en **admin**:
+    ```php title="routes\admin.php"
     Route::resource('prices', PriceController::class)->names('prices');  
     ```
     Importar:
-    ```php title=""
+    ```php title="routes\admin.php"
     use App\Http\Controllers\Admin\PriceController;  
     ```
-1. Crear controlador para la ruta **prices**:
+3. Crear controlador para la ruta **prices**:
     ```bash
     php artisan make:controller Admin\PriceController -r  
     ```
-1. Programar el controlador **app\Http\Controllers\Admin\PriceController.php**:
-    ```php title=""
+4. Programar el controlador **PriceController**:
+    ```php title="app\Http\Controllers\Admin\PriceController.php"
     <?php
 
     namespace App\Http\Controllers\Admin;
@@ -9694,9 +9693,9 @@ sidebar_position: 98
         }
     }  
     ```
-1. Crear las vistas para administrar precios:
-    + **resources\views\admin\prices\index.blade.php**
-        ```php title=""
+5. Crear las vistas para administrar precios:
+    + **index**
+        ```php title="resources\views\admin\prices\index.blade.php"
         @extends('adminlte::page')
 
         @section('title', 'Coders Free')
@@ -9761,8 +9760,8 @@ sidebar_position: 98
             <script> console.log('Hi!'); </script>
         @stop  
         ```
-    + **resources\views\admin\prices\create.blade.php**
-        ```php title=""
+    + **create**
+        ```php title="resources\views\admin\prices\create.blade.php"
         @extends('adminlte::page')
 
         @section('title', 'Coders Free')
@@ -9803,8 +9802,8 @@ sidebar_position: 98
             <script> console.log('Hi!'); </script>
         @stop  
         ```
-    + **resources\views\admin\prices\edit.blade.php**
-        ```php title=""
+    + **edit**
+        ```php title="resources\views\admin\prices\edit.blade.php"
         @extends('adminlte::page')
 
         @section('title', 'Coders Free')
@@ -9857,7 +9856,7 @@ sidebar_position: 98
     ```bash
     php artisan make:factory ReviewFactory  
     ```
-1. Programar el campo **definition** en el factory **database\factories\ReviewFactory.php**:
+2. Programar el campo **definition** en el factory **database\factories\ReviewFactory.php**:
     ```php title=""
     public function definition()
     {
@@ -9872,7 +9871,7 @@ sidebar_position: 98
     ```php title=""
     use App\Models\User;  
     ```
-1. Modificar el método **run** del seeder **database\seeders\CourseSeeder.php**:
+3. Modificar el método **run** del seeder **database\seeders\CourseSeeder.php**:
     ```php title=""
     public function run()
     {
@@ -9886,21 +9885,24 @@ sidebar_position: 98
                 'imageable_id' => $course->id,
                 'imageable_type' => 'App\Models\Course'
             ]);
-            ≡  
+            // ...
+        }
+        // ...
+    }
     ```
     Importar:
     ```php title=""
     use App\Models\Review;  
     ```
-1. Reestablecer la base de datos:
+4. Reestablecer la base de datos:
     ```bash
     php artisan migrate:fresh --seed  
     ```
-1. Crear componente de livewire para mostrar reseñas:
+5. Crear componente de livewire para mostrar reseñas:
     ```bash
     php artisan make:livewire CoursesReviews  
     ```
-1. Programar el controlador del **componente app\Http\Livewire\CoursesReviews.php**:
+6. Programar el controlador del **componente app\Http\Livewire\CoursesReviews.php**:
     ```php title=""
     <?php
 
@@ -9935,8 +9937,8 @@ sidebar_position: 98
         }
     }  
     ```
-1. Diseñar vista del componente **resources\views\livewire\courses-reviews.blade.php**:
-    ```php title=""
+7. Diseñar vista del componente **courses-reviews**:
+    ```php title="resources\views\livewire\courses-reviews.blade.php"
     <section class="mt-4">
         <h1 class="font-bold text-3xl text-gray-800 mb-2">Valoración</h1>
         @can('enrolled', $course)
@@ -9991,9 +9993,9 @@ sidebar_position: 98
         </div>
     </section>  
     ```
-1. Modificar la vista **resources\views\courses\show.blade.php**:
-    ```php title=""
-    ≡
+8. Modificar la vista **show**:
+    ```php title="resources\views\courses\show.blade.php"
+    <!-- ... -->
         <section>
             <h1 class="font-bold text-3xl text-gray-800">Requisitos</h1>
             <ul class="list-disc list-inside">
@@ -10010,10 +10012,10 @@ sidebar_position: 98
         </section>
         @livewire('courses-reviews', ['course' => $course])
     </div>
-    ≡  
+    <!-- ... --> 
     ```
-1. Crear método **valued** en **app\Policies\CoursePolicy.php** para evitar que un usuario realice más de una reseña:
-    ```php title=""
+9. Crear método **valued** en **CoursePolicy** para evitar que un usuario realice más de una reseña:
+    ```php title="app\Policies\CoursePolicy.php"
     public function valued(User $user, Course $course){
         if(Review::where('user_id', $user->id)->where('course_id', $course->id)->count()){
             return false;
@@ -10023,14 +10025,14 @@ sidebar_position: 98
     }  
     ```
     Importar:
-    ```php title=""
+    ```php title="app\Policies\CoursePolicy.php"
     use App\Models\Review;  
     ```
 
 
 ### Video 60. Descargar recursos
-1. Modificar el método **status** del controlador **app\Http\Controllers\Instructor\CourseController.php**:
-    ```php title=""
+1. Modificar el método **status** del controlador **CourseController**:
+    ```php title="app\Http\Controllers\Instructor\CourseController.php"
     public function status(Course $course){
         $course->status = 2;
         $course->save();
@@ -10042,9 +10044,9 @@ sidebar_position: 98
         return redirect()->route('instructor.courses.edit', $course);
     }  
     ```
-1. Modificar vista del componente livewire **resources\views\livewire\course-status.blade.php**:
-    ```php title=""
-    ≡
+2. Modificar vista del componente livewire **course-status**:
+    ```php title="resources\views\livewire\course-status.blade.php"
+    <!-- ... -->
     <div class="flex justify-between mt-4">
         {{-- MARCAR COMO CULMINADO --}}
         <div class="flex items-center cursor-pointer" wire:click="completed">
@@ -10062,10 +10064,10 @@ sidebar_position: 98
             </div> 
         @endif
     </div>
-    ≡  
+    <!-- ... -->
     ```
-1. Crear método **download** en el controlador del componente livewire **app\Http\Livewire\CourseStatus.php**
-    ```php title=""
+3. Crear método **download** en el controlador del componente livewire **CourseStatus**
+    ```php title="app\Http\Livewire\CourseStatus.php"
     public function download(){
         return response()->download(storage_path('app/public/' . $this->current->resource->url));
     }  
@@ -10074,7 +10076,7 @@ sidebar_position: 98
 
 ## Sección 9: Metodo de pago
 ### Video 61. Parte visual
-1. Modificar el componente **resources\views\components\course-card.blade.php**:
+1. Modificar el componente **course-card**:
     ```php title="resources\views\components\course-card.blade.php"
     @props(['course'])
 
@@ -10117,9 +10119,9 @@ sidebar_position: 98
         </div>
     </article>
     ```
-1. Modificar vista **resources\views\courses\show.blade.php**:
+2. Modificar vista **show.blade**:
     ```php title="resources\views\courses\show.blade.php"
-    ≡
+    <!-- ... -->
     @can('enrolled', $course)
         <a class="btn btn-danger btn-block mt-4" href="{{ route('courses.status', $course) }}">Continuar con curso</a>
     @else
@@ -10134,9 +10136,9 @@ sidebar_position: 98
             <a href="{{ route('payment.checkout', $course) }}" class="btn btn-danger btn-block">Comprar este curso</a>
         @endif
     @endcan
-    ≡
+    <!-- ... -->
     ```
-1. Crear archivo de rutas **routes\payment.php**:
+3. Crear archivo de rutas **payment**:
     ```php title="routes\payment.php"
     <?php
 
@@ -10145,7 +10147,7 @@ sidebar_position: 98
 
     Route::get('{course}/checkout',[PaymentController::class, 'checkout'])->name('checkout');
     ```
-1. Modificar el método **boot** el provider **app\Providers\RouteServiceProvider.php** para que se reconozca **routes\payment.php** como archivo de rutas:
+4. Modificar el método **boot** el provider **RouteServiceProvider** para que se reconozca **routes\payment.php** como archivo de rutas:
     ```php title="app\Providers\RouteServiceProvider.php"
     public function boot()
     {
@@ -10181,11 +10183,11 @@ sidebar_position: 98
         });
     }
     ```
-1. Crear controlador para administrar los pagos:
+5. Crear controlador para administrar los pagos:
     ```bash
     php artisan make:controller PaymentController
     ```
-1. Programar el controlador **app\Http\Controllers\PaymentController.php**:
+6. Programar el controlador **PaymentController**:
     ```php title="app\Http\Controllers\PaymentController.php"
     <?php
 
@@ -10201,7 +10203,7 @@ sidebar_position: 98
         }
     }
     ```
-1. Crear vista **resources\views\payment\checkout.blade.php**:
+7. Crear vista **checkout**:
     ```php title="resources\views\payment\checkout.blade.php"
     <x-app-layout>
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 py-12">
@@ -10229,46 +10231,46 @@ sidebar_position: 98
 
 ### Video 62. Gestionar pago
 1. Crear cuenta de PayPal para empresas.
-1. Ir a https://developer.paypal.com/classic-home, iniciar sesión e ir al Dashboard.
-1. Dar clic en **SANDBOX > Accounts** (https://developer.paypal.com/developer/accounts/) para generar las siguientes cuentas ficticias:
+2. Ir a https://developer.paypal.com/classic-home, iniciar sesión e ir al Dashboard.
+3. Dar clic en **SANDBOX > Accounts** (https://developer.paypal.com/developer/accounts/) para generar las siguientes cuentas ficticias:
     ```
     Account name	                        Type	    Country     Date created
     sb-6jp47b6555136@business.example.com   Business	VE	        19 Jun 2021     (Cuenta empresarial)
     sb-nqk47a6555696@personal.example.com   Personal	VE	        19 Jun 2021     (Cuenta personal)
     ```
-1. Ir a https://sandbox.paypal.com e ingresar con la cuenta personal ficticia.
+4. Ir a https://sandbox.paypal.com e ingresar con la cuenta personal ficticia.
     + Nota: para obtener password de la cuenta personal ir a **View/edit account** (En **Manage accounts**) y cambiar el password por 12345678.
-1. En https://developer.paypal.com/developer/accounts/ ir a **DASHBOARD > My Apps & Credentials** y luego dar clic en **Create App**.
-1. Completar el formulario con la siguiente información:
+5. En https://developer.paypal.com/developer/accounts/ ir a **DASHBOARD > My Apps & Credentials** y luego dar clic en **Create App**.
+6. Completar el formulario con la siguiente información:
     + App Name: CodersFree
     + Sandbox Business Account: sb-6jp47b6555136@business.example.com
-1. Dar clic en **Create App** para obtener las siguientes credenciales:
+7. Dar clic en **Create App** para obtener las siguientes credenciales:
     + Sandbox account: sb-6jp47b6555136@business.example.com
     + Client ID: ARXkrvWlwR0P3-Bu8UfKo2csv8Wa-7W6kNMP5TOWvX_W_baa5Bm18wuuUPEAsMf0e_PU5aMNACGgAQon
     + Secret: EPmmNZXEabxClPMHtIJaLAukamqgEHkLvmupjxfUxKSt_S_loD_mW12hu9QGcP3bpn6e-O0Tf0AVagaz
-1. Agregar credenciales de **paypal** en el archivo de configuración **config\services.php**:
+8. Agregar credenciales de **paypal** en el archivo de configuración **services**:
     ```php title="config\services.php"
     <?php
 
     return [
-        ≡
+        // ...
         'paypal' => [
             'client_id' => env('PAYPAL_CLIENT_ID'),
             'client_secret' => env('PAYPAL_CLIENT_SECRET'),
         ],
     ];
     ```
-1. Agregar credenciales de **paypal** en el archivo de variables de entorno **.env**:
+9. Agregar credenciales de **paypal** en el archivo de variables de entorno **.env**:
     ```env
-    ≡
+    # ...
     PAYPAL_CLIENT_ID=ARXkrvWlwR0P3-Bu8UfKo2csv8Wa-7W6kNMP5TOWvX_W_baa5Bm18wuuUPEAsMf0e_PU5aMNACGgAQon
     PAYPAL_CLIENT_SECRET=EPmmNZXEabxClPMHtIJaLAukamqgEHkLvmupjxfUxKSt_S_loD_mW12hu9QGcP3bpn6e-O0Tf0AVagaz
     ```
-1. Crear ruta de pago en **routes\payment.php**:
+10. Crear ruta de pago en **payment**:
     ```php title="routes\payment.php"
     Route::get('{course}/pay',[PaymentController::class, 'pay'])->name('pay');
     ```
-1. Crear método **pay** en el controlador **app\Http\Controllers\PaymentController.php**:
+11. Crear método **pay** en el controlador **PaymentController**:
     ```php title="app\Http\Controllers\PaymentController.php"
     public function pay(Course $course){
         // After Step 1
@@ -10313,7 +10315,7 @@ sidebar_position: 98
         }
     }
     ```
-1. Modificar vista **resources\views\payment\checkout.blade.php** para añadir ruta de pago:
+12. Modificar vista **checkout** para añadir ruta de pago:
     ```php title="resources\views\payment\checkout.blade.php"
     <x-app-layout>
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 py-12">
@@ -10337,19 +10339,19 @@ sidebar_position: 98
         </div>
     </x-app-layout>
     ```
-1. Ir a https://github.com/paypal/PayPal-PHP-SDK y:
+13. Ir a https://github.com/paypal/PayPal-PHP-SDK y:
     + Dar clic en la opción **Wiki** (https://github.com/paypal/PayPal-PHP-SDK/wiki).
     + Dar clic en **Installation > Composer** (https://github.com/paypal/PayPal-PHP-SDK/wiki/Installation-Composer) para obtener la sentencia de instalación de **Package paypal** ($ composer require paypal/rest-api-sdk-php:*).
     + Dar clic en **Making Your First Call** (https://github.com/paypal/PayPal-PHP-SDK/wiki/Making-First-Call) para obtener el modelo de las credenciales a copiar en el método **pay** del controlador **app\Http\Controllers\PaymentController.php**. 
-1. Instalar **Package paypal**:
+14. Instalar **Package paypal**:
     ```bash
     composer require paypal/rest-api-sdk-php:*
     ```
-1. Crear ruta de aprobación del pago en **routes\payment.php**:
+15. Crear ruta de aprobación del pago en **payment**:
     ```php title="routes\payment.php"
     Route::get('{course}/approved',[PaymentController::class, 'approved'])->name('approved');
     ```
-1. Crear método **approved** en el controlador **app\Http\Controllers\PaymentController.php**:
+16. Crear método **approved** en el controlador **PaymentController**:
     ```php title="app\Http\Controllers\PaymentController.php"
     public function approved(Request $request, Course $course){
         // After Step 1
@@ -10374,7 +10376,7 @@ sidebar_position: 98
     }
     ```
     Ir a https://github.com/paypal/PayPal-PHP-SDK/blob/master/sample/payments/ExecutePayment.php para obtener código para procesar pago
-1. Nota: Cuando se crea una aplicación en **paypal developer** se tiene que tener en cuenta:
+18. Nota: Cuando se crea una aplicación en **paypal developer** se tiene que tener en cuenta:
     + Sendbox: para desarrollo.
     + Live: para producción.
 

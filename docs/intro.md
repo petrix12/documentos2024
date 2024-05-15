@@ -54,6 +54,8 @@ sidebar_position: 0
 - [ ] [petrix12/react-laravel2022](https://github.com/petrix12/react-laravel2022)
 - [ ] [petrix12/react2022](https://github.com/petrix12/react2022)
 - [ ] [petrix12/instaclone-react-graphql_client](https://github.com/petrix12/instaclone-react-graphql_client)
+- [X] [petrix12/Desarrollo-Web-Completo-con-HTML5-CSS3-JS-AJAX-PHP-y-MySQL](https://github.com/petrix12/Desarrollo-Web-Completo-con-HTML5-CSS3-JS-AJAX-PHP-y-MySQL)
+- [X] [petrix12/API-RESTful-con-Laravel-Guia-Definitiva](https://github.com/petrix12/API-RESTful-con-Laravel-Guia-Definitiva)
 - [X] [petrix12/Curso-Laravel-8-desde-cero---cursosdesarrolloweb.es](https://github.com/petrix12/Curso-Laravel-8-desde-cero---cursosdesarrolloweb.es)
 - [X] [petrix12/laravel_datatables](https://github.com/petrix12/laravel_datatables)
 ### Proyectos
@@ -118,8 +120,7 @@ sidebar_position: 0
 - [ ] [petrix12/thermo](https://github.com/petrix12/thermo)
 - [ ] [petrix12/borrar](https://github.com/petrix12/borrar)
 - [ ] [petrix12/awsejemplo](https://github.com/petrix12/awsejemplo)
-- [ ] [petrix12/Desarrollo-Web-Completo-con-HTML5-CSS3-JS-AJAX-PHP-y-MySQL](https://github.com/petrix12/Desarrollo-Web-Completo-con-HTML5-CSS3-JS-AJAX-PHP-y-MySQL)
-- [ ] [petrix12/API-RESTful-con-Laravel-Guia-Definitiva](https://github.com/petrix12/API-RESTful-con-Laravel-Guia-Definitiva)
+
 
 ### Pruebas
 - [X] [petrix12/octicons](https://github.com/petrix12/octicons)
