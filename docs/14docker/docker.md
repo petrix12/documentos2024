@@ -187,7 +187,7 @@ sidebar_position: 1
     ```
     :::tip Ejemplo
     Ejemplo de una imagen de Ubuntu con Python:
-    ```
+    ```Dockerfile
     FROM ubuntu
     RUN apt update
     RUN apt install python3 -y
@@ -213,7 +213,7 @@ sidebar_position: 1
     sudo nano Dockerfile
     ```
 3. Configurar Dockerfile:
-    ```
+    ```Dockerfile
     FROM ubuntu
     RUN apt update
     COPY mi_archivo.txt /home/mi_carpeta/    
@@ -256,14 +256,45 @@ sidebar_position: 1
 
 ## Establecer un directorio por defecto en el Dockerfile
 + Editar el Dockerfile:
-    ```
-    ...
+    ```Dockerfile
+    #...
     WORKDIR /home
     COPY archivo.txt .
     ```
     :::tip Nota
     Al copiar el archivo **archivo.txt**, este se copiará en el directorio por defecto.
     :::
+
+
+## Agregar información a una imagen de Docker:
++ Editar el Dockerfile:
+    ```Dockerfile
+    #...
+    # Crar etiquetas
+    LABEL autor="Soluciones++"
+    LABEL version=1.0
+
+    # Crear usuario
+    RUN useradd Petrix
+    # Añadir usuarios
+    USER Petrix
+
+    # Ejecutar instrucción automaticamente
+    CMD echo Bienvenido al contenedor
+    ```
+    :::tip Nota
+    Para ver usuarios dentro del contenedor:
+    ```bash
+    whoami
+    ```
+    :::
+
+
+
+
+
+
+
 
 
     mmm:
