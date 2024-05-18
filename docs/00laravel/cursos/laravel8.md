@@ -1,7 +1,7 @@
 ---
 title: Curso de Laravel 8
 sidebar_label: "Curso de Laravel 8"
-sidebar_position: 3
+sidebar_position: 100
 ---
 
 # Curso Laravel 8 desde cero

@@ -641,6 +641,15 @@ public function mi_metodo1($mi_variable) {
 Se recomienda nombrar las vista igual que el método.
 :::
 
+### Recuperar todo lo que llegue por la url
+```php
+// ...
+public function mi_metodo() {
+    $request = request()->all();
+}
+```
+
+
 
 ## Query Builder:
 ### Realizar consultas SQL directamente con DB:
@@ -1950,6 +1959,31 @@ Se recomienda nombrar las vista igual que el método.
         ];
     }
     ```
+### Query scope
+#### Scope local
+    ```php
+    // ...
+    class Modelo extends Model {
+        // ...
+        public function scopeFiltro($query, $filtro) {
+            $query->where('campo_x', 'LIKE', "%$filtro%");
+        }
+        // ...
+    }
+    ```
+#### Scope global
+    ```php
+    // ...
+    class Modelo extends Model {
+        // ...
+        protected static function booted() {
+            static::addGlobalScope('nombre_del_scope', function($query) {
+                $query->where('campo_x', "valor_x");
+            });
+        }
+        // ...
+    }
+    ```    
 ### Relaciones
 :::tip Tips
 + Relación 1:1 (El modelo tiene la clave primaria):

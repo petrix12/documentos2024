@@ -289,7 +289,16 @@ sidebar_position: 1
     ```
     :::
 
+## Ignorar archivos a copiar en una imagen de Docker
++ Crear archivo **.dockerignore** en la carpeta en donde estan los archivos a copiar en la imagen del contenedor.
+    ```dockerignore
+    # Listar los archivos y rutas a ignorar
+    ```
 
+## Exponer y gestionar puertos de Docker
+```bash
+docker run -d -p 8080:8080 nombre_de_la_imagen
+```
 
 
 
