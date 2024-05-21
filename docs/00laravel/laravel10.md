@@ -2671,6 +2671,8 @@ Se genera el archivo **app\Http\Requests\StoreModelo.php**.
 + Ejemplo de programación del Form Request **app\Http\Requests\StoreModelo.php**:
     ```php
     // ...
+    use Illuminate\Validation\Rules\File;
+    // ...
     class StoreModelo extends FormRequest
     {
         // Reglas de autorización (normalmente se deja así)
@@ -2710,7 +2712,8 @@ Se genera el archivo **app\Http\Requests\StoreModelo.php**.
                 'publicado' => 'required|boolean',
                 'descripcion' => $request->publicado ? 'required' : 'nullable',
                 'option_id' => 'required|exists:tabla_options,id',
-                'category_id' => 'required|exists:categories,id'
+                'category_id' => 'required|exists:categories,id',
+                'file' => ['nullable', File::image()->max(7 * 1024)]
             ];
         }
 
@@ -2772,7 +2775,7 @@ Se genera el archivo **app\Http\Requests\StoreModelo.php**.
     // ...   
     ```
 
-## Policy:
+## Policy
 + Crear una policy:
     + $ php artisan make:policy ModeloPolicy
 + Implementar una regla de autorización en **app\Policies\ModeloPolicy.php**:
@@ -3142,7 +3145,7 @@ Se genera el archivo **app\Http\Requests\StoreModelo.php**.
     }
 
 
-## Storage:
+## Storage
 + Acceder al storage:
     ```php
     <img src="{{ Storage::url($ruta) }}" alt="">
@@ -3193,6 +3196,34 @@ Se genera el archivo **app\Http\Requests\StoreModelo.php**.
 + Descargar un archivo:
     ```php
     return Storage::download($path);
+    ```
+    ó:
+    ```php
+    return Storage::download($path);
+    ```
++ Obtener a url de un archivo:
+    ```php
+    $url = Storage::url($path);
+    ```
++ Generar una url temporal:
+    ```php
+    $url = Storage::temporalUrl('nombre_del_archivo', now()->addMonutes(10));
+    // El segundo parámetro es el tiempo de expiración
+    ```
++ Algunos métods asociados a archivos:
+    ```php
+    // ...
+    public function metodo(Request $request) {
+        // Establecer nombre del archivo
+        $fileName = time().'.'.$request->file->extension();
+        
+        // Mover archivo
+        $request->file->move('ruta_destino', 'nombre_del_archivo');
+        
+        // Guardar archivo como
+        $request->file->storeAs('ruta_destino', 'nombre_del_archivo');
+    }
+    // ...
     ```
 
 ## Provider:
