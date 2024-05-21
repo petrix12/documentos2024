@@ -117,12 +117,12 @@ sidebar_position: 0
 - [ ] [petrix12/api_laravel_passport](https://github.com/petrix12/api_laravel_passport)
 - [ ] [petrix12/apirestful_laravel8](https://github.com/petrix12/apirestful_laravel8)
 - [ ] [petrix12/file](https://github.com/petrix12/file)
-- [ ] [petrix12/hwasung](https://github.com/petrix12/hwasung)
-- [ ] [petrix12/thermo](https://github.com/petrix12/thermo)
-- [ ] [petrix12/borrar](https://github.com/petrix12/borrar)
 
 
 ### Pruebas
+- [X] [petrix12/hwasung](https://github.com/petrix12/hwasung)
+- [X] [petrix12/thermo](https://github.com/petrix12/thermo)
+- [X] [petrix12/borrar](https://github.com/petrix12/borrar)
 - [X] [petrix12/octicons](https://github.com/petrix12/octicons)
 - [X] [petrix12/canvas_html5](https://github.com/petrix12/canvas_html5)
 - [X] [petrix12/autenticacion_firebase](https://github.com/petrix12/autenticacion_firebase)
