@@ -63,6 +63,7 @@ sidebar_position: 0
 - [ ] [petrix12/instaclone2022](https://github.com/petrix12/instaclone2022)
 - [ ] [petrix12/voyager2022](https://github.com/petrix12/voyager2022)
 - [ ] [petrix12/laravel-excel-2022](https://github.com/petrix12/laravel-excel-2022)
+- [X] [petrix12/file](https://github.com/petrix12/file)
 - [X] [petrix12/PlataformaDeCursosLaravel](https://github.com/petrix12/PlataformaDeCursosLaravel)
 - [X] [petrix12/AppFileLaravel](https://github.com/petrix12/AppFileLaravel)
 - [X] [petrix12/Sistema-de-Historia-Cl-nica-en-Laravel](https://github.com/petrix12/Sistema-de-Historia-Cl-nica-en-Laravel)
@@ -116,7 +117,6 @@ sidebar_position: 0
 - [ ] [petrix12/pasarela_pago](https://github.com/petrix12/pasarela_pago)
 - [ ] [petrix12/api_laravel_passport](https://github.com/petrix12/api_laravel_passport)
 - [ ] [petrix12/apirestful_laravel8](https://github.com/petrix12/apirestful_laravel8)
-- [ ] [petrix12/file](https://github.com/petrix12/file)
 
 
 ### Pruebas

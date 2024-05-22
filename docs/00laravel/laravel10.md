@@ -4394,6 +4394,37 @@ Ahora todos los **jobs** en lugar de ejecutarse, se registrará la instrucciones
         exec('php artisan queue:work > /dev/null 2>&1 &');
         ```
 
+## Localización (Idiomas)
+:::tip Nota
+Para establecer la configuración de idiomas y configuración ir al archivo de configuración **config/app.php**.
+:::
+1. Crear un archivo de idiomas **lang/xx/seccion.php**:
+    ```php
+    <?php
+
+    return [
+        'clave' => 'Traducción',
+        'clave_con_variable' => 'Texto de la traducción :variable',
+        // ...
+    ];
+    ```
+2. Tomar datos de los archivos de traducción en una vista:
+    ```php
+    <!-- ... -->
+    <p>{{ __('seccion.clave') }}</p>
+    <p>{{ __('seccion.clave_con_variable', ['variable' => 'Valor de la variable']) }}</p>
+    <!-- ... -->
+    ```
+3. Tomar datos de los archivos de traducción en un controlador:
+    ```php
+    // ...
+    public function metodo() {
+        $msg = __('seccion.clave');
+    }
+    // ...
+    ```
+4. Ejemplo de menú de selección de idioma
+
 
 ## Tips generales:
 ### Crear un sistema de autenticación
