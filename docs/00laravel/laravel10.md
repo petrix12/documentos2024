@@ -4423,7 +4423,91 @@ Para establecer la configuración de idiomas y configuración ir al archivo de c
     }
     // ...
     ```
-4. Ejemplo de menú de selección de idioma
+4. Construcción de un menú de selección de idioma:
+    + Crear archivo de configuración **languages**:
+        ```php title="config\languages.php"
+        <?php
+
+        // Idiomas permitidos en el proyecto
+        return [
+            'en' => 'English',
+            'es' => 'Español',
+        ];        
+        ```
+    + Crear middleware **Language**:
+        ```bash
+        php artisan make:middleware Language
+        ```
+    + Programar middleware **Language**:
+        ```php title="app\Http\Middleware\Language.php"
+        // ...
+        use Illuminate\Support\Facades\App;
+        // ...
+        class Language
+        {
+            // ...
+            public function handle(Request $request, Closure $next): Response
+            {
+                if(Session()->has('applocale') AND array_key_exists(Session()->get('applocale'), config('languages'))) {
+                App::setLocale(Session()->get('applocale'));
+                } else {
+                    App::setLocale(Config('app.fallback_locale'));
+                }
+                return $next($request);
+            }
+        }        
+        ```
+    + Aplicar middleware **Language** a todas las rutas web en el **Kernel**:
+        ```php title="app\Http\Kernel.php"
+        // ...
+        protected $middlewareGroups = [
+            'web' => [
+                // ...
+                \App\Http\Middleware\Language::class
+            ],
+            // ...
+        ];        
+        ```
+    + Crear controlador **LanguageController**:
+        ```bash
+        php artisan make:controller LanguageController
+        ```
+    + Programar controlador **LanguageController**:
+        ```php title="app\Http\Controllers\LanguageController.php"
+        // ...
+        use Illuminate\Support\Facades\Config;
+        use Illuminate\Support\Facades\Redirect;
+        use Illuminate\Support\Facades\Session;
+        // ...
+        class LanguageController extends Controller
+        {
+            public function switchLang($lang) {
+                if (array_key_exists($lang, Config::get('languages'))) {
+                    Session::put('applocale', $lang);
+                }
+                return Redirect::back();
+            }
+        }        
+        ```
+    + Crear ruta web **lang/{lang}**:
+        ```php title="routes\web.php"
+        Route::get('lang/{lang}', [App\Http\Controllers\LanguageController::class, 'switchLang'])->name('lang');
+        ```
+    + Crear vista **lang**:
+        ```php title="resources\views\_partials\lang.blade.php"
+        @foreach(Config::get('languages') as $lang => $language)
+            @if($lang != App::getLocale())
+                <a href="{{ route('lang', $lang) }}">{{ $language }}</a>
+            @endif
+        @endforeach        
+        ```
+        :::tip Nota
+        Para ver el menú de idiomas en la vista desada, incluir la siguiente directiva blade:
+        ```php
+        @include('_partials.lang')
+        ```
+        :::
+
 
 
 ## Tips generales:
