@@ -4489,7 +4489,7 @@ Para establecer la configuración de idiomas y configuración ir al archivo de c
             }
         }        
         ```
-    + Crear ruta web **lang/{lang}**:
+    + Crear ruta web **lang/\{lang}**:
         ```php title="routes\web.php"
         Route::get('lang/{lang}', [App\Http\Controllers\LanguageController::class, 'switchLang'])->name('lang');
         ```
