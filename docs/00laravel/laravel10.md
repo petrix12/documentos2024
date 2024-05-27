@@ -2832,9 +2832,14 @@ Se genera el archivo **app\Http\Requests\StoreModelo.php**.
         ```
 
 ## Mailables
+:::tip Nota
+Sitios web de proveedores para envio de correos electrónicos:
++ [@mailgun](https://try.mailgun.com/api-1)
++ [Postmark](https://postmarkapp.com)
+:::
 + Indicar credenciales del servicio de correos a utilizar en **.env**:
     + Ejemplo:
-        ```env
+        ```env title=".env"
         MAIL_MAILER=smtp
         MAIL_HOST=mailpit
         MAIL_PORT=1025
@@ -2845,10 +2850,14 @@ Se genera el archivo **app\Http\Requests\StoreModelo.php**.
         MAIL_FROM_NAME="${APP_NAME}"        
         ```
 + Crear un mailable:
-    + $ php artisan make:mail CorreoMailable
-    + **Nota:** esta acción crea el siguiente archivo: **app\Mail\CorreoMailable.php**,.
-+ Crear vista del correo **resources\views\emails\correo.blade.php**:
-    ```php
+    ```bash
+    php artisan make:mail CorreoMailable
+    ```
+    :::tip Nota
+    Esta acción crea el siguiente archivo: **app\Mail\CorreoMailable.php**.
+    :::
++ Crear vista del correo:
+    ```php title="resources\views\emails\correo.blade.php"
     <!DOCTYPE html>
     <html lang="es">
     <head>
@@ -2865,7 +2874,7 @@ Se genera el archivo **app\Http\Requests\StoreModelo.php**.
     ```
     + **Nota:** si para el correo se usan estilos bootstrap, tailwind, etc, será necesario escribir los estilos en el mismo correo.
 + Modificar **app\Mail\CorreoMailable.php**:
-    ```php
+    ```php title="app\Mail\CorreoMailable.php"
     // ...
     use Illuminate\Mail\Mailables\Address;
 
@@ -2916,6 +2925,64 @@ Se genera el archivo **app\Http\Requests\StoreModelo.php**.
     $correo = new \App\Mail\CorreoMailable($data);
     \Illuminate\Support\Facades\Mail::to('mi.correo1@correo.com')->bcc('mi.correo2@correo.com')->send($correo);
     ```
+### Adjuntar un archivo a un correo
+    ```php title="app\Mail\CorreoMailable.php"
+    // ...
+    class CorreoMailable extends Mailable
+    {
+        // ...
+    }
+    ```
+### Poner en cola el envío de correos
++ Modificar mailable:
+    ```php title="app\Mail\CorreoMailable.php"
+    // ...
+    use Illuminate\Contracts\Queue\ShouldQueue;
+
+    class CorreoMailable extends Mailable implements ShouldQueue
+    {
+        // ...
+        public $data;
+        // ...
+        public function __construct($data) {
+            $this->data = $data;
+        }
+        // ...
+        public function build() {
+            return $this->from($this->data['email'])
+                ->subject('Mensaje...')
+                ->attach($this->data['file']->getRealPath(), [
+                    'as' => $this->data['file']->getClientOriginalName(),
+                    'mime' => $this->data['file']->getMimeType()
+                ])
+                ->markdown('mail.correo', [
+                    'data' => $this->data
+                ]);
+        }
+        // ...
+    }
+    ```
++ Configurar proyecto para que pueda trabajar con colas:
+    ```env title=".env"
+    QUEUE_CONNECTION=database
+    ```
++ Crear tabla **jobs**:
+    ```bash
+    php artisan queue:table
+    php artisan migrate
+    ```
++ Ejecutar las tareas en cola:
+    ```bash
+    php artisan queue:work
+    ```
+    :::tip Nota
+    En cosa de poner en cola correos con archivos adjuntos, será necesario almacenar este y luego pasar la url de su ubicación.
+    Ahora, en lugar de usar el método **attach**, se deberá usar el método **attachFromStorage**
+    :::
+### Publicar vista del correo:
+```bash
+php artisan vendor:publish --tag=laravel-mail
+```
 
 ## Componentes
 + Crear un componente blade anónimo:
@@ -4423,90 +4490,90 @@ Para establecer la configuración de idiomas y configuración ir al archivo de c
     }
     // ...
     ```
-4. Construcción de un menú de selección de idioma:
-    + Crear archivo de configuración **languages**:
-        ```php title="config\languages.php"
-        <?php
+### Construcción de un menú de selección de idioma
++ Crear archivo de configuración **languages**:
+    ```php title="config\languages.php"
+    <?php
 
-        // Idiomas permitidos en el proyecto
-        return [
-            'en' => 'English',
-            'es' => 'Español',
-        ];        
-        ```
-    + Crear middleware **Language**:
-        ```bash
-        php artisan make:middleware Language
-        ```
-    + Programar middleware **Language**:
-        ```php title="app\Http\Middleware\Language.php"
+    // Idiomas permitidos en el proyecto
+    return [
+        'en' => 'English',
+        'es' => 'Español',
+    ];        
+    ```
++ Crear middleware **Language**:
+    ```bash
+    php artisan make:middleware Language
+    ```
++ Programar middleware **Language**:
+    ```php title="app\Http\Middleware\Language.php"
+    // ...
+    use Illuminate\Support\Facades\App;
+    // ...
+    class Language
+    {
         // ...
-        use Illuminate\Support\Facades\App;
-        // ...
-        class Language
+        public function handle(Request $request, Closure $next): Response
         {
-            // ...
-            public function handle(Request $request, Closure $next): Response
-            {
-                if(Session()->has('applocale') AND array_key_exists(Session()->get('applocale'), config('languages'))) {
-                App::setLocale(Session()->get('applocale'));
-                } else {
-                    App::setLocale(Config('app.fallback_locale'));
-                }
-                return $next($request);
+            if(Session()->has('applocale') AND array_key_exists(Session()->get('applocale'), config('languages'))) {
+            App::setLocale(Session()->get('applocale'));
+            } else {
+                App::setLocale(Config('app.fallback_locale'));
             }
-        }        
-        ```
-    + Aplicar middleware **Language** a todas las rutas web en el **Kernel**:
-        ```php title="app\Http\Kernel.php"
-        // ...
-        protected $middlewareGroups = [
-            'web' => [
-                // ...
-                \App\Http\Middleware\Language::class
-            ],
+            return $next($request);
+        }
+    }        
+    ```
++ Aplicar middleware **Language** a todas las rutas web en el **Kernel**:
+    ```php title="app\Http\Kernel.php"
+    // ...
+    protected $middlewareGroups = [
+        'web' => [
             // ...
-        ];        
-        ```
-    + Crear controlador **LanguageController**:
-        ```bash
-        php artisan make:controller LanguageController
-        ```
-    + Programar controlador **LanguageController**:
-        ```php title="app\Http\Controllers\LanguageController.php"
+            \App\Http\Middleware\Language::class
+        ],
         // ...
-        use Illuminate\Support\Facades\Config;
-        use Illuminate\Support\Facades\Redirect;
-        use Illuminate\Support\Facades\Session;
-        // ...
-        class LanguageController extends Controller
-        {
-            public function switchLang($lang) {
-                if (array_key_exists($lang, Config::get('languages'))) {
-                    Session::put('applocale', $lang);
-                }
-                return Redirect::back();
+    ];        
+    ```
++ Crear controlador **LanguageController**:
+    ```bash
+    php artisan make:controller LanguageController
+    ```
++ Programar controlador **LanguageController**:
+    ```php title="app\Http\Controllers\LanguageController.php"
+    // ...
+    use Illuminate\Support\Facades\Config;
+    use Illuminate\Support\Facades\Redirect;
+    use Illuminate\Support\Facades\Session;
+    // ...
+    class LanguageController extends Controller
+    {
+        public function switchLang($lang) {
+            if (array_key_exists($lang, Config::get('languages'))) {
+                Session::put('applocale', $lang);
             }
-        }        
-        ```
-    + Crear ruta web **lang/\{lang}**:
-        ```php title="routes\web.php"
-        Route::get('lang/{lang}', [App\Http\Controllers\LanguageController::class, 'switchLang'])->name('lang');
-        ```
-    + Crear vista **lang**:
-        ```php title="resources\views\_partials\lang.blade.php"
-        @foreach(Config::get('languages') as $lang => $language)
-            @if($lang != App::getLocale())
-                <a href="{{ route('lang', $lang) }}">{{ $language }}</a>
-            @endif
-        @endforeach        
-        ```
-        :::tip Nota
-        Para ver el menú de idiomas en la vista desada, incluir la siguiente directiva blade:
-        ```php
-        @include('_partials.lang')
-        ```
-        :::
+            return Redirect::back();
+        }
+    }        
+    ```
++ Crear ruta web **lang/\{lang}**:
+  ```php title="routes\web.php"
+  Route::get('lang/{lang}', [App\Http\Controllers\LanguageController::class, 'switchLang'])->name('lang');
+  ```
++ Crear vista **lang**:
+    ```php title="resources\views\_partials\lang.blade.php"
+    @foreach(Config::get('languages') as $lang => $language)
+        @if($lang != App::getLocale())
+            <a href="{{ route('lang', $lang) }}">{{ $language }}</a>
+        @endif
+    @endforeach        
+    ```
+    :::tip Nota
+    Para ver el menú de idiomas en la vista desada, incluir la siguiente directiva blade:
+    ```php
+    @include('_partials.lang')
+    ```
+    :::
 
 
 
