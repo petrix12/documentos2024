@@ -2931,17 +2931,6 @@ Sitios web de proveedores para envio de correos electrónicos:
     class CorreoMailable extends Mailable
     {
         // ...
-    }
-    ```
-### Poner en cola el envío de correos
-+ Modificar mailable:
-    ```php title="app\Mail\CorreoMailable.php"
-    // ...
-    use Illuminate\Contracts\Queue\ShouldQueue;
-
-    class CorreoMailable extends Mailable implements ShouldQueue
-    {
-        // ...
         public $data;
         // ...
         public function __construct($data) {
@@ -2959,6 +2948,17 @@ Sitios web de proveedores para envio de correos electrónicos:
                     'data' => $this->data
                 ]);
         }
+        // ...
+    }
+    ```
+### Poner en cola el envío de correos
++ Modificar mailable:
+    ```php title="app\Mail\CorreoMailable.php"
+    // ...
+    use Illuminate\Contracts\Queue\ShouldQueue;
+
+    class CorreoMailable extends Mailable implements ShouldQueue
+    {
         // ...
     }
     ```
@@ -2982,6 +2982,56 @@ Sitios web de proveedores para envio de correos electrónicos:
 ### Publicar vista del correo:
 ```bash
 php artisan vendor:publish --tag=laravel-mail
+```
+### Ejemplo de estructura de un mailable
+```php title="app\Mail\CorreoMailable.php"
+// ...
+//use Illuminate\Bus\Queueable;
+//use Illuminate\Contracts\Queue\ShouldQueue;
+//use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address;
+//use Illuminate\Mail\Mailables\Content;
+//use Illuminate\Mail\Mailables\Envelope;
+//use Illuminate\Queue\SerializesModels;
+// ...
+class CorreoMailable extends Mailable
+{
+    use Queueable, SerializesModels;
+    
+    // ...
+    public function __construct(public $data) {}
+
+    // ...
+    public function envelope(): Envelope
+    {
+        return new Envelope(
+            from: new Address(env('MAIL_FROM_ADDRESS', $this->data['from_email']), env('MAIL_FROM_NAME', $this->data['from_name'])),
+            /* from: => [
+                'address' => env('MAIL_FROM_ADDRESS', $this->data['from_email']),
+                'name' => env('MAIL_FROM_NAME', $this->data['from_name'])
+            ], */
+            subject: $this->data['asunto'],
+            /* reply_to: => [
+                'address' => $this->data['from_email_replay_to'],
+                'name' => $this->data['from_name_replay_to']
+            ], */
+        );
+    }
+
+    // ...
+    public function content(): Content
+    {
+        return new Content(
+            view: 'emails.correo'
+        );
+    }
+
+    // ...
+    public function attachments(): array
+    {
+        return [];
+    }
+}
 ```
 
 ## Componentes
