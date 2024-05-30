@@ -4626,6 +4626,72 @@ Para establecer la configuración de idiomas y configuración ir al archivo de c
     :::
 
 
+## Events y Listeners
+1. Crear un evento:
+    ```bash
+    php artisan make:event EventoEvent
+    ```
+2. Crear un oyente:
+    ```bash
+    php artisan make:listener OyenteListener
+    ```
+3. Programar evento **EventoEvent**:
+    ```php title="app\Events\EventoEvent.php"
+    // ...
+    class EventoEvent {
+        // ...
+        public function __construct(public $data) {}
+        // ...
+        public function broadcastOn(): array
+        {
+            return [
+                new PrivateChannel('canal-del-evento'),
+            ];
+        }
+    }    
+    ```
+4. Programar oyente **OyenteListener**:
+    ```php title="app\Listeners\OyenteListener.php"
+    use App\Events\EventoEvent;
+    // ...
+    class OyenteListener
+    {
+        // ...
+        public function __construct() {}
+        // ...
+        public function handle(EventoEvent $event): void
+        {
+            // Aquí las acciones a tomar con la información del evento $data
+            dd('Información recibida: ' . $event->data);
+        }
+    }    
+    ```
+5. Registrar el evento **EventoEvent** en **EventServiceProvider**:
+    ```php title="app\Providers\EventServiceProvider.php"
+    // ...
+    use App\Events\EventoEvent;
+    use App\Listeners\OyenteListener;
+    // ...
+    class EventServiceProvider extends ServiceProvider
+    {
+        // ...
+        protected $listen = [
+            // ...
+            EventoEvent::class => [
+                OyenteListener::class
+            ]
+        ];
+        // ...
+    }    
+    ```
+6. Despachar el evento:
+    ```php
+    // ...
+    use App\Events\EventoEvent;
+    // ...
+    EventoEvent::dispatch($data);
+    ```
+
 
 ## Tips generales:
 ### Crear un sistema de autenticación
