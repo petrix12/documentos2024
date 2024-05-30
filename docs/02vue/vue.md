@@ -855,6 +855,134 @@ Para abrir la consola de Amplify:
 amplify console
 ```
 :::
+#### Azure
+1. Crear cuenta en [Azure](https://azure.microsoft.com/es-es).
+2. Acceder a **Azure Active Directory**.
+3. En el panel **Administrar** acceder a **Registro de aplicaciones**.
+4. Clic en **+ Nuevo registro**.
+5. Completar formulario y luego clic en **Registrar**:
+    + Nombre: auth_azure
+    + Tipos de cuenta compatibles: Solo cuentas de este directorio organizativo (solo de Default Directory: inquilino único).
+    + URI de redirección (opcional): Aplicación de página única (SPA) | Dirección: http://localhost:8080
+    :::tip Nota
+    Ya podemos obtener las credenciales para nuestro proyecto.
+    :::
+6. En el panel **Administrar**, seleccionar **Permisos de API**.
+7. Clic en **+ Agregar un permiso**.
+8. Seleccionar **Azure Storage**.
+9. Seleccionar la opción **Permisos delegados**.
+10. Habilitar **user_impersonation** y clic en **Agregar permisos**.
+:::tip Nota
+Con estos pasos ya hemos culminado la configuración en Azure.
+:::
+11. Regresar al proyecto en vue para configurar Azure.
+12. Instalar librerias de Azure requeridas:
+    + Ejecutar:
+        ```bash
+        npm i @azure/core-http
+        npm i @azure/msal-browser
+        npm i @azure/storage-blob
+        npm i tiny-emitter
+        ```
+
+13. Incorporar Azure a la aplicación:
+    ```ts  title="...\authentication\src\main.ts"
+    //...
+    import Emitter from 'tiny-emitter'
+    // ...
+    const app = createApp(App)
+    app.config.globalProperties.$msalInstance = {}
+    app.config.globalProperties.$emitter = new Emitter()
+
+    app.use(router).mount('#app')
+    // ...
+    ```
+14. Crear servicio **AuthService**:
+    + Con typescript:
+        ```ts title="...\src\services\AuthService.ts"
+        import { Ref, ref } from 'vue'
+
+        class AuthService {
+        }
+        export default AuthService        
+        ```
+    + Con javascript:
+        ```js
+        import { ref } from 'vue'
+
+        class AuthService {
+            private msalConfig
+            private accessToken
+            constructor() {
+                this.msalConfig = ref({
+                    auth: {
+                        clientId: 'XXXXXXXXX',
+                        authority: 'XXXXXXXXX'
+                    },
+                    cache: {
+                        cacheLocation: 'localStorage'
+                    }
+                })
+                this.accessToken = ref('')
+            }
+            setAccessToken(token) {
+                this.accessToken = token
+                return this.accessToken
+            }
+            getAccessToken() {
+                return this.accessToken
+            }
+            getMsalConfig() {
+                this.msalConfig
+            }
+        }
+        export default AuthService
+        ```
+15. Crear vista AuthView en **...\src\views\AuthView.vue**:
+    ```html
+    <template>
+        <authenticator>
+            <!-- EL CÓDIGO QUE ESCRIBAMOS AQUÍ SOLO SE PODRÁ VER SI SE HACE LOGIN -->
+            <template v-slot="{user, signOut}">
+                <h1>Hola {{ user.username }}</h1>
+                <button @click="signOut">Cerrar sesión</button>
+            </template>
+        </authenticator>
+    </template>
+
+    <script lang="ts">
+    import { PublicClientApplication } from '@azure/msal-browser'
+    import { defineComponent } from 'vue'
+    import AuthService from '@/services/AuthService'
+    
+    export default defineComponent({
+        name: AuthView,
+        data() {
+            return {
+                account: ''
+            }
+        },
+        async created() {
+            const authService = new AuthService()
+            this.$msalInstance = new PublicClientApplication(authService.getMsalConfig().value)
+        },
+        methods: {
+            async login() {
+                await this.$msalInstance
+                    .loginPopup({})
+                    .then(() => {
+                        const myAccounts = this.$msalInstance.getAllAccounts()
+                        this.account = myAccounts[0]
+                        this.$emitter.emit('login', this.account)
+                    })
+                    .catch(error => {
+                        alert(error)
+                    })
+            }
+        }
+    })
+    </script>    
+    ```
 ### Modificar el archivo de rutas:
     ```ts title="...\src\router\index.ts"
     // ...
