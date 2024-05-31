@@ -4692,6 +4692,145 @@ Para establecer la configuración de idiomas y configuración ir al archivo de c
     EventoEvent::dispatch($data);
     ```
 
+## Comandos
+1. Crear un comando personalizado:
+    ```bash
+    php artisan make:command ComandoCommand
+    ```
+2. Programar comando **ComandoCommand**:
+    ```php title="app\Console\Commands\ComandoCommand.php"
+    class ComandoCommand extends Command
+    {
+        // ...
+        protected $signature = 'accion:firma-de-mi-comando';
+        // ...
+        protected $description = 'Breve descripción de mi comando';
+        // ...
+        public function handle()
+        {
+            try {
+                // Acciones de mi comando
+                return Command::SUCCESS;
+            } catch (\Throwable $th) {
+                //throw $th;
+                return Command::FAILURE;
+            }
+        }
+    }    
+    ```
+3. Programar comando **ComandoCommand** con parámetros:
+    ```php title="app\Console\Commands\ComandoCommand.php"
+    class ComandoCommand extends Command
+    {
+        // ...
+        protected $signature = 'accion:firma-de-mi-comando {parametro1} {parametro2}';
+        // ...
+        protected $description = 'Breve descripción de mi comando';
+        // ...
+        public function handle()
+        {
+            try {
+                // Recuperar los parámetros
+                $parametro1 = $this->argument('parametro1');
+                $parametro2 = $this->argument('parametro2');
+                // Acciones de mi comando                
+                return Command::SUCCESS;
+            } catch (\Throwable $th) {
+                //throw $th;
+                return Command::FAILURE;
+            }
+        }
+    }    
+    ```
+4. Registrar comando en el Kernel:
+    ```php title="app\Console\Kernel.php"
+    // ...
+    protected $commands = [
+        // ...
+        \App\Console\Commands\ComandoCommand::class,
+    ];
+    ```
+    :::tip Nota
+    + Si el Kernel contiene el siguiente código, no será necesario registrarlo, puesto que ya esta registrando todos los comandos que se encuentran en la ruta **app\Console\Commands**
+    
+    ```php title="app\Console\Kernel.php"
+    // ...
+    protected function commands(): void
+    {
+        $this->load(__DIR__.'/Commands');
+        // ...
+    }    
+    // ...
+    ```
+    + Igualmente, habrá que registrar el comando, si este no se encuentra ubicado en la ruta **app\Console\Commands**.
+    :::
+5. Para ejecutar el comando por consola:
+    ```bash
+    php artisan accion:firma-de-mi-comando
+    ```
+    :::tip Nota
+    En caso de problemas con la ejecución:
+    ```bash
+    php artisan optimize:clear
+    php artisan cache:clear
+    ```
+    :::
+6. Para ejecutar el comando por consola con parámetros:
+    ```bash
+    php artisan accion:firma-de-mi-comando [valor del parámetro 1] [valor del parámetro 2]
+    ```
+7. Para ejecutar un camando con código php:
+    ```php
+    // ...
+    use Illuminate\Support\Facades\Artisan;
+    // ...
+    // Sin parámetros
+    Artisan::call('accion:firma-de-mi-comando');
+    // Con parámetros
+    Artisan::call('accion:firma-de-mi-comando', [
+        'parametro1' => $parametro1, 
+        'parametro2' => $parametro2
+    ]);
+    // ...
+    ```
+
+### Ejecución de comando artisan mediante código php
+:::tip Nota
+También podemos ejecutar comando artisan comunes:
+```php
+// ...
+use Illuminate\Support\Facades\Artisan;
+// ...
+// Comando artisan
+Artisan::call('migrate');
+Artisan::call('db:seed');
+// ...
+```
+:::
+
+### Programar la ejecución de comandos de forma periódica
+1. Programar tareas en el **Kernel**:
+    ```php title="app\Console\Kernel.php"
+    protected function schedule(Schedule $schedule): void
+    {
+        // ...
+        $schedule->command('accion:firma-de-mi-comando', [
+            'parametro1' => 'valor parametro1', 
+            'parametro2' => 'valor parametro2'
+        ])->daily();
+
+        /*
+            daily: Una vez al día
+            dailyAt: Una vez al día en una hora determinada
+            hourly: Cada hora
+            cron: Requiere de una expresión cron
+                + Ejemplo: '0 * * * *'  (minutos, horas, dias, meses, dias de la semana)
+                + días de la semana: 1: lunes, 2: martes, 3: miercoles, 4: jueves, 5: viernes, 6: sabado, 7: domingo
+                + * = todos los valores (todos los minutos, todos los horas, todos los dias, todos los meses, todos los dias de la semana)
+        */
+    }    
+    ```
+
 
 ## Tips generales:
 ### Crear un sistema de autenticación
