@@ -865,7 +865,12 @@ amplify console
     + Tipos de cuenta compatibles: Solo cuentas de este directorio organizativo (solo de Default Directory: inquilino único).
     + URI de redirección (opcional): Aplicación de página única (SPA) | Dirección: http://localhost:8080
     :::tip Nota
-    Ya podemos obtener las credenciales para nuestro proyecto.
+    Ya podemos obtener las credenciales para nuestro proyecto:
+    + Id. de aplicación (cliente): que se corresponderá con el **clientId** de nuestro código.
+    + Id. de driectorio (inquilino): que será nuestro **tenant_id** y se corresponderá con el **authority** de nuestro código, el cual construiremos de la siguiente forma
+    ```
+    authority = 'https://login.microsoftonline.com<tenant_id>'
+    ```
     :::
 6. En el panel **Administrar**, seleccionar **Permisos de API**.
 7. Clic en **+ Agregar un permiso**.
@@ -892,7 +897,7 @@ Con estos pasos ya hemos culminado la configuración en Azure.
     // ...
     const app = createApp(App)
     app.config.globalProperties.$msalInstance = {}
-    app.config.globalProperties.$emitter = new Emitter()
+    app.config.globalProperties.$emitter = new Emitter.TinyEmitter()
 
     app.use(router).mount('#app')
     // ...
@@ -901,11 +906,57 @@ Con estos pasos ya hemos culminado la configuración en Azure.
     + Con typescript:
         ```ts title="...\src\services\AuthService.ts"
         import { Ref, ref } from 'vue'
+        import IMsalConfig from '@/interfaces/IMsalConfig'
 
         class AuthService {
+            private msalConfig:Ref<IMsalConfig>
+            private accessToken:Ref<string>
+            constructor() {
+                this.msalConfig = ref({
+                    auth: {
+                        clientId: 'XXXXXXXXX',
+                        authority: 'XXXXXXXXX'
+                    },
+                    cache: {
+                        cacheLocation: 'localStorage'
+                    }
+                })
+                this.accessToken = ref('')
+            }
+            setAccessToken(token:string):Ref<string> {
+                this.accessToken.value = token
+                return this.accessToken
+            }
+            getAccessToken():Ref<string> {
+                return this.accessToken
+            }
+            getMsalConfig():Ref<IMsalConfig> {
+                this.msalConfig
+            }
         }
         export default AuthService        
         ```
+        :::tip Nota
+        En el caso de Typescript será necesario definir la interface **IMsalConfig** y opcionalmente la interface **IAuth**:
+        ```ts title="src//interfaces/IMsalConfig.ts"
+        import IAuth from './IAuth'
+
+        interface IMsalConfig {
+            auth: IAuth,
+            cache: {
+                cacheLocation: string
+            }
+        }
+        export default IMsalConfig
+        ```
+        ```ts title="src//interfaces/IAuth.ts"
+        interface IAuth {
+            clientId: string,
+            authority: string
+        }
+        export default IAuth
+        ```
+        :::
     + Con javascript:
         ```js
         import { ref } from 'vue'
@@ -939,50 +990,126 @@ Con estos pasos ya hemos culminado la configuración en Azure.
         export default AuthService
         ```
 15. Crear vista AuthView en **...\src\views\AuthView.vue**:
-    ```html
-    <template>
-        <authenticator>
-            <!-- EL CÓDIGO QUE ESCRIBAMOS AQUÍ SOLO SE PODRÁ VER SI SE HACE LOGIN -->
-            <template v-slot="{user, signOut}">
-                <h1>Hola {{ user.username }}</h1>
-                <button @click="signOut">Cerrar sesión</button>
-            </template>
-        </authenticator>
-    </template>
+    + Javascript con Option API
+        ```html
+        <template>
+            <h1>Azure login</h1>
+            <button @click="login">Login</button>
+        </template>
 
-    <script lang="ts">
-    import { PublicClientApplication } from '@azure/msal-browser'
-    import { defineComponent } from 'vue'
-    import AuthService from '@/services/AuthService'
-    
-    export default defineComponent({
-        name: AuthView,
-        data() {
-            return {
-                account: ''
+        <script>
+        import { PublicClientApplication } from '@azure/msal-browser'
+        import { defineComponent } from 'vue'
+        import AuthService from '@/services/AuthService'
+        
+        export default defineComponent({
+            name: AuthView,
+            data() {
+                return {
+                    account: ''
+                }
+            },
+            async created() {
+                const authService = new AuthService()
+                this.$msalInstance = new PublicClientApplication(authService.getMsalConfig().value)
+            },
+            methods: {
+                async login() {
+                    await this.$msalInstance
+                        .loginPopup({})
+                        .then(() => {
+                            const myAccounts = this.$msalInstance.getAllAccounts()
+                            this.account = myAccounts[0]
+                            this.$emitter.emit('login', this.account)
+                        })
+                        .catch(error => {
+                            alert(error)
+                        })
+                }
             }
-        },
-        async created() {
+        })
+        </script>    
+        ```
+    + Javascript con Composition API y sin setup:
+        ```html
+        <template>
+            <h1>Azure login</h1>
+            <button @click="login">Login</button>
+        </template>
+
+        <script>
+        import { PublicClientApplication } from '@azure/msal-browser'
+        import { defineComponent, onMounted } from 'vue'
+        import AuthService from '@/services/AuthService'
+        
+        export default defineComponent({
+            name: AuthView,
+            setup() {
+                onMounted(() => {
+                    const authService = new AuthService()
+                    $msalInstance = new PublicClientApplication(authService.getMsalConfig().value)
+                })
+                let account = ''
+                const login = async () => {
+                    await $msalInstance
+                        .loginPopup({})
+                        .then(() => {
+                            const myAccounts = $msalInstance.getAllAccounts()
+                            account = myAccounts[0]
+                            $emitter.emit('login', account)
+                        })
+                        .catch(error => {
+                            alert(error)
+                        })
+                }
+                return {
+                    account,
+                    login
+                }
+            }
+        })
+        </script>    
+        ```
+    + Javascript con Composition API y con setup:
+        ```html
+        <template>
+            <authenticator>
+                <!-- EL CÓDIGO QUE ESCRIBAMOS AQUÍ SOLO SE PODRÁ VER SI SE HACE LOGIN -->
+                <template v-slot="{user, signOut}">
+                    <h1>Hola {{ user.username }}</h1>
+                    <button @click="signOut">Cerrar sesión</button>
+                </template>
+            </authenticator>
+        </template>
+
+        <script setup>
+        import { PublicClientApplication } from '@azure/msal-browser'
+        import { defineComponent, onMounted } from 'vue'
+        import AuthService from '@/services/AuthService'
+        
+        onMounted(() => {
             const authService = new AuthService()
-            this.$msalInstance = new PublicClientApplication(authService.getMsalConfig().value)
-        },
-        methods: {
-            async login() {
-                await this.$msalInstance
-                    .loginPopup({})
-                    .then(() => {
-                        const myAccounts = this.$msalInstance.getAllAccounts()
-                        this.account = myAccounts[0]
-                        this.$emitter.emit('login', this.account)
-                    })
-                    .catch(error => {
-                        alert(error)
-                    })
-            }
+            $msalInstance = new PublicClientApplication(authService.getMsalConfig().value)
+        })
+        let account = ''
+        const login = async () => {
+            await $msalInstance
+                .loginPopup({})
+                .then(() => {
+                    const myAccounts = $msalInstance.getAllAccounts()
+                    account = myAccounts[0]
+                    $emitter.emit('login', account)
+                })
+                .catch(error => {
+                    alert(error)
+                })
         }
-    })
-    </script>    
-    ```
+        return {
+            account,
+            login
+        }
+        </script>    
+        ```
 ### Modificar el archivo de rutas:
     ```ts title="...\src\router\index.ts"
     // ...
