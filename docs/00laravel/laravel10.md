@@ -5518,3 +5518,97 @@ class ModeloController extends Controller
     }
 </script>
 ```
+
+### Generar PDF
+:::tip Nota
+Documentación: https://github.com/barryvdh/laravel-dompdf
+:::
+1. Instalar la dependencia composer **laravel-dompdf**:
+    ```bash
+    composer require barryvdh/laravel-dompdf
+    ```
+2. Publicar archivo de configuración general de **laravel-dompdf**:
+    ```bash
+    php artisan vendor:publish --provider="Barryvdh\DomPDF\ServiceProvider"
+    ```
+    :::tip Nota
+    + Esta acción generará un archivo de configuración en la siguiente ruta:
+        + config/dompdf.php
+    + Configuraciones comunes:
+        + Tamaño de la hoja:
+            ```php
+            "default_paper_size" => "a4",
+            ```
+        + Orientación de la hoja:
+            ```php
+            "default_paper_orientattion" => "portrait",
+            ```
+        + Fuente por defecto:
+            ```php
+            "default_font" => "serif",
+            ```
+        + Densidad del pixelado:
+            ```php
+            "dpi" => 96,
+            ```
+    :::
+3. Crear controlado **PdfController**:
+    ```bash
+    php artisan make:controller PdfController
+    ```
+4. Programar controlador **PdfController**:
+    ```php
+    // ...
+    use Barryvdh\DomPDF\Facade\Pdf;
+    // ...
+    class PdfController extends Controller {
+        // Generación básica de un pdf
+        public function generarpdf() {
+            $pdf = Pdf::loadView('pdf.documentopdf');
+            $pdf->save('/ruta_de_alamcenamiento/nombre-del-documento.pdf');
+            return $pdf->download('nombre-del-documento.pdf')'';
+        }
+
+        // Generación modificando opciones de configuración
+        public function generarpdf_modificando_opciones() {
+            $pdf = Pdf::setOption(['dpi' => 150, 'defaultFont' => 'arial'])->loadView('pdf.documentopdf');
+            return $pdf->download('nombre-del-documento.pdf')'';
+        }
+
+        // Generación pasando variables al pdf
+        public function generarpdf_modificando_opciones() {
+            $data = 'mis datos';
+            $pdf = Pdf::loadView('pdf.documentopdf', ['data' => $data]);
+            return $pdf->download('nombre-del-documento.pdf')'';
+        }
+    }
+    // ...
+    ```
+5. Crear vista **documentopdf**:
+    ```html title="resources/views/pdf/documentopdf.blade.php"
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            /* Salto de página */
+            .page-break {
+                page-break-after: always;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Mi documento PDF</h1>
+        <p>{{ $data }}</p>
+    </body>
+    </html>    
+    ```
+6. Crear ruta para generar PDF
+    ```php
+    use App\Http\Controllers\PdfController;
+    Route::get('generarpdf', [PdfController::class, 'generarpdf'])->name('generarpdf');
+    ```
+
+
