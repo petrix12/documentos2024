@@ -1125,7 +1125,7 @@ Con estos pasos ya hemos culminado la configuración en Azure.
     ]
     // ...   
     ```
-### Modificar el componente principal:
+### Modificar el componente principal
     ```html title="...\src\App.vue"
     <template>
         <nav>
@@ -1136,8 +1136,175 @@ Con estos pasos ya hemos culminado la configuración en Azure.
     </template>
     ```
 
+## Proyecto con Vuex
+1. Crear un proyecto con Vuex:
+    + Ejecutar:
+        ```bash
+        vue create app_vuex
+        ```
+    + Ejemplo de opciones seleccionadas para la creación de un proyecto:
+        ```
+        Vue CLI v5.0.8
+        ? Please pick a preset: Manually select features
+        ? Check the features needed for your project: Babel, TS, Router, Vuex, CSS
+        Pre-processors, Linter
+        ? Choose a version of Vue.js that you want to start the project with 3.x
+        ? Use class-style component syntax? No
+        ? Use Babel alongside TypeScript (required for modern mode, auto-detected
+        polyfills, transpiling JSX)? Yes
+        ? Use history mode for router? (Requires proper server setup for index fallback
+        in production) Yes
+        ? Pick a CSS pre-processor (PostCSS, Autoprefixer and CSS Modules are supported
+        by default): Sass/SCSS (with dart-sass)
+        ? Pick a linter / formatter config: Basic
+        ? Pick additional lint features: Lint on save
+        ? Where do you prefer placing config for Babel, ESLint, etc.? In dedicated
+        config files
+        ? Save this as a preset for future projects? No
+        ```
+2. Estructura de un **store**:
+    ```js title="src\store\index.ts"
+    import { createStore } from 'vuex'
 
-## Estructura recomendada de carpetas de un proyecto Vue:
+    export default createStore({
+        state: {
+            // datos
+            mi_estado: 'valor de mi estado'
+        },
+        getters: {
+            // propiedades computadas
+            obtener_mi_estado(state) {
+                return state.mi_estado
+            }
+        },
+        mutations: {
+            // modificar los datos de forma sincrona
+            modificar_mi_estado(state, nuevo_valor) {
+                state.mi_estado = nuevo_valor
+            }
+        },
+        actions: {
+            // modificar los datos de forma asincrona
+        },
+        modules: {
+            // subdividir el store
+        }
+    })
+    ```
+3. Consumir un **store** desde un componente:
+    + Invocar elementos del **store** directamente:
+        ```html title="Con Option API con typescript"
+        <template>
+            <p>Forma 1: {{ $store.state.mi_estado }}</p>
+            <p>Forma 2: {{ estado }}</p>
+            <p>Forma 3: {{ $store.getters.obtener_mi_estado }}</p>   
+            <p>Forma 4: {{ estado2 }}</p>       
+        </template>
+
+        <script lang="ts">
+        import { defineComponent } from 'vue'
+
+        export default defineComponent({
+            // ...
+            computed: {
+                estado() {
+                    return this.$store.state.mi_estado
+                },
+                estado2() {
+                    return this.$store.getters.obtener_mi_estado
+                }
+            },
+            methods: {
+                cambiar_estado() {
+                    this.$store.commit('modificar_mi_estado', 'nuevo valor de mi estado')
+                }
+            },
+            // ...
+        })
+        </script>    
+        ```
+    + Invocar elementos del **store** mediante el mapeo con Option API:
+        ```html title="Con Option API con typescript"
+        <template>
+            <p>Forma 1: {{ mi_estado }}</p>
+            <p>Forma 2: {{ obtener_mi_estado }}</p>
+        </template>
+
+        <script lang="ts">
+        import { defineComponent } from 'vue'
+        import { mapState, mapGetters, mapMutations } from 'vuex'
+
+        export default defineComponent({
+            // ...
+            computed: {
+                ...mapState(['mi_estado']),
+                ...mapGetters(['obtener_mi_estado'])
+            },
+            methods: {
+                ...mapMutations(['modificar_mi_estado']),
+                cambiar_estado() {
+                    this.modificar_mi_estado('nuevo valor de mi estado')
+                }
+            },
+            // ...
+        })
+        </script>    
+        ```
+    + Invocar elementos del **store** mediante el mapeo con Composition API:
+        ```html title="Con Composition API con typescript"
+        <template>
+            <p>Forma 1: {{ mi_estado }}</p>
+            <p>Forma 2: {{ obtener_mi_estado }}</p>
+        </template>
+
+        <script lang="ts">
+        import { defineComponent, computed } from 'vue'
+        import { useStore } from 'vuex'
+
+        export default defineComponent({
+            // ...
+            setup() {
+                const store = useStore()
+                const mi_estado = computed(() => store.state.mi_estado)
+                const obtener_mi_estado = computed(() => store.getters.obtener_mi_estado)
+                const cambiar_estado = () => store.commit('cambiar_estado', 'nuevo valor de mi estado')
+                return {
+                    mi_estado,
+                    obtener_mi_estado,
+                    cambiar_estado
+                }
+            }
+            // ...
+        })
+        </script>    
+        ```
+    + Invocar elementos del **store** mediante el mapeo con Composition API y setup:
+        ```html title="Con Composition API con typescript y setup"
+        <template>
+            <p>Forma 1: {{ mi_estado }}</p>
+            <p>Forma 2: {{ obtener_mi_estado }}</p>
+        </template>
+
+        <script lang="ts" setup>
+        import { defineComponent, computed } from 'vue'
+        import { useStore } from 'vuex'
+
+        // ...
+        const store = useStore()
+        const mi_estado = computed(() => store.state.mi_estado)
+        const obtener_mi_estado = computed(() => store.getters.obtener_mi_estado)
+        const cambiar_estado = () => store.commit('cambiar_estado', 'nuevo valor de mi estado')
+        // ...
+        </script>    
+        ```
+4. Mapear un **store**:
+    ```html
+    ```
+5. mmmm
+
+
+
+## Estructura recomendada de carpetas de un proyecto Vue
 + **node_modules**: dependencias npm.
 + **public**: archivos accesibles desde la web.
 + **src**: parte central de la aplicación.

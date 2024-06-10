@@ -5576,7 +5576,7 @@ Documentación: https://github.com/barryvdh/laravel-dompdf
         }
 
         // Generación pasando variables al pdf
-        public function generarpdf_modificando_opciones() {
+        public function generarpdf_con_pase_de_variables() {
             $data = 'mis datos';
             $pdf = Pdf::loadView('pdf.documentopdf', ['data' => $data]);
             return $pdf->download('nombre-del-documento.pdf')'';
