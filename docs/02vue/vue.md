@@ -1297,11 +1297,82 @@ Con estos pasos ya hemos culminado la configuración en Azure.
         // ...
         </script>    
         ```
-4. Mapear un **store**:
-    ```html
-    ```
-5. mmmm
+        
+## Proyecto con Pinia
+1. Crear un proyecto con Pinia:
+    + Ejecutar:
+        ```bash
+        vue create app_pinia
+        ```
+    + Ejemplo de opciones seleccionadas para la creación de un proyecto:
+        ```
+        Vue CLI v5.0.8
+        ? Please pick a preset: Manually select features
+        ? Check the features needed for your project: Babel, TS, Linter
+        ? Choose a version of Vue.js that you want to start the project with 3.x
+        ? Use class-style component syntax? No
+        ? Use Babel alongside TypeScript (required for modern mode, auto-detected
+        polyfills, transpiling JSX)? Yes
+        ? Pick a linter / formatter config: Basic
+        ? Pick additional lint features: Lint on save
+        ? Where do you prefer placing config for Babel, ESLint, etc.? In dedicated
+        config files
+        ? Save this as a preset for future projects? No
+        ```
+    + Instalar Pinia:
+        ```bash
+        npm i pinia
+        ```
+    + Poner pinia a disposición de todo el proyecto:
+        ```js title="src\main.ts"
+        // ...
+        import { createPinia } from 'pinia'
 
+        const pinia = createPinia()
+        const app = createApp(App)
+        app.use(pinia).mount('#app')
+        ```
+2. Crear un store de pinia:
+    ```js tilte="src\store\mi_store.ts"
+    import { defineStore } from 'pinia'
+
+    // Convención para nombra al store: use[Nombre del store]Store
+    export const useMiStoreStore = defineStore('mi_estore', {
+        state: () => {
+            return {
+                // datos
+                mi_estado: 'valor de mi estado'
+
+            }
+        },
+
+        getters: {
+            // propiedades computadas
+            obtener_mi_estado: (state) => state.mi_estado
+        },
+
+        actions: {
+            // modificar los datos
+            modificar_mi_estado(nuevo_valor = 'valor por defecto') {
+                this.mi_estado = nuevo_valor
+            }
+        }
+    })    
+    ```
+3. Usar el store en un componente vue:
+    ```html
+    <template>
+        <p>Recuperar estado: {{ store.mi_estado }}</p>
+        <p>Recuperar getter: {{ store.obtener_mi_estado }}</p>
+        <button @click="store.modificar_mi_estado('nuevo valor de mi estado')">Modificar mi_estado</button>
+    </template>
+
+    <script>
+    import { useMiStoreStore } from '@/store/mi_store'
+
+    const store = useMiStoreStore()
+    </script>
+    ```
 
 
 ## Estructura recomendada de carpetas de un proyecto Vue
