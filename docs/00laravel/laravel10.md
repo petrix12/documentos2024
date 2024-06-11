@@ -3786,7 +3786,15 @@ php artisan make:livewire componente-livewire
             </script>
         </div>
         ```
-            
+### Llaves (keys)
++ Cuando en una vista de livewire usamos un **@foreach** para iterar una variable de livewire es recomendable agregar una llave dentro del lazo para evitar fallos:
+    ```html
+    <ul>
+    @foreach($elementos as $elemento)
+        <li wire:key="elemento-{{ $elmento->id }}">{{ $elemento }}</li>
+    @endforeach
+    </ul>
+    ```
 
 ## Publicar recursos de Laravel
 + Publicar idiomas:
