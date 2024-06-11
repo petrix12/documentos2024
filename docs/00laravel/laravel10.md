@@ -3795,6 +3795,284 @@ php artisan make:livewire componente-livewire
     @endforeach
     </ul>
     ```
+### Eventos comunes en Livewire
+1. wire:click
+    :::tip Descripción
+    + Ejecuta una acción en el componente Livewire cuando se hace clic en el elemento.
+    + Ejemplo:
+        ```html
+        <button wire:click="save">Guardar</button>
+        ```
+    + Se utiliza para capturar clics en botones, enlaces u otros elementos clicables. Cuando se hace clic en el elemento, se llama al método especificado en el componente Livewire.
+    :::
+2. wire:change
+    :::tip Descripción
+    + Ejecuta una acción en el componente Livewire cuando el valor del elemento cambia.
+    + Ejemplo:
+        ```html
+        <input type="text" wire:change="updateName">
+        ```
+    + Es útil para inputs y selectores donde deseas capturar cambios de valor. Se dispara cada vez que el valor del elemento cambia.
+    :::
+3. wire:blur
+    :::tip Descripción
+    + Ejecuta una acción en el componente Livewire cuando el elemento pierde el foco.
+    + Ejemplo:
+        ```html
+        <input type="text" wire:blur="validateName">
+        ```
+    + Se utiliza principalmente en formularios para validar o procesar datos cuando el campo pierde el foco.
+    :::
+4. wire:focus
+    :::tip Descripción
+    + Ejecuta una acción en el componente Livewire cuando el elemento recibe el foco.
+    + Ejemplo:
+        ```html
+        <input type="text" wire:focus="focusHandler">
+        ```
+    + Útil para acciones que deben ocurrir cuando un campo de entrada recibe el foco, como mostrar sugerencias o resaltar el campo.
+    :::
+5. wire:keydown
+    :::tip Descripción
+    + Ejecuta una acción en el componente Livewire cuando se presiona una tecla.
+    + Ejemplo:
+        ```html
+        <input type="text" wire:keydown="handleKeydown">
+        ```
+    + Útil para manejar eventos relacionados con el teclado. Puedes usarlos para crear accesos directos de teclado o para manejar la entrada de texto en tiempo real.
+    :::
+6. wire:keyup
+    :::tip Descripción
+    + Ejecuta una acción en el componente Livewire cuando se suelta una tecla.
+    + Ejemplo:
+        ```html
+        <input type="text" wire:keyup="handleKeyup">
+        ```
+    + Útil para manejar eventos relacionados con el teclado. Puedes usarlos para crear accesos directos de teclado o para manejar la entrada de texto en tiempo real.
+    :::
+7. wire:submit
+    :::tip Descripción
+    + Ejecuta una acción en el componente Livewire cuando se envía un formulario.
+    + Ejemplo:
+        ```html
+        <form wire:submit.prevent="submitForm">
+            <button type="submit">Enviar</button>
+        </form>
+        ```
+    + Ideal para formularios, ya que permite interceptar el envío del formulario para manejar la lógica del lado del servidor en el componente Livewire sin una recarga de página.
+    :::
+8. wire:model
+    :::tip Descripción
+    + Enlaza el valor del input con una propiedad del componente Livewire.
+    + Ejemplo:
+        ```html
+        <input type="text" wire:model="name">
+        ```
+    + wire:model y sus variantes (lazy, debounce, defer): Proporcionan una forma de enlace de datos bidireccional entre los campos de entrada del formulario y las propiedades del componente Livewire. lazy actualiza solo cuando se pierde el foco, debounce actualiza después de un retraso, y defer actualiza cuando se envía el formulario.
+    :::
+9. wire:model.lazy
+    :::tip Descripción
+    + Enlaza el valor del input con una propiedad del componente Livewire, pero solo actualiza la propiedad cuando el input pierde el foco.
+    + Ejemplo:
+        ```html
+        <input type="text" wire:model.lazy="name">
+        ```
+    :::
+10. wire:model.debounce
+    :::tip Descripción
+    + Enlaza el valor del input con una propiedad del componente Livewire, pero actualiza la propiedad después de un retraso (debounce).
+    + Ejemplo:
+        ```html
+        <input type="text" wire:model.debounce.500ms="name">
+        ```
+    :::
+11. wire:model.defer
+    :::tip Descripción
+    + Enlaza el valor del input con una propiedad del componente Livewire, pero solo actualiza la propiedad cuando el formulario es enviado.
+    + Ejemplo:
+        ```html
+        <input type="text" wire:model.defer="name">
+        ```
+    :::
+12. wire:init
+    :::tip Descripción
+    + Ejecuta una acción en el componente Livewire cuando el componente es inicializado.
+    + Ejemplo:
+        ```html
+        <div wire:init="loadData">
+            Cargando...
+        </div>
+        ```
+    + Se usa para ejecutar lógica al inicializar el componente, como cargar datos necesarios antes de mostrar el contenido.
+    :::
+13. wire:mouseover
+    :::tip Descripción
+    + Ejecuta una acción en el componente Livewire cuando el mouse se pasa sobre el elemento.
+    + Ejemplo:
+        ```html
+        <div wire:mouseover="handleMouseOver">Pasa el mouse por aquí</div>
+        ```
+    :::
+14. wire:mouseout
+    :::tip Descripción
+    + Ejecuta una acción en el componente Livewire cuando el mouse sale del elemento.
+    + Ejemplo:
+        ```html
+        <div wire:mouseout="handleMouseOut">Sal del mouse de aquí</div>
+        ```
+    :::
+15. wire:mousedown
+    :::tip Descripción
+    + Ejecuta una acción en el componente Livewire cuando se presiona el botón del mouse sobre el elemento.
+    + Ejemplo:
+        ```html
+        <div wire:mousedown="handleMouseDown">Presiona el botón del mouse aquí</div>
+        ```
+    :::
+16. wire:mouseup
+    :::tip Descripción
+    + Ejecuta una acción en el componente Livewire cuando se suelta el botón del mouse sobre el elemento.
+    + Ejemplo:
+        ```html
+        <div wire:mouseup="handleMouseUp">Suelta el botón del mouse aquí</div>
+        ```
+    :::
+17. wire:dblclick
+    :::tip Descripción
+    + Ejecuta una acción en el componente Livewire cuando se hace doble clic en el elemento.
+    + Ejemplo:
+        ```html
+        <button wire:dblclick="handleDoubleClick">Haz doble clic aquí</button>
+        ```
+    :::
+18. wire:keydown.enter
+    :::tip Descripción
+    + Ejecuta una acción en el componente Livewire cuando se presiona la tecla Enter.
+    + Ejemplo:
+        ```html
+        <input type="text" wire:keydown.enter="submitForm">
+        ```
+    :::
+19. wire:keydown.escape
+    :::tip Descripción
+    + Ejecuta una acción en el componente Livewire cuando se presiona la tecla Escape.
+    + Ejemplo:
+        ```html
+        <input type="text" wire:keydown.escape="clearInput">
+        ```
+    :::
+20. wire:poll
+    :::tip Descripción
+    + Actualiza el componente Livewire periódicamente (polling).
+    + Ejemplo:
+        ```html
+        <div wire:poll.1000ms="refreshData">Datos actualizados cada segundo</div>
+        ```
+    :::
+21. wire:offline
+    :::tip Descripción
+    + Ejecuta una acción en el componente Livewire cuando la conexión a internet se pierde.
+    + Ejemplo:
+        ```html
+        <div wire:offline>
+            No tienes conexión a internet
+        </div>
+        ```
+    :::
+22. wire:online
+    :::tip Descripción
+    + Ejecuta una acción en el componente Livewire cuando se restablece la conexión a internet.
+    + Ejemplo:
+        ```html
+        <div wire:online>
+            Conexión a internet restablecida
+        </div>
+        ```
+    :::
+23. wire:dirty
+    :::tip Descripción
+    + Se activa cuando el componente Livewire tiene cambios sin guardar.
+    + Ejemplo:
+        ```html
+        <input type="text" wire:model="name" wire:dirty.class="input-dirty">
+        ```
+    :::
+24. wire:loading
+    :::tip Descripción
+    + Muestra el elemento solo cuando el componente Livewire está realizando una acción de carga.
+    + Ejemplo:
+        ```html
+        <div wire:loading>
+            Cargando...
+        </div>
+        ```
+    :::
+25. wire:target
+    :::tip Descripción
+    + Se utiliza junto con wire:loading para especificar qué acción debe activar el estado de carga.
+    + Ejemplo:
+        ```html
+        <button wire:click="save" wire:loading.attr="disabled" wire:target="save">Guardar</button>
+        ```
+    :::
+26. wire:ignore
+    :::tip Descripción
+    + Ignora el procesamiento de Livewire en el elemento.
+    + Ejemplo:
+        ```html
+        <div wire:ignore>
+            Este contenido no será manejado por Livewire
+        </div>
+        ```
+    :::
+27. wire:key
+    :::tip Descripción
+    + Proporciona una clave única para el elemento, útil para mantener el estado de los elementos en listas.
+    + Ejemplo:
+        ```html
+        <div wire:key="unique-key">
+            Elemento con clave única
+        </div>
+        ```
+    :::
+### Resumen de Directivas y Eventos de Livewire
+### Eventos del DOM
++ wire:click: Acción en clic.
++ wire:change: Acción en cambio de valor.
++ wire:blur: Acción en pérdida de foco.
++ wire:focus: Acción en recibir foco.
++ wire:keydown: Acción en tecla presionada.
++ wire:keyup: Acción en tecla soltada.
++ wire:submit: Acción en envío de formulario.
++ wire:mouseover: Acción al pasar el mouse.
++ wire:mouseout: Acción al salir el mouse.
++ wire:mousedown: Acción al presionar el botón del mouse.
++ wire:mouseup: Acción al soltar el botón del mouse.
++ wire:dblclick: Acción al hacer doble clic.
++ wire:keydown.enter: Acción al presionar Enter.
++ wire:keydown.escape: Acción al presionar Escape.
+#### Directivas de Modelado
++ wire:model: Enlace bidireccional con actualización instantánea.
++ wire:model.lazy: Enlace bidireccional con actualización al perder foco.
++ wire:model.debounce: Enlace bidireccional con retraso.
++ wire:model.defer: Enlace bidireccional con actualización en envío de formulario.
+#### Directivas de Estado
++ wire:loading: Muestra el elemento mientras el componente está cargando.
++ wire:loading.remove: Elimina el elemento mientras el componente está cargando.
++ wire:loading.class: Añade una clase mientras el componente está cargando.
++ wire:loading.attr: Añade un atributo mientras el componente está cargando.
++ wire:target: Especifica la acción que debe activar el estado de carga.
++ wire:poll: Actualiza el componente periódicamente.
++ wire:poll.keep-alive: Mantiene el componente vivo sin re-renderizarlo.
++ wire:poll.visible: Solo realiza polling cuando el componente es visible.
++ wire:offline: Acción cuando la conexión a internet se pierde.
++ wire:online: Acción cuando la conexión a internet se restablece.
++ wire:dirty: Se activa cuando hay cambios sin guardar.
++ wire:dirty.class: Añade una clase cuando hay cambios sin guardar.
+#### Directivas de Inicialización y Clave
++ wire:init: Ejecuta una acción al inicializar el componente.
++ wire:ignore: Ignora el procesamiento de Livewire en el elemento.
++ wire:key: Proporciona una clave única para el elemento.
 
 ## Publicar recursos de Laravel
 + Publicar idiomas:
