@@ -3689,6 +3689,20 @@ php artisan make:livewire componente-livewire
         // ...
     }
     ```
+### Propiedad computada
++ Estructura de una propiedad computada en el controlador de livewire:
+    ```php
+    public getNombreProperty() {
+        // Lógica para $valor
+        return $valor;
+    }
+    ```
+    :::tip Nota
+    En **getNombreProperty**, Nombre corresponderá al nombre de la propiedad, y la forma de referirse a esta tanto en el controlador como en la vista livewire será de la siguiente forma:
+    ```php
+    $this->nombre
+    ```
+    :::
 ### Para indicar a un controlador de livewire que:
 + Use la paginación de Tailwind:
     ```php
@@ -3786,6 +3800,10 @@ php artisan make:livewire componente-livewire
             </script>
         </div>
         ```
+        :::tip Nota
+        Para resolver algunos problemas de incompatibilidad entre livewire y javascript ver el siguiente video:
+        + https://codersfree.com/courses-status/aprende-laravel-avanzado/incluir-ckeditor-5-en-la-caja-de-comentarios
+        :::
 ### Llaves (keys)
 + Cuando en una vista de livewire usamos un **@foreach** para iterar una variable de livewire es recomendable agregar una llave dentro del lazo para evitar fallos:
     ```html
@@ -5598,6 +5616,10 @@ Para establecer el alto mínimo y máximo y añadir un scroll bar:
         }        
     </style>  
     ```
+:::
+:::tip Nota 3
+Para resolver algunos problemas de incompatibilidad entre livewire y javascript ver el siguiente video:
++ https://codersfree.com/courses-status/aprende-laravel-avanzado/incluir-ckeditor-5-en-la-caja-de-comentarios
 :::
 
 ### Instalar redis
