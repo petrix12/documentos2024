@@ -4995,6 +4995,33 @@ Para establecer la configuración de idiomas y configuración ir al archivo de c
     // ...
     EventoEvent::dispatch($data);
     ```
+:::tip Nota
++ Una forma simple de crear events y listeners es editar el **EventServiceProvider**
+    ```php title="app\Providers\EventServiceProvider.php"
+    // ...
+    class EventServiceProvider extends ServiceProvider
+    {
+        // ...
+        protected $listen = [
+            // ...
+            \App\Events\Evento1Event::class => [
+                \App\Listeners\Oyente1Evento1Listener::class,
+                \App\Listeners\Oyente2Evento1Listener::class,
+            ],
+            \App\Events\Evento2Event::class => [
+                \App\Listeners\Oyente1Evento2Listener::class,
+                \App\Listeners\Oyente2Evento2Listener::class,
+            ],
+        ];
+        // ...
+    }    
+    ```
++ Ejecutar:
+    ```bash
+    php artisan event:generate
+    ```
+    + Esta acción generará todos los events y listeners que no se encuentren definidos.
+:::
 
 ## Comandos
 1. Crear un comando personalizado:
@@ -5620,6 +5647,9 @@ Para establecer el alto mínimo y máximo y añadir un scroll bar:
 :::tip Nota 3
 Para resolver algunos problemas de incompatibilidad entre livewire y javascript ver el siguiente video:
 + https://codersfree.com/courses-status/aprende-laravel-avanzado/incluir-ckeditor-5-en-la-caja-de-comentarios
++ https://codersfree.com/courses-status/aprende-laravel-avanzado/solucionar-problemas-con-ckeditor-en-nuestra-caja-de-comentarios
++ https://codersfree.com/courses-status/aprende-laravel-avanzado/incluir-texto-en-ckeditor-con-setdata
++ https://codersfree.com/courses-status/aprende-laravel-avanzado/poner-activo-la-caja-de-ckeditor
 :::
 
 ### Instalar redis
