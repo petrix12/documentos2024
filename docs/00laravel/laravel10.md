@@ -5950,3 +5950,49 @@ Documentación: https://github.com/barryvdh/laravel-dompdf
     ```
 
 
+### Importar / Exportar CSV
+1. Importar libreria **maatwebsite**
+    ```bash
+    composer require maatwebsite/excel -W
+    ```
+2. Crear gestor de importación:
+    ```bash
+    php artisan make:import ModeloImport --model=Modelo
+    ```
+    :::tip Nota
+    El gestor de importación se creara en:
+    + app/Imports/ModeloImport.php
+    :::
+3. Establecer la lógica de la importación:
+    ```php title="app/Imports/ModeloImport.php"
+    // ...
+    public function model(array $row) {
+        return new Modelo([
+            'campo1' => $row['campo1'],
+            'campo2' => $row['campo2']
+        ]);
+    }
+    ```
+4. Crear modelo **CsvController**:
+    ```bash
+    php artisan make:controller CsvController
+    ```
+5. Programar controlador:
+    ```php
+    // ...
+    use App\Imports\ModeloImport;
+    use Maatwebsite\Excel\Facades\Excel;
+    // ...
+    class CsvController extends Controller {
+        public function import(Request $request) {
+            $file = $request->file('file');
+            Excel::import(new ModeloImport, $file);
+            // ...
+        }
+
+        public function export() {
+
+        }
+    }
+    ```
+6. mmm
