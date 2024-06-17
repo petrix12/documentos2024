@@ -5950,7 +5950,7 @@ Documentación: https://github.com/barryvdh/laravel-dompdf
     ```
 
 
-### Importar / Exportar CSV
+### Importar / Exportar CSV - Excel
 1. Importar libreria **maatwebsite**
     ```bash
     composer require maatwebsite/excel -W
@@ -5973,11 +5973,26 @@ Documentación: https://github.com/barryvdh/laravel-dompdf
         ]);
     }
     ```
-4. Crear modelo **CsvController**:
+4. Crear gestor de exportación:
+    ```bash
+    php artisan make:export ModelosExport --model=Modelo
+    ```
+    :::tip Nota
+    El gestor de exportación se creara en:
+    + app/Exports/ModelosExport.php
+    :::
+5. Establecer la lógica de la exportación:
+    ```php title="app/Exports/ModelosExport.php"
+    // ...
+    public function collection() {
+        return Medelo::all();
+    }
+    ```
+6. Crear modelo **CsvController**:
     ```bash
     php artisan make:controller CsvController
     ```
-5. Programar controlador:
+7. Programar controlador:
     ```php
     // ...
     use App\Imports\ModeloImport;
@@ -5991,8 +6006,15 @@ Documentación: https://github.com/barryvdh/laravel-dompdf
         }
 
         public function export() {
-
+            return Excel::download(new ModelosExport, 'nombre_fichero.csv');
         }
     }
     ```
-6. mmm
+:::tip Nota
++ Publicar archivos de configuración de **maatwebsite**:
+```bash
+php artisan vendor:publish --provider="Maatwebsite\Excel\ExcelServiceProvider" --tag=config
+```
++ Esta acción crear el siguiente archivo de configuración: **config/excel.php**.
+:::
+
