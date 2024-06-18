@@ -940,22 +940,22 @@ public function mi_metodo() {
     }
     ```
 ### Paginación de registros con DB:
-    ```php
-    // ...
-    use Illuminate\Support\Facades\DB;
-    // ...
-    public function metodo() {
-        // Registros paginados
-        $registros = DB::table('tabla')->paginate(15);
-        
-        // Registros paginados con más parametros
-        $registros = DB::table('tabla')->paginate(15, ['campo1', 'campo2'], 'nombre_parametro_page');
+```php
+// ...
+use Illuminate\Support\Facades\DB;
+// ...
+public function metodo() {
+    // Registros paginados
+    $registros = DB::table('tabla')->paginate(15);
+    
+    // Registros paginados con más parametros
+    $registros = DB::table('tabla')->paginate(15, ['campo1', 'campo2'], 'nombre_parametro_page');
 
-        // Registros paginados simples (oculta los números de página en la vista)
-        $registros = DB::table('tabla')->simplePaginate(15);
-    }
-    ```
-    + Estructura de los registros paginados:
+    // Registros paginados simples (oculta los números de página en la vista)
+    $registros = DB::table('tabla')->simplePaginate(15);
+}
+```
++ Estructura de los registros paginados:
     ```json
     {
         "current_page": 1,
@@ -1018,6 +1018,15 @@ public function mi_metodo() {
                 }
             }            
             ```
+    + Para publicar los estilos de paginación de laravel:
+        ```bash
+        php artisan vendor:publish --tag=laravel-pagination
+        ```
+        :::tip Nota
+        Las vista de paginación se ubicarán en:
+        + resources/view/vendor/pagination
+        :::
+
 
 
 ## Eloquent:
@@ -1967,6 +1976,11 @@ public function mi_metodo() {
         // ...
         public function scopeFiltro($query, $filtro) {
             $query->where('campo_x', 'LIKE', "%$filtro%");
+        }
+
+        // El siguiente scope hace lo mismo que el anteriore
+        public function scopeFiltro($query, $filtro) {
+            $query->where('campo_x', '%LIKE%', $filtro);
         }
         // ...
     }
@@ -3343,7 +3357,7 @@ class CorreoMailable extends Mailable
     // ...
     ```
 
-## Provider:
+## Provider
 ### Indicar vista con la que se iniciará la aplicación:
 + Modificar el provider **app\Providers\RouteServiceProvider.php**:
     ```php
@@ -3504,7 +3518,7 @@ El provider se creo en **app\Providers\PruebaServiceProvider.php**.
         ```
 
 
-## Observer:
+## Observer
 + Crear un observer:
     + $ php artisan make:observer ModeloObserver --model=Modelo
     + **Nota**: me crea un observer en **app\Observers\ModeloObserver.php**.
@@ -6017,4 +6031,61 @@ php artisan vendor:publish --provider="Maatwebsite\Excel\ExcelServiceProvider" -
 ```
 + Esta acción crear el siguiente archivo de configuración: **config/excel.php**.
 :::
+
+### Crear una regla de validación personalizada
++ Crear regla
+    ```bash
+    php artisan make:rule Miregla
+    ```
++ Personalizar regla (En Laravel 9):
+    ```php title="app/Rules/Miregal.php"
+    // ...
+    class Miregla implements Rule {
+        // ...
+        public function __construct() {
+            // Pueder recibir valores para la validación en caso de ser necesario
+        }
+        // ...
+        public function passes($attibute, $value) {
+            // Establecer lógicca en base al parámetro $value
+            if($es_valido) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        // ...
+        public function message() {
+            return 'Mensaje en caso de que no pase la validación';
+        }
+    }
+    ```
+
++ Personalizar regla (En Laravel 10):
+    ```php title="app/Rules/Miregal.php"
+    // ...
+    class Miregla implements ValidationRule {
+        // ...
+        public function validate(string $attribute, mixed $value, Closure $fail): void {
+            // Establecer lógicca en base al parámetro $value
+            if(!$es_valido) {
+                $fail('Mensaje en caso de que no pase la validación (:attribute no es válido)');
+            }
+        }
+    }
+    ```
++ Uso de la regla de validación personalizada en un controlador:
+    ```php
+    // ...
+    use App\Rules\Miregla;
+
+    class ModeloController extends Controller {
+        public function mi_metodo(Request $request) {
+            $request->validation([
+                'campo_x' => ['otras_reglas', new Miregla];
+            ]);
+            // ...
+        }
+    }
+    ```
 
