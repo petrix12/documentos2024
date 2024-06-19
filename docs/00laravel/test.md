@@ -140,9 +140,30 @@ sidebar_position: 1
         ```
     4. Programar controlador **UserController.php**:
         ```php title="app\Http\Controllers\UserController.php"
+        // ...
+        use App\Models\User;
+        // ...
+        class UserController extends Controller
+        {
+            public function index() {
+                $users = User::all();
+                return response()->json($users);
+            }
+
+            public function user($id) {
+                $user = User::find($id);
+                if($user == null) return response()->json(['message' => 'User not found'], 404);
+                return response()->json($user);
+            }
+        }        
         ```
     5. Establecer rutas api:
         ```php title="routes\api.php"
+        // ...
+        use App\Http\Controllers\UserController;
+        // ...
+        Route::get('/users', [UserController::class, 'index']);
+        Route::get('/users/{id}', [UserController::class, 'user']);
         ```
     :::tip Nota
     Para Ejecutar la migración utilizando el archivo de variable de entorno **.env.testing**:
