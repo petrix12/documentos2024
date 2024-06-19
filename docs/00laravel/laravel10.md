@@ -5137,7 +5137,8 @@ Para establecer la configuración de idiomas y configuración ir al archivo de c
         'parametro2' => $parametro2
     ]);
     // ...
-    ```
+    ``
+    
 
 ### Ejecución de comando artisan mediante código php
 :::tip Nota
