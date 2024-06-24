@@ -2269,6 +2269,92 @@ Con estos pasos ya hemos culminado la configuración en Azure.
             </script>            
             ```
 
+## Cookies
++ Instalar cookies en un proyecto vue:
+    1. Instalar dependencia **vue-cookies**:
+        ```bash
+        npm i vue-cookies
+        ```
+    2. Modificar **main.ts**:
+        ```ts title="src\main.ts"
+        // ...
+        import VueCookies from '.vue-cookies'
+
+        const app = createApp(App)
+        app.use(VueCookies, {
+            expires: '1d'/* ,
+            path: '/',
+            domain: '',
+            secure: '',
+            sameSite: '' */
+        }).mount('#app')
+        ```
++ Guardar una cookie:
+    ```vue
+    $cookies.set('nombre_de_la_cookie', 'valor de la cookie')
+    ```
++ Guardar una cookie sobreescribiendo su configuración:
+    ```vue
+    $cookies.set('nombre_de_la_cookie', 'valor de la cookie', expries, path, damoain, ...)
+    ```    
++ Recuperar una cookie:
+    ```vue
+    $cookies.get('nombre_de_la_cookie')
+    ```  
++ Eliminar una cookie:
+    ```vue
+    $cookies.remove('nombre_de_la_cookie')
+    ```  
++ Saber si una cookie existe:
+    ```vue
+    $cookies.isKey('nombre_de_la_cookie')
+    ```  
++ Obtener todas las cookies:
+    ```vue
+    $cookies.keys()
+    ```
+
+
+## Sesiones
++ Instalar sesiones en un proyecto vue:
+    1. Instalar dependencia **vue-session**:
+        ```bash
+        npm i vue-session
+        ```
+    2. Modificar **main.ts**:
+        ```ts title="src\main.ts"
+        // ...
+        import VueSession from '.vue-session'
+
+        const app = createApp(App)
+        app.use(VueSession).mount('#app')
+        ```
++ Iniciar una sesión:
+    ```vue
+    $session.start()
+    ```
++ Obtener el id de una sesión:
+    ```vue
+    $session.id()
+    ```
++ Reonovar una sesión:
+    ```vue
+    $session.renew()
+    ```        
++ Guardar una sesión:
+    ```vue
+    $session.set('nombre_de_la_sesion', 'valor de la sesión')
+    ```
++ Recuperar una sesión:
+    ```vue
+    $session.get('nombre_de_la_sesion')
+    ```  
++ Eliminar una sesión:
+    ```vue
+    $session.destroy('nombre_de_la_sesion')
+    ```
+
+
 ## Tips de interes:
 ### Importar estilos y scripts a un componente vue:
     ```html
