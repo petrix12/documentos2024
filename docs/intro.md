@@ -54,6 +54,7 @@ sidebar_position: 0
 - [ ] [petrix12/react-laravel2022](https://github.com/petrix12/react-laravel2022)
 - [ ] [petrix12/react2022](https://github.com/petrix12/react2022)
 - [ ] [petrix12/instaclone-react-graphql_client](https://github.com/petrix12/instaclone-react-graphql_client)
+- [X] [petrix12/api_laravel_passport](https://github.com/petrix12/api_laravel_passport)
 - [X] [petrix12/apirestful_laravel8](https://github.com/petrix12/apirestful_laravel8)
 - [X] [petrix12/awsejemplo](https://github.com/petrix12/awsejemplo)
 - [X] [petrix12/Desarrollo-Web-Completo-con-HTML5-CSS3-JS-AJAX-PHP-y-MySQL](https://github.com/petrix12/Desarrollo-Web-Completo-con-HTML5-CSS3-JS-AJAX-PHP-y-MySQL)
@@ -116,7 +117,6 @@ sidebar_position: 0
 - [ ] [petrix12/cursos_sefar](https://github.com/petrix12/cursos_sefar)
 - [ ] [petrix12/automatizacion_vba_2017](https://github.com/petrix12/automatizacion_vba_2017)
 - [ ] [petrix12/pasarela_pago](https://github.com/petrix12/pasarela_pago)
-- [ ] [petrix12/api_laravel_passport](https://github.com/petrix12/api_laravel_passport)
 
 
 ### Pruebas
