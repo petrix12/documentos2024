@@ -250,7 +250,27 @@ sidebar_position: 1
         // Ruta con redirección
         {
             path: '/ruta4',
-            reirect: to => { return {name: 'ruta1'} }s
+            reirect: to => { return {name: 'ruta1'} }
+        },
+
+        // Ruta que no requiere autenticación
+        {
+            path: '/ruta5',
+            name: 'ruta5',
+            component: () => import('../views/Vista5View.vue'),
+            meta: {
+                requireAuth: false
+            }
+        },
+
+        // Ruta que requiere autenticación
+        {
+            path: '/ruta6',
+            name: 'ruta6',
+            component: () => import('../views/Vista6View.vue'),
+            meta: {
+                requireAuth: true
+            }
         },
         // ...
     ]
@@ -258,6 +278,22 @@ sidebar_position: 1
     const router = createRouter({
         history: createWebHistory(process.env.BASE_URL),
         routes
+    })
+
+    // Se ejecutará antes de acceder a cada ruta
+    /*
+        to: a donde quiere ir
+        from: de donde viene
+        next: hacia donde irá
+    */
+    router.beforeEach((to, from, next) => {
+        const auth = MiFuncionAuth()
+        const needAuth = to.meta.requiredAuth
+        if(needAuth && !auth) {
+            next('ruta5')
+        } else {
+            next()
+        }
     })
 
     export default router
@@ -2397,3 +2433,24 @@ Con estos pasos ya hemos culminado la configuración en Azure.
         import "bootstrap"
         // ...
         ```
+### Peticiones al servidor
++ Ejemplo de petición a un servidor web con **fetch**:
+    ```js
+    const peticionWeb = async () => {
+        let token = miFuncionGetToken()
+        const response = await fetch('http://mi_ruta', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept':  'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                'variable1': 'Valor de la variable 1',
+                'variable2': 'Valor de la variable 2'
+            })
+        })
+
+        const respuesta = await response.json()
+    }
+    ```
