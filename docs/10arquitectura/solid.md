@@ -17,7 +17,7 @@ sidebar_position: 1
 :::tip Nota
 Una clase debe tener una y solo una razón para cambiar, es decir, un único trabajo.
 :::
-+ Código en Python que nos sigue este principio:
++ Código en Python que no sigue este principio:
     ```py
     class Employee:
         def __init__(self, name, id, salary)
@@ -49,4 +49,49 @@ Una clase debe tener una y solo una razón para cambiar, es decir, un único tra
         def save_to_database(self, employee):
             # Aquí la lógica para guardar los datos en base de datos
             pass
+    ```
+
+## Open / Close | Prinicipio de Abierto o Cerrado
+:::tip Nota
+Los objetos o entidades deben estar abiertos para su extensión, pero cerrados a modificaciones.
+:::    
++ Código en PHP que no sigue este principio:
+    ```php
+    <?php
+
+    class Shape {
+        public $type;
+
+        public function __construct($type) {
+            $this->type = $type;
+        }
+
+        public function area() {
+            if($this->type === 'circle') {
+                // Aquí la lógica para para el cáclulo del área de un círculo
+            } elseif($this->type === 'rectangle') {
+                // Aquí la lógica para para el cáclulo del área de un rectángulo
+            }
+        }
+    }
+    ```
++ Refactorización del código en PHP para adaptarlo al principio:
+    ```php
+    <?php
+
+    interface AreaCalculable {
+        public function area();
+    }
+
+    class Circle implements AreaCulculable {
+        public function area() {
+            // Aquí la lógica para para el cáclulo del área de un círculo
+        }
+    }
+
+    class Rectangle implements AreaCulculable {
+        public function area() {
+            // Aquí la lógica para para el cáclulo del área de un rectángulo
+        }
+    }
     ```
