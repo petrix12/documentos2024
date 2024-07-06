@@ -95,3 +95,38 @@ Los objetos o entidades deben estar abiertos para su extensión, pero cerrados a
         }
     }
     ```
+
+## Liskov Substitution | Principio de sustitución de Barbara Liskov
+:::tip Nota
+Cada sublclase o clase derivada debe ser sustituible por su clase base o padre.
+:::    
++ Código en Java que no sigue este principio:
+    ```java
+    class Bird {
+        public void fly() {
+            // Aquí la lógica para para la implementación de vuelo común para todas las aves
+        }
+    }
+
+    class Ostrich extends Bird {
+        // Las avestruces no vuelan, pero no pueden anular el método fly
+    }
+    ```
++ Refactorización del código en Java para adaptarlo al principio:
+    ```java
+    abstract class Bird {
+        public abstract void move();
+    }
+
+    class Sparrow extends Bird {
+        public void move() {
+            // Aquí la lógica para para la implementación de movimiento del gorrión
+        }
+    }
+
+    class Ostrich extends Bird {
+        public void move() {
+            // Aquí la lógica para para la implementación de movimiento del avestruz
+        }
+    }
+    ```
