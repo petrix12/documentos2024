@@ -300,7 +300,37 @@ sidebar_position: 1
 docker run -d -p 8080:8080 nombre_de_la_imagen
 ```
 
+## Crear un contenedor de Docker
+```bash
+docker run -it nombre_contenedor
+```
+:::tip Nota
++ Para salir del contenedor:
+```bash
+exit
+```
++ Al salir de un contenedor, este queda en pausa.
+:::
 
+## Iniciar un contenedor
+```bash
+docker start primeros_caracteres_de_su_container_id
+```
+
+## Parar un contenedor
+```bash
+docker stop primeros_caracteres_de_su_container_id
+```
+
+## Reiniciar un contenedor
+```bash
+docker restart primeros_caracteres_de_su_container_id
+```
+
+## Ejecutar un terminal de bash dentro de un contenedor
+```bash
+docker exec -ti nombre_contenedor bash
+```
 
 
 
