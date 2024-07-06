@@ -2390,6 +2390,119 @@ Con estos pasos ya hemos culminado la configuración en Azure.
     $session.destroy('nombre_de_la_sesion')
     ```
 
+## Layouts y Slots
+1. Plantilla con slot sin nombre:
+    1. Crear plantilla **MiLayout**:
+        ```html title="src/layouts/MiLayout.vue"
+        <template>
+            <div>
+                <!-- ... -->
+                <!-- Estructura de mi layout -->
+                <!-- ... -->
+                <div>
+                    <!-- Contenido específico de la vista -->
+                    <slot></slot>
+                </div>
+                <!-- ... -->
+                <!-- Estructura de mi layout -->
+                <!-- ... -->
+            </div>
+        </template>
+        ```
+    2. Uso de la plantilla en la vista **MiView**:
+        ```html
+        <template>
+            <MiLayout>
+                <!-- Aquí el contenido específico de la vista -->
+            </MiLayout>
+        </template>
+
+        <script setup>
+        import MiLayout from '@/layouts/MiLayout.vue'
+        </script>
+        ```
+2. Plantilla con slot con nombre:
+    1. Crear plantilla **MiLayout**:
+        ```html title="src/layouts/MiLayout.vue"
+        <template>
+            <div>
+                <!-- ... -->
+                <!-- Estructura de mi layout -->
+                <!-- ... -->
+                <div>
+                    <!-- Contenido específico de la vista -->
+                    <slot name="nombre1"></slot>
+                </div>
+                <!-- ... -->
+                <div>
+                    <!-- Contenido específico de la vista -->
+                    <slot name="nombre2"></slot>
+                </div>
+                <!-- ... -->
+                <!-- Estructura de mi layout -->
+                <!-- ... -->
+            </div>
+        </template>
+        ```
+    2. Uso de la plantilla en la vista **MiView**:
+        ```html
+        <template>
+            <MiLayout>
+                <template v-slot:nombre1>
+                    <!-- Aquí el contenido específico de la vista en el slot nombre1 -->
+                </template>
+                <template v-slot:nombre2>
+                    <!-- Aquí el contenido específico de la vista en el slot nombre2 -->
+                </template>
+            </MiLayout>
+        </template>
+
+        <script setup>
+        import MiLayout from '@/layouts/MiLayout.vue'
+        </script>
+        ```
+    3. Otra forma de escribir el código anterior, pero con atajos:
+        ```html
+        <template>
+            <MiLayout>
+                <template #nombre1>
+                    <!-- Aquí el contenido específico de la vista en el slot nombre1 -->
+                </template>
+                <template #nombre2>
+                    <!-- Aquí el contenido específico de la vista en el slot nombre2 -->
+                </template>
+            </MiLayout>
+        </template>
+
+        <script setup>
+        import MiLayout from '@/layouts/MiLayout.vue'
+        </script>
+        ```
+
+## Composables
+1. Crear composable **useMiComposable**:
+    ```ts title="src/composables/useMiComposable.ts"
+    // ...
+    export function useMiComposable() {
+        const valor1 = 'Valor 1';
+        const valor2 = 'Valor 2';
+        // ...
+        return {
+            valor1,
+            valor2
+        }
+    }
+    ```
+2. Uso del composable **useMiComposable** en la vista **MiView**:
+    ```html
+    <!-- ... -->
+    <script setup>
+    import { useMiComposable } from '@/composables/useMiComposable'
+    const {valor1, valor2} = useMiComposable
+    </script>
+    <!-- ... -->
+    ```
+
 
 ## Tips de interes:
 ### Importar estilos y scripts a un componente vue:
