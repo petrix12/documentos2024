@@ -333,6 +333,29 @@ docker exec -ti nombre_contenedor bash
 ```
 
 
+## Instalar servidor web Nginx en Docker
+1. Crear una imagen de nginx:
+    ```bash
+    docker pull nginx
+    ```
+2. Crear una carpeta con de proyecto y en ella un Dockerfile:
+    ```Dockerfile title="mi_proyecto/Dockerfile"
+    FROM nginx
+    COPY mi_proyecto /usr/share/nginx/html
+    ```
+3. Ejecutar:
+    ```bash
+    docker build -t web .
+    ```
+4. Arrancar servidor web:
+    ```bash
+    docker run -d -p 8080:80 web
+    ```
+5. Para acceder a la aplicación web desde un navegador:
+    ```
+    http://localhost:8080
+    ```
+6. mm
 
 
 

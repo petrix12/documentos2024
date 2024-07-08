@@ -130,3 +130,60 @@ Cada sublclase o clase derivada debe ser sustituible por su clase base o padre.
         }
     }
     ```
+
+
+## Interface Segregation | Principio de segregación de interfaz
+:::tip Nota
+Nunca debemos obligar a un cliente a implementar una interfaz que no usa y no se debe obligar a los clientes a depender de métodos que no usan
+:::    
++ Código en Typescript que no sigue este principio:
+    ```ts
+    interface Employee {
+        work(): void;
+        eat(): void;
+        sleep(): void;
+    }
+
+    class User implements Emplyee {
+        work() {
+            // Aquí la lógica para trabajar
+        }
+
+        eat() {
+            // Aquí la lógica para comer
+        }
+
+        sleep() {
+            // Aquí la lógica para dormir
+        }
+    }
+    ```
++ Refactorización del código en Typescript para adaptarlo al principio:
+    ```ts
+    interface Workable {
+        work(): void;
+    }
+
+    interface Eatable {
+        eat(): void;
+    }
+
+    interface Sleepable {
+        sleep(): void;
+    }
+
+    class User implements Workable, Eatable, Sleepable {
+        work() {
+            // Aquí la lógica para trabajar
+        }
+
+        eat() {
+            // Aquí la lógica para comer
+        }
+
+        sleep() {
+            // Aquí la lógica para dormir
+        }
+    }
+    ```
+
