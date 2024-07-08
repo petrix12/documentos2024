@@ -2503,6 +2503,75 @@ Con estos pasos ya hemos culminado la configuración en Azure.
     <!-- ... -->
     ```
 
+## Componentes dinámicos
+1. Ejemplo de creación de un compoenente dinámico:
+    1. Crear layouta **ListLayout**:
+        ```html tilte="src/layouts/ListLayout.vue"
+        <template>
+            <h2>Componente Lista</h2>
+            <div>
+                <DatoLista v-for="item in props.content" :key="item.id" :content="item" />
+            </div>
+        </template>
+
+        <script setup>
+        const props = defineProps(['content'])
+        </script>
+        ```
+    2. Crear layouta **TableLayout**:
+        ```html tilte="src/layouts/TableLayout.vue"
+        <template>
+            <h2>Componente Tabla</h2>
+            <div>
+                <DatoTable v-for="item in props.content" :key="item.id" :content="item" />
+            </div>
+        </template>
+
+        <script setup>
+        const props = defineProps(['content'])
+        </script>
+        ```
+    3. Crear layouta **CardLayout**:
+        ```html tilte="src/layouts/CardLayout.vue"
+        <template>
+            <h2>Componente Tarjeta</h2>
+            <div>
+                <DatoCard v-for="item in props.content" :key="item.id" :content="item" />
+            </div>
+        </template>
+
+        <script setup>
+        const props = defineProps(['content'])
+        </script>
+        ```
+    4. Crear una vista para ver los componentes en forma dinámica en Composition API:
+        ```html
+        <template>
+            <h2>Componente Dinámico</h2>
+            <button @click="handleLayout(ListLayout)">Ver en lista</button>
+            <button @click="handleLayout(TableLayout)">Ver en tabla</button>
+            <button @click="handleLayout(CardLayout)">Ver en tarjetas</button>
+            <component :is="layout" :content="datos" />
+        </template>
+
+        <script setup>
+        import { ref, defineAsyncComponent } from 'vue'
+
+        const ListLayout = defineAsyncComponent(() => import('@/layouts/ListLayout.vue'))
+        const TableLayout = defineAsyncComponent(() => import('@/layouts/TableLayout.vue'))
+        const CardLayout = defineAsyncComponent(() => import('@/layouts/CardLayout.vue'))
+
+        const layout = ref(ListLayout)
+        const handleLayout = (componente) => layout.value = componente
+
+        const datos = getDatos()
+        // ...
+        </script>
+        ```
+    5. mmm
+2. mmm
+
+
 
 ## Tips de interes:
 ### Importar estilos y scripts a un componente vue:

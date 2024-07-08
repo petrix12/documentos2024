@@ -5,6 +5,16 @@ sidebar_position: 0
 ---
 
 # APUNTES LARAVEL 11
+:::tip Notas
++ Para trabajar con Laravel 11 es importante trabajar con una versión de PHP 8.2 o superior.
++ En **php.ini** descomentar:
+    ```
+    extension=zip
+    ```
++ Actualizar la versión de Composer a la 2.7 o superior.
++ Instalar y/o actualizar Git y Node.
+:::
+
 ## Habilitar soporte para API
 + Ejecutar:
     ```bash
