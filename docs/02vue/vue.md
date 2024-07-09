@@ -2636,3 +2636,132 @@ Con estos pasos ya hemos culminado la configuración en Azure.
         const respuesta = await response.json()
     }
     ```
+
+### Animaciones (Transitions)
++ Ejemplo de transición simple:
+    ```html
+    <template>
+        <button @click="show = !show">Mostrar / Ocultar</button>
+        <Transition>
+            <h1 v-if="show">Animación</h1>
+        </Transition>
+    </template>
+
+    <script setup>
+    import { ref } from 'vue'
+
+    const show = ref(false)
+    </script>
+
+    <style>
+    /* CLASES DE ENTRADA (MOUNTED) */
+    /* Estado inicial de la animación */
+    .v-enter-from {
+        opacity: 0;
+    }
+
+    /* Establecer la animación */
+    .v-enter-active {
+        transition: opacity 0.5s ease;
+    }
+
+    /* Estado final de la animación */
+    .v-enter-to {
+        
+    }
+
+    /* CLASES DE SALIDA (UNMOUNTED) */
+    /* Estado inicial de la animación */
+    .leave-from {
+
+    }
+
+    /* Establecer la animación */
+    .leave-active {
+        transition: opacity 0.5s ease;
+    }
+
+    /* Estado final de la animación */
+    .leave-to {
+        opacity: 0;
+    }
+    </style>
+    ```
++ Ejemplo de transición a grupos de elementos:
+    ```html
+    <template>
+        <TransitionGroup name="list" tag="ul">
+            <li v-for="note in notes" :key="note">{{ note }}</li>
+        </TransitionGroup>
+        <input type="text" v-model="note" />
+        <button @click="handleNote">Save note</button>
+    </template>
+
+    <script setup>
+    import { ref } from 'vue'
+
+    const notes = ref([])
+    const note = ref('')
+
+    const handleNote = () => {
+        notes.value.push(note.value)
+        note.value = ''
+    }
+    </script>
+
+    <style>
+    .list-enter-active, .list-leave-active {
+        transition: all 0.5s ease;
+    }
+    .list-enter-from, .list-leave-to {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    </style>
+    ```
+
+### Iconos (v-icons)
+:::tip Nota
+Página de inconos **Oh, Vue Icons!**: https://oh-vue-icons.js.org
+:::
++ Instalación:
+    ```bash
+    npm install oh-vue-icons
+    ```
++ Importar los iconos a utilizar en **main**:
+    ```ts title="src/main.ts"
+    // ...
+    import { OhVueIcon, addIcons } from "oh-vue-icons"
+    import { BiFileCodeFill } from "oh-vue-icons/icons"
+    
+    addIcons(BiFileCodeFill)
+
+    const app = createApp(App);
+    app.component("v-icon", OhVueIcon);
+    app.mount("#app");    
+    // ...
+    ```
++ Uso de iconos en un componente:
+    ```html
+    <template>
+        <v-icon name="bi-file-code-fill"/>
+    </template>
+    ```
++ Modificacón de iconos:
+    ```html
+    <template>
+        <v-icon 
+            name="bi-file-code-fill"
+            scale="2"
+            animation="pulse"
+            title="Mi icono"
+            hover="true"
+        />
+    </template>
+
+    <script setup>
+    </script>
+
+    <style>
+    </style>
+    ```
