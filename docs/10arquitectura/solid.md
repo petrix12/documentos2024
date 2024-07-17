@@ -187,3 +187,69 @@ Nunca debemos obligar a un cliente a implementar una interfaz que no usa y no se
     }
     ```
 
+## Dependency Inversion | Principio de inversión de dependencia
+:::tip Nota
+El módulo de alto nivel no debe depender del módulo de bajo nivel, sino que deben depender de abstracciones.
+:::    
++ Código en C# que no sigue este principio:
+    ```cs
+    class LightBulb {
+        public void TurnOn() {
+            // Aquí la lógica para encender la bombilla
+        }
+
+        public void TrunOff() {
+            // Aquí la lógica para apagar la bombilla
+        }
+    }
+
+    class Switch {
+        private LightBulb bulb;
+
+        public Switch() {
+            bulb = new LightBulb();
+        }
+
+        public void Operate() {
+            if(bulb.IsOn) {
+                bulb.TrunOff();
+            } else {
+                bulb.TurnOn();
+            }
+        }
+    }
+    ```
++ Refactorización del código en C# para adaptarlo al principio:
+    ```cs
+    interface ISwitchable {
+        void TurnOn();
+        void TurnOff();
+    }
+
+    class LightBulb : ISwitchable {
+        public void TurnOn() {
+            // Aquí la lógica para encender la bombilla
+        }
+
+        public void TrunOff() {
+            // Aquí la lógica para apagar la bombilla
+        }
+    }
+
+    class Switch {
+        private ISwitchable divice;
+
+        public Switch(ISwitchable divice) {
+            this.divice = divice;
+        }
+
+        public void Operate() {
+            if(divice.IsOn) {
+                divice.TrunOff();
+            } else {
+                divice.TurnOn();
+            }
+        }
+    }
+    ```
+

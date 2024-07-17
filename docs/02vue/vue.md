@@ -1409,6 +1409,50 @@ Con estos pasos ya hemos culminado la configuración en Azure.
     const store = useMiStoreStore()
     </script>
     ```
+### Persistencia con pinia
+:::tip Nota
+Documentación: https://github.com/prazdevs/pinia-plugin-persistedstate
+:::
+1. Instalar plugin de persistencia de pinia:
+    ```bash
+    npm i pinia-plugin-persistedstate
+    ```
+2. Configurar el plugin de persistencia de pinia:
+    ```js title="src\main.ts"
+    // ...
+    import { createPinia } from 'pinia'
+    import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+
+    const pinia = createPinia()
+    pinia.use(piniaPluginPersistedstate)
+    const app = createApp(App)
+    app.use(pinia).mount('#app')
+    ```
+3. Crear un store de pinia con persistencia:
+    ```js title="src/store/useExample.js"
+    import { defineStore } from 'pinia'
+
+    export const useExample = defineStore('useExample', {
+        state: () => {
+            return {
+                count: 1
+            }
+        },
+        actions: {
+            increment(val = 1) {
+                this.count += val
+            }
+        },
+        persist: true
+        // Si queremos detallar más:
+        /*
+        persist: {
+            storage: sessionStorage,
+            paths: ['count']
+        }
+        */
+    })
+    ```
 
 
 ## Estructura recomendada de carpetas de un proyecto Vue
@@ -2568,9 +2612,199 @@ Con estos pasos ya hemos culminado la configuración en Azure.
         // ...
         </script>
         ```
-    5. mmm
-2. mmm
 
+
+## Watchers
++ Ejemplo de uso de watch en Option API:
+    ```html title="src/components/Example.vue"    
+    <script>
+    import { defineComponent } from 'vue'
+    export default defineCompoent ({
+        data() {
+            return {
+                note: ""
+            }
+        },
+        watch: {
+            // Esta acción se ejecutará cada vez que el valor de note sea modificado
+            note(newValue, oldValue) {
+                localStorage.setItem('note', newValue)
+            }
+        }
+    })
+    </script>
+    ```
++ Ejemplo de uso de watch en Composition API setup:
+    ```html title="src/components/Example.vue"    
+    <script setup>
+    import { ref, watch} from 'vue'
+    const note = ref("")
+    // El watchEffect se ejecutará cuando cualquier elemento reactivo cambie
+    watch(note, () => {
+        localStorage.setItem('note', note.value)
+    })
+    </script>
+    ```
++ Ejemplo de uso de watchEffect en Composition API:
+    ```html title="src/components/Example.vue"    
+    <script>
+    import { defineComponent, ref, watchEffect } from 'vue'
+    export default defineCompoent ({
+        setup() {
+            const note = ref("")
+            // El watchEffect se ejecutará cuando cualquier elemento reactivo cambie
+            watchEffect(() => {
+                localStorage.setItem('note', note.value)
+            })
+            return {
+                note
+            }
+        }
+    })
+    </script>
+    ```
++ Ejemplo de uso de watchEffect en Composition API setup:
+    ```html title="src/components/Example.vue"    
+    <script setup>
+    import { ref, watchEffect} from 'vue'
+    const note = ref("")
+    // El watchEffect se ejecutará cuando cualquier elemento reactivo cambie
+    watchEffect(() => {
+        localStorage.setItem('note', note.value)
+    })
+    </script>
+    ```
+
+## Control delegado por referencia
++ Ejemplo de uso del control delegado por referencia con Composition API
+    + Componente padre con setup:
+        ```html title="src/components/ParentComponent.vue"
+        <template>
+            <h2>Componente padre</h2>
+            <ChildComponent ref="tarea"></ChildComponent>
+            <button @click="mandarIncrementoAlComponenteHijo">Incrementar</button>
+        </template>
+
+        <script setup>
+            import { ref } from 'vue'
+            import ChildComponent from './ChildComponent.vue'
+
+            const tarea = ref(null)
+
+            const mandarIncrementoAlComponenteHijo = () => {
+                tarea.value.incrementar()
+            }
+        </script>
+        ```
+    + Componente hijo con setup:
+        ```html title="src/components/ChildComponent.vue"
+        <template>
+            <h2>Componente hijo</h2>
+            <p>Valor: {{ valor }}</p>
+        </template>
+
+        <script setup>
+        import { onMounted, ref, defineExpose } from 'vue'
+
+        const valor = ref(0)
+
+        onMounted(() => {
+            valor.value++
+        })
+
+        const incrementar = () => {
+            valor.value++
+        }
+
+        defineExpose({ incrementar })
+        </script>
+        ```
+    + Componente hijo:
+        ```html title="src/components/ChildComponent.vue"
+        <template>
+            <h2>Componente hijo</h2>
+            <p>Valor: {{ valor }}</p>
+        </template>
+
+        <script>
+        import { onMounted, ref, defineExpose, defineComponent } from 'vue'
+
+        export default defineComponent({
+            setup() {
+                const valor = ref(0)
+                const incrementar = () => {
+                    valor.value++
+                }
+                onMounted(() => {
+                    valor.value++
+                })
+                defineExpose({ incrementar })
+                return {
+                    valor,
+                    incrementar
+                }
+            }
+        })
+        </script>
+        ```
++ Ejemplo de uso del control delegado por referencia con Composition API
+    + Componente padre:
+        ```html title="src/components/ParentComponent.vue"
+        <template>
+            <h2>Componente padre</h2>
+            <ChildComponent ref="tarea"></ChildComponent>
+            <button @click="mandarIncrementoAlComponenteHijo">Incrementar</button>
+        </template>
+
+        <script>
+            import { defineComponent } from 'vue'
+            import ChildComponent from './ChildComponent.vue'
+
+            export default defineComponent({
+                components: {
+                    ChildComponent
+                },
+                methods: {
+                    mandarIncrementoAlComponenteHijo() {
+                        this.$refs.tarea.incrementar()
+                    }
+                }
+            })
+        </script>
+        ```
+    + Componente hijo con Option API:
+        ```html title="src/components/ChildComponent.vue"
+        <template>
+            <h2>Componente hijo</h2>
+            <p>Valor: {{ valor }}</p>
+        </template>
+
+        <script>
+        import { defineComponent } from 'vue'
+
+        export default defineComponent({
+            data() {
+                return {
+                    valor: 0,
+                    incrementar
+                },
+
+                mounted() {
+                    this.valor++
+                },
+
+                methods: {
+                    incrementar() {
+                        this.valor++
+                    }
+                }
+            }
+        })
+        </script>
+        ```        
+
+## Carga v-lazy der recursos
+## Webchunking
 
 
 ## Tips de interes:
@@ -2758,10 +2992,4 @@ Página de inconos **Oh, Vue Icons!**: https://oh-vue-icons.js.org
             hover="true"
         />
     </template>
-
-    <script setup>
-    </script>
-
-    <style>
-    </style>
     ```
