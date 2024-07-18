@@ -2803,8 +2803,137 @@ Documentación: https://github.com/prazdevs/pinia-plugin-persistedstate
         </script>
         ```        
 
-## Carga v-lazy der recursos
-## Webchunking
+## Carga v-lazy de recursos
+:::tip Nota
+vue3-lazyload: https://www.npmjs.com/package/vue3-lazyload
+:::
++ Instalación de **vue3-lazyload**:
+    ```bash
+    npm i vue3-lazyload
+    ```
++ Configurar vue3-lazyload en **main.ts**:
+    ```js title="src\main.ts"
+    // ...
+    import VueLazyLoad from 'vue3-lazyload'
+
+    const app = createApp(App)
+    app.use(VueLazyLoad, {/* Aquí se puede configurar las opciones por defecto */ }).mount('#app')
+    ```
++ Ejemplo de uso en carga de imagen:
+    ```html
+    <template>
+        <img 
+            v-lazy="{
+                src: 'https://imagen-externa',   // Se recomienda que la imagen no supere los 500KB
+                loading: 'imagen-de-carga-dentro-de-mi-proyecto.png',    // Imagen que se mostrará mientras se carga la imagen solicitada
+                error: 'imagen-de-error-dentro-de-mi-proyecto.png',  // Imagen de error que mostrará si no se carga la imagen solicitada
+                delay: 500  // Tiempo de espera antes de que ocurra la carga
+            }"
+        />
+    </template>
+    ```
++ Ejemplo de uso en carga de cualquier tipo de recursos en javascript:
+    ```html
+    <template>
+        <img 
+            v-lazy="{ src: lazyOption.src, lifecycle: lazyOption.lifecycle, lazyOption.delay }" 
+            lazy="loading"
+        />
+    </template>
+
+    <script setup>
+    import { ref } from 'vue'
+
+    const lazyOptions = ref({
+        src: 'https://imagen-externa',
+        delay: 500,
+        lifecycle: {
+            loading: (el) => {
+                console.log('cargando recurso')
+            }
+            error: (el) => {
+                console.log('error al cargar recurso')
+            }
+            loaded: (el) => {
+                console.log('el recurso se ha cargado con éxito', el)
+            }
+        }
+    })
+    </script>
+
+    <style scoped>
+    img[lazy=loading] {
+        /* Estilos para img cuando se esta cargando */
+    }
+    img[lazy=loaded] {
+        /* Estilos para img cuando ya se ha cargado */
+    }
+    img[lazy=error] {
+        /* Estilos para img si existe un error en la carga */
+    }
+    </style>
+    ```
++ Ejemplo de uso en carga de cualquier tipo de recursos en typescript:
+    ```html
+    <template>
+        <img 
+            v-lazy="{ src: lazyOption.src, lifecycle: lazyOption.lifecycle, lazyOption.delay }" 
+            lazy="loading"
+        />
+    </template>
+
+    <script setup>
+    import { ref, VNode } from 'vue'
+
+    const lazyOptions = ref({
+        src: 'https://imagen-externa',
+        delay: 500,
+        lifecycle: {
+            loading: (el: VNode) => {
+                console.log('cargando recurso')
+            }
+            error: (el: VNode) => {
+                console.log('error al cargar recurso')
+            }
+            loaded: (el: VNode) => {
+                console.log('el recurso se ha cargado con éxito', el)
+            }
+        }
+    })
+    </script>
+
+    <style scoped>
+    img[lazy=loading] {
+        /* Estilos para img cuando se esta cargando */
+    }
+    img[lazy=loaded] {
+        /* Estilos para img cuando ya se ha cargado */
+    }
+    img[lazy=error] {
+        /* Estilos para img si existe un error en la carga */
+    }
+    </style>
+    ```
+
+
+## Webpack Chunk - Code Splitting
+:::tip Nota
+Webpack Chunk no es aplicable en Vite.
+:::
++ Aplicar Webpack Chunk en una ruta:
+    ```js title="src/router/index.ts"
+    // ...
+    const routes: Array<RouteRecordRaw> = [
+        // ...
+        {
+            path: '/ruta',
+            name: 'ruta',
+            component: () => import(/* webpackChunkName: "ruta" */ '../views/MiVista.vue')
+        }
+        // ...
+    ]
+    // ...
+    ```
 
 
 ## Tips de interes:
