@@ -3122,3 +3122,11 @@ Página de inconos **Oh, Vue Icons!**: https://oh-vue-icons.js.org
         />
     </template>
     ```
+
+
+### GraphQL Apollo CLI
+:::tip Nota
+Página de GraphQL: https://graphql.org
+Página de Vue Apollo GraphQL: https://v4.apollo.vuejs.org
+:::
++ Configuración del paquete Apollo CLI

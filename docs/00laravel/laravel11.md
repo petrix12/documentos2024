@@ -21,16 +21,28 @@ Para tener disponible un servidor web con PHP, Composer, Nginx, Node, SQLite y L
 :::
 
 ## Habilitar soporte para API
+:::tip Nota
+Cuando ejecutas "php artisan install:api" en **Laravel 11**, se recomienda agregar el trait **HasApiTokens** al modelo **User**, esto tiene un propósito específico relacionado con la autenticación y autorización en las API.
+El trait **HasApiTokens** proporciona varias funcionalidades importantes:
++ **Generación de tokens de API**: Permite crear tokens de acceso para los usuarios, que pueden ser utilizados para autenticar solicitudes a tu API.
++ **Manejo de tokens**: Facilita la gestión de tokens, incluyendo la creación, revocación y verificación de tokens.
++ **Capacidades de Sanctum**: Este trait es parte del paquete Laravel Sanctum, que proporciona un sistema de autenticación ligero para SPAs (Single Page Applications), aplicaciones móviles y APIs simples basadas en tokens.
++ **Métodos útiles**: Añade métodos al modelo User para trabajar con tokens, como createToken(), tokens(), y otros.
++ **Integración con el sistema de autenticación**: Permite que el sistema de autenticación de Laravel reconozca y utilice estos tokens para proteger rutas y recursos de la API.
+Al agregar este trait, estás preparando tu modelo **User** para trabajar eficientemente con autenticación basada en tokens, lo cual es crucial para la seguridad y el control de acceso en APIs.
+:::
 + Ejecutar:
     ```bash
     php artisan install:api
     ```
 + Agregar trait **HasApiTokens** al modelo **User**:
     ```php title="...\app\Models\User.php"
-    //...
+    // ...
+    use Laravel\Sanctum\HasApiTokens;
+
     class User extends Authenticatable
     {
-        use HasApiTokens;
+        use /* ... */ HasApiTokens;
         // ...
     }
     ```
