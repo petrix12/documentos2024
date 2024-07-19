@@ -3129,4 +3129,93 @@ Página de inconos **Oh, Vue Icons!**: https://oh-vue-icons.js.org
 Página de GraphQL: https://graphql.org
 Página de Vue Apollo GraphQL: https://v4.apollo.vuejs.org
 :::
-+ Configuración del paquete Apollo CLI
++ Configuración del paquete Apollo CLI para poder usar GraphQL en nuestra aplicación:
+    ```bash
+    npm i --save graphql graphql-tag @apollo/client
+    ```
+    + Configurar **main.ts**:
+        ```ts title="src/main.ts"
+        // ...
+        import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client/core'
+        
+        const httpLink = createHttpLink({
+            uri: 'http://end-point-del-servicio-de-graphql'
+        })
+        const cache = new InMemoryCache()
+        const apolloClient = new ApolloClient({
+            link: httpLink,
+            cache
+        })
+        // ...
+        ```
++ Configuración de Apollo Composable para Composition API:
+    ```bash
+    npm i --save @vue/apollo-composable
+    ```
+    + Configurar **main.ts** para un solo cliente de Apollo:
+        ```ts title="src/main.ts"
+        // ...
+        import { /* ... */, privide, h } from 'vue'
+        import { DefaultAppClient } from '@vue/apollo-composable'
+        // ...        
+        createApp({
+            setup() {
+                privide(DefaultAppClient, apolloClient)
+            },
+            render: () => h(App)
+        }).mount('#app')
+        // ...
+        ```
+    + Configurar **main.ts** para mas de un cliente de Apollo:
+        ```ts title="src/main.ts"
+        // ...
+        import { /* ... */, privide, h } from 'vue'
+        import { ApolloCients } from '@vue/apollo-composable'
+        // ...        
+        createApp({
+            setup() {
+                privide(ApolloCients, {
+                    default: apolloClient,
+                    client1: apolloClient,
+                    client2: apolloClient2,
+                    // ...
+                    clientn: apolloClientn
+                })
+            },
+            render: () => h(App)
+        }).mount('#app')
+        // ...
+        ```
++ Configuración de Apollo Composable para Option API:
+    ```bash
+    npm i --save @vue/apollo-option
+    ```
+    + Configurar **main.ts** para un solo cliente de Apollo:
+        ```ts title="src/main.ts"
+        // ...
+        import { createApolloProvider } from '@vue/apollo-option'
+
+        const apolloProvider = createApolloProvider({
+            defaultClient: apolloClient
+        })
+
+        createApp(App).use(apolloProvider).mount("#app")
+        // ...
+        ```
+    + Configurar **main.ts** para mas de un cliente de Apollo:
+        ```ts title="src/main.ts"
+        // ...
+        import { createApolloProvider } from '@vue/apollo-option'
+
+        const apolloProvider = createApolloProvider({
+            defaultClient: apolloClient,
+            client1: apolloClient,
+            client2: apolloClient2,
+            // ...
+            clientn: apolloClientn
+        })
+
+        createApp(App).use(apolloProvider).mount("#app")
+        // ...
+        ```
+
