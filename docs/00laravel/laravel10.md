@@ -2920,6 +2920,36 @@ Sitios web de proveedores para envio de correos electrónicos:
         // ...
     }
     ```
+    :::tip Nota
+    + Si queremos escribir el correo en formato Markdown:
+    ```php
+    // ...
+    return new Content(
+        markdown: 'emails.correo'
+    );    
+    // ...
+    ```
+    + Ejemplo de escritura del corro **emails.correo**
+    ```php
+    <x-mail::message>
+    # Aquí un título 1
+    
+    <x-mail::panel>
+    Aquí un texto encerrado en un panel
+    </x-mail::panel>
+
+    <x-mail::botton url="{{ route('mi_ruta') }}">
+    Aquí un enlace con forma de botón
+    </x-mail::botton>
+
+    <x-mail::botton :url="route('mi_ruta')">
+    Aquí otra forma de un enlace con forma de botón
+    </x-mail::botton>    
+
+    <a href="#">Aquí un enlace normal</a>
+    </x-mail::message>
+    ```
+    :::
 + Ejemplo de invocación del correo:
     ```php
     // ...
