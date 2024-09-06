@@ -197,7 +197,10 @@ composer global require laravel/installer
         ```bash
         npm run build
         ```
-
+### Ver configuración del proyecto
+```bash
+php artisan about
+```
 
 
 ## Estructura de carpetas de un proyecto Laravel:
