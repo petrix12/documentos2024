@@ -13,6 +13,12 @@ sidebar_position: 2
     + $ npx create-docusaurus@latest documentacion classic
 2. Ejecutar proyecto:
     + $ npm run start
+    :::tip Nota
+    En caso de denegación de permisos, ejeuctar:
+    ```bash
+    chmod +x node_modules/.bin/docusaurus
+    ```
+    :::
 3. Para ingresar documentación pegar documentos en la carpeta **docs** del proyecto
 4. Para configurar la página, escribir al iniciao:
     ```
