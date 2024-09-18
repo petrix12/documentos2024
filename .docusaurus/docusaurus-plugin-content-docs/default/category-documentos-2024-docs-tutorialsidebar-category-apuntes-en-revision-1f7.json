@@ -1,0 +1,16 @@
+{
+  "title": "Apuntes en revisión",
+  "description": "Apuntes en revisión",
+  "slug": "/category/apuntes-en-revisión",
+  "permalink": "/documentos2024/docs/category/apuntes-en-revisión",
+  "navigation": {
+    "previous": {
+      "title": "Utilidades",
+      "permalink": "/documentos2024/docs/97otros/otros"
+    },
+    "next": {
+      "title": "Pruebas",
+      "permalink": "/documentos2024/docs/category/pruebas"
+    }
+  }
+}

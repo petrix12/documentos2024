@@ -1,0 +1,394 @@
+{
+  "/documentos2024/blog-cef": {
+    "__comp": "a6aa9e1f",
+    "__context": {
+      "plugin": "a3dbb1ff"
+    },
+    "sidebar": "814f3328",
+    "items": [
+      {
+        "content": "7661071f"
+      },
+      {
+        "content": "f4f34a3a"
+      },
+      {
+        "content": "8717b14a"
+      },
+      {
+        "content": "925b3f96"
+      }
+    ],
+    "metadata": "0ea4c98a"
+  },
+  "/documentos2024/blog/archive-e4b": {
+    "__comp": "9e4087bc",
+    "__context": {
+      "plugin": "a3dbb1ff"
+    },
+    "archive": "c52a7c3b"
+  },
+  "/documentos2024/blog/first-blog-post-6f4": {
+    "__comp": "ccc49370",
+    "__context": {
+      "plugin": "a3dbb1ff"
+    },
+    "sidebar": "814f3328",
+    "content": "e273c56f"
+  },
+  "/documentos2024/blog/long-blog-post-74f": {
+    "__comp": "ccc49370",
+    "__context": {
+      "plugin": "a3dbb1ff"
+    },
+    "sidebar": "814f3328",
+    "content": "73664a40"
+  },
+  "/documentos2024/blog/mdx-blog-post-872": {
+    "__comp": "ccc49370",
+    "__context": {
+      "plugin": "a3dbb1ff"
+    },
+    "sidebar": "814f3328",
+    "content": "59362658"
+  },
+  "/documentos2024/blog/tags-997": {
+    "__comp": "01a85c17",
+    "__context": {
+      "plugin": "a3dbb1ff"
+    },
+    "sidebar": "814f3328",
+    "tags": "e04de765"
+  },
+  "/documentos2024/blog/tags/docusaurus-5e2": {
+    "__comp": "6875c492",
+    "__context": {
+      "plugin": "a3dbb1ff"
+    },
+    "sidebar": "814f3328",
+    "items": [
+      {
+        "content": "7661071f"
+      },
+      {
+        "content": "f4f34a3a"
+      },
+      {
+        "content": "8717b14a"
+      },
+      {
+        "content": "925b3f96"
+      }
+    ],
+    "tag": "3db602ba",
+    "listMetadata": "07a47f8d"
+  },
+  "/documentos2024/blog/tags/facebook-914": {
+    "__comp": "6875c492",
+    "__context": {
+      "plugin": "a3dbb1ff"
+    },
+    "sidebar": "814f3328",
+    "items": [
+      {
+        "content": "7661071f"
+      }
+    ],
+    "tag": "b41c1b8c",
+    "listMetadata": "8e4ccd2b"
+  },
+  "/documentos2024/blog/tags/hello-26c": {
+    "__comp": "6875c492",
+    "__context": {
+      "plugin": "a3dbb1ff"
+    },
+    "sidebar": "814f3328",
+    "items": [
+      {
+        "content": "7661071f"
+      },
+      {
+        "content": "8717b14a"
+      }
+    ],
+    "tag": "e6f42260",
+    "listMetadata": "eebeb6f5"
+  },
+  "/documentos2024/blog/tags/hola-ff3": {
+    "__comp": "6875c492",
+    "__context": {
+      "plugin": "a3dbb1ff"
+    },
+    "sidebar": "814f3328",
+    "items": [
+      {
+        "content": "925b3f96"
+      }
+    ],
+    "tag": "8f0e104b",
+    "listMetadata": "6af466d6"
+  },
+  "/documentos2024/blog/welcome-625": {
+    "__comp": "ccc49370",
+    "__context": {
+      "plugin": "a3dbb1ff"
+    },
+    "sidebar": "814f3328",
+    "content": "d9f32620"
+  },
+  "/documentos2024/markdown-page-99e": {
+    "__comp": "1f391b9e",
+    "__context": {
+      "plugin": "ac907035"
+    },
+    "content": "393be207"
+  },
+  "/documentos2024/docs-120": {
+    "__comp": "5e95c892",
+    "__context": {
+      "plugin": "00ff0069"
+    }
+  },
+  "/documentos2024/docs-93f": {
+    "__comp": "a7bd4aaa",
+    "version": "935f2afb"
+  },
+  "/documentos2024/docs-deb": {
+    "__comp": "a94703ab"
+  },
+  "/documentos2024/docs/00laravel/cursos/apirestfull-cb0": {
+    "__comp": "17896441",
+    "content": "adc38a65"
+  },
+  "/documentos2024/docs/00laravel/cursos/laravel_passport-b5b": {
+    "__comp": "17896441",
+    "content": "18010be2"
+  },
+  "/documentos2024/docs/00laravel/cursos/laravel8-66f": {
+    "__comp": "17896441",
+    "content": "db56c02b"
+  },
+  "/documentos2024/docs/00laravel/cursos/laravel8_aws-b67": {
+    "__comp": "17896441",
+    "content": "c675bc5c"
+  },
+  "/documentos2024/docs/00laravel/laravel10-c50": {
+    "__comp": "17896441",
+    "content": "ebd0dff8"
+  },
+  "/documentos2024/docs/00laravel/laravel11-221": {
+    "__comp": "17896441",
+    "content": "700a47e9"
+  },
+  "/documentos2024/docs/00laravel/proyectos/2020_08_clinica-c25": {
+    "__comp": "17896441",
+    "content": "b4f5d476"
+  },
+  "/documentos2024/docs/00laravel/proyectos/2021_03_multiples_file-fae": {
+    "__comp": "17896441",
+    "content": "441b77ed"
+  },
+  "/documentos2024/docs/00laravel/proyectos/2021_06_plataforma_cursos-416": {
+    "__comp": "17896441",
+    "content": "393afe3f"
+  },
+  "/documentos2024/docs/00laravel/proyectos/2021_08_upload_file-bc4": {
+    "__comp": "17896441",
+    "content": "bf30ffcc"
+  },
+  "/documentos2024/docs/00laravel/test-15a": {
+    "__comp": "17896441",
+    "content": "894b9a2b"
+  },
+  "/documentos2024/docs/02vue/vue-ad8": {
+    "__comp": "17896441",
+    "content": "9d568d5b"
+  },
+  "/documentos2024/docs/03react/docusaurus-f1c": {
+    "__comp": "17896441",
+    "content": "6a638302"
+  },
+  "/documentos2024/docs/03react/tutorial/intro-135": {
+    "__comp": "17896441",
+    "content": "2e537d01"
+  },
+  "/documentos2024/docs/03react/tutorial/tutorial-basics/congratulations-a01": {
+    "__comp": "17896441",
+    "content": "9cd921bc"
+  },
+  "/documentos2024/docs/03react/tutorial/tutorial-basics/create-a-blog-post-ebc": {
+    "__comp": "17896441",
+    "content": "242417e8"
+  },
+  "/documentos2024/docs/03react/tutorial/tutorial-basics/create-a-document-281": {
+    "__comp": "17896441",
+    "content": "0ce82201"
+  },
+  "/documentos2024/docs/03react/tutorial/tutorial-basics/create-a-page-367": {
+    "__comp": "17896441",
+    "content": "49092757"
+  },
+  "/documentos2024/docs/03react/tutorial/tutorial-basics/deploy-your-site-a6c": {
+    "__comp": "17896441",
+    "content": "78640ebe"
+  },
+  "/documentos2024/docs/03react/tutorial/tutorial-basics/markdown-features-49e": {
+    "__comp": "17896441",
+    "content": "70ad1188"
+  },
+  "/documentos2024/docs/03react/tutorial/tutorial-extras/manage-docs-versions-9c6": {
+    "__comp": "17896441",
+    "content": "edc148e3"
+  },
+  "/documentos2024/docs/03react/tutorial/tutorial-extras/translate-your-site-a11": {
+    "__comp": "17896441",
+    "content": "6bd969de"
+  },
+  "/documentos2024/docs/06jquery/jquery-a94": {
+    "__comp": "17896441",
+    "content": "41977067"
+  },
+  "/documentos2024/docs/10arquitectura/arquitectura_hexagonal-ef2": {
+    "__comp": "17896441",
+    "content": "7daeaf89"
+  },
+  "/documentos2024/docs/10arquitectura/solid-2fc": {
+    "__comp": "17896441",
+    "content": "b5af9033"
+  },
+  "/documentos2024/docs/14docker/docker-af3": {
+    "__comp": "17896441",
+    "content": "9a245bdd"
+  },
+  "/documentos2024/docs/15blockchain/solidity-a65": {
+    "__comp": "17896441",
+    "content": "619324ca"
+  },
+  "/documentos2024/docs/16webdeveloper/curso_dw-186": {
+    "__comp": "17896441",
+    "content": "63037db7"
+  },
+  "/documentos2024/docs/30styles/css-b3e": {
+    "__comp": "17896441",
+    "content": "f2edf3b3"
+  },
+  "/documentos2024/docs/50vsc/vsc-3d9": {
+    "__comp": "17896441",
+    "content": "3464f872"
+  },
+  "/documentos2024/docs/90chrome/chrome-c75": {
+    "__comp": "17896441",
+    "content": "03987bd1"
+  },
+  "/documentos2024/docs/97otros/hwasung-06c": {
+    "__comp": "17896441",
+    "content": "5359398d"
+  },
+  "/documentos2024/docs/97otros/otros-1a1": {
+    "__comp": "17896441",
+    "content": "64673eae"
+  },
+  "/documentos2024/docs/98revisar/99pruebas/prueba2-d2c": {
+    "__comp": "17896441",
+    "content": "4cff3142"
+  },
+  "/documentos2024/docs/98revisar/markdown-94f": {
+    "__comp": "17896441",
+    "content": "a8c2c47c"
+  },
+  "/documentos2024/docs/98revisar/sitios-e05": {
+    "__comp": "17896441",
+    "content": "fc6ad6f3"
+  },
+  "/documentos2024/docs/98revisar/wireui-f5b": {
+    "__comp": "17896441",
+    "content": "31102073"
+  },
+  "/documentos2024/docs/category/apuntes-en-revisión-b03": {
+    "__comp": "14eb3368",
+    "categoryGeneratedIndex": "52c10a07"
+  },
+  "/documentos2024/docs/category/arquitecturas-95c": {
+    "__comp": "14eb3368",
+    "categoryGeneratedIndex": "99536223"
+  },
+  "/documentos2024/docs/category/blockchain-65d": {
+    "__comp": "14eb3368",
+    "categoryGeneratedIndex": "0e118e6a"
+  },
+  "/documentos2024/docs/category/cursos-laravel-c22": {
+    "__comp": "14eb3368",
+    "categoryGeneratedIndex": "05d4400e"
+  },
+  "/documentos2024/docs/category/desarrollo-web-d90": {
+    "__comp": "14eb3368",
+    "categoryGeneratedIndex": "1a20cc8f"
+  },
+  "/documentos2024/docs/category/docker-fd2": {
+    "__comp": "14eb3368",
+    "categoryGeneratedIndex": "9338c784"
+  },
+  "/documentos2024/docs/category/estilos-373": {
+    "__comp": "14eb3368",
+    "categoryGeneratedIndex": "01adf72c"
+  },
+  "/documentos2024/docs/category/google-chrome-244": {
+    "__comp": "14eb3368",
+    "categoryGeneratedIndex": "766cf220"
+  },
+  "/documentos2024/docs/category/jquery-0a1": {
+    "__comp": "14eb3368",
+    "categoryGeneratedIndex": "aa3b6962"
+  },
+  "/documentos2024/docs/category/laravel-f62": {
+    "__comp": "14eb3368",
+    "categoryGeneratedIndex": "02b10f68"
+  },
+  "/documentos2024/docs/category/otros-c67": {
+    "__comp": "14eb3368",
+    "categoryGeneratedIndex": "da923ed3"
+  },
+  "/documentos2024/docs/category/proyectos-laravel-85b": {
+    "__comp": "14eb3368",
+    "categoryGeneratedIndex": "f8df6c4f"
+  },
+  "/documentos2024/docs/category/pruebas-0a8": {
+    "__comp": "14eb3368",
+    "categoryGeneratedIndex": "ca3a5c13"
+  },
+  "/documentos2024/docs/category/react-182": {
+    "__comp": "14eb3368",
+    "categoryGeneratedIndex": "ada11e89"
+  },
+  "/documentos2024/docs/category/tutorial---basics-06d": {
+    "__comp": "14eb3368",
+    "categoryGeneratedIndex": "eae9eb82"
+  },
+  "/documentos2024/docs/category/tutorial---extras-314": {
+    "__comp": "14eb3368",
+    "categoryGeneratedIndex": "bcde74aa"
+  },
+  "/documentos2024/docs/category/tutorial-docusaurus-269": {
+    "__comp": "14eb3368",
+    "categoryGeneratedIndex": "071a4ff7"
+  },
+  "/documentos2024/docs/category/vsc-ce5": {
+    "__comp": "14eb3368",
+    "categoryGeneratedIndex": "8f8ff0ea"
+  },
+  "/documentos2024/docs/category/vue-83d": {
+    "__comp": "14eb3368",
+    "categoryGeneratedIndex": "8ba4c51e"
+  },
+  "/documentos2024/docs/intro-f2e": {
+    "__comp": "17896441",
+    "content": "0e384e19"
+  },
+  "/documentos2024/-230": {
+    "__comp": "c4f5d8e4",
+    "__context": {
+      "plugin": "ac907035"
+    },
+    "config": "5e9f5e1a"
+  }
+}

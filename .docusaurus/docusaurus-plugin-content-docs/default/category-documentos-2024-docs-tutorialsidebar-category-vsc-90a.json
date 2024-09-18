@@ -1,0 +1,16 @@
+{
+  "title": "VSC",
+  "description": "Apuntes de VSC",
+  "slug": "/category/vsc",
+  "permalink": "/documentos2024/docs/category/vsc",
+  "navigation": {
+    "previous": {
+      "title": "Apuntes de CSS3",
+      "permalink": "/documentos2024/docs/30styles/css"
+    },
+    "next": {
+      "title": "Visual Studio Code",
+      "permalink": "/documentos2024/docs/50vsc/vsc"
+    }
+  }
+}

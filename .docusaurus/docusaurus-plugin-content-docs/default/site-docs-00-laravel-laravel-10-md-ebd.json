@@ -1,0 +1,29 @@
+{
+  "id": "00laravel/laravel10",
+  "title": "Apuntes de Laravel 10",
+  "description": "Pre-requisitos obligatorios:",
+  "source": "@site/docs/00laravel/laravel10.md",
+  "sourceDirName": "00laravel",
+  "slug": "/00laravel/laravel10",
+  "permalink": "/documentos2024/docs/00laravel/laravel10",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/00laravel/laravel10.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "title": "Apuntes de Laravel 10",
+    "sidebar_label": "Apuntes de Laravel 10",
+    "sidebar_position": 1
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Apuntes de Laravel 11",
+    "permalink": "/documentos2024/docs/00laravel/laravel11"
+  },
+  "next": {
+    "title": "Test en Laravel",
+    "permalink": "/documentos2024/docs/00laravel/test"
+  }
+}

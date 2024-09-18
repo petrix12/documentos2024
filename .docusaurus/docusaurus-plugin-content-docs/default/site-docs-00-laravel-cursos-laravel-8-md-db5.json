@@ -1,0 +1,29 @@
+{
+  "id": "00laravel/cursos/laravel8",
+  "title": "Curso de Laravel 8",
+  "description": "+ Repositorio//github.com/petrix12/Curso-Laravel-8-desde-cero---cursosdesarrolloweb.es",
+  "source": "@site/docs/00laravel/cursos/laravel8.md",
+  "sourceDirName": "00laravel/cursos",
+  "slug": "/00laravel/cursos/laravel8",
+  "permalink": "/documentos2024/docs/00laravel/cursos/laravel8",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/00laravel/cursos/laravel8.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 100,
+  "frontMatter": {
+    "title": "Curso de Laravel 8",
+    "sidebar_label": "Curso de Laravel 8",
+    "sidebar_position": 100
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Laravel 8 en AWS",
+    "permalink": "/documentos2024/docs/00laravel/cursos/laravel8_aws"
+  },
+  "next": {
+    "title": "Vue",
+    "permalink": "/documentos2024/docs/category/vue"
+  }
+}

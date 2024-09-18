@@ -1,0 +1,29 @@
+{
+  "id": "97otros/otros",
+  "title": "Utilidades",
+  "description": "Crear un avatar con IA",
+  "source": "@site/docs/97otros/otros.md",
+  "sourceDirName": "97otros",
+  "slug": "/97otros/otros",
+  "permalink": "/documentos2024/docs/97otros/otros",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/97otros/otros.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 99,
+  "frontMatter": {
+    "title": "Utilidades",
+    "sidebar_label": "Utilidades",
+    "sidebar_position": 99
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Hwasung Thermo",
+    "permalink": "/documentos2024/docs/97otros/hwasung"
+  },
+  "next": {
+    "title": "Apuntes en revisión",
+    "permalink": "/documentos2024/docs/category/apuntes-en-revisión"
+  }
+}

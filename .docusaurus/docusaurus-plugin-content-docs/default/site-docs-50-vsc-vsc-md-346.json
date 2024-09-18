@@ -1,0 +1,24 @@
+{
+  "id": "50vsc/vsc",
+  "title": "Visual Studio Code",
+  "description": "Extensiones recomendadas:",
+  "source": "@site/docs/50vsc/vsc.md",
+  "sourceDirName": "50vsc",
+  "slug": "/50vsc/vsc",
+  "permalink": "/documentos2024/docs/50vsc/vsc",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/50vsc/vsc.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "VSC",
+    "permalink": "/documentos2024/docs/category/vsc"
+  },
+  "next": {
+    "title": "Google Chrome",
+    "permalink": "/documentos2024/docs/category/google-chrome"
+  }
+}

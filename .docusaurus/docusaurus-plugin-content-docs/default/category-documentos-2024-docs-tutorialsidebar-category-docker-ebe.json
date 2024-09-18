@@ -1,0 +1,16 @@
+{
+  "title": "Docker",
+  "description": "Apuntes de Blockchain",
+  "slug": "/category/docker",
+  "permalink": "/documentos2024/docs/category/docker",
+  "navigation": {
+    "previous": {
+      "title": "Apuntes de Principios SOLID",
+      "permalink": "/documentos2024/docs/10arquitectura/solid"
+    },
+    "next": {
+      "title": "Apuntes de Docker",
+      "permalink": "/documentos2024/docs/14docker/docker"
+    }
+  }
+}

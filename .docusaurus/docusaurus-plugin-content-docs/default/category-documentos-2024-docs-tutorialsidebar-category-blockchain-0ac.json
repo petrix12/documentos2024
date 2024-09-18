@@ -1,0 +1,16 @@
+{
+  "title": "Blockchain",
+  "description": "Apuntes de Blockchain",
+  "slug": "/category/blockchain",
+  "permalink": "/documentos2024/docs/category/blockchain",
+  "navigation": {
+    "previous": {
+      "title": "Curso de desarrollo web",
+      "permalink": "/documentos2024/docs/16webdeveloper/curso_dw"
+    },
+    "next": {
+      "title": "Apuntes de Solidity",
+      "permalink": "/documentos2024/docs/15blockchain/solidity"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "title": "Otros",
+  "description": "Otros",
+  "slug": "/category/otros",
+  "permalink": "/documentos2024/docs/category/otros",
+  "navigation": {
+    "previous": {
+      "title": "Google Chrome",
+      "permalink": "/documentos2024/docs/90chrome/chrome"
+    },
+    "next": {
+      "title": "Hwasung Thermo",
+      "permalink": "/documentos2024/docs/97otros/hwasung"
+    }
+  }
+}

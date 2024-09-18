@@ -1,0 +1,1896 @@
+{
+  "docusaurus-plugin-content-docs": {
+    "default": {
+      "loadedVersions": [
+        {
+          "versionName": "current",
+          "label": "Next",
+          "banner": null,
+          "badge": false,
+          "noIndex": false,
+          "className": "docs-version-current",
+          "path": "/documentos2024/docs",
+          "tagsPath": "/documentos2024/docs/tags",
+          "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs",
+          "editUrlLocalized": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/i18n/es/docusaurus-plugin-content-docs/current",
+          "isLast": true,
+          "routePriority": -1,
+          "sidebarFilePath": "/home/pbazo/www/documentos2024/sidebars.js",
+          "contentPath": "/home/pbazo/www/documentos2024/docs",
+          "contentPathLocalized": "/home/pbazo/www/documentos2024/i18n/es/docusaurus-plugin-content-docs/current",
+          "docs": [
+            {
+              "id": "00laravel/cursos/apirestfull",
+              "title": "Laravel API RESTful",
+              "description": "+ URL Curso//www.udemy.com/course/aprende-a-crear-una-api-restful-con-laravel",
+              "source": "@site/docs/00laravel/cursos/apirestfull.md",
+              "sourceDirName": "00laravel/cursos",
+              "slug": "/00laravel/cursos/apirestfull",
+              "permalink": "/documentos2024/docs/00laravel/cursos/apirestfull",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/00laravel/cursos/apirestfull.md",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 98,
+              "frontMatter": {
+                "title": "Laravel API RESTful",
+                "sidebar_label": "Laravel API RESTful",
+                "sidebar_position": 98
+              },
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "Laravel 8 - Laravel Passort",
+                "permalink": "/documentos2024/docs/00laravel/cursos/laravel_passport"
+              },
+              "next": {
+                "title": "Laravel 8 en AWS",
+                "permalink": "/documentos2024/docs/00laravel/cursos/laravel8_aws"
+              }
+            },
+            {
+              "id": "00laravel/cursos/laravel_passport",
+              "title": "Laravel 8 - Laravel Passort",
+              "description": "+ Documentación Laravel Passport",
+              "source": "@site/docs/00laravel/cursos/laravel_passport.md",
+              "sourceDirName": "00laravel/cursos",
+              "slug": "/00laravel/cursos/laravel_passport",
+              "permalink": "/documentos2024/docs/00laravel/cursos/laravel_passport",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/00laravel/cursos/laravel_passport.md",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 97,
+              "frontMatter": {
+                "title": "Laravel 8 - Laravel Passort",
+                "sidebar_label": "Laravel 8 - Laravel Passort",
+                "sidebar_position": 97
+              },
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "Cursos Laravel",
+                "permalink": "/documentos2024/docs/category/cursos-laravel"
+              },
+              "next": {
+                "title": "Laravel API RESTful",
+                "permalink": "/documentos2024/docs/00laravel/cursos/apirestfull"
+              }
+            },
+            {
+              "id": "00laravel/cursos/laravel8",
+              "title": "Curso de Laravel 8",
+              "description": "+ Repositorio//github.com/petrix12/Curso-Laravel-8-desde-cero---cursosdesarrolloweb.es",
+              "source": "@site/docs/00laravel/cursos/laravel8.md",
+              "sourceDirName": "00laravel/cursos",
+              "slug": "/00laravel/cursos/laravel8",
+              "permalink": "/documentos2024/docs/00laravel/cursos/laravel8",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/00laravel/cursos/laravel8.md",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 100,
+              "frontMatter": {
+                "title": "Curso de Laravel 8",
+                "sidebar_label": "Curso de Laravel 8",
+                "sidebar_position": 100
+              },
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "Laravel 8 en AWS",
+                "permalink": "/documentos2024/docs/00laravel/cursos/laravel8_aws"
+              },
+              "next": {
+                "title": "Vue",
+                "permalink": "/documentos2024/docs/category/vue"
+              }
+            },
+            {
+              "id": "00laravel/cursos/laravel8_aws",
+              "title": "Laravel 8 en AWS",
+              "description": "+ https://www.udemy.com/course/aprende-a-instalar-laravel-8-en-amazon-web-services",
+              "source": "@site/docs/00laravel/cursos/laravel8_aws.md",
+              "sourceDirName": "00laravel/cursos",
+              "slug": "/00laravel/cursos/laravel8_aws",
+              "permalink": "/documentos2024/docs/00laravel/cursos/laravel8_aws",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/00laravel/cursos/laravel8_aws.md",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 99,
+              "frontMatter": {
+                "title": "Laravel 8 en AWS",
+                "sidebar_label": "Laravel 8 en AWS",
+                "sidebar_position": 99
+              },
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "Laravel API RESTful",
+                "permalink": "/documentos2024/docs/00laravel/cursos/apirestfull"
+              },
+              "next": {
+                "title": "Curso de Laravel 8",
+                "permalink": "/documentos2024/docs/00laravel/cursos/laravel8"
+              }
+            },
+            {
+              "id": "00laravel/laravel10",
+              "title": "Apuntes de Laravel 10",
+              "description": "Pre-requisitos obligatorios:",
+              "source": "@site/docs/00laravel/laravel10.md",
+              "sourceDirName": "00laravel",
+              "slug": "/00laravel/laravel10",
+              "permalink": "/documentos2024/docs/00laravel/laravel10",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/00laravel/laravel10.md",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 1,
+              "frontMatter": {
+                "title": "Apuntes de Laravel 10",
+                "sidebar_label": "Apuntes de Laravel 10",
+                "sidebar_position": 1
+              },
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "Apuntes de Laravel 11",
+                "permalink": "/documentos2024/docs/00laravel/laravel11"
+              },
+              "next": {
+                "title": "Test en Laravel",
+                "permalink": "/documentos2024/docs/00laravel/test"
+              }
+            },
+            {
+              "id": "00laravel/laravel11",
+              "title": "Apuntes de Laravel 11",
+              "description": "+ Para trabajar con Laravel 11 es importante trabajar con una versión de PHP 8.2 o superior.",
+              "source": "@site/docs/00laravel/laravel11.md",
+              "sourceDirName": "00laravel",
+              "slug": "/00laravel/laravel11",
+              "permalink": "/documentos2024/docs/00laravel/laravel11",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/00laravel/laravel11.md",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 0,
+              "frontMatter": {
+                "title": "Apuntes de Laravel 11",
+                "sidebar_label": "Apuntes de Laravel 11",
+                "sidebar_position": 0
+              },
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "Laravel",
+                "permalink": "/documentos2024/docs/category/laravel"
+              },
+              "next": {
+                "title": "Apuntes de Laravel 10",
+                "permalink": "/documentos2024/docs/00laravel/laravel10"
+              }
+            },
+            {
+              "id": "00laravel/proyectos/2020_08_clinica",
+              "title": "Sistema de Historia Clínica en Laravel",
+              "description": "+ Repositorio//github.com/petrix12/Sistema-de-Historia-Cl-nica-en-Laravel",
+              "source": "@site/docs/00laravel/proyectos/2020_08_clinica.md",
+              "sourceDirName": "00laravel/proyectos",
+              "slug": "/00laravel/proyectos/2020_08_clinica",
+              "permalink": "/documentos2024/docs/00laravel/proyectos/2020_08_clinica",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/00laravel/proyectos/2020_08_clinica.md",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 100,
+              "frontMatter": {
+                "title": "Sistema de Historia Clínica en Laravel",
+                "sidebar_label": "Sistema de Historia Clínica",
+                "sidebar_position": 100
+              },
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "Subir múltiples archivos",
+                "permalink": "/documentos2024/docs/00laravel/proyectos/2021_03_multiples_file"
+              },
+              "next": {
+                "title": "Cursos Laravel",
+                "permalink": "/documentos2024/docs/category/cursos-laravel"
+              }
+            },
+            {
+              "id": "00laravel/proyectos/2021_03_multiples_file",
+              "title": "Subir múltiples archivos en Laravel",
+              "description": "+ Repositorio//github.com/petrix12/AppFileLaravel",
+              "source": "@site/docs/00laravel/proyectos/2021_03_multiples_file.md",
+              "sourceDirName": "00laravel/proyectos",
+              "slug": "/00laravel/proyectos/2021_03_multiples_file",
+              "permalink": "/documentos2024/docs/00laravel/proyectos/2021_03_multiples_file",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/00laravel/proyectos/2021_03_multiples_file.md",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 99,
+              "frontMatter": {
+                "title": "Subir múltiples archivos en Laravel",
+                "sidebar_label": "Subir múltiples archivos",
+                "sidebar_position": 99
+              },
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "Plataforma de cursos",
+                "permalink": "/documentos2024/docs/00laravel/proyectos/2021_06_plataforma_cursos"
+              },
+              "next": {
+                "title": "Sistema de Historia Clínica",
+                "permalink": "/documentos2024/docs/00laravel/proyectos/2020_08_clinica"
+              }
+            },
+            {
+              "id": "00laravel/proyectos/2021_06_plataforma_cursos",
+              "title": "Plataforma de cursos",
+              "description": "+ Repositorio//github.com/petrix12/PlataformaDeCursosLaravel",
+              "source": "@site/docs/00laravel/proyectos/2021_06_plataforma_cursos.md",
+              "sourceDirName": "00laravel/proyectos",
+              "slug": "/00laravel/proyectos/2021_06_plataforma_cursos",
+              "permalink": "/documentos2024/docs/00laravel/proyectos/2021_06_plataforma_cursos",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/00laravel/proyectos/2021_06_plataforma_cursos.md",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 98,
+              "frontMatter": {
+                "title": "Plataforma de cursos",
+                "sidebar_label": "Plataforma de cursos",
+                "sidebar_position": 98
+              },
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "Subir archivos",
+                "permalink": "/documentos2024/docs/00laravel/proyectos/2021_08_upload_file"
+              },
+              "next": {
+                "title": "Subir múltiples archivos",
+                "permalink": "/documentos2024/docs/00laravel/proyectos/2021_03_multiples_file"
+              }
+            },
+            {
+              "id": "00laravel/proyectos/2021_08_upload_file",
+              "title": "Subir archivos en Laravel",
+              "description": "GitHub//github.com/petrix12/file.git",
+              "source": "@site/docs/00laravel/proyectos/2021_08_upload_file.md",
+              "sourceDirName": "00laravel/proyectos",
+              "slug": "/00laravel/proyectos/2021_08_upload_file",
+              "permalink": "/documentos2024/docs/00laravel/proyectos/2021_08_upload_file",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/00laravel/proyectos/2021_08_upload_file.md",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 97,
+              "frontMatter": {
+                "title": "Subir archivos en Laravel",
+                "sidebar_label": "Subir archivos",
+                "sidebar_position": 97
+              },
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "Proyectos Laravel",
+                "permalink": "/documentos2024/docs/category/proyectos-laravel"
+              },
+              "next": {
+                "title": "Plataforma de cursos",
+                "permalink": "/documentos2024/docs/00laravel/proyectos/2021_06_plataforma_cursos"
+              }
+            },
+            {
+              "id": "00laravel/test",
+              "title": "Test en Laravel",
+              "description": "1. Crear proyecto:",
+              "source": "@site/docs/00laravel/test.md",
+              "sourceDirName": "00laravel",
+              "slug": "/00laravel/test",
+              "permalink": "/documentos2024/docs/00laravel/test",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/00laravel/test.md",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 1,
+              "frontMatter": {
+                "title": "Test en Laravel",
+                "sidebar_label": "Test en Laravel",
+                "sidebar_position": 1
+              },
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "Apuntes de Laravel 10",
+                "permalink": "/documentos2024/docs/00laravel/laravel10"
+              },
+              "next": {
+                "title": "Proyectos Laravel",
+                "permalink": "/documentos2024/docs/category/proyectos-laravel"
+              }
+            },
+            {
+              "id": "02vue/vue",
+              "title": "Apuntes de Vue 3",
+              "description": "Pre-requisitos obligatorios:",
+              "source": "@site/docs/02vue/vue.md",
+              "sourceDirName": "02vue",
+              "slug": "/02vue/vue",
+              "permalink": "/documentos2024/docs/02vue/vue",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/02vue/vue.md",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 1,
+              "frontMatter": {
+                "title": "Apuntes de Vue 3",
+                "sidebar_label": "Apuntes de Vue 3",
+                "sidebar_position": 1
+              },
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "Vue",
+                "permalink": "/documentos2024/docs/category/vue"
+              },
+              "next": {
+                "title": "React",
+                "permalink": "/documentos2024/docs/category/react"
+              }
+            },
+            {
+              "id": "03react/docusaurus/docusaurus",
+              "title": "Proyecto Docusaurus",
+              "description": "+ Página oficial//docusaurus.io",
+              "source": "@site/docs/03react/docusaurus/docusaurus.md",
+              "sourceDirName": "03react/docusaurus",
+              "slug": "/03react/docusaurus/",
+              "permalink": "/documentos2024/docs/03react/docusaurus/",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/03react/docusaurus/docusaurus.md",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 2,
+              "frontMatter": {
+                "title": "Proyecto Docusaurus",
+                "sidebar_label": "Proyecto Docusaurus",
+                "sidebar_position": 2
+              },
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "React",
+                "permalink": "/documentos2024/docs/category/react"
+              },
+              "next": {
+                "title": "Tutorial docusaurus",
+                "permalink": "/documentos2024/docs/category/tutorial-docusaurus"
+              }
+            },
+            {
+              "id": "03react/tutorial/intro",
+              "title": "Tutorial Intro",
+              "description": "Let's discover Docusaurus in less than 5 minutes.",
+              "source": "@site/docs/03react/tutorial/intro.md",
+              "sourceDirName": "03react/tutorial",
+              "slug": "/03react/tutorial/intro",
+              "permalink": "/documentos2024/docs/03react/tutorial/intro",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/03react/tutorial/intro.md",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 1,
+              "frontMatter": {
+                "sidebar_position": 1
+              },
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "Tutorial docusaurus",
+                "permalink": "/documentos2024/docs/category/tutorial-docusaurus"
+              },
+              "next": {
+                "title": "Tutorial - Basics",
+                "permalink": "/documentos2024/docs/category/tutorial---basics"
+              }
+            },
+            {
+              "id": "03react/tutorial/tutorial-basics/congratulations",
+              "title": "Congratulations!",
+              "description": "You have just learned the basics of Docusaurus and made some changes to the initial template.",
+              "source": "@site/docs/03react/tutorial/tutorial-basics/congratulations.md",
+              "sourceDirName": "03react/tutorial/tutorial-basics",
+              "slug": "/03react/tutorial/tutorial-basics/congratulations",
+              "permalink": "/documentos2024/docs/03react/tutorial/tutorial-basics/congratulations",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/03react/tutorial/tutorial-basics/congratulations.md",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 6,
+              "frontMatter": {
+                "sidebar_position": 6
+              },
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "Deploy your site",
+                "permalink": "/documentos2024/docs/03react/tutorial/tutorial-basics/deploy-your-site"
+              },
+              "next": {
+                "title": "Tutorial - Extras",
+                "permalink": "/documentos2024/docs/category/tutorial---extras"
+              }
+            },
+            {
+              "id": "03react/tutorial/tutorial-basics/create-a-blog-post",
+              "title": "Create a Blog Post",
+              "description": "Docusaurus creates a page for each blog post, but also a blog index page, a tag system, an RSS feed...",
+              "source": "@site/docs/03react/tutorial/tutorial-basics/create-a-blog-post.md",
+              "sourceDirName": "03react/tutorial/tutorial-basics",
+              "slug": "/03react/tutorial/tutorial-basics/create-a-blog-post",
+              "permalink": "/documentos2024/docs/03react/tutorial/tutorial-basics/create-a-blog-post",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/03react/tutorial/tutorial-basics/create-a-blog-post.md",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 3,
+              "frontMatter": {
+                "sidebar_position": 3
+              },
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "Create a Document",
+                "permalink": "/documentos2024/docs/03react/tutorial/tutorial-basics/create-a-document"
+              },
+              "next": {
+                "title": "Markdown Features",
+                "permalink": "/documentos2024/docs/03react/tutorial/tutorial-basics/markdown-features"
+              }
+            },
+            {
+              "id": "03react/tutorial/tutorial-basics/create-a-document",
+              "title": "Create a Document",
+              "description": "Documents are groups of pages connected through:",
+              "source": "@site/docs/03react/tutorial/tutorial-basics/create-a-document.md",
+              "sourceDirName": "03react/tutorial/tutorial-basics",
+              "slug": "/03react/tutorial/tutorial-basics/create-a-document",
+              "permalink": "/documentos2024/docs/03react/tutorial/tutorial-basics/create-a-document",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/03react/tutorial/tutorial-basics/create-a-document.md",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 2,
+              "frontMatter": {
+                "sidebar_position": 2
+              },
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "Create a Page",
+                "permalink": "/documentos2024/docs/03react/tutorial/tutorial-basics/create-a-page"
+              },
+              "next": {
+                "title": "Create a Blog Post",
+                "permalink": "/documentos2024/docs/03react/tutorial/tutorial-basics/create-a-blog-post"
+              }
+            },
+            {
+              "id": "03react/tutorial/tutorial-basics/create-a-page",
+              "title": "Create a Page",
+              "description": "Add Markdown or React files to src/pages to create a standalone page:",
+              "source": "@site/docs/03react/tutorial/tutorial-basics/create-a-page.md",
+              "sourceDirName": "03react/tutorial/tutorial-basics",
+              "slug": "/03react/tutorial/tutorial-basics/create-a-page",
+              "permalink": "/documentos2024/docs/03react/tutorial/tutorial-basics/create-a-page",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/03react/tutorial/tutorial-basics/create-a-page.md",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 1,
+              "frontMatter": {
+                "sidebar_position": 1
+              },
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "Tutorial - Basics",
+                "permalink": "/documentos2024/docs/category/tutorial---basics"
+              },
+              "next": {
+                "title": "Create a Document",
+                "permalink": "/documentos2024/docs/03react/tutorial/tutorial-basics/create-a-document"
+              }
+            },
+            {
+              "id": "03react/tutorial/tutorial-basics/deploy-your-site",
+              "title": "Deploy your site",
+              "description": "Docusaurus is a static-site-generator (also called Jamstack).",
+              "source": "@site/docs/03react/tutorial/tutorial-basics/deploy-your-site.md",
+              "sourceDirName": "03react/tutorial/tutorial-basics",
+              "slug": "/03react/tutorial/tutorial-basics/deploy-your-site",
+              "permalink": "/documentos2024/docs/03react/tutorial/tutorial-basics/deploy-your-site",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/03react/tutorial/tutorial-basics/deploy-your-site.md",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 5,
+              "frontMatter": {
+                "sidebar_position": 5
+              },
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "Markdown Features",
+                "permalink": "/documentos2024/docs/03react/tutorial/tutorial-basics/markdown-features"
+              },
+              "next": {
+                "title": "Congratulations!",
+                "permalink": "/documentos2024/docs/03react/tutorial/tutorial-basics/congratulations"
+              }
+            },
+            {
+              "id": "03react/tutorial/tutorial-basics/markdown-features",
+              "title": "Markdown Features",
+              "description": "Docusaurus supports Markdown and a few additional features.",
+              "source": "@site/docs/03react/tutorial/tutorial-basics/markdown-features.mdx",
+              "sourceDirName": "03react/tutorial/tutorial-basics",
+              "slug": "/03react/tutorial/tutorial-basics/markdown-features",
+              "permalink": "/documentos2024/docs/03react/tutorial/tutorial-basics/markdown-features",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/03react/tutorial/tutorial-basics/markdown-features.mdx",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 4,
+              "frontMatter": {
+                "sidebar_position": 4
+              },
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "Create a Blog Post",
+                "permalink": "/documentos2024/docs/03react/tutorial/tutorial-basics/create-a-blog-post"
+              },
+              "next": {
+                "title": "Deploy your site",
+                "permalink": "/documentos2024/docs/03react/tutorial/tutorial-basics/deploy-your-site"
+              }
+            },
+            {
+              "id": "03react/tutorial/tutorial-extras/manage-docs-versions",
+              "title": "Manage Docs Versions",
+              "description": "Docusaurus can manage multiple versions of your docs.",
+              "source": "@site/docs/03react/tutorial/tutorial-extras/manage-docs-versions.md",
+              "sourceDirName": "03react/tutorial/tutorial-extras",
+              "slug": "/03react/tutorial/tutorial-extras/manage-docs-versions",
+              "permalink": "/documentos2024/docs/03react/tutorial/tutorial-extras/manage-docs-versions",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/03react/tutorial/tutorial-extras/manage-docs-versions.md",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 1,
+              "frontMatter": {
+                "sidebar_position": 1
+              },
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "Tutorial - Extras",
+                "permalink": "/documentos2024/docs/category/tutorial---extras"
+              },
+              "next": {
+                "title": "Translate your site",
+                "permalink": "/documentos2024/docs/03react/tutorial/tutorial-extras/translate-your-site"
+              }
+            },
+            {
+              "id": "03react/tutorial/tutorial-extras/translate-your-site",
+              "title": "Translate your site",
+              "description": "Let's translate docs/intro.md to French.",
+              "source": "@site/docs/03react/tutorial/tutorial-extras/translate-your-site.md",
+              "sourceDirName": "03react/tutorial/tutorial-extras",
+              "slug": "/03react/tutorial/tutorial-extras/translate-your-site",
+              "permalink": "/documentos2024/docs/03react/tutorial/tutorial-extras/translate-your-site",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/03react/tutorial/tutorial-extras/translate-your-site.md",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 2,
+              "frontMatter": {
+                "sidebar_position": 2
+              },
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "Manage Docs Versions",
+                "permalink": "/documentos2024/docs/03react/tutorial/tutorial-extras/manage-docs-versions"
+              },
+              "next": {
+                "title": "jQuery",
+                "permalink": "/documentos2024/docs/category/jquery"
+              }
+            },
+            {
+              "id": "06jquery/jquery",
+              "title": "Apuntes de jQuery",
+              "description": "Comenzar aquí",
+              "source": "@site/docs/06jquery/jquery.md",
+              "sourceDirName": "06jquery",
+              "slug": "/06jquery/jquery",
+              "permalink": "/documentos2024/docs/06jquery/jquery",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/06jquery/jquery.md",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 1,
+              "frontMatter": {
+                "title": "Apuntes de jQuery",
+                "sidebar_label": "Apuntes de jQuery",
+                "sidebar_position": 1
+              },
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "jQuery",
+                "permalink": "/documentos2024/docs/category/jquery"
+              },
+              "next": {
+                "title": "Arquitecturas",
+                "permalink": "/documentos2024/docs/category/arquitecturas"
+              }
+            },
+            {
+              "id": "10arquitectura/arquitectura_hexagonal",
+              "title": "Arquitectura Hexagonal",
+              "description": "Estructura por entidad",
+              "source": "@site/docs/10arquitectura/arquitectura_hexagonal.md",
+              "sourceDirName": "10arquitectura",
+              "slug": "/10arquitectura/arquitectura_hexagonal",
+              "permalink": "/documentos2024/docs/10arquitectura/arquitectura_hexagonal",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/10arquitectura/arquitectura_hexagonal.md",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 0,
+              "frontMatter": {
+                "title": "Arquitectura Hexagonal",
+                "sidebar_label": "Apuntes de Arquitectura Hexagonal",
+                "sidebar_position": 0
+              },
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "Arquitecturas",
+                "permalink": "/documentos2024/docs/category/arquitecturas"
+              },
+              "next": {
+                "title": "Apuntes de Principios SOLID",
+                "permalink": "/documentos2024/docs/10arquitectura/solid"
+              }
+            },
+            {
+              "id": "10arquitectura/solid",
+              "title": "Principios SOLID",
+              "description": "Acrónimo:",
+              "source": "@site/docs/10arquitectura/solid.md",
+              "sourceDirName": "10arquitectura",
+              "slug": "/10arquitectura/solid",
+              "permalink": "/documentos2024/docs/10arquitectura/solid",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/10arquitectura/solid.md",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 1,
+              "frontMatter": {
+                "title": "Principios SOLID",
+                "sidebar_label": "Apuntes de Principios SOLID",
+                "sidebar_position": 1
+              },
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "Apuntes de Arquitectura Hexagonal",
+                "permalink": "/documentos2024/docs/10arquitectura/arquitectura_hexagonal"
+              },
+              "next": {
+                "title": "Docker",
+                "permalink": "/documentos2024/docs/category/docker"
+              }
+            },
+            {
+              "id": "14docker/docker",
+              "title": "Apuntes de Docker",
+              "description": "Instalar Windows Subsystem for Linux",
+              "source": "@site/docs/14docker/docker.md",
+              "sourceDirName": "14docker",
+              "slug": "/14docker/docker",
+              "permalink": "/documentos2024/docs/14docker/docker",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/14docker/docker.md",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 1,
+              "frontMatter": {
+                "title": "Apuntes de Docker",
+                "sidebar_label": "Apuntes de Docker",
+                "sidebar_position": 1
+              },
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "Docker",
+                "permalink": "/documentos2024/docs/category/docker"
+              },
+              "next": {
+                "title": "Desarrollo web",
+                "permalink": "/documentos2024/docs/category/desarrollo-web"
+              }
+            },
+            {
+              "id": "15blockchain/solidity",
+              "title": "Apuntes de Solidity",
+              "description": "Introducción a Smart Contracts con Solidity (Ethereum, Polygon, BSC)",
+              "source": "@site/docs/15blockchain/solidity.md",
+              "sourceDirName": "15blockchain",
+              "slug": "/15blockchain/solidity",
+              "permalink": "/documentos2024/docs/15blockchain/solidity",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/15blockchain/solidity.md",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 1,
+              "frontMatter": {
+                "title": "Apuntes de Solidity",
+                "sidebar_label": "Apuntes de Solidity",
+                "sidebar_position": 1
+              },
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "Blockchain",
+                "permalink": "/documentos2024/docs/category/blockchain"
+              },
+              "next": {
+                "title": "Estilos",
+                "permalink": "/documentos2024/docs/category/estilos"
+              }
+            },
+            {
+              "id": "16webdeveloper/curso_dw",
+              "title": "Curso de desarrollo web",
+              "description": "Autor: Juan Pablo De La Torre Valdez",
+              "source": "@site/docs/16webdeveloper/curso_dw.md",
+              "sourceDirName": "16webdeveloper",
+              "slug": "/16webdeveloper/curso_dw",
+              "permalink": "/documentos2024/docs/16webdeveloper/curso_dw",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/16webdeveloper/curso_dw.md",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 1,
+              "frontMatter": {
+                "title": "Curso de desarrollo web",
+                "sidebar_label": "Curso de desarrollo web",
+                "sidebar_position": 1
+              },
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "Desarrollo web",
+                "permalink": "/documentos2024/docs/category/desarrollo-web"
+              },
+              "next": {
+                "title": "Blockchain",
+                "permalink": "/documentos2024/docs/category/blockchain"
+              }
+            },
+            {
+              "id": "30styles/css",
+              "title": "Apuntes de CSS3",
+              "description": "Rangos de ancho de pantalla",
+              "source": "@site/docs/30styles/css.md",
+              "sourceDirName": "30styles",
+              "slug": "/30styles/css",
+              "permalink": "/documentos2024/docs/30styles/css",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/30styles/css.md",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 1,
+              "frontMatter": {
+                "title": "Apuntes de CSS3",
+                "sidebar_label": "Apuntes de CSS3",
+                "sidebar_position": 1
+              },
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "Estilos",
+                "permalink": "/documentos2024/docs/category/estilos"
+              },
+              "next": {
+                "title": "VSC",
+                "permalink": "/documentos2024/docs/category/vsc"
+              }
+            },
+            {
+              "id": "50vsc/vsc",
+              "title": "Visual Studio Code",
+              "description": "Extensiones recomendadas:",
+              "source": "@site/docs/50vsc/vsc.md",
+              "sourceDirName": "50vsc",
+              "slug": "/50vsc/vsc",
+              "permalink": "/documentos2024/docs/50vsc/vsc",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/50vsc/vsc.md",
+              "tags": [],
+              "version": "current",
+              "frontMatter": {},
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "VSC",
+                "permalink": "/documentos2024/docs/category/vsc"
+              },
+              "next": {
+                "title": "Google Chrome",
+                "permalink": "/documentos2024/docs/category/google-chrome"
+              }
+            },
+            {
+              "id": "90chrome/chrome",
+              "title": "Google Chrome",
+              "description": "Extensiones recomendadas:",
+              "source": "@site/docs/90chrome/chrome.md",
+              "sourceDirName": "90chrome",
+              "slug": "/90chrome/chrome",
+              "permalink": "/documentos2024/docs/90chrome/chrome",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/90chrome/chrome.md",
+              "tags": [],
+              "version": "current",
+              "frontMatter": {},
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "Google Chrome",
+                "permalink": "/documentos2024/docs/category/google-chrome"
+              },
+              "next": {
+                "title": "Otros",
+                "permalink": "/documentos2024/docs/category/otros"
+              }
+            },
+            {
+              "id": "97otros/hwasung",
+              "title": "Hwasung Thermo",
+              "description": "Repositorios GitHub:",
+              "source": "@site/docs/97otros/hwasung.md",
+              "sourceDirName": "97otros",
+              "slug": "/97otros/hwasung",
+              "permalink": "/documentos2024/docs/97otros/hwasung",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/97otros/hwasung.md",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 98,
+              "frontMatter": {
+                "title": "Hwasung Thermo",
+                "sidebar_label": "Hwasung Thermo",
+                "sidebar_position": 98
+              },
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "Otros",
+                "permalink": "/documentos2024/docs/category/otros"
+              },
+              "next": {
+                "title": "Utilidades",
+                "permalink": "/documentos2024/docs/97otros/otros"
+              }
+            },
+            {
+              "id": "97otros/otros",
+              "title": "Utilidades",
+              "description": "Crear un avatar con IA",
+              "source": "@site/docs/97otros/otros.md",
+              "sourceDirName": "97otros",
+              "slug": "/97otros/otros",
+              "permalink": "/documentos2024/docs/97otros/otros",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/97otros/otros.md",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 99,
+              "frontMatter": {
+                "title": "Utilidades",
+                "sidebar_label": "Utilidades",
+                "sidebar_position": 99
+              },
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "Hwasung Thermo",
+                "permalink": "/documentos2024/docs/97otros/hwasung"
+              },
+              "next": {
+                "title": "Apuntes en revisión",
+                "permalink": "/documentos2024/docs/category/apuntes-en-revisión"
+              }
+            },
+            {
+              "id": "98revisar/99pruebas/prueba2",
+              "title": "Página de prueba 2",
+              "description": "",
+              "source": "@site/docs/98revisar/99pruebas/prueba2.mdx",
+              "sourceDirName": "98revisar/99pruebas",
+              "slug": "/98revisar/99pruebas/prueba2",
+              "permalink": "/documentos2024/docs/98revisar/99pruebas/prueba2",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/98revisar/99pruebas/prueba2.mdx",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 1,
+              "frontMatter": {
+                "title": "Página de prueba 2",
+                "sidebar_label": "prueba 1",
+                "sidebar_position": 1
+              },
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "Pruebas",
+                "permalink": "/documentos2024/docs/category/pruebas"
+              },
+              "next": {
+                "title": "Markdown",
+                "permalink": "/documentos2024/docs/98revisar/markdown"
+              }
+            },
+            {
+              "id": "98revisar/markdown",
+              "title": "Markdown",
+              "description": "+ Markdown syntax//enterprise.github.com/downloads/en/markdown-cheatsheet.pdf",
+              "source": "@site/docs/98revisar/markdown.md",
+              "sourceDirName": "98revisar",
+              "slug": "/98revisar/markdown",
+              "permalink": "/documentos2024/docs/98revisar/markdown",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/98revisar/markdown.md",
+              "tags": [],
+              "version": "current",
+              "frontMatter": {},
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "prueba 1",
+                "permalink": "/documentos2024/docs/98revisar/99pruebas/prueba2"
+              },
+              "next": {
+                "title": "Sitios web de interes:",
+                "permalink": "/documentos2024/docs/98revisar/sitios"
+              }
+            },
+            {
+              "id": "98revisar/sitios",
+              "title": "Sitios web de interes:",
+              "description": "Recursos de prueba",
+              "source": "@site/docs/98revisar/sitios.md",
+              "sourceDirName": "98revisar",
+              "slug": "/98revisar/sitios",
+              "permalink": "/documentos2024/docs/98revisar/sitios",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/98revisar/sitios.md",
+              "tags": [],
+              "version": "current",
+              "frontMatter": {},
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "Markdown",
+                "permalink": "/documentos2024/docs/98revisar/markdown"
+              },
+              "next": {
+                "title": "Livewire y WireUI: Crea interfaces web responsivas de forma fácil",
+                "permalink": "/documentos2024/docs/98revisar/wireui"
+              }
+            },
+            {
+              "id": "98revisar/wireui",
+              "title": "Livewire y WireUI: Crea interfaces web responsivas de forma fácil",
+              "description": "+ URL//codersfree.com/cursos/livewire-wireui-crea-interfaces-web-responsivas-facil",
+              "source": "@site/docs/98revisar/wireui.md",
+              "sourceDirName": "98revisar",
+              "slug": "/98revisar/wireui",
+              "permalink": "/documentos2024/docs/98revisar/wireui",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/98revisar/wireui.md",
+              "tags": [],
+              "version": "current",
+              "frontMatter": {},
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "Sitios web de interes:",
+                "permalink": "/documentos2024/docs/98revisar/sitios"
+              }
+            },
+            {
+              "id": "intro",
+              "title": "Apuntes Soluciones++",
+              "description": "Respositorios de GitHub en revisión",
+              "source": "@site/docs/intro.md",
+              "sourceDirName": ".",
+              "slug": "/intro",
+              "permalink": "/documentos2024/docs/intro",
+              "draft": false,
+              "unlisted": false,
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/intro.md",
+              "tags": [],
+              "version": "current",
+              "sidebarPosition": 0,
+              "frontMatter": {
+                "sidebar_position": 0
+              },
+              "sidebar": "tutorialSidebar",
+              "next": {
+                "title": "Laravel",
+                "permalink": "/documentos2024/docs/category/laravel"
+              }
+            }
+          ],
+          "drafts": [],
+          "sidebars": {
+            "tutorialSidebar": [
+              {
+                "type": "doc",
+                "id": "intro"
+              },
+              {
+                "type": "category",
+                "label": "Laravel",
+                "collapsible": true,
+                "collapsed": true,
+                "items": [
+                  {
+                    "type": "doc",
+                    "id": "00laravel/laravel11",
+                    "label": "Apuntes de Laravel 11"
+                  },
+                  {
+                    "type": "doc",
+                    "id": "00laravel/laravel10",
+                    "label": "Apuntes de Laravel 10"
+                  },
+                  {
+                    "type": "doc",
+                    "id": "00laravel/test",
+                    "label": "Test en Laravel"
+                  },
+                  {
+                    "type": "category",
+                    "label": "Proyectos Laravel",
+                    "collapsible": true,
+                    "collapsed": true,
+                    "items": [
+                      {
+                        "type": "doc",
+                        "id": "00laravel/proyectos/2021_08_upload_file",
+                        "label": "Subir archivos"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "00laravel/proyectos/2021_06_plataforma_cursos",
+                        "label": "Plataforma de cursos"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "00laravel/proyectos/2021_03_multiples_file",
+                        "label": "Subir múltiples archivos"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "00laravel/proyectos/2020_08_clinica",
+                        "label": "Sistema de Historia Clínica"
+                      }
+                    ],
+                    "link": {
+                      "type": "generated-index",
+                      "description": "Proyectos Laravel",
+                      "slug": "/category/proyectos-laravel",
+                      "permalink": "/documentos2024/docs/category/proyectos-laravel"
+                    }
+                  },
+                  {
+                    "type": "category",
+                    "label": "Cursos Laravel",
+                    "collapsible": true,
+                    "collapsed": true,
+                    "items": [
+                      {
+                        "type": "doc",
+                        "id": "00laravel/cursos/laravel_passport",
+                        "label": "Laravel 8 - Laravel Passort"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "00laravel/cursos/apirestfull",
+                        "label": "Laravel API RESTful"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "00laravel/cursos/laravel8_aws",
+                        "label": "Laravel 8 en AWS"
+                      },
+                      {
+                        "type": "doc",
+                        "id": "00laravel/cursos/laravel8",
+                        "label": "Curso de Laravel 8"
+                      }
+                    ],
+                    "link": {
+                      "type": "generated-index",
+                      "description": "Cursos Laravel",
+                      "slug": "/category/cursos-laravel",
+                      "permalink": "/documentos2024/docs/category/cursos-laravel"
+                    }
+                  }
+                ],
+                "link": {
+                  "type": "generated-index",
+                  "description": "Apuntes de Laravel",
+                  "slug": "/category/laravel",
+                  "permalink": "/documentos2024/docs/category/laravel"
+                }
+              },
+              {
+                "type": "category",
+                "label": "Vue",
+                "collapsible": true,
+                "collapsed": true,
+                "items": [
+                  {
+                    "type": "doc",
+                    "id": "02vue/vue",
+                    "label": "Apuntes de Vue 3"
+                  }
+                ],
+                "link": {
+                  "type": "generated-index",
+                  "description": "Apuntes de Vue",
+                  "slug": "/category/vue",
+                  "permalink": "/documentos2024/docs/category/vue"
+                }
+              },
+              {
+                "type": "category",
+                "label": "React",
+                "collapsible": true,
+                "collapsed": true,
+                "items": [
+                  {
+                    "type": "doc",
+                    "label": "Proyecto Docusaurus",
+                    "id": "03react/docusaurus/docusaurus"
+                  },
+                  {
+                    "type": "category",
+                    "label": "Tutorial docusaurus",
+                    "collapsible": true,
+                    "collapsed": true,
+                    "items": [
+                      {
+                        "type": "doc",
+                        "id": "03react/tutorial/intro"
+                      },
+                      {
+                        "type": "category",
+                        "label": "Tutorial - Basics",
+                        "collapsible": true,
+                        "collapsed": true,
+                        "items": [
+                          {
+                            "type": "doc",
+                            "id": "03react/tutorial/tutorial-basics/create-a-page"
+                          },
+                          {
+                            "type": "doc",
+                            "id": "03react/tutorial/tutorial-basics/create-a-document"
+                          },
+                          {
+                            "type": "doc",
+                            "id": "03react/tutorial/tutorial-basics/create-a-blog-post"
+                          },
+                          {
+                            "type": "doc",
+                            "id": "03react/tutorial/tutorial-basics/markdown-features"
+                          },
+                          {
+                            "type": "doc",
+                            "id": "03react/tutorial/tutorial-basics/deploy-your-site"
+                          },
+                          {
+                            "type": "doc",
+                            "id": "03react/tutorial/tutorial-basics/congratulations"
+                          }
+                        ],
+                        "link": {
+                          "type": "generated-index",
+                          "description": "5 minutes to learn the most important Docusaurus concepts.",
+                          "slug": "/category/tutorial---basics",
+                          "permalink": "/documentos2024/docs/category/tutorial---basics"
+                        }
+                      },
+                      {
+                        "type": "category",
+                        "label": "Tutorial - Extras",
+                        "collapsible": true,
+                        "collapsed": true,
+                        "items": [
+                          {
+                            "type": "doc",
+                            "id": "03react/tutorial/tutorial-extras/manage-docs-versions"
+                          },
+                          {
+                            "type": "doc",
+                            "id": "03react/tutorial/tutorial-extras/translate-your-site"
+                          }
+                        ],
+                        "link": {
+                          "type": "generated-index",
+                          "slug": "/category/tutorial---extras",
+                          "permalink": "/documentos2024/docs/category/tutorial---extras"
+                        }
+                      }
+                    ],
+                    "link": {
+                      "type": "generated-index",
+                      "description": "Tutorial docusaurus",
+                      "slug": "/category/tutorial-docusaurus",
+                      "permalink": "/documentos2024/docs/category/tutorial-docusaurus"
+                    }
+                  }
+                ],
+                "link": {
+                  "type": "generated-index",
+                  "description": "Apuntes de React",
+                  "slug": "/category/react",
+                  "permalink": "/documentos2024/docs/category/react"
+                }
+              },
+              {
+                "type": "category",
+                "label": "jQuery",
+                "collapsible": true,
+                "collapsed": true,
+                "items": [
+                  {
+                    "type": "doc",
+                    "id": "06jquery/jquery",
+                    "label": "Apuntes de jQuery"
+                  }
+                ],
+                "link": {
+                  "type": "generated-index",
+                  "description": "Apuntes de jQuery",
+                  "slug": "/category/jquery",
+                  "permalink": "/documentos2024/docs/category/jquery"
+                }
+              },
+              {
+                "type": "category",
+                "label": "Arquitecturas",
+                "collapsible": true,
+                "collapsed": true,
+                "items": [
+                  {
+                    "type": "doc",
+                    "id": "10arquitectura/arquitectura_hexagonal",
+                    "label": "Apuntes de Arquitectura Hexagonal"
+                  },
+                  {
+                    "type": "doc",
+                    "id": "10arquitectura/solid",
+                    "label": "Apuntes de Principios SOLID"
+                  }
+                ],
+                "link": {
+                  "type": "generated-index",
+                  "description": "Apuntes de Arquitectura Hexagonal",
+                  "slug": "/category/arquitecturas",
+                  "permalink": "/documentos2024/docs/category/arquitecturas"
+                }
+              },
+              {
+                "type": "category",
+                "label": "Docker",
+                "collapsible": true,
+                "collapsed": true,
+                "items": [
+                  {
+                    "type": "doc",
+                    "id": "14docker/docker",
+                    "label": "Apuntes de Docker"
+                  }
+                ],
+                "link": {
+                  "type": "generated-index",
+                  "description": "Apuntes de Blockchain",
+                  "slug": "/category/docker",
+                  "permalink": "/documentos2024/docs/category/docker"
+                }
+              },
+              {
+                "type": "category",
+                "label": "Desarrollo web",
+                "collapsible": true,
+                "collapsed": true,
+                "items": [
+                  {
+                    "type": "doc",
+                    "id": "16webdeveloper/curso_dw",
+                    "label": "Curso de desarrollo web"
+                  }
+                ],
+                "link": {
+                  "type": "generated-index",
+                  "description": "Desarrollo web",
+                  "slug": "/category/desarrollo-web",
+                  "permalink": "/documentos2024/docs/category/desarrollo-web"
+                }
+              },
+              {
+                "type": "category",
+                "label": "Blockchain",
+                "collapsible": true,
+                "collapsed": true,
+                "items": [
+                  {
+                    "type": "doc",
+                    "id": "15blockchain/solidity",
+                    "label": "Apuntes de Solidity"
+                  }
+                ],
+                "link": {
+                  "type": "generated-index",
+                  "description": "Apuntes de Blockchain",
+                  "slug": "/category/blockchain",
+                  "permalink": "/documentos2024/docs/category/blockchain"
+                }
+              },
+              {
+                "type": "category",
+                "label": "Estilos",
+                "collapsible": true,
+                "collapsed": true,
+                "items": [
+                  {
+                    "type": "doc",
+                    "id": "30styles/css",
+                    "label": "Apuntes de CSS3"
+                  }
+                ],
+                "link": {
+                  "type": "generated-index",
+                  "description": "Apuntes de Estilos",
+                  "slug": "/category/estilos",
+                  "permalink": "/documentos2024/docs/category/estilos"
+                }
+              },
+              {
+                "type": "category",
+                "label": "VSC",
+                "collapsible": true,
+                "collapsed": true,
+                "items": [
+                  {
+                    "type": "doc",
+                    "id": "50vsc/vsc"
+                  }
+                ],
+                "link": {
+                  "type": "generated-index",
+                  "description": "Apuntes de VSC",
+                  "slug": "/category/vsc",
+                  "permalink": "/documentos2024/docs/category/vsc"
+                }
+              },
+              {
+                "type": "category",
+                "label": "Google Chrome",
+                "collapsible": true,
+                "collapsed": true,
+                "items": [
+                  {
+                    "type": "doc",
+                    "id": "90chrome/chrome"
+                  }
+                ],
+                "link": {
+                  "type": "generated-index",
+                  "description": "Apuntes de Google Chrome",
+                  "slug": "/category/google-chrome",
+                  "permalink": "/documentos2024/docs/category/google-chrome"
+                }
+              },
+              {
+                "type": "category",
+                "label": "Otros",
+                "collapsible": true,
+                "collapsed": true,
+                "items": [
+                  {
+                    "type": "doc",
+                    "id": "97otros/hwasung",
+                    "label": "Hwasung Thermo"
+                  },
+                  {
+                    "type": "doc",
+                    "id": "97otros/otros",
+                    "label": "Utilidades"
+                  }
+                ],
+                "link": {
+                  "type": "generated-index",
+                  "description": "Otros",
+                  "slug": "/category/otros",
+                  "permalink": "/documentos2024/docs/category/otros"
+                }
+              },
+              {
+                "type": "category",
+                "label": "Apuntes en revisión",
+                "collapsible": true,
+                "collapsed": true,
+                "items": [
+                  {
+                    "type": "category",
+                    "label": "Pruebas",
+                    "collapsible": true,
+                    "collapsed": true,
+                    "items": [
+                      {
+                        "type": "doc",
+                        "id": "98revisar/99pruebas/prueba2",
+                        "label": "prueba 1"
+                      }
+                    ],
+                    "link": {
+                      "type": "generated-index",
+                      "description": "Estos son pruebas",
+                      "slug": "/category/pruebas",
+                      "permalink": "/documentos2024/docs/category/pruebas"
+                    }
+                  },
+                  {
+                    "type": "doc",
+                    "id": "98revisar/markdown"
+                  },
+                  {
+                    "type": "doc",
+                    "id": "98revisar/sitios"
+                  },
+                  {
+                    "type": "doc",
+                    "id": "98revisar/wireui"
+                  }
+                ],
+                "link": {
+                  "type": "generated-index",
+                  "description": "Apuntes en revisión",
+                  "slug": "/category/apuntes-en-revisión",
+                  "permalink": "/documentos2024/docs/category/apuntes-en-revisión"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "docusaurus-plugin-content-blog": {
+    "default": {
+      "blogSidebarTitle": "Recent posts",
+      "blogPosts": [
+        {
+          "id": "welcome",
+          "metadata": {
+            "permalink": "/documentos2024/blog/welcome",
+            "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/blog/2021-08-26-welcome/index.md",
+            "source": "@site/blog/2021-08-26-welcome/index.md",
+            "title": "Welcome",
+            "description": "Docusaurus blogging features are powered by the blog plugin.",
+            "date": "2021-08-26T00:00:00.000Z",
+            "formattedDate": "26 de agosto de 2021",
+            "tags": [
+              {
+                "label": "facebook",
+                "permalink": "/documentos2024/blog/tags/facebook"
+              },
+              {
+                "label": "hello",
+                "permalink": "/documentos2024/blog/tags/hello"
+              },
+              {
+                "label": "docusaurus",
+                "permalink": "/documentos2024/blog/tags/docusaurus"
+              }
+            ],
+            "readingTime": 0.405,
+            "hasTruncateMarker": false,
+            "authors": [
+              {
+                "name": "Sébastien Lorber",
+                "title": "Docusaurus maintainer",
+                "url": "https://sebastienlorber.com",
+                "imageURL": "https://github.com/slorber.png",
+                "key": "slorber"
+              },
+              {
+                "name": "Yangshun Tay",
+                "title": "Front End Engineer @ Facebook",
+                "url": "https://github.com/yangshun",
+                "imageURL": "https://github.com/yangshun.png",
+                "key": "yangshun"
+              }
+            ],
+            "frontMatter": {
+              "slug": "welcome",
+              "title": "Welcome",
+              "authors": [
+                "slorber",
+                "yangshun"
+              ],
+              "tags": [
+                "facebook",
+                "hello",
+                "docusaurus"
+              ]
+            },
+            "unlisted": false,
+            "nextItem": {
+              "title": "MDX Blog Post",
+              "permalink": "/documentos2024/blog/mdx-blog-post"
+            }
+          },
+          "content": "[Docusaurus blogging features](https://docusaurus.io/docs/blog) are powered by the [blog plugin](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-blog).\r\n\r\nSimply add Markdown files (or folders) to the `blog` directory.\r\n\r\nRegular blog authors can be added to `authors.yml`.\r\n\r\nThe blog post date can be extracted from filenames, such as:\r\n\r\n- `2019-05-30-welcome.md`\r\n- `2019-05-30-welcome/index.md`\r\n\r\nA blog post folder can be convenient to co-locate blog post images:\r\n\r\n![Docusaurus Plushie](./docusaurus-plushie-banner.jpeg)\r\n\r\nThe blog supports tags as well!\r\n\r\n**And if you don't want a blog**: just delete this directory, and use `blog: false` in your Docusaurus config."
+        },
+        {
+          "id": "mdx-blog-post",
+          "metadata": {
+            "permalink": "/documentos2024/blog/mdx-blog-post",
+            "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/blog/2021-08-01-mdx-blog-post.mdx",
+            "source": "@site/blog/2021-08-01-mdx-blog-post.mdx",
+            "title": "MDX Blog Post",
+            "description": "Blog posts support Docusaurus Markdown features, such as MDX.",
+            "date": "2021-08-01T00:00:00.000Z",
+            "formattedDate": "1 de agosto de 2021",
+            "tags": [
+              {
+                "label": "docusaurus",
+                "permalink": "/documentos2024/blog/tags/docusaurus"
+              }
+            ],
+            "readingTime": 0.175,
+            "hasTruncateMarker": false,
+            "authors": [
+              {
+                "name": "Sébastien Lorber",
+                "title": "Docusaurus maintainer",
+                "url": "https://sebastienlorber.com",
+                "imageURL": "https://github.com/slorber.png",
+                "key": "slorber"
+              }
+            ],
+            "frontMatter": {
+              "slug": "mdx-blog-post",
+              "title": "MDX Blog Post",
+              "authors": [
+                "slorber"
+              ],
+              "tags": [
+                "docusaurus"
+              ]
+            },
+            "unlisted": false,
+            "prevItem": {
+              "title": "Welcome",
+              "permalink": "/documentos2024/blog/welcome"
+            },
+            "nextItem": {
+              "title": "Long Blog Post",
+              "permalink": "/documentos2024/blog/long-blog-post"
+            }
+          },
+          "content": "Blog posts support [Docusaurus Markdown features](https://docusaurus.io/docs/markdown-features), such as [MDX](https://mdxjs.com/).\r\n\r\n:::tip\r\n\r\nUse the power of React to create interactive blog posts.\r\n\r\n```js\r\n<button onClick={() => alert('button clicked!')}>Click me!</button>\r\n```\r\n\r\n<button onClick={() => alert('button clicked!')}>Click me!</button>\r\n\r\n:::"
+        },
+        {
+          "id": "long-blog-post",
+          "metadata": {
+            "permalink": "/documentos2024/blog/long-blog-post",
+            "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/blog/2019-05-29-long-blog-post.md",
+            "source": "@site/blog/2019-05-29-long-blog-post.md",
+            "title": "Long Blog Post",
+            "description": "This is the summary of a very long blog post,",
+            "date": "2019-05-29T00:00:00.000Z",
+            "formattedDate": "29 de mayo de 2019",
+            "tags": [
+              {
+                "label": "hello",
+                "permalink": "/documentos2024/blog/tags/hello"
+              },
+              {
+                "label": "docusaurus",
+                "permalink": "/documentos2024/blog/tags/docusaurus"
+              }
+            ],
+            "readingTime": 2.05,
+            "hasTruncateMarker": true,
+            "authors": [
+              {
+                "name": "Endilie Yacop Sucipto",
+                "title": "Maintainer of Docusaurus",
+                "url": "https://github.com/endiliey",
+                "imageURL": "https://github.com/endiliey.png",
+                "key": "endi"
+              }
+            ],
+            "frontMatter": {
+              "slug": "long-blog-post",
+              "title": "Long Blog Post",
+              "authors": "endi",
+              "tags": [
+                "hello",
+                "docusaurus"
+              ]
+            },
+            "unlisted": false,
+            "prevItem": {
+              "title": "MDX Blog Post",
+              "permalink": "/documentos2024/blog/mdx-blog-post"
+            },
+            "nextItem": {
+              "title": "First Blog Post",
+              "permalink": "/documentos2024/blog/first-blog-post"
+            }
+          },
+          "content": "This is the summary of a very long blog post,\r\n\r\nUse a `<!--` `truncate` `-->` comment to limit blog post size in the list view.\r\n\r\n<!--truncate-->\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet"
+        },
+        {
+          "id": "first-blog-post",
+          "metadata": {
+            "permalink": "/documentos2024/blog/first-blog-post",
+            "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/blog/2019-05-28-first-blog-post.md",
+            "source": "@site/blog/2019-05-28-first-blog-post.md",
+            "title": "First Blog Post",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet",
+            "date": "2019-05-28T00:00:00.000Z",
+            "formattedDate": "28 de mayo de 2019",
+            "tags": [
+              {
+                "label": "hola",
+                "permalink": "/documentos2024/blog/tags/hola"
+              },
+              {
+                "label": "docusaurus",
+                "permalink": "/documentos2024/blog/tags/docusaurus"
+              }
+            ],
+            "readingTime": 0.12,
+            "hasTruncateMarker": false,
+            "authors": [
+              {
+                "name": "Gao Wei",
+                "title": "Docusaurus Core Team",
+                "url": "https://github.com/wgao19",
+                "image_url": "https://github.com/wgao19.png",
+                "imageURL": "https://github.com/wgao19.png"
+              }
+            ],
+            "frontMatter": {
+              "slug": "first-blog-post",
+              "title": "First Blog Post",
+              "authors": {
+                "name": "Gao Wei",
+                "title": "Docusaurus Core Team",
+                "url": "https://github.com/wgao19",
+                "image_url": "https://github.com/wgao19.png",
+                "imageURL": "https://github.com/wgao19.png"
+              },
+              "tags": [
+                "hola",
+                "docusaurus"
+              ]
+            },
+            "unlisted": false,
+            "prevItem": {
+              "title": "Long Blog Post",
+              "permalink": "/documentos2024/blog/long-blog-post"
+            }
+          },
+          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet"
+        }
+      ],
+      "blogListPaginated": [
+        {
+          "items": [
+            "welcome",
+            "mdx-blog-post",
+            "long-blog-post",
+            "first-blog-post"
+          ],
+          "metadata": {
+            "permalink": "/documentos2024/blog",
+            "page": 1,
+            "postsPerPage": 10,
+            "totalPages": 1,
+            "totalCount": 4,
+            "blogDescription": "Blog",
+            "blogTitle": "Blog"
+          }
+        }
+      ],
+      "blogTags": {
+        "/documentos2024/blog/tags/facebook": {
+          "label": "facebook",
+          "items": [
+            "welcome"
+          ],
+          "permalink": "/documentos2024/blog/tags/facebook",
+          "pages": [
+            {
+              "items": [
+                "welcome"
+              ],
+              "metadata": {
+                "permalink": "/documentos2024/blog/tags/facebook",
+                "page": 1,
+                "postsPerPage": 10,
+                "totalPages": 1,
+                "totalCount": 1,
+                "blogDescription": "Blog",
+                "blogTitle": "Blog"
+              }
+            }
+          ],
+          "unlisted": false
+        },
+        "/documentos2024/blog/tags/hello": {
+          "label": "hello",
+          "items": [
+            "welcome",
+            "long-blog-post"
+          ],
+          "permalink": "/documentos2024/blog/tags/hello",
+          "pages": [
+            {
+              "items": [
+                "welcome",
+                "long-blog-post"
+              ],
+              "metadata": {
+                "permalink": "/documentos2024/blog/tags/hello",
+                "page": 1,
+                "postsPerPage": 10,
+                "totalPages": 1,
+                "totalCount": 2,
+                "blogDescription": "Blog",
+                "blogTitle": "Blog"
+              }
+            }
+          ],
+          "unlisted": false
+        },
+        "/documentos2024/blog/tags/docusaurus": {
+          "label": "docusaurus",
+          "items": [
+            "welcome",
+            "mdx-blog-post",
+            "long-blog-post",
+            "first-blog-post"
+          ],
+          "permalink": "/documentos2024/blog/tags/docusaurus",
+          "pages": [
+            {
+              "items": [
+                "welcome",
+                "mdx-blog-post",
+                "long-blog-post",
+                "first-blog-post"
+              ],
+              "metadata": {
+                "permalink": "/documentos2024/blog/tags/docusaurus",
+                "page": 1,
+                "postsPerPage": 10,
+                "totalPages": 1,
+                "totalCount": 4,
+                "blogDescription": "Blog",
+                "blogTitle": "Blog"
+              }
+            }
+          ],
+          "unlisted": false
+        },
+        "/documentos2024/blog/tags/hola": {
+          "label": "hola",
+          "items": [
+            "first-blog-post"
+          ],
+          "permalink": "/documentos2024/blog/tags/hola",
+          "pages": [
+            {
+              "items": [
+                "first-blog-post"
+              ],
+              "metadata": {
+                "permalink": "/documentos2024/blog/tags/hola",
+                "page": 1,
+                "postsPerPage": 10,
+                "totalPages": 1,
+                "totalCount": 1,
+                "blogDescription": "Blog",
+                "blogTitle": "Blog"
+              }
+            }
+          ],
+          "unlisted": false
+        }
+      },
+      "blogTagsListPath": "/documentos2024/blog/tags"
+    }
+  },
+  "docusaurus-plugin-content-pages": {
+    "default": [
+      {
+        "type": "jsx",
+        "permalink": "/documentos2024/",
+        "source": "@site/src/pages/index.js"
+      },
+      {
+        "type": "mdx",
+        "permalink": "/documentos2024/markdown-page",
+        "source": "@site/src/pages/markdown-page.md",
+        "title": "Markdown page example",
+        "description": "You don't need React to write simple standalone pages.",
+        "frontMatter": {
+          "title": "Markdown page example"
+        },
+        "unlisted": false
+      }
+    ]
+  },
+  "docusaurus-plugin-debug": {},
+  "docusaurus-theme-classic": {},
+  "docusaurus-bootstrap-plugin": {},
+  "docusaurus-mdx-fallback-plugin": {}
+}

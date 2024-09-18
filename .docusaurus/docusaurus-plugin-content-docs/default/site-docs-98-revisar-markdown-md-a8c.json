@@ -1,0 +1,24 @@
+{
+  "id": "98revisar/markdown",
+  "title": "Markdown",
+  "description": "+ Markdown syntax//enterprise.github.com/downloads/en/markdown-cheatsheet.pdf",
+  "source": "@site/docs/98revisar/markdown.md",
+  "sourceDirName": "98revisar",
+  "slug": "/98revisar/markdown",
+  "permalink": "/documentos2024/docs/98revisar/markdown",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/98revisar/markdown.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "prueba 1",
+    "permalink": "/documentos2024/docs/98revisar/99pruebas/prueba2"
+  },
+  "next": {
+    "title": "Sitios web de interes:",
+    "permalink": "/documentos2024/docs/98revisar/sitios"
+  }
+}

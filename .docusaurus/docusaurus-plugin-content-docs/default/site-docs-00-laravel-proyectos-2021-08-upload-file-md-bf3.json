@@ -1,0 +1,29 @@
+{
+  "id": "00laravel/proyectos/2021_08_upload_file",
+  "title": "Subir archivos en Laravel",
+  "description": "GitHub//github.com/petrix12/file.git",
+  "source": "@site/docs/00laravel/proyectos/2021_08_upload_file.md",
+  "sourceDirName": "00laravel/proyectos",
+  "slug": "/00laravel/proyectos/2021_08_upload_file",
+  "permalink": "/documentos2024/docs/00laravel/proyectos/2021_08_upload_file",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/00laravel/proyectos/2021_08_upload_file.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 97,
+  "frontMatter": {
+    "title": "Subir archivos en Laravel",
+    "sidebar_label": "Subir archivos",
+    "sidebar_position": 97
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Proyectos Laravel",
+    "permalink": "/documentos2024/docs/category/proyectos-laravel"
+  },
+  "next": {
+    "title": "Plataforma de cursos",
+    "permalink": "/documentos2024/docs/00laravel/proyectos/2021_06_plataforma_cursos"
+  }
+}

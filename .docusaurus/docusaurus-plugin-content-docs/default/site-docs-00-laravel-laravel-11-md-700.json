@@ -1,0 +1,29 @@
+{
+  "id": "00laravel/laravel11",
+  "title": "Apuntes de Laravel 11",
+  "description": "+ Para trabajar con Laravel 11 es importante trabajar con una versión de PHP 8.2 o superior.",
+  "source": "@site/docs/00laravel/laravel11.md",
+  "sourceDirName": "00laravel",
+  "slug": "/00laravel/laravel11",
+  "permalink": "/documentos2024/docs/00laravel/laravel11",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/00laravel/laravel11.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "title": "Apuntes de Laravel 11",
+    "sidebar_label": "Apuntes de Laravel 11",
+    "sidebar_position": 0
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Laravel",
+    "permalink": "/documentos2024/docs/category/laravel"
+  },
+  "next": {
+    "title": "Apuntes de Laravel 10",
+    "permalink": "/documentos2024/docs/00laravel/laravel10"
+  }
+}

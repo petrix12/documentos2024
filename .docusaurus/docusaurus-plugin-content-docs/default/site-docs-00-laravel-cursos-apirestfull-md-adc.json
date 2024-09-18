@@ -1,0 +1,29 @@
+{
+  "id": "00laravel/cursos/apirestfull",
+  "title": "Laravel API RESTful",
+  "description": "+ URL Curso//www.udemy.com/course/aprende-a-crear-una-api-restful-con-laravel",
+  "source": "@site/docs/00laravel/cursos/apirestfull.md",
+  "sourceDirName": "00laravel/cursos",
+  "slug": "/00laravel/cursos/apirestfull",
+  "permalink": "/documentos2024/docs/00laravel/cursos/apirestfull",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/00laravel/cursos/apirestfull.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 98,
+  "frontMatter": {
+    "title": "Laravel API RESTful",
+    "sidebar_label": "Laravel API RESTful",
+    "sidebar_position": 98
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Laravel 8 - Laravel Passort",
+    "permalink": "/documentos2024/docs/00laravel/cursos/laravel_passport"
+  },
+  "next": {
+    "title": "Laravel 8 en AWS",
+    "permalink": "/documentos2024/docs/00laravel/cursos/laravel8_aws"
+  }
+}

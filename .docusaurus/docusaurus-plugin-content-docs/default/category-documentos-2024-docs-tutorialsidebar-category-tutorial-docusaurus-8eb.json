@@ -1,0 +1,16 @@
+{
+  "title": "Tutorial docusaurus",
+  "description": "Tutorial docusaurus",
+  "slug": "/category/tutorial-docusaurus",
+  "permalink": "/documentos2024/docs/category/tutorial-docusaurus",
+  "navigation": {
+    "previous": {
+      "title": "Proyecto Docusaurus",
+      "permalink": "/documentos2024/docs/03react/docusaurus/"
+    },
+    "next": {
+      "title": "Tutorial Intro",
+      "permalink": "/documentos2024/docs/03react/tutorial/intro"
+    }
+  }
+}

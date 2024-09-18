@@ -1,0 +1,16 @@
+{
+  "title": "Pruebas",
+  "description": "Estos son pruebas",
+  "slug": "/category/pruebas",
+  "permalink": "/documentos2024/docs/category/pruebas",
+  "navigation": {
+    "previous": {
+      "title": "Apuntes en revisión",
+      "permalink": "/documentos2024/docs/category/apuntes-en-revisión"
+    },
+    "next": {
+      "title": "prueba 1",
+      "permalink": "/documentos2024/docs/98revisar/99pruebas/prueba2"
+    }
+  }
+}

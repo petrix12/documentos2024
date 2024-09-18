@@ -1,0 +1,29 @@
+{
+  "id": "00laravel/cursos/laravel8_aws",
+  "title": "Laravel 8 en AWS",
+  "description": "+ https://www.udemy.com/course/aprende-a-instalar-laravel-8-en-amazon-web-services",
+  "source": "@site/docs/00laravel/cursos/laravel8_aws.md",
+  "sourceDirName": "00laravel/cursos",
+  "slug": "/00laravel/cursos/laravel8_aws",
+  "permalink": "/documentos2024/docs/00laravel/cursos/laravel8_aws",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/00laravel/cursos/laravel8_aws.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 99,
+  "frontMatter": {
+    "title": "Laravel 8 en AWS",
+    "sidebar_label": "Laravel 8 en AWS",
+    "sidebar_position": 99
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Laravel API RESTful",
+    "permalink": "/documentos2024/docs/00laravel/cursos/apirestfull"
+  },
+  "next": {
+    "title": "Curso de Laravel 8",
+    "permalink": "/documentos2024/docs/00laravel/cursos/laravel8"
+  }
+}

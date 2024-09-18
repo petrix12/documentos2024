@@ -1,0 +1,313 @@
+{
+  "docusaurus-plugin-content-docs": {
+    "default": {
+      "path": "/documentos2024/docs",
+      "versions": [
+        {
+          "name": "current",
+          "label": "Next",
+          "isLast": true,
+          "path": "/documentos2024/docs",
+          "mainDocId": "intro",
+          "docs": [
+            {
+              "id": "00laravel/cursos/apirestfull",
+              "path": "/documentos2024/docs/00laravel/cursos/apirestfull",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "00laravel/cursos/laravel_passport",
+              "path": "/documentos2024/docs/00laravel/cursos/laravel_passport",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "00laravel/cursos/laravel8",
+              "path": "/documentos2024/docs/00laravel/cursos/laravel8",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "00laravel/cursos/laravel8_aws",
+              "path": "/documentos2024/docs/00laravel/cursos/laravel8_aws",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "00laravel/laravel10",
+              "path": "/documentos2024/docs/00laravel/laravel10",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "00laravel/laravel11",
+              "path": "/documentos2024/docs/00laravel/laravel11",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "00laravel/proyectos/2020_08_clinica",
+              "path": "/documentos2024/docs/00laravel/proyectos/2020_08_clinica",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "00laravel/proyectos/2021_03_multiples_file",
+              "path": "/documentos2024/docs/00laravel/proyectos/2021_03_multiples_file",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "00laravel/proyectos/2021_06_plataforma_cursos",
+              "path": "/documentos2024/docs/00laravel/proyectos/2021_06_plataforma_cursos",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "00laravel/proyectos/2021_08_upload_file",
+              "path": "/documentos2024/docs/00laravel/proyectos/2021_08_upload_file",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "00laravel/test",
+              "path": "/documentos2024/docs/00laravel/test",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "02vue/vue",
+              "path": "/documentos2024/docs/02vue/vue",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "03react/docusaurus/docusaurus",
+              "path": "/documentos2024/docs/03react/docusaurus/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "03react/tutorial/intro",
+              "path": "/documentos2024/docs/03react/tutorial/intro",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "03react/tutorial/tutorial-basics/congratulations",
+              "path": "/documentos2024/docs/03react/tutorial/tutorial-basics/congratulations",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "03react/tutorial/tutorial-basics/create-a-blog-post",
+              "path": "/documentos2024/docs/03react/tutorial/tutorial-basics/create-a-blog-post",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "03react/tutorial/tutorial-basics/create-a-document",
+              "path": "/documentos2024/docs/03react/tutorial/tutorial-basics/create-a-document",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "03react/tutorial/tutorial-basics/create-a-page",
+              "path": "/documentos2024/docs/03react/tutorial/tutorial-basics/create-a-page",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "03react/tutorial/tutorial-basics/deploy-your-site",
+              "path": "/documentos2024/docs/03react/tutorial/tutorial-basics/deploy-your-site",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "03react/tutorial/tutorial-basics/markdown-features",
+              "path": "/documentos2024/docs/03react/tutorial/tutorial-basics/markdown-features",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "03react/tutorial/tutorial-extras/manage-docs-versions",
+              "path": "/documentos2024/docs/03react/tutorial/tutorial-extras/manage-docs-versions",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "03react/tutorial/tutorial-extras/translate-your-site",
+              "path": "/documentos2024/docs/03react/tutorial/tutorial-extras/translate-your-site",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "06jquery/jquery",
+              "path": "/documentos2024/docs/06jquery/jquery",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "10arquitectura/arquitectura_hexagonal",
+              "path": "/documentos2024/docs/10arquitectura/arquitectura_hexagonal",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "10arquitectura/solid",
+              "path": "/documentos2024/docs/10arquitectura/solid",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "14docker/docker",
+              "path": "/documentos2024/docs/14docker/docker",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "15blockchain/solidity",
+              "path": "/documentos2024/docs/15blockchain/solidity",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "16webdeveloper/curso_dw",
+              "path": "/documentos2024/docs/16webdeveloper/curso_dw",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "30styles/css",
+              "path": "/documentos2024/docs/30styles/css",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "50vsc/vsc",
+              "path": "/documentos2024/docs/50vsc/vsc",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "90chrome/chrome",
+              "path": "/documentos2024/docs/90chrome/chrome",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "97otros/hwasung",
+              "path": "/documentos2024/docs/97otros/hwasung",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "97otros/otros",
+              "path": "/documentos2024/docs/97otros/otros",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "98revisar/99pruebas/prueba2",
+              "path": "/documentos2024/docs/98revisar/99pruebas/prueba2",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "98revisar/markdown",
+              "path": "/documentos2024/docs/98revisar/markdown",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "98revisar/sitios",
+              "path": "/documentos2024/docs/98revisar/sitios",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "98revisar/wireui",
+              "path": "/documentos2024/docs/98revisar/wireui",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "intro",
+              "path": "/documentos2024/docs/intro",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "/category/laravel",
+              "path": "/documentos2024/docs/category/laravel",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "/category/proyectos-laravel",
+              "path": "/documentos2024/docs/category/proyectos-laravel",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "/category/cursos-laravel",
+              "path": "/documentos2024/docs/category/cursos-laravel",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "/category/vue",
+              "path": "/documentos2024/docs/category/vue",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "/category/react",
+              "path": "/documentos2024/docs/category/react",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "/category/tutorial-docusaurus",
+              "path": "/documentos2024/docs/category/tutorial-docusaurus",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "/category/tutorial---basics",
+              "path": "/documentos2024/docs/category/tutorial---basics",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "/category/tutorial---extras",
+              "path": "/documentos2024/docs/category/tutorial---extras",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "/category/jquery",
+              "path": "/documentos2024/docs/category/jquery",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "/category/arquitecturas",
+              "path": "/documentos2024/docs/category/arquitecturas",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "/category/docker",
+              "path": "/documentos2024/docs/category/docker",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "/category/desarrollo-web",
+              "path": "/documentos2024/docs/category/desarrollo-web",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "/category/blockchain",
+              "path": "/documentos2024/docs/category/blockchain",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "/category/estilos",
+              "path": "/documentos2024/docs/category/estilos",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "/category/vsc",
+              "path": "/documentos2024/docs/category/vsc",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "/category/google-chrome",
+              "path": "/documentos2024/docs/category/google-chrome",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "/category/otros",
+              "path": "/documentos2024/docs/category/otros",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "/category/apuntes-en-revisión",
+              "path": "/documentos2024/docs/category/apuntes-en-revisión",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "/category/pruebas",
+              "path": "/documentos2024/docs/category/pruebas",
+              "sidebar": "tutorialSidebar"
+            }
+          ],
+          "draftIds": [],
+          "sidebars": {
+            "tutorialSidebar": {
+              "link": {
+                "path": "/documentos2024/docs/intro",
+                "label": "intro"
+              }
+            }
+          }
+        }
+      ],
+      "breadcrumbs": true
+    }
+  }
+}

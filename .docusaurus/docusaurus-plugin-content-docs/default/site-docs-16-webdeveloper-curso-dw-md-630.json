@@ -1,0 +1,29 @@
+{
+  "id": "16webdeveloper/curso_dw",
+  "title": "Curso de desarrollo web",
+  "description": "Autor: Juan Pablo De La Torre Valdez",
+  "source": "@site/docs/16webdeveloper/curso_dw.md",
+  "sourceDirName": "16webdeveloper",
+  "slug": "/16webdeveloper/curso_dw",
+  "permalink": "/documentos2024/docs/16webdeveloper/curso_dw",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/16webdeveloper/curso_dw.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "title": "Curso de desarrollo web",
+    "sidebar_label": "Curso de desarrollo web",
+    "sidebar_position": 1
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Desarrollo web",
+    "permalink": "/documentos2024/docs/category/desarrollo-web"
+  },
+  "next": {
+    "title": "Blockchain",
+    "permalink": "/documentos2024/docs/category/blockchain"
+  }
+}

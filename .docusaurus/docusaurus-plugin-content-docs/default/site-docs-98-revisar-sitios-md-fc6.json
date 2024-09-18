@@ -1,0 +1,24 @@
+{
+  "id": "98revisar/sitios",
+  "title": "Sitios web de interes:",
+  "description": "Recursos de prueba",
+  "source": "@site/docs/98revisar/sitios.md",
+  "sourceDirName": "98revisar",
+  "slug": "/98revisar/sitios",
+  "permalink": "/documentos2024/docs/98revisar/sitios",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/98revisar/sitios.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Markdown",
+    "permalink": "/documentos2024/docs/98revisar/markdown"
+  },
+  "next": {
+    "title": "Livewire y WireUI: Crea interfaces web responsivas de forma fácil",
+    "permalink": "/documentos2024/docs/98revisar/wireui"
+  }
+}

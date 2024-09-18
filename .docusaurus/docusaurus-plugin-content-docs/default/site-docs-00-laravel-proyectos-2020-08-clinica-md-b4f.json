@@ -1,0 +1,29 @@
+{
+  "id": "00laravel/proyectos/2020_08_clinica",
+  "title": "Sistema de Historia Clínica en Laravel",
+  "description": "+ Repositorio//github.com/petrix12/Sistema-de-Historia-Cl-nica-en-Laravel",
+  "source": "@site/docs/00laravel/proyectos/2020_08_clinica.md",
+  "sourceDirName": "00laravel/proyectos",
+  "slug": "/00laravel/proyectos/2020_08_clinica",
+  "permalink": "/documentos2024/docs/00laravel/proyectos/2020_08_clinica",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/00laravel/proyectos/2020_08_clinica.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 100,
+  "frontMatter": {
+    "title": "Sistema de Historia Clínica en Laravel",
+    "sidebar_label": "Sistema de Historia Clínica",
+    "sidebar_position": 100
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Subir múltiples archivos",
+    "permalink": "/documentos2024/docs/00laravel/proyectos/2021_03_multiples_file"
+  },
+  "next": {
+    "title": "Cursos Laravel",
+    "permalink": "/documentos2024/docs/category/cursos-laravel"
+  }
+}

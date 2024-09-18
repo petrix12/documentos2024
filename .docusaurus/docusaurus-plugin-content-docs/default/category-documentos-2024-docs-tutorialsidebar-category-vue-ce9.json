@@ -1,0 +1,16 @@
+{
+  "title": "Vue",
+  "description": "Apuntes de Vue",
+  "slug": "/category/vue",
+  "permalink": "/documentos2024/docs/category/vue",
+  "navigation": {
+    "previous": {
+      "title": "Curso de Laravel 8",
+      "permalink": "/documentos2024/docs/00laravel/cursos/laravel8"
+    },
+    "next": {
+      "title": "Apuntes de Vue 3",
+      "permalink": "/documentos2024/docs/02vue/vue"
+    }
+  }
+}

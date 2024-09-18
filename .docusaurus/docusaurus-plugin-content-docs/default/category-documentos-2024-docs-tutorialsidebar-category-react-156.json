@@ -1,0 +1,16 @@
+{
+  "title": "React",
+  "description": "Apuntes de React",
+  "slug": "/category/react",
+  "permalink": "/documentos2024/docs/category/react",
+  "navigation": {
+    "previous": {
+      "title": "Apuntes de Vue 3",
+      "permalink": "/documentos2024/docs/02vue/vue"
+    },
+    "next": {
+      "title": "Proyecto Docusaurus",
+      "permalink": "/documentos2024/docs/03react/docusaurus/"
+    }
+  }
+}

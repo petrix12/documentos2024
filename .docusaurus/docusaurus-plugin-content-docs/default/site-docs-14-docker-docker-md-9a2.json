@@ -1,0 +1,29 @@
+{
+  "id": "14docker/docker",
+  "title": "Apuntes de Docker",
+  "description": "Instalar Windows Subsystem for Linux",
+  "source": "@site/docs/14docker/docker.md",
+  "sourceDirName": "14docker",
+  "slug": "/14docker/docker",
+  "permalink": "/documentos2024/docs/14docker/docker",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/14docker/docker.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "title": "Apuntes de Docker",
+    "sidebar_label": "Apuntes de Docker",
+    "sidebar_position": 1
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Docker",
+    "permalink": "/documentos2024/docs/category/docker"
+  },
+  "next": {
+    "title": "Desarrollo web",
+    "permalink": "/documentos2024/docs/category/desarrollo-web"
+  }
+}

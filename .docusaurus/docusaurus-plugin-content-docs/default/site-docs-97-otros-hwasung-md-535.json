@@ -1,0 +1,29 @@
+{
+  "id": "97otros/hwasung",
+  "title": "Hwasung Thermo",
+  "description": "Repositorios GitHub:",
+  "source": "@site/docs/97otros/hwasung.md",
+  "sourceDirName": "97otros",
+  "slug": "/97otros/hwasung",
+  "permalink": "/documentos2024/docs/97otros/hwasung",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/97otros/hwasung.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 98,
+  "frontMatter": {
+    "title": "Hwasung Thermo",
+    "sidebar_label": "Hwasung Thermo",
+    "sidebar_position": 98
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Otros",
+    "permalink": "/documentos2024/docs/category/otros"
+  },
+  "next": {
+    "title": "Utilidades",
+    "permalink": "/documentos2024/docs/97otros/otros"
+  }
+}

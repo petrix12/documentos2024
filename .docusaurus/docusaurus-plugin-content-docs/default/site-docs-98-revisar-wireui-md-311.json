@@ -1,0 +1,20 @@
+{
+  "id": "98revisar/wireui",
+  "title": "Livewire y WireUI: Crea interfaces web responsivas de forma fácil",
+  "description": "+ URL//codersfree.com/cursos/livewire-wireui-crea-interfaces-web-responsivas-facil",
+  "source": "@site/docs/98revisar/wireui.md",
+  "sourceDirName": "98revisar",
+  "slug": "/98revisar/wireui",
+  "permalink": "/documentos2024/docs/98revisar/wireui",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/98revisar/wireui.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Sitios web de interes:",
+    "permalink": "/documentos2024/docs/98revisar/sitios"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "00laravel/cursos/laravel_passport",
+  "title": "Laravel 8 - Laravel Passort",
+  "description": "+ Documentación Laravel Passport",
+  "source": "@site/docs/00laravel/cursos/laravel_passport.md",
+  "sourceDirName": "00laravel/cursos",
+  "slug": "/00laravel/cursos/laravel_passport",
+  "permalink": "/documentos2024/docs/00laravel/cursos/laravel_passport",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/00laravel/cursos/laravel_passport.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 97,
+  "frontMatter": {
+    "title": "Laravel 8 - Laravel Passort",
+    "sidebar_label": "Laravel 8 - Laravel Passort",
+    "sidebar_position": 97
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Cursos Laravel",
+    "permalink": "/documentos2024/docs/category/cursos-laravel"
+  },
+  "next": {
+    "title": "Laravel API RESTful",
+    "permalink": "/documentos2024/docs/00laravel/cursos/apirestfull"
+  }
+}

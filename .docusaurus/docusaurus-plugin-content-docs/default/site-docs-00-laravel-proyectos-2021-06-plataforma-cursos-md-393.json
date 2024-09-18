@@ -1,0 +1,29 @@
+{
+  "id": "00laravel/proyectos/2021_06_plataforma_cursos",
+  "title": "Plataforma de cursos",
+  "description": "+ Repositorio//github.com/petrix12/PlataformaDeCursosLaravel",
+  "source": "@site/docs/00laravel/proyectos/2021_06_plataforma_cursos.md",
+  "sourceDirName": "00laravel/proyectos",
+  "slug": "/00laravel/proyectos/2021_06_plataforma_cursos",
+  "permalink": "/documentos2024/docs/00laravel/proyectos/2021_06_plataforma_cursos",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/00laravel/proyectos/2021_06_plataforma_cursos.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 98,
+  "frontMatter": {
+    "title": "Plataforma de cursos",
+    "sidebar_label": "Plataforma de cursos",
+    "sidebar_position": 98
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Subir archivos",
+    "permalink": "/documentos2024/docs/00laravel/proyectos/2021_08_upload_file"
+  },
+  "next": {
+    "title": "Subir múltiples archivos",
+    "permalink": "/documentos2024/docs/00laravel/proyectos/2021_03_multiples_file"
+  }
+}
