@@ -67,6 +67,25 @@ sidebar_position: 2
         ```
     :::tip Página
     https://petrix12.github.io/documentos2024
+    + En caso de falla, ejecutar:
+        + Instala Docusaurus:
+            ```bash
+            npm install @docusaurus/core@latest @docusaurus/preset-classic@latest
+            ```
+        + Introducir las credenciales de GitHub:
+            ```bash
+            git remote set-url origin https://<GIT_USER>:<YOUR_TOKEN>@github.com/petrix12/documentos2024.git
+            ```
+        + Verifica los permisos de los archivos:
+            ```bash
+            sudo chmod -R 755 /home/pbazo/www/documentos2024
+            ```
+        + Limpia el caché de npm y reinstala dependencias:
+            ```bash
+            npm cache clean --force
+            rm -rf node_modules package-lock.json
+            npm install
+            ```
     :::
 
 

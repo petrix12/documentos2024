@@ -6,3 +6,8 @@
 
 ### Imagenes de prueba
 + https://picsum.photos
+
+
+## Herramientas
+### Descargar programas y aplicaciones
++ https://1337x.to
