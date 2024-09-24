@@ -312,8 +312,114 @@ Existen algunas formas más de cargar jQuery, estas opciones se pueden ver en:
     ```
 
 
+### Eventos delegados
+```html
+<!-- ... -->
+<body>
+    <table id="tablaPaises"></table>
+    <script>
+        const $tablaPaises = $('#tablaPaises');
+        let paises = [
+            {
+                "id": 149,
+                "nombre": "Perú",
+                "capital": "Lima",
+            },
+            {
+                "id": 623,
+                "nombre": "España",
+                "capital": "Madrid",
+            },
+            {
+                "id": 923,
+                "nombre": "Ecuador",
+                "capital": "Quito",
+            }
+        ];
+        const cargarTabla = () => {
+            let tabla = ``;
+            $.each(paises, (indice, pais) => {
+                tabla += `<tr>`;
+                tabla += `<td>${pais.nombre}</td>`;
+                tabla += `<td>${pais.capital}</td>`;
+                tabla += `<td><button id='${pais.id}' class='otraClase verId'>Ver Id</button></td>`;
+                tabla += `</tr>`;
+            });
+            $tablaPaises.html(tabla);
+            $('otraClase').each(function() {
+                // jQuery Object
+                console.log($(this));
+            });
+        };
 
-ME FALTA DEL VÍDEO 11 EN ADELANTE
+        // Se ejecuta al hacer clic sobre el botón Ver Id
+        $(document).on('click', '.verId', function() {
+            // Formas de obtener el id
+            console.log($(this)[0].id);
+            console.log($(this).attr(id));
+        });
+
+        // Se ejecuta al hacer clic sobre la tabla
+        $($tablaPaises).on('click', $tablaPaises, function() {
+            console.log($(this));
+            $(this).off('click');   // Desenlace del evento. Esta función ya no se ejecutará una segunda vez
+        });
+
+        $(function() {
+            cargarTabla();
+        });
+    </script>
+</body>
+<!-- ... -->
+```
+
+
+### Asignar, obtener y remover atributos (attr)
+```html
+<!-- ... -->
+<body>
+    <!-- ... -->
+    <script>
+        // ...
+        $(document).on('click', '.claseElemento', function() {
+            // Obteniendo atributo
+            let id = $(this).attr("id");
+            let clase = $(this).attr("class");
+
+            // Asignando atributo
+            $(this).attr("name", 'Valor asignado'); // Si el atributo no existe, entonces se craa
+
+            // Removiendo atributo
+            $(this).removeAttr("id");
+        });
+        // ...
+    </script>
+</body>
+<!-- ... -->
+```
+
+
+### Método prop
+```html
+<!-- ... -->
+<body>
+    <label> ¿Valido?</label>
+    <input type="checkbox" id="chkValido" />
+    <script>
+        $(function() {
+            // attr() y prop() son intercambiables en la mayoria de casos
+            $('#chkValido').prop('checked', true);
+        });
+    </script>
+</body>
+<!-- ... -->
+```
+
+
+
+
+
+ME FALTA DEL VÍDEO 14 EN ADELANTE
 https://www.youtube.com/watch?v=AoxdJRSinD0&list=PL_wRgp7nihyY020gyukDupJEJ84gimiPS&index=11
 
 
