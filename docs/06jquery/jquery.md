@@ -373,6 +373,40 @@ Existen algunas formas más de cargar jQuery, estas opciones se pueden ver en:
 <!-- ... -->
 ```
 
+### Ejemplo de aplicación del método data basados en el apartado anterior
+```html
+<!-- ... -->
+<body>
+    <table id="tablaPaises"></table>
+    <script>
+        const $tablaPaises = $('#tablaPaises');
+        let paises = [
+            // ...
+        ];
+        const cargarTabla = () => {
+            let tabla = ``;
+            $.each(paises, (indice, pais) => {
+                tabla += `<tr>`;
+                tabla += `<td>${pais.nombre}</td>`;
+                tabla += `<td>${pais.capital}</td>`;
+                tabla += `<td><button id='${pais.id}' data-pais='${JSON.stringify(pais)}' class='otraClase verId'>Ver Id</button></td>`;
+                tabla += `</tr>`;
+            });
+            // ...
+        };
+
+        // Se ejecuta al hacer clic sobre el botón Ver Id
+        $(document).on('click', '.verId', function() {
+            // ...
+            let paisSeleccionado = $(this).data("pais");
+            console.log(paisSeleccionado);
+        });
+        // ...
+    </script>
+</body>
+<!-- ... -->
+```
+
 
 ### Asignar, obtener y remover atributos (attr)
 ```html
@@ -416,22 +450,53 @@ Existen algunas formas más de cargar jQuery, estas opciones se pueden ver en:
 ```
 
 
+### Función AJAX
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script 
+        src="https://code.jquery.com/jquery-3.7.1.min.js" 
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" 
+        crossorigin="anonymous"
+    ></script>
+</head>
+<body>
+    <script>
+        const listUsers = () => {
+            $.ajax({
+                type: 'GET',
+                url: 'https://jsonplaceholder.typicode.com/users',
+                contentType: 'application/json',
+                async: true,
+                beforeSend: () => {
+                    console.log('Esto se ejecutará antes del envío de la petición');
+                },
+                success: data => {
+                    console.log(data);
+                },
+                complete: () => {
+                    console.log('Esto se ejecutará luego de que la solicitud sea completada');
+                },
+                error: error => {
+                    console.log(error);
+                }
+            });
+        };
+        $(function() {
+            listUsers();
+        });
+    </script>
+</body>
+</html>
+```
 
 
 
-ME FALTA DEL VÍDEO 14 EN ADELANTE
 https://www.youtube.com/watch?v=AoxdJRSinD0&list=PL_wRgp7nihyY020gyukDupJEJ84gimiPS&index=11
 
 
 
-
-```html
-<!-- ... -->
-<body>
-    <!-- ... -->
-    <script>
-        // ...
-    </script>
-</body>
-<!-- ... -->
-```
